@@ -1,0 +1,20 @@
+.login_bg{
+    width: 70%;
+    height: 100vh; 
+    background-image:url("../../images/background/foundationBG.png") ;
+    background-repeat: no-repeat;
+    background-size: 60% auto;
+}
+.login{
+    width: 40%;
+    float: right;
+    vertical-align: middle;
+}
+.logo{
+    width: 150px;
+    height: auto;
+    margin-left: 1rem;
+}
+input{
+    height: 20px;
+}
