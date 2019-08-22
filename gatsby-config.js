@@ -6,4 +6,9 @@
 
 module.exports = {
   /* Your site config here */
+  plugins: [
+    'gatsby-plugin-offline',
+    'gatsby-plugin-sass',
+    'gatsby-plugin-react-helmet'
+  ]
 }
