@@ -1,0 +1,30 @@
+.Header {
+  background-color: #222222;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  .logo {
+    width: 160px;
+    height: auto;
+    margin-left: 1rem;
+  }
+  ul {
+    width: 80%;
+    float: right;
+    margin: 0;
+    list-style: none;
+    li {
+      display: inline-block;
+      margin-left: 2vw;
+      margin-right: 2vw;
+      a {
+        color: #ffffff;
+        font-size: 20px;
+        text-decoration: none;
+        &:hover{
+          color: #ff5151;
+        }
+      }
+    }
+  }
+}
