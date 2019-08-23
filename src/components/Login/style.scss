@@ -1,20 +1,62 @@
-.login_bg{
-    width: 70%;
-    height: 100vh; 
-    background-image:url("../../images/background/foundationBG.png") ;
-    background-repeat: no-repeat;
-    background-size: 60% auto;
-}
-.login{
+.login_bg {
+  width: 100%;
+  min-height: 90vh;
+  background-image: url("../../images/background/foundationBG.png");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  .big-logo {
+    margin-top: 13%;
+    padding-left: 5%;
     width: 40%;
-    float: right;
-    vertical-align: middle;
-}
-.logo{
-    width: 150px;
-    height: auto;
-    margin-left: 1rem;
-}
-input{
-    height: 20px;
+    float: left;
+    .logo {
+      width: 70%;
+    }
+  }
+
+  .login {
+    width: 50%;
+    float: left;
+    text-align: center;
+    padding: 1rem;
+    .login-form {
+      margin-top: 12%;
+    }
+      p {
+        color: #343434;
+        font-weight: 600;
+        font-size: 22px;
+        letter-spacing: 8px;
+        margin-block-start: 0;
+      }
+      .letter{
+        letter-spacing: 8px;
+      }
+      .input-style {
+        width: 95%;
+        padding: 1rem 0;
+      }
+      input {
+        width: 25%;
+        height: 25px;
+      }
+      .login-link {
+        color: #343434;
+        margin: 0 5px;
+        padding: 0.5rem;
+        text-decoration: none;
+      }
+      .login-btn {
+        width: 98%;
+        height: 45px;
+        padding-top: 0.5rem;
+        a {
+          color: #ffffff;
+          background-color: #343434;
+          padding: 0.5rem 1rem;
+          text-decoration: none;
+        }
+      }
+   
+  }
 }

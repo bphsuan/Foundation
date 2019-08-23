@@ -9,7 +9,7 @@ class Header extends React.Component {
     render() {
         return (
             <div className="Header">
-            <img className="logo" src={Logo} />
+            <Link to="/"><img className="logo" src={Logo} /></Link>
                 <ul>                    
                     <li><Link to="/">首頁 ｜ Homepage</Link></li>
                     <li><Link to="/Detection/">色號檢測 ｜ Detection</Link></li>
