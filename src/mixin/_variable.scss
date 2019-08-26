@@ -1,0 +1,30 @@
+// font-size
+$fontSize-s: 14px;
+$fontSize-m: $fontSize-s * 2;
+$fontSize-l: $fontSize-s * 2.5;
+$fontSize-copyright: $fontSize-s * 0.9;
+
+// color
+$color-main: #ff5151;
+$color-normal: #343434;
+$color-black: #222222;
+$color-gray: #efefef;
+$color-white: #ffffff;
+
+// letter-spacing
+$letterSpacing-s: 1px;
+$letterSpacing-m: 3px;
+$letterSpacing-l: 5px;
+
+// others
+$borderWidth: 3px;
+$opacity: 0.85;
+$transition: all 0.5s;
+$shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+// @mixin
+@mixin background {
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

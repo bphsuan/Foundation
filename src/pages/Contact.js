@@ -6,4 +6,3 @@ export default () =>
     <Layout>
         <Contact></Contact>
     </Layout>
-    

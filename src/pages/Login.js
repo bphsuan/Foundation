@@ -5,8 +5,8 @@ import Layout from '../components/layout/layout'
 class Login_page extends React.Component {
   render() {
     return (
-      <Layout>        
-          <Login></Login>       
+      <Layout>
+        <Login></Login>
       </Layout>
     )
   }
