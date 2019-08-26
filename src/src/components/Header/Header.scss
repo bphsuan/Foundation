@@ -1,8 +1,9 @@
+@import "../../../mixin/main.scss";
 .Header {
-  background-color: #222222;
-  height: 10vh;
+  background-color: $color-black;
+  height: 60px;
   display: flex;
-  align-items: center ;
+  align-items: center;
   ul {
     width: 80%;
     float: right;
@@ -15,8 +16,8 @@
       margin-left: 2vw;
       margin-right: 2vw;
       a {
-        color: #ffffff;
-        font-size: 20px;
+        color: $color-white;
+        font-size: $fontSize-m;
         text-decoration: none;
       }
     }

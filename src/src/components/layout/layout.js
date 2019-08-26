@@ -1,6 +1,6 @@
-import React from "react"
+import React from "./node_modules/react"
 import Header from "../Header/Header"
-import "./layout.scss"
+import "./Layout.scss"
 export default ({ children }) => (
   <div>
     <Header></Header>

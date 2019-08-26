@@ -15,7 +15,6 @@ class Login extends React.Component {
           <br />
           <Link to="/">回首頁</Link>
         </div>
-      
       </div>
     )
   }
