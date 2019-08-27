@@ -1,5 +1,5 @@
-body{
-    font-family: Microsoft JhengHei;
-    margin: 0;
-    text-decoration: none;
+@import "../../mixin/main.scss";
+.content {
+  width: 100%;
+  margin-top: 60px;
 }
