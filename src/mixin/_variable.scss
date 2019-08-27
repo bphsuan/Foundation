@@ -1,6 +1,6 @@
 // font-size
 $fontSize-s: 15px;
-$fontSize-m: $fontSize-s * 1.25;
+$fontSize-m: $fontSize-s * 1.2;
 $fontSize-l: $fontSize-s * 2;
 $fontSize-copyright: $fontSize-s * 0.9;
 
@@ -29,6 +29,11 @@ $shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   background-size: cover;
 }
 
+@mixin pc {
+  @media screen and (max-width: 1200px) {
+    @content;
+  }
+}
 @mixin laptop {
   @media screen and (max-width: 1080px) {
     @content;

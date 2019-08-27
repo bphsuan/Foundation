@@ -43,7 +43,7 @@ class Header extends React.Component {
                 </div>
                 <Link to="/" className="logo"><img src={Logo} /></Link>
                 <div className="nav" style={this.state.menu ? menuShow : menuHide}>
-                    <Link to="/">網站首頁｜Homepage</Link>
+                    <Link to="/">網站首頁｜Home</Link>
                     <Link to="/Detection/">色號檢測｜Detection</Link>
                     <Link to="/Products/">產品介紹｜Products</Link>
                     <Link to="/Contact/">聯絡我們｜Contact</Link>
