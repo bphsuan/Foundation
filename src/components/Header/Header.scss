@@ -78,11 +78,17 @@
           letter-spacing: $letterSpacing-s;
         }
       }
+      @include laptop {
+        & {
+          font-size: $fontSize-s;
+        }
+      }
       @include pad {
         & {
           width: 90%;
           padding-left: 10%;
           text-align: left;
+          font-size: $fontSize-m;
           border-right: 3px solid $color-black;
           letter-spacing: $letterSpacing-m;
           border-bottom: none;

@@ -40,7 +40,7 @@ $shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   }
 }
 @mixin pad {
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 876px) {
     @content;
   }
 }
