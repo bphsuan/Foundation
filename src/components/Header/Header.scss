@@ -9,24 +9,26 @@
   top: 0;
   z-index: 20;
   .bar {
-    width: 40px;
     display: none;
-    z-index: 30;
-    color: $color-white;
-    font-size: $fontSize-l * 0.9;
-    margin: 0 20px;
-    &:hover {
-      cursor: pointer;
-    }
     @include pad {
       display: block;
+      z-index: 35;
+    }
+    .barIcon {
+      width: 40px;
+      color: $color-white;
+      font-size: $fontSize-l * 0.9;
+      margin: 0 20px;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
   .logo {
     width: 13%;
     border-bottom: none;
     margin: 0 1%;
-    z-index: 30;
+    z-index: 25;
     &:hover {
       border-bottom: none;
     }
@@ -52,6 +54,7 @@
         position: fixed;
         top: 0;
         border-right: 3px solid $color-black;
+        z-index: 30;
       }
     }
     a {
@@ -72,8 +75,8 @@
       }
       @include pad {
         & {
-          width: 95%;
-          padding-left: 5%;
+          width: 90%;
+          padding-left: 10%;
           text-align: left;
           border-right: 3px solid $color-black;
           border-bottom: none;

@@ -11,7 +11,9 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            menu: false
+            menu: false,
+            bar: false,
+            width: 0
         }
     }
     menuShow() {
@@ -35,8 +37,10 @@ class Header extends React.Component {
         }
         return (
             <div className="Header">
-                <FontAwesomeIcon className="bar" icon={faBars} style={this.state.menu ? barDispear : barApear} onClick={this.menuShow.bind(this)}></FontAwesomeIcon>
-                <FontAwesomeIcon className="bar" icon={faTimes} style={this.state.menu ? barApear : barDispear} onClick={this.menuHide.bind(this)}></FontAwesomeIcon>
+                <div className="bar">
+                    <FontAwesomeIcon className="barIcon" icon={faBars} style={this.state.menu ? barDispear : barApear} onClick={this.menuShow.bind(this)}></FontAwesomeIcon>
+                    <FontAwesomeIcon className="barIcon" icon={faTimes} style={this.state.menu ? barApear : barDispear} onClick={this.menuHide.bind(this)}></FontAwesomeIcon>
+                </div>
                 <Link to="/" className="logo"><img src={Logo} /></Link>
                 <div className="nav" style={this.state.menu ? menuShow : menuHide}>
                     <Link to="/">網站首頁｜Homepage</Link>
