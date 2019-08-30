@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import Logo from "../../images/background/foundationLogo.png"
 import './style.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
@@ -31,24 +30,24 @@ class Login extends React.Component {
           <div className="login-form">
             <p>登 入｜Log in</p>
             <div className="input-style">
-              <span className="letter">帳號</span>
+              <p className="letter">帳號</p>
               <input type="text" className="input" />
             </div>
             <div className="input-style password">
-              <span className="letter">密碼</span>
+              <p className="letter">密碼</p>
               <input type={this.state.show ? "text" : "password"} className="input" />
-              <FontAwesomeIcon className="eye" style={this.state.show ? eyeDispear : eyeApear} icon={faEye} onClick={this.pwdShow.bind(this)}></FontAwesomeIcon>
-              <FontAwesomeIcon className="eye" style={this.state.show ? eyeApear : eyeDispear} icon={faEyeSlash} onClick={this.pwdHide.bind(this)}></FontAwesomeIcon>
+              <FontAwesomeIcon className="eye" style={this.state.show ? eyeDispear : eyeApear} icon={faEye} onClick={this.pwdShow.bind(this)} />
+              <FontAwesomeIcon className="eye" style={this.state.show ? eyeApear : eyeDispear} icon={faEyeSlash} onClick={this.pwdHide.bind(this)} />
             </div>
             <div className="login-btn">
               <a href="">登入</a>
             </div>
-            <Link className="login-link" to="/">忘記密碼? </Link>
+            <Link className="login-link" to="/ForgetPassword">忘記密碼? </Link>
             <span>｜</span>
-            <Link className="login-link" to="/Register/"> 還不是會員?</Link>
+            <Link className="login-link" to="/Register"> 還不是會員?</Link>
           </div>
         </div>
-      </div >
+      </div>
     )
   }
 }

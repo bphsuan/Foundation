@@ -42,14 +42,18 @@
     .input-style {
       width: 70%;
       margin: 15px 15%;
+      display: flex;
       @include mobile {
         width: 90%;
         margin: 15px 5%;
       }
       .letter {
         width: 25%;
+        height: 30px;
+        line-height: 30px;
+        font-size: $fontSize-m;
         letter-spacing: $letterSpacing-l;
-        text-align: right;
+        text-align: left;
         @include mobile {
           width: 20%;
         }
@@ -71,7 +75,7 @@
       position: relative;
       .eye {
         position: absolute;
-        right: 10%;
+        right: 5%;
         color: $color-normal;
         height: 30px;
         margin: 2px 0;

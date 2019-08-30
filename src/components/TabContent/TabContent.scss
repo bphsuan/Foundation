@@ -1,0 +1,40 @@
+@import "../../mixin/main.scss";
+.tab-content {
+  width: 40%;
+  margin: 45px auto;
+  text-align: center;
+  display: flex;
+  @include laptop {
+    width: 50%;
+  }
+  @include pad {
+    width: 65%;
+  }
+  @include mobile {
+    width: 80%;
+  }
+  @include min-mobile {
+    width: 90%;
+  }
+  .tab {
+    width: 50%;
+    padding: 15px 0;
+    line-height: 2;
+    font-size: $fontSize-m;
+    font-weight: bold;
+    background-color: $color-gray;
+    color: #777;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: $transition;
+    letter-spacing: $letterSpacing-l;
+    .icon {
+      padding: 2.5px;
+      font-size: $fontSize-l;
+    }
+    &.active {
+      background-color: $color-normal;
+      color: $color-white;
+    }
+  }
+}
