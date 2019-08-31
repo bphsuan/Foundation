@@ -7,7 +7,7 @@ export default ({ children }) => (
     <Header></Header>
     <div className="content">
       {children}
-      <Footer></Footer>
     </div>
+    <Footer></Footer>
   </div>
 )

@@ -30,47 +30,46 @@ class Register extends React.Component {
         <div className="login">
           <p>註 冊｜Register</p>
           <div className="input-style">
-            <span className="letter">帳號</span>
+            <p className="letter">帳號</p>
             <input type="text" className="input" />
           </div>
           <div className="input-style password" >
-            <span className="letter">密碼</span>
+            <p className="letter">密碼</p>
             <input type={this.state.show ? "text" : "password"} className="input" />
-            <FontAwesomeIcon className="eye" style={this.state.show ? eyeDispear : eyeApear} icon={faEye} onClick={this.pwdShow.bind(this)}></FontAwesomeIcon>
-            <FontAwesomeIcon className="eye" style={this.state.show ? eyeApear : eyeDispear} icon={faEyeSlash} onClick={this.pwdHide.bind(this)}></FontAwesomeIcon>
+            <FontAwesomeIcon className="eye" style={this.state.show ? eyeDispear : eyeApear} icon={faEye} onClick={this.pwdShow.bind(this)} />
+            <FontAwesomeIcon className="eye" style={this.state.show ? eyeApear : eyeDispear} icon={faEyeSlash} onClick={this.pwdHide.bind(this)} />
           </div>
           <div className="input-style">
-            <span className="letter">姓名</span>
+            <p className="letter">姓名</p>
             <input type="text" className="input" />
           </div>
           <div className="input-style">
-            <span className="letter">性別</span>
+            <p className="letter">性別</p>
             <select className="input">
               <option>女</option>
               <option>男</option>
             </select>
           </div>
           <div className="input-style">
-            <span className="letter">生日</span>
+            <p className="letter">生日</p>
             <input type="date" className="input" />
           </div>
           <div className="input-style">
-            <span>Email</span>
+            <p className="letter">Email</p>
             <input type="email" className="input" />
           </div>
           <div className="input-style">
-            <span className="letter">電話</span>
+            <p className="letter">電話</p>
             <input type="tel" className="input" />
           </div>
           <div className="input-style">
-            <span className="letter">地址</span>
+            <p className="letter">地址</p>
             <input type="text" className="input" />
           </div>
           <div className="login-btn">
             <a href="">註冊</a>
           </div>
           <Link className="login-link" to="/Login">已經有會員? </Link>
-
         </div>
       </div>
     )
