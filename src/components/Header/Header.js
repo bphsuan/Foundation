@@ -19,9 +19,6 @@ class Header extends React.Component {
     }
   }
   componentDidMount() {
-    console.log(this.state.location)
-  }
-  componentWillMount() {
     this.setState({ location: window.location.pathname }) //抓路由
   }
   menuShow() {
