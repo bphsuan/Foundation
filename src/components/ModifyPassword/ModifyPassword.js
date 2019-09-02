@@ -9,7 +9,7 @@ class ModifyPassword extends React.Component {
     super(props);
     this.state = {
       originPwd: false,
-      newPwd: false
+      newPwd: false,
     }
   }
   originPwdShow() {
@@ -32,7 +32,7 @@ class ModifyPassword extends React.Component {
       display: "inline-flex"
     }
     return (
-      <div className="modify-form">
+      <div className="modify-form" >
         <div className="input-style password">
           <p className="letter">舊密碼</p>
           <input type={this.state.originPwd ? "text" : "password"} className="input" />
