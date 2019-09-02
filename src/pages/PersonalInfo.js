@@ -4,6 +4,7 @@ import Layout from '../components/Layout/Layout'
 import TabContent from '../components/TabContent/TabContent'
 import PersonalHeader from "../components/PersonalHeader/PersonalHeader"
 import ModifyPassword from "../components/ModifyPassword/ModifyPassword"
+import ModifyPersonalInfo from "../components/ModifyPersonalInfo/ModifyPersonalInfo"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIdCardAlt } from '@fortawesome/free-solid-svg-icons'
 import { faKey } from '@fortawesome/free-solid-svg-icons'
@@ -58,7 +59,12 @@ class PersonalInfo extends React.Component {
     }
   }
   render() {
-
+    const dispear = {
+      display: "none"
+    }
+    const apear = {
+      display: "block"
+    }
     return (
       <Layout>
         <PersonalHeader />
@@ -67,7 +73,12 @@ class PersonalInfo extends React.Component {
           activeTab={this.state.activeTab}
           onChangeTab={this.onChangeTab.bind(this)}
         />
-        <ModifyPassword />
+        <div style={this.state.activeTab === 2 ? apear : dispear}>
+          <ModifyPassword />
+        </div>
+        <div style={this.state.activeTab === 1 ? apear : dispear}>
+          <ModifyPersonalInfo />
+        </div>
       </Layout>
     )
   }
