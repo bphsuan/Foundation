@@ -1,8 +1,8 @@
 import React from "react"
 import { Link } from 'gatsby'
 import Layout from '../components/Layout/Layout'
-import Products from '../components/Products/Products'
+import ProductHeader from '../components/ProductHeader/ProductHeader'
 export default () =>
     <Layout>
-        <Products></Products>
+        <ProductHeader></ProductHeader>
     </Layout>
