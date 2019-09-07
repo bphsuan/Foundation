@@ -1,0 +1,95 @@
+@import "../../mixin/main.scss";
+.contact {
+  width: 100%;
+  .contact-bar {
+    width: 100%;
+    background-color: $color-gray;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    .rightBar {
+      border-right: 3px solid $color-main;
+    }
+    .contact-box {
+      display: inline-block;
+      width: 33%;
+      .contact-msg {
+        text-align: center;
+        padding: 1rem;
+        word-break: break-all;
+        .contact-icon {
+          font-size: 25px;
+          padding-bottom: 1rem;
+        }
+      }
+    }
+  }
+  .contact-body {
+    padding: 3rem 0;
+    display: flex;
+    .contact-bodyPic {
+      width: 40%;
+      padding: 0 5%;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-bodyBox {
+      width: 60%;
+      .input-style {
+        width: 80%;
+        margin: 15px 5%;
+        display: flex;
+        @include mobile {
+          width: 90%;
+          margin: 15px 5%;
+        }
+        .letter {
+          width: 25%;
+          height: 30px;
+          line-height: 30px;
+          font-size: $fontSize-m;
+          letter-spacing: $letterSpacing-l;
+          text-align: left;
+          @include mobile {
+            width: 20%;
+          }
+        }
+        .input {
+          width: 75%;
+          //   height: 30px;
+          font-size: $fontSize-m;
+          background-color: $color-white;
+          &:focus {
+            outline-color: $color-main;
+          }
+          @include mobile {
+            width: 80%;
+          }
+        }
+        .textarea {
+          height: 150px;
+        }
+      
+      }
+      .summit-btn {
+        a {
+          width: 100px;
+          height: 40px;
+          margin: 20px auto;
+          background-color: $color-normal;
+          color: $color-white;
+          display: block;
+          text-align: center;
+          line-height: 40px;
+          transition: $transition;
+          letter-spacing: $letterSpacing-m;
+          &:hover {
+            color: $color-main;
+          }
+        }
+      }
+    }
+  }
+}

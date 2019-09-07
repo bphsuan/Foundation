@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from 'gatsby'
 import Layout from '../components/Layout/Layout'
+import AboutTeam from '../components/AboutTeam/AboutTeam'
 class Index extends React.Component {
   constructor(props) {
     super(props);
@@ -18,6 +19,7 @@ class Index extends React.Component {
   render() {
     return (
       <Layout>
+        <AboutTeam/>
       </Layout>
     )
   }
