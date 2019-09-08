@@ -18,26 +18,68 @@
     }
   }
   .descirption {
-    width: 85%;
-    margin: 0 auto;
+    width: 80%;
+    margin: 10px auto;
     display: flex;
+    @include mobile {
+      & {
+        width: 90%;
+      }
+    }
     .team-content {
       width: 70%;
       text-align: right;
+      @include mobile {
+        & {
+          width: 70%;
+        }
+      }
+      @include min-mobile {
+        & {
+          width: 60%;
+        }
+      }
     }
     .team-title {
       width: 25%;
       display: flex;
       align-items: center;
+      @include mobile {
+        & {
+          width: 30%;
+        }
+      }
+      @include min-mobile {
+        & {
+          width: 40%;
+        }
+      }
     }
   }
   .member {
-    width: 85%;
-    margin: 0 auto;
+    width: 80%;
+    margin: 10px auto;
+    @include mobile {
+      & {
+        width: 90%;
+      }
+    }
     .member-box {
       width: 25%;
-      margin: 20px 3.5%;
+      margin: 20px 4%;
       display: inline-block;
+      @include pad {
+        & {
+          width: 45%;
+          margin: 20px 2.5%;
+        }
+      }
+      @include mobile {
+        & {
+          width: 90%;
+          margin: 20px 5%;
+        }
+      }
       .member-pic {
         width: 100%;
         display: block;
@@ -58,14 +100,21 @@
           color: $color-white;
           font-size: $fontSize-xs;
           padding: 5px 15px;
-          margin: 10px 5px;
+          margin: 10px 7.5px;
           border-radius: 20px;
           background-color: $color-normal;
+          letter-spacing: $letterSpacing-s;
         }
       }
     }
     .middle {
       vertical-align: top;
+      margin-top: 5rem;
+      @include mobile {
+        & {
+          margin-top: 0;
+        }
+      }
     }
     .shadow {
       box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);

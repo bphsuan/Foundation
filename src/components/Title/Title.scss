@@ -1,0 +1,15 @@
+@import "../../mixin/main.scss";
+.title {
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  background-color: $color-white;
+  span {
+    padding: 5px;
+    font-size: $fontSize-m;
+    font-weight: bold;
+    color: $color-black;
+    letter-spacing: $letterSpacing-m;
+    border-bottom: $borderWidth solid $color-main;
+  }
+}
