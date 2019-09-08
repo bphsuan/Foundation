@@ -97,6 +97,7 @@
         transition: $transition;
         letter-spacing: $letterSpacing-m;
         &:hover {
+          cursor: pointer;
           color: $color-main;
         }
       }
