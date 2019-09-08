@@ -1,0 +1,18 @@
+@import "../../mixin/main.scss";
+.top-content {
+  width: 40px;
+  height: 40px;
+  background-color: $color-black;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  text-align: center;
+  line-height: 40px;
+  &:hover {
+    cursor: pointer;
+  }
+  .top-icon {
+    color: $color-white;
+    font-size: $fontSize-m;
+  }
+}

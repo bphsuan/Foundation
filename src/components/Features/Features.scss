@@ -1,0 +1,113 @@
+@import "../../mixin/main.scss";
+.feature-content {
+  width: 100%;
+  padding: 0 0 20px 0;
+  background-image: url(../../images/feature.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  background-attachment: fixed;
+  .feature {
+    width: 80%;
+    margin: 15px auto;
+    padding: 10px 0;
+    display: flex;
+    font-size: $fontSize-s;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    @include mobile {
+      & {
+        display: block;
+      }
+    }
+    .feature-left {
+      width: 50%;
+      padding: 20px 0;
+      background-color: $color-white;
+      text-align: center;
+      @include laptop {
+        & {
+          width: 40%;
+        }
+      }
+      @include mobile {
+        & {
+          width: 100%;
+        }
+      }
+      .feature-square {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        border: $borderWidth * 2 solid $color-black;
+        position: relative;
+        span {
+          font-size: $fontSize-l * 2.5;
+          font-weight: bold;
+          color: $color-main;
+          position: absolute;
+          top: -5px;
+          left: 5px;
+          z-index: 5;
+        }
+        .feature-icon {
+          padding: 5px;
+          font-size: $fontSize-l * 2;
+          background-color: $color-white;
+          position: absolute;
+          bottom: -12px;
+          right: -12px;
+        }
+      }
+    }
+    .feature-right {
+      width: 50%;
+      background-color: $color-white;
+      align-items: center;
+      display: flex;
+      line-height: 2;
+      @include laptop {
+        & {
+          width: 60%;
+        }
+      }
+      @include mobile {
+        & {
+          width: 95%;
+          padding: 0 2.5%;
+        }
+      }
+      .feature-description {
+        width: 100%;
+        h1 {
+          font-size: $fontSize-l;
+          letter-spacing: $letterSpacing-l;
+          @include pad {
+            & {
+              font-size: $fontSize-m;
+            }
+          }
+          @include mobile {
+            & {
+              letter-spacing: $letterSpacing-m;
+              text-align: center;
+            }
+          }
+        }
+        p {
+          font-size: $fontSize-m;
+          letter-spacing: $letterSpacing-s;
+          @include pad {
+            & {
+              font-size: $fontSize-s;
+            }
+          }
+          @include mobile {
+            & {
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}

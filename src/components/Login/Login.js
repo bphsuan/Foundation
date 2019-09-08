@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'gatsby';
-import './style.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye } from '@fortawesome/free-solid-svg-icons'
-import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
-import { login } from '../../components/Services/loginAPI'
+import './style.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { login } from '../../components/Services/loginAPI';
 
 import axios from 'axios';
 
@@ -12,6 +12,7 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLogin: false,
       account: "",
       password: "",
       show: false
@@ -43,12 +44,14 @@ class Login extends React.Component {
         'Access-Control-Allow-Origin': '*',
       },
       body: JSON.stringify({
-          Account: account,
-          Password: password
+        Account: account,
+        Password: password
       })
     }).then(r => r.json())
       .then(response => {
-        console.log('Success:', JSON.stringify(response))
+        window.location = '/';
+        console.log('Success:', JSON.stringify(response));
+        this.setState({ isLogin: true })
       })
       .catch(error => console.error('Error:', error));
   }
