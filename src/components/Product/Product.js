@@ -1,8 +1,9 @@
-import React from "react"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
 class Product extends React.Component {
   constructor(props) {
     super(props);
@@ -11,10 +12,7 @@ class Product extends React.Component {
   }
   render() {
     return (
-      <div
-
-        className="product"
-      >
+      <div className="product">
         <div className="product-func">
           <FontAwesomeIcon icon={faHeart} />
           <FontAwesomeIcon icon={faCartPlus} />

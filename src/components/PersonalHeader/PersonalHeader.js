@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'gatsby';
 import './PersonalHeader.scss';
 import ModifyHead from '../ModifyHead/ModifyHead';
-import test from '../../images/background/foundationBG.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
 class PersonalHeader extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +25,8 @@ class PersonalHeader extends React.Component {
         <ModifyHead />
         <div className="personal-menu">
           <p className="name">Jing-Yi</p>
-          <Link to="/PersonalInfo"
+          <Link
+            to="/PersonalInfo"
             className={this.state.location === "/PersonalInfo" ? "active" : ""}>
             <span>編輯個人資訊 </span>
             <FontAwesomeIcon
@@ -33,7 +34,8 @@ class PersonalHeader extends React.Component {
               icon={faEdit}
             />
           </Link>
-          <Link to="/DetectionHistory"
+          <Link
+            to="/DetectionHistory"
             className={this.state.location === "/DetectionHistory" ? "active" : ""}>
             <span>檢測歷史紀錄 </span>
             <FontAwesomeIcon
@@ -41,7 +43,8 @@ class PersonalHeader extends React.Component {
               icon={faCamera}
             />
           </Link>
-          <Link to="/DealHistory"
+          <Link
+            to="/DealHistory"
             className={this.state.location === "/DealHistory" ? "active" : ""}>
             <span>購買歷史紀錄 </span>
             <FontAwesomeIcon
@@ -49,7 +52,8 @@ class PersonalHeader extends React.Component {
               icon={faShoppingBag}
             />
           </Link>
-          <Link to="/MyFavorite"
+          <Link
+            to="/MyFavorite"
             className={this.state.location === "/MyFavorite" ? "active" : ""}>
             <span>查看我的最愛 </span>
             <FontAwesomeIcon

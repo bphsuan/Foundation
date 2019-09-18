@@ -1,6 +1,5 @@
-import React from "react"
-import { Link } from "gatsby";
-import "./Features.scss";
+import React from 'react';
+import './Features.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons';
@@ -16,12 +15,17 @@ class News extends React.Component {
   render() {
     return (
       <div className="feature-content">
-        <Title name={this.state.name} />
+        <Title
+          name={this.state.name}
+        />
         <div className="feature">
           <div className="feature-left">
             <div className="feature-square">
               <span>1</span>
-              <FontAwesomeIcon icon={faCamera} className="feature-icon" />
+              <FontAwesomeIcon
+                icon={faCamera}
+                className="feature-icon"
+              />
             </div>
           </div>
           <div className="feature-right">
@@ -35,7 +39,10 @@ class News extends React.Component {
           <div className="feature-left">
             <div className="feature-square">
               <span>2</span>
-              <FontAwesomeIcon icon={faHandHoldingUsd} className="feature-icon" />
+              <FontAwesomeIcon
+                icon={faHandHoldingUsd}
+                className="feature-icon"
+              />
             </div>
           </div>
           <div className="feature-right">
@@ -49,7 +56,10 @@ class News extends React.Component {
           <div className="feature-left">
             <div className="feature-square">
               <span>3</span>
-              <FontAwesomeIcon icon={faThumbsUp} className="feature-icon" />
+              <FontAwesomeIcon
+                icon={faThumbsUp}
+                className="feature-icon"
+              />
             </div>
           </div>
           <div className="feature-right">
