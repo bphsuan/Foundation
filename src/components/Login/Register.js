@@ -1,7 +1,9 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import Logo from "../../images/background/foundationLogo.png"
-import './style.scss'
+import React from 'react';
+import { Link } from 'gatsby';
+import './style.scss';
+import { connect } from "react-redux";
+import Grid from '@material-ui/core/Grid';
+import Tooltip from '@material-ui/core/Tooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
@@ -66,29 +68,26 @@ class Register extends React.Component {
   pwdHide() {
     this.setState({ show: false });
   }
-  async register() {
-    const { account, password, name, gender, birthday, email, phone, address } = this.state;
-    fetch("http://foundation.hsc.nutc.edu.tw/api/Customer/Register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        Account: account,
-        Password: password,
-        Name: name,
-        Gender: gender,
-        Birthday: birthday,
-        Email: email,
-        Phone: phone,
-        Address: address
-      })
-    }).then(r => r.json())
-      .then(response => {
-        console.log('Success:', JSON.stringify(response))
-      })
-      .catch(error => console.error('Error:', error));
+  register = () => {
+
+    const memberObj = {
+      Account: this.state.account,
+      Password: this.state.password,
+      Name: this.state.name,
+      Gender: this.state.gender,
+      Birthday: this.state.birthday,
+      Email: this.state.email,
+      Phone: this.state.phone,
+      Address: this.state.address
+    }
+    this.props.dispatch({
+      type: 'member/register',
+      payload: memberObj,
+      callback: () => {
+        console.log("註冊成功!")
+        window.location = "/Login";
+      }
+    })
   }
   render() {
     const eyeDispear = {
@@ -120,6 +119,7 @@ class Register extends React.Component {
             <select className="input" onChange={this.updateGender.bind(this)}>
               <option>女</option>
               <option>男</option>
+              <option>其他</option>
             </select>
           </div>
           <div className="input-style">
@@ -128,7 +128,7 @@ class Register extends React.Component {
           </div>
           <div className="input-style">
             <p className="letter">Email</p>
-            <input type="email" className="input" onChange={this.updateEmail.bind(this)} />
+            <input type="email" className="input" onChange={this.updateEmail.bind(this)} placeholder="例如:abc@gmail.com" />
           </div>
           <div className="input-style">
             <p className="letter">電話</p>
@@ -139,7 +139,7 @@ class Register extends React.Component {
             <input type="text" className="input" onChange={this.updateAddress.bind(this)} />
           </div>
           <div className="login-btn">
-            <a onClick={this.register.bind(this)}>註冊</a>
+            <a onClick={this.register}>註冊</a>
           </div>
           <Link className="login-link" to="/Login">已經有會員? </Link>
         </div>
@@ -148,4 +148,5 @@ class Register extends React.Component {
   }
 }
 
-export default Register
+// export default Register
+export default connect()(Register)
