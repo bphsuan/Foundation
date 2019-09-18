@@ -1,6 +1,6 @@
-import React from "react"
-import Tab from "../Tab/Tab"
-import "./TabContent.scss"
+import React from 'react';
+import Tab from '../Tab/Tab';
+import './TabContent.scss';
 
 class TabContent extends React.Component {
   constructor(props) {

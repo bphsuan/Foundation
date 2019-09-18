@@ -24,7 +24,10 @@ class ToTop extends React.Component {
   render() {
     return (
       <div className="top-content" onClick={() => { this.scrollToTop(); }}>
-        <FontAwesomeIcon icon={faChevronUp} className="top-icon" />
+        <FontAwesomeIcon
+          icon={faChevronUp}
+          className="top-icon"
+        />
       </div>
     )
   }

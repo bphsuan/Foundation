@@ -20,7 +20,10 @@ export default ({ children }) => (
         {children}
       </div>
       <Footer />
-      <ToTop scrollStepInPx="50" delayInMs="16.66" />
+      <ToTop
+        scrollStepInPx="50"
+        delayInMs="16.66"
+      />
     </div>
   </Provider>
 )

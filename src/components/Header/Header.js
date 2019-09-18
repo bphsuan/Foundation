@@ -1,15 +1,14 @@
-import React, { Component } from "react"
-import ReactDOM from "react-dom"
-import { Link } from "gatsby"
-import "./Header.scss"
-import Logo from "../../images/background/foundationLogo.png"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"
-import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
-import { faBars } from "@fortawesome/free-solid-svg-icons"
-import { faTimes } from "@fortawesome/free-solid-svg-icons"
+import React from 'react';
+import { Link } from 'gatsby';
+import './Header.scss';
+import Logo from '../../images/background/foundationLogo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 class Header extends React.Component {
   constructor(props) {
     super(props)
@@ -91,17 +90,33 @@ class Header extends React.Component {
             聯絡我們｜Contact
           </Link>
           <div className="headerIcons">
-            <Link to="/" className="headerIcon">
-              <FontAwesomeIcon icon={faShoppingCart} />
+            <Link
+              to="/"
+              className="headerIcon">
+              <FontAwesomeIcon
+                icon={faShoppingCart}
+              />
             </Link>
-            <Link to="/PersonalInfo" className="headerIcon">
-              <FontAwesomeIcon icon={faUserCircle} />
+            <Link
+              to="/PersonalInfo"
+              className="headerIcon">
+              <FontAwesomeIcon
+                icon={faUserCircle}
+              />
             </Link>
-            <Link to="/Login" className="headerIcon">
-              <FontAwesomeIcon icon={faSignInAlt} />
+            <Link
+              to="/Login"
+              className="headerIcon">
+              <FontAwesomeIcon
+                icon={faSignInAlt}
+              />
             </Link>
-            {/* <Link to="/Login" className="headerIcon">
-              <FontAwesomeIcon icon={faSignOutAlt} />
+            {/* <Link
+              to="/Login"
+              className="headerIcon">
+              <FontAwesomeIcon
+                icon={faSignOutAlt}
+              />
             </Link> */}
           </div>
         </div>

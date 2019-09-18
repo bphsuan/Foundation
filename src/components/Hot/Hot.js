@@ -1,5 +1,5 @@
 import React from 'react';
-import Title from '../Title/Title'
+import Title from '../Title/Title';
 import './Hot.scss';
 
 class Hot extends React.Component {
@@ -12,7 +12,9 @@ class Hot extends React.Component {
   render() {
     return (
       <div className="hot-content">
-        <Title name={this.state.name} />
+        <Title
+          name={this.state.name}
+        />
       </div>
     )
   }

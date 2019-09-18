@@ -1,6 +1,7 @@
-import React from "react"
-import Product from "../Product/Product"
-import "./ProductContent.scss"
+import React from 'react';
+import Product from '../Product/Product';
+import './ProductContent.scss';
+
 class ProductContent extends React.Component {
   constructor(props) {
     super(props);

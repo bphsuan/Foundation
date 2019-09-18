@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from 'gatsby';
+import React from 'react';
 import './Title.scss';
+
 class Title extends React.Component {
   constructor(props) {
     super(props);
@@ -15,4 +15,5 @@ class Title extends React.Component {
     )
   }
 }
+
 export default Title;
