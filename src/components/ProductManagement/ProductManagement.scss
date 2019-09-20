@@ -1,5 +1,5 @@
 @import "../../mixin/main.scss";
-.Member {
+.product-management {
   width: 100%;
   text-align: center;
   margin-top: 2rem;
@@ -9,20 +9,23 @@
     white-space: nowrap;
     // text-overflow : ellipsis;
   }
-  .MemberData {
+  .product-data {
     width: 95%;
     margin: 0 auto;
     border: 2px solid $color-black;
     border-collapse: collapse;
     word-break: break-all;
+    .t-width {
+      width: 32%;
+    }
     td,
     th {
-      // width: 110px;
       border: 2px solid $color-black;
-      .block {
-        width: 70px;
+
+      .p-button {
+        width: 65px;
         height: 30px;
-        margin: 12px auto;
+        margin: 5px auto;
         background-color: $color-normal;
         color: $color-white;
         display: block;
@@ -36,10 +39,51 @@
           color: $color-main;
         }
         @include pad {
-          width: 60px;
+          width: 50px;
           height: 28px;
           margin: 5px;
         }
+      }
+    }
+  }
+}
+.DialogContent {
+  width: 30vw;
+  @include laptop {
+    width: 60vw;
+  }
+  .input {
+    width: 100%;
+    margin: 5px 0;
+    display: flex;
+    background-color: $color-white;
+    &:focus {
+      outline-color: $color-main;
+    }
+    @include pad {
+      display: block;
+      margin: 0;
+    }
+    input {
+      width: 80%;
+      @include pad {
+        width: 100%;
+      }
+    }
+    p {
+      margin: 0 5px;
+      color: $color-black;
+      letter-spacing: $letterSpacing-m;
+      @include pad {
+        letter-spacing: $letterSpacing-l;
+      }
+    }
+    textarea {
+      width: 80%;
+      height: 180px;
+      resize: vertical;
+      @include pad {
+        width: 100%;
       }
     }
   }
