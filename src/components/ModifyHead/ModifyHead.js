@@ -1,15 +1,16 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import './ModifyHead.scss'
-import defaultHead from '../../images/Default.png'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
+import React from 'react';
+import { Link } from 'gatsby';
+import './ModifyHead.scss';
+import defaultHead from '../../images/Default.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 class ModifyHead extends React.Component {
   constructor(props) {
     super(props);
@@ -55,8 +56,14 @@ class ModifyHead extends React.Component {
       <div className="personal-head" >
         <img src={defaultHead} />
         <span onClick={this.handleClickOpen.bind(this)} >更換頭貼</span>
-        <Dialog open={this.state.open} onClose={this.handleClose.bind(this)} aria-labelledby="form-dialog-title" >
-          <DialogTitle id="form-dialog-title">上傳新的頭貼</DialogTitle>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose.bind(this)}
+          aria-labelledby="form-dialog-title" >
+          <DialogTitle
+            id="form-dialog-title">
+            上傳新的頭貼
+          </DialogTitle>
           <DialogContent>
             <DialogContentText>
               請點選『選擇檔案』上傳您的新頭貼。
@@ -71,8 +78,16 @@ class ModifyHead extends React.Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose.bind(this)} style={button}>取消</Button>
-            <Button onClick={this.handleClose.bind(this)} style={button}>上傳</Button>
+            <Button
+              onClick={this.handleClose.bind(this)}
+              style={button}>
+              取消
+            </Button>
+            <Button
+              onClick={this.handleClose.bind(this)}
+              style={button}>
+              上傳
+            </Button>
           </DialogActions>
         </Dialog>
       </div>

@@ -1,0 +1,90 @@
+@import "../../mixin/main.scss";
+.product-management {
+  width: 100%;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  @include pad {
+    overflow-x: scroll;
+    white-space: nowrap;
+    // text-overflow : ellipsis;
+  }
+  .product-data {
+    width: 95%;
+    margin: 0 auto;
+    border: 2px solid $color-black;
+    border-collapse: collapse;
+    word-break: break-all;
+    .t-width {
+      width: 32%;
+    }
+    td,
+    th {
+      border: 2px solid $color-black;
+
+      .p-button {
+        width: 65px;
+        height: 30px;
+        margin: 5px auto;
+        background-color: $color-normal;
+        color: $color-white;
+        display: block;
+        text-align: center;
+        line-height: 30px;
+        transition: $transition;
+        letter-spacing: $letterSpacing-m;
+        font-size: $fontSize-m;
+        &:hover {
+          cursor: pointer;
+          color: $color-main;
+        }
+        @include pad {
+          width: 50px;
+          height: 28px;
+          margin: 5px;
+        }
+      }
+    }
+  }
+}
+.DialogContent {
+  width: 30vw;
+  @include laptop {
+    width: 60vw;
+  }
+  .input {
+    width: 100%;
+    margin: 5px 0;
+    display: flex;
+    background-color: $color-white;
+    &:focus {
+      outline-color: $color-main;
+    }
+    @include pad {
+      display: block;
+      margin: 0;
+    }
+    input {
+      width: 80%;
+      @include pad {
+        width: 100%;
+      }
+    }
+    p {
+      margin: 0 5px;
+      color: $color-black;
+      letter-spacing: $letterSpacing-m;
+      @include pad {
+        letter-spacing: $letterSpacing-l;
+      }
+    }
+    textarea {
+      width: 80%;
+      height: 180px;
+      resize: vertical;
+      @include pad {
+        width: 100%;
+      }
+    }
+  }
+}

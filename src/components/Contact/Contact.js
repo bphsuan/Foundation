@@ -1,10 +1,9 @@
-import React from 'react'
-import './contact.scss'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPhone } from "@fortawesome/free-solid-svg-icons"
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
-import { faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons"
-
+import React from 'react';
+import './contact.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 import contactPic from '../../images/contactus.png'
 class Contact extends React.Component {
   render() {

@@ -12,7 +12,9 @@ class Hot extends React.Component {
   render() {
     return (
       <div className="hot-content">
-        <Title name={this.state.name} />
+        <Title
+          name={this.state.name}
+        />
       </div>
     )
   }

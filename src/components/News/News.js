@@ -1,10 +1,10 @@
-import React from "react"
-import { Link } from "gatsby";
-import "./News.scss"
-import News01 from "../../images/news01.png";
-import News02 from "../../images/news02.png";
-import News03 from "../../images/news03.png";
+import React from 'react'
+import './News.scss'
+import News01 from '../../images/news01.png';
+import News02 from '../../images/news02.png';
+import News03 from '../../images/news03.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 class News extends React.Component {
   constructor(props) {
     super(props);
