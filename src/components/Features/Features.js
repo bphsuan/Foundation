@@ -30,7 +30,7 @@ class News extends React.Component {
           </div>
           <div className="feature-right">
             <div className="feature-description">
-              <h1>影像辨識</h1>
+              <h1>精準影像辨識</h1>
               <p>協助您準確判斷適合您膚色的粉底液</p>
             </div>
           </div>
@@ -47,8 +47,8 @@ class News extends React.Component {
           </div>
           <div className="feature-right">
             <div className="feature-description">
-              <h1>不用您親自貨比三家</h1>
-              <p>幫您比較各大電商平台上全新商品之價格</p>
+              <h1>貨比不只三家</h1>
+              <p>紅粉知己幫您比較各大電商平台上全新商品之價格</p>
             </div>
           </div>
         </div>
@@ -64,8 +64,8 @@ class News extends React.Component {
           </div>
           <div className="feature-right">
             <div className="feature-description">
-              <h1>個人化儀表板</h1>
-              <p>個人化的服務給您尊榮級的享受</p>
+              <h1>個人化數據追蹤</h1>
+              <p>個人化的追蹤服務給您尊榮級的享受</p>
             </div>
           </div>
         </div>

@@ -56,7 +56,13 @@ class Login extends React.Component {
         callback: resMsg => {
           console.log(resMsg);
           if (resMsg === "登入成功") {
-            return navigateTo('/')
+            this.props.dispatch({
+              type: "member/loginSuccess",
+              payload: memberObj,
+              callback: () => {
+                return navigateTo('/')
+              }
+            })
           } else {
             alert(resMsg);
           }

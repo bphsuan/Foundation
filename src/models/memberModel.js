@@ -31,6 +31,11 @@ export default {
     * login({ payload, callback }, { put, call, select }) {
       const resMsg = yield call(login, payload); //return status
       console.log(resMsg);
+      callback(resMsg);
+    },
+    * loginSuccess({ payload, callback }, { put, call, select }) {
+      const resMsg = yield call(login, payload); //return status
+      console.log(resMsg);
       let _account = "";
       _account = payload.Account; //get account
       console.log(_account);
@@ -46,5 +51,7 @@ export default {
         type: "SET_Logout",
       })
     }
-  }
+  },
+
 }
+
