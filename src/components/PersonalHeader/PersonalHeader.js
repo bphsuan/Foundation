@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import './PersonalHeader.scss';
+import { connect } from "react-redux";
 import ModifyHead from '../ModifyHead/ModifyHead';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -24,7 +25,7 @@ class PersonalHeader extends React.Component {
       <div className="personal-header">
         <ModifyHead />
         <div className="personal-menu">
-          <p className="name">Jing-Yi</p>
+          <p className="name">Hello! {this.props.memberAccount}</p>
           <Link
             to="/PersonalInfo"
             className={this.state.location === "/PersonalInfo" ? "active" : ""}>
@@ -67,4 +68,11 @@ class PersonalHeader extends React.Component {
   }
 }
 
-export default PersonalHeader
+function mapStateToProps(state, ownProps) {
+  return {
+    isLogin: state.member.isLogin,
+    memberAccount: state.member.memberAccount
+  };
+}
+
+export default connect(mapStateToProps)(PersonalHeader)

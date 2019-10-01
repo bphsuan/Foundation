@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import './Header.scss';
+import { connect } from 'react-redux';
 import Logo from '../../images/background/foundationLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +10,8 @@ import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { navigateTo } from 'gatsby';
+
 class Header extends React.Component {
   constructor(props) {
     super(props)
@@ -19,21 +22,35 @@ class Header extends React.Component {
       location: "",
     }
   }
-  componentDidMount() {
+  componentDidMount = () => {
     this.setState({ location: window.location.pathname }) //抓路由
   }
-  menuShow() {
+  menuShow = () => {
     this.setState({ menu: true })
   }
-  menuHide() {
+  menuHide = () => {
     this.setState({ menu: false })
   }
-  render() {
-    const barDispear = {
+  logout = () => {
+    this.props.dispatch({
+      type: "member/logout",
+      callback: () => {
+        return navigateTo('/') //redirect to homepage
+      }
+    })
+  }
+  render = () => {
+    const dispear = {
       display: "none",
     }
-    const barApear = {
+    const apear = {
       display: "block",
+    }
+    const iconDispear = {
+      display: "none",
+    }
+    const iconApear = {
+      display: "inline-block",
     }
     const menuShow = {
       left: "0",
@@ -41,20 +58,21 @@ class Header extends React.Component {
     const menuHide = {
       left: "-305px",
     }
+    const isLogin = this.props.isLogin;
     return (
       <div className="Header">
         <div className="bar">
           <FontAwesomeIcon
             className="barIcon"
             icon={faBars}
-            style={this.state.menu ? barDispear : barApear}
-            onClick={this.menuShow.bind(this)}
+            style={this.state.menu ? dispear : apear}
+            onClick={this.menuShow}
           />
           <FontAwesomeIcon
             className="barIcon"
             icon={faTimes}
-            style={this.state.menu ? barApear : barDispear}
-            onClick={this.menuHide.bind(this)}
+            style={this.state.menu ? apear : dispear}
+            onClick={this.menuHide}
           />
         </div>
         <Link to="/" className="logo">
@@ -99,25 +117,31 @@ class Header extends React.Component {
             </Link>
             <Link
               to="/PersonalInfo"
-              className="headerIcon">
+              className="headerIcon"
+              style={isLogin ? iconApear : iconDispear}
+            >
               <FontAwesomeIcon
                 icon={faUserCircle}
               />
             </Link>
             <Link
               to="/Login"
-              className="headerIcon">
+              className="headerIcon"
+              style={isLogin ? iconDispear : iconApear}
+            >
               <FontAwesomeIcon
                 icon={faSignInAlt}
               />
             </Link>
-            {/* <Link
-              to="/Login"
-              className="headerIcon">
+            <Link
+              className="headerIcon"
+              style={isLogin ? iconApear : iconDispear}
+              onClick={this.logout.bind(this)}
+            >
               <FontAwesomeIcon
                 icon={faSignOutAlt}
               />
-            </Link> */}
+            </Link>
           </div>
         </div>
       </div>
@@ -125,4 +149,10 @@ class Header extends React.Component {
   }
 }
 
-export default Header
+function mapStateToProps(state, ownProps) {
+  return {
+    isLogin: state.member.isLogin,
+  };
+}
+
+export default connect(mapStateToProps)(Header)
