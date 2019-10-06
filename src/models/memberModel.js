@@ -1,4 +1,4 @@
-import { register, login } from '../services/memberService';
+import { register, login, modifyPsw } from '../services/memberService';
 
 export default {
   namespace: "member",
@@ -50,6 +50,11 @@ export default {
       yield put({
         type: "SET_Logout",
       })
+    },
+    * modifyPsw({ payload, callback }, { put, call, select }) {
+      const resMsg = yield call(modifyPsw, payload); //return status
+      console.log(resMsg);
+      callback(resMsg);
     }
   },
 

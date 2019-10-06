@@ -1,7 +1,7 @@
 const registerAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/Register";
 const loginAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/Login";
 const logoutAPI = "foundation.hsc.nutc.edu.tw/api/Customer/Logout";
-
+const modifyPswAPI = "foundation.hsc.nutc.edu.tw/api/Customer/ModifyPassword"
 function register(data) {
   console.log(data)
   return fetch(registerAPI, {
@@ -36,7 +36,21 @@ function login(data) {
     })
   }).then(responese => responese.json())
 }
+function modifyPsw(data) {
+  console.log(data)
+  return fetch(modifyPswAPI, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+    body: JSON.stringify({
+      oldPassword: data.oldPassword,
+      newPassword: data.newPassword,
+    })
+  }).then(responese => responese.json())
+}
 export {
-  register, login
+  register, login, modifyPsw
 }
 

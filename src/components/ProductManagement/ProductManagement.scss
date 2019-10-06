@@ -1,8 +1,64 @@
 @import "../../mixin/main.scss";
+.addProduct {
+  width: 100%;
+  padding-top: 1rem;
+  h2{
+    text-align: center;
+    color: $color-black;
+    letter-spacing: $letterSpacing-l;
+  }
+  .addContent {
+    @include pad {
+      width: 90%;
+    }
+    width: 40%;   
+    margin: 0 auto;
+    padding-top: 1rem;
+    .input {
+      padding: 0.5rem;
+      display:flex;
+      margin: 15px 5%;
+      span{
+        font-weight: 600;      
+        letter-spacing: $letterSpacing-l;
+      }
+      input{
+        height: 20px;
+        width: 75%;
+        &:focus {
+          outline-color: $color-main;
+        }
+      }
+      textarea{
+        width: 75%;
+        min-height: 180px;        
+      }
+    }
+    .summit-btn {
+      a {
+        width: 100px;
+        height: 40px;
+        margin: 20px auto;
+        background-color: $color-normal;
+        color: $color-white;
+        display: block;
+        text-align: center;
+        line-height: 40px;
+        transition: $transition;
+        letter-spacing: $letterSpacing-m;
+        font-size: $fontSize-m;
+        &:hover {
+          cursor: pointer;
+          color: $color-main;
+        }
+      }
+    }
+  }
+}
 .product-management {
   width: 100%;
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   margin-bottom: 2rem;
   @include pad {
     overflow-x: scroll;
@@ -21,30 +77,39 @@
     td,
     th {
       border: 2px solid $color-black;
-
-      .p-button {
-        width: 65px;
-        height: 30px;
-        margin: 5px auto;
-        background-color: $color-normal;
-        color: $color-white;
-        display: block;
-        text-align: center;
-        line-height: 30px;
-        transition: $transition;
-        letter-spacing: $letterSpacing-m;
-        font-size: $fontSize-m;
-        &:hover {
-          cursor: pointer;
-          color: $color-main;
-        }
-        @include pad {
-          width: 50px;
-          height: 28px;
-          margin: 5px;
-        }
-      }
     }
+  }
+  .p-button {
+    height: 30px;
+    margin: 5px auto;
+    background-color: $color-normal;
+    color: $color-white;
+    display: block;
+    text-align: center;
+    line-height: 30px;
+    transition: $transition;
+    letter-spacing: $letterSpacing-m;
+    font-size: $fontSize-m;
+    &:hover {
+      cursor: pointer;
+      color: $color-main;
+    }
+    @include pad {
+      width: 50px;
+      height: 28px;
+      margin: 5px;
+    }
+  }
+  .top-tool {
+    height: 40px;
+    .square-size {
+      width: 35px;
+      position: absolute;
+      right: 2.5%;
+    }
+  }
+  .b-size {
+    width: 65px;
   }
 }
 .DialogContent {
