@@ -28,13 +28,21 @@ function login(data) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      // "Access-Control-Allow-Credentials":true,
       "Access-Control-Allow-Origin": "*",
+      "Accept":"application/json"
     },
+    credentials: "same-origin",
+
     body: JSON.stringify({
       Account: data.Account,
       Password: data.Password,
     })
-  }).then(responese => responese.json())
+  }).then(responese => {
+    // console.log(responese.headers)
+    responese.json()
+  }
+  )
 }
 function modifyPsw(data) {
   console.log(data)
