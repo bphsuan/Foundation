@@ -31,7 +31,7 @@ function login(data) {
       "Content-Type": "application/json",
       // "Access-Control-Allow-Credentials":true,
       "Access-Control-Allow-Origin": "*",
-      "Accept":"application/json"
+      "Accept": "application/json"
     },
     credentials: "same-origin",
 
@@ -41,7 +41,7 @@ function login(data) {
     })
   }).then(responese => {
     // console.log(responese.headers)
-    responese.json()
+    return responese.json()
   }
   )
 }
