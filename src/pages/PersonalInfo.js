@@ -1,13 +1,15 @@
-import React, { Component } from "react"
-import { Link } from 'gatsby'
-import Layout from '../components/Layout/Layout'
-import TabContent from '../components/TabContent/TabContent'
-import PersonalHeader from "../components/PersonalHeader/PersonalHeader"
-import ModifyPassword from "../components/ModifyPassword/ModifyPassword"
-import ModifyPersonalInfo from "../components/ModifyPersonalInfo/ModifyPersonalInfo"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIdCardAlt } from '@fortawesome/free-solid-svg-icons'
-import { faKey } from '@fortawesome/free-solid-svg-icons'
+import React, { Component } from 'react';
+import { Link } from 'gatsby';
+import { connect } from 'react-redux';
+import { navigateTo } from 'gatsby';
+import Layout from '../components/Layout/Layout';
+import TabContent from '../components/TabContent/TabContent';
+import PersonalHeader from "../components/PersonalHeader/PersonalHeader";
+import ModifyPassword from "../components/ModifyPassword/ModifyPassword";
+import ModifyPersonalInfo from "../components/ModifyPersonalInfo/ModifyPersonalInfo";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faIdCardAlt } from '@fortawesome/free-solid-svg-icons';
+import { faKey } from '@fortawesome/free-solid-svg-icons';
 
 class PersonalInfo extends React.Component {
   constructor(props) {

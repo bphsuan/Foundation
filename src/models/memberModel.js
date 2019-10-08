@@ -4,7 +4,7 @@ export default {
   namespace: "member",
   state: {
     memberAccount: "",
-    isLogin: false
+    isLogin: ""
   },
   reducers: {
     SET_Login(state, { payload }) {
@@ -12,13 +12,13 @@ export default {
       return {
         ...state, //open state
         memberAccount: payload,
-        isLogin: true
+        isLogin: "user"
       }
     },
     SET_Logout(state) {
       return {
         ...state,
-        isLogin: false
+        isLogin: "guest"
       }
     }
   },
@@ -32,19 +32,17 @@ export default {
       const resMsg = yield call(login, payload); //return status
       console.log(resMsg);
       callback(resMsg);
-    },
-    * loginSuccess({ payload, callback }, { put, call, select }) {
-      const resMsg = yield call(login, payload); //return status
-      console.log(resMsg);
       let _account = "";
-      _account = payload.Account; //get account
-      console.log(_account);
-      yield put({
-        //to reducer
-        type: "SET_Login",
-        payload: _account,
-      });
-      callback(resMsg);
+      if (resMsg === "登入成功") {
+        _account = payload.Account; //get account
+        yield put({
+          //to reducer
+          type: "SET_Login",
+          payload: _account,
+        });
+      } else {
+        callback(resMsg);
+      }
     },
     * logout({ payload, callback }, { put, call, select }) {
       yield put({

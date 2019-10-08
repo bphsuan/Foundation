@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import './PersonalHeader.scss';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+import { navigateTo } from 'gatsby';
 import ModifyHead from '../ModifyHead/ModifyHead';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';

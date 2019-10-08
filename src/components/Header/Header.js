@@ -22,13 +22,13 @@ class Header extends React.Component {
       location: "",
     }
   }
-  componentDidMount = () => {
+  componentDidMount() {
     this.setState({ location: window.location.pathname }) //抓路由
   }
-  menuShow = () => {
+  menuShow() {
     this.setState({ menu: true })
   }
-  menuHide = () => {
+  menuHide() {
     this.setState({ menu: false })
   }
   logout = () => {
@@ -39,7 +39,7 @@ class Header extends React.Component {
       }
     })
   }
-  render = () => {
+  render() {
     const dispear = {
       display: "none",
     }
@@ -66,13 +66,13 @@ class Header extends React.Component {
             className="barIcon"
             icon={faBars}
             style={this.state.menu ? dispear : apear}
-            onClick={this.menuShow}
+            onClick={this.menuShow.bind(this)}
           />
           <FontAwesomeIcon
             className="barIcon"
             icon={faTimes}
             style={this.state.menu ? apear : dispear}
-            onClick={this.menuHide}
+            onClick={this.menuHide.bind(this)}
           />
         </div>
         <Link to="/" className="logo">
@@ -118,7 +118,7 @@ class Header extends React.Component {
             <Link
               to="/PersonalInfo"
               className="headerIcon"
-              style={isLogin ? iconApear : iconDispear}
+              style={isLogin === "user" ? iconApear : iconDispear}
             >
               <FontAwesomeIcon
                 icon={faUserCircle}
@@ -127,7 +127,7 @@ class Header extends React.Component {
             <Link
               to="/Login"
               className="headerIcon"
-              style={isLogin ? iconDispear : iconApear}
+              style={isLogin === "user" ? iconDispear : iconApear}
             >
               <FontAwesomeIcon
                 icon={faSignInAlt}
@@ -135,7 +135,7 @@ class Header extends React.Component {
             </Link>
             <Link
               className="headerIcon"
-              style={isLogin ? iconApear : iconDispear}
+              style={isLogin === "user" ? iconApear : iconDispear}
               onClick={this.logout.bind(this)}
             >
               <FontAwesomeIcon
