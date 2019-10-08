@@ -3,9 +3,10 @@
   width: 100%;
   padding: 50px 0;
   a {
-    margin: 10px 10%;
+    margin: 15px 10%;
     color: $color-black;
     font-size: $fontSize-m;
+    font-weight: bold;
     &:hover {
       cursor: pointer;
     }
@@ -25,16 +26,27 @@
         width: 85%;
       }
     }
+    @include pad {
+      & {
+        display: block;
+      }
+    }
     .detail-img {
       width: 50%;
       @include pad {
         & {
-          margin: 10px 7.5%;
+          width: 100%;
         }
       }
       img {
         width: 80%;
         margin: 10%;
+        @include pad {
+          & {
+            width: 60%;
+            margin: 20px 20%;
+          }
+        }
       }
     }
     .detail-text {
@@ -43,9 +55,26 @@
       background-color: $color-gray;
       font-size: $fontSize-m;
       line-height: 2;
+      @include pad {
+        & {
+          width: 80%;
+          padding: 20px 10%;
+          line-height: 1.5;
+        }
+      }
       .name {
         font-size: $fontSize-l;
         font-weight: bold;
+        @include mobile {
+          & {
+            font-size: $fontSize-l * 0.85;
+          }
+        }
+        @include min-mobile {
+          & {
+            font-size: $fontSize-m;
+          }
+        }
       }
       .new-price {
         font-size: $fontSize-l;
@@ -66,7 +95,7 @@
         }
       }
       button {
-        width: 160px;
+        width: 155px;
         height: 40px;
         margin: 0 15px;
         background-color: $color-normal;
