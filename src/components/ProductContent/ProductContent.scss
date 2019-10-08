@@ -11,6 +11,9 @@
     font-size: $fontSize-m;
     line-height: 1.5;
     display: inline-block;
+    &:hover {
+      cursor: pointer;
+    }
     @include pc {
       & {
         width: 30%;
@@ -50,17 +53,38 @@
         font-size: $fontSize-l;
         margin-top: 5px;
         color: $color-main;
+        &:hover {
+          cursor: pointer;
+        }
       }
       .addCart {
         font-size: $fontSize-l;
         margin-top: 5px;
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
     .product-img {
       width: 80%;
-      height: 250px;
+      height: 260px;
       padding: 10px 10%;
       overflow: hidden;
+      @include pad {
+        & {
+          height: 270px;
+        }
+      }
+      @include mobile {
+        & {
+          height: 275px;
+        }
+      }
+      @include min-mobile {
+        & {
+          height: 220px;
+        }
+      }
       img {
         width: 100%;
         height: auto;
