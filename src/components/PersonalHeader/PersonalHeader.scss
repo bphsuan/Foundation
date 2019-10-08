@@ -1,0 +1,159 @@
+@import "../../mixin/main.scss";
+.personal-header {
+  width: 70%;
+  height: 160px;
+  padding: 20px 15%;
+  background-color: $color-gray;
+  display: flex;
+  @include pc {
+    & {
+      width: 75%;
+      padding: 20px 12.5%;
+    }
+  }
+  @include laptop {
+    & {
+      width: 85%;
+      padding: 20px 7.5%;
+    }
+  }
+  @include pad {
+    & {
+      width: 70%;
+      padding: 20px 15%;
+    }
+  }
+  @include mobile {
+    & {
+      width: 90%;
+      padding: 20px 5%;
+    }
+  }
+  @include min-mobile {
+    & {
+      width: 95%;
+      padding: 20px 2.5%;
+    }
+  }
+  .personal-head {
+    width: 20%;
+    height: 160px;
+    text-align: center;
+    position: relative;
+    @include laptop {
+      & {
+        width: 18%;
+      }
+    }
+    @include pad {
+      & {
+        width: 35%;
+      }
+    }
+    img {
+      width: 150px;
+      height: 150px;
+      margin: 5px 0;
+      border-radius: 50%;
+      transition: $transition;
+      @include laptop {
+        & {
+          width: 120px;
+          height: 120px;
+          margin: 20px 0;
+        }
+      }
+      @include mobile {
+        & {
+          width: 100px;
+          height: 100px;
+          margin: 30px 0;
+        }
+      }
+    }
+    span {
+      width: 100%;
+      height: 160px;
+      line-height: 160px;
+      text-align: center;
+      font-size: $fontSize-m;
+      font-weight: bold;
+      letter-spacing: $letterSpacing-m;
+      color: $color-black;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: $transition;
+      &:hover {
+        opacity: 0.5;
+        cursor: pointer;
+      }
+    }
+  }
+  .personal-menu {
+    width: 75%;
+    padding: 10px 2.5%;
+    @include laptop {
+      & {
+        width: 80%;
+        padding: 10px 1%;
+      }
+    }
+    @include pad {
+      & {
+        width: 60%;
+        padding: 10px 2.5%;
+      }
+    }
+    .name {
+      height: 60px;
+      font-size: $fontSize-l;
+      font-weight: bold;
+      letter-spacing: $letterSpacing-m;
+      line-height: 60px;
+    }
+    a {
+      height: 37px;
+      margin: 30px 25px 30px 0;
+      display: inline-block;
+      color: $color-normal;
+      font-size: $fontSize-m;
+      font-weight: bold;
+      line-height: 37px;
+      transition: $transition;
+      border-bottom: 3px solid $color-gray;
+      &.active {
+        color: $color-main;
+        border-bottom: 3px solid $color-main;
+      }
+      @include pc {
+        & {
+          margin: 30px 20px 30px 0;
+        }
+      }
+      @include laptop {
+        & {
+          margin: 30px 15px 30px 0;
+        }
+      }
+      @include pad {
+        & {
+          margin: 30px 35px 30px 0;
+        }
+      }
+      @include mobile {
+        & {
+          margin: 30px 25px 30px 0;
+        }
+      }
+      span {
+        @include pad {
+          & {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

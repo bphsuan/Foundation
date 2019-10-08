@@ -1,0 +1,118 @@
+@import "../../mixin/main.scss";
+.login_bg {
+  width: 100%;
+  height: 90vh;
+  background-image: url("../../images/background/foundationBG.png");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-attachment: fixed;
+  overflow-y: auto;
+  overflow-x: hidden;
+  @include pad {
+    background-size: auto 80%;
+  }
+  @include mobile {
+    background-size: auto 60%;
+  }
+  .login {
+    width: 50%;
+    margin: 100px 0;
+    float: right;
+    text-align: center;
+    font-size: $fontSize-m;
+    @include pad {
+      width: 70%;
+    }
+    @include mobile {
+      width: 90%;
+      margin: 20px 5%;
+      padding: 5px 0;
+      background-color: rgba($color: $color-black, $alpha: 0.2);
+    }
+    @include min-mobile {
+      width: 98%;
+      margin: 20px 1%;
+      padding: 10px 0;
+    }
+    p {
+      font-size: $fontSize-l;
+      font-weight: bold;
+      letter-spacing: $letterSpacing-m;
+    }
+    .input-style {
+      width: 70%;
+      margin: 15px 15%;
+      display: flex;
+      @include mobile {
+        width: 90%;
+        margin: 15px 5%;
+      }
+      .letter {
+        width: 25%;
+        height: 30px;
+        line-height: 30px;
+        font-size: $fontSize-m;
+        letter-spacing: $letterSpacing-m;
+        text-align: left;
+        @include mobile {
+          width: 25%;
+        }
+        .required {
+          color: #990000;
+        }
+      }
+      .input {
+        width: 75%;
+        height: 30px;
+        font-size: $fontSize-m;
+        background-color: $color-white;
+        &:focus {
+          outline-color: $color-main;
+        }
+        @include mobile {
+          width: 75%;
+        }
+      }
+    }
+    .password {
+      position: relative;
+      .eye {
+        position: absolute;
+        right: 5%;
+        color: $color-normal;
+        height: 30px;
+        margin: 2px 0;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    .login-btn {
+      a {
+        width: 100px;
+        height: 40px;
+        margin: 20px auto;
+        background-color: $color-normal;
+        color: $color-white;
+        display: block;
+        text-align: center;
+        line-height: 40px;
+        transition: $transition;
+        letter-spacing: $letterSpacing-m;
+        &:hover {
+          cursor: pointer;
+          color: $color-main;
+        }
+      }
+    }
+    .login-link {
+      color: $color-normal;
+      font-weight: bold;
+      transition: $transition;
+      letter-spacing: $letterSpacing-s;
+      &:hover {
+        color: $color-main;
+      }
+    }
+  }
+}

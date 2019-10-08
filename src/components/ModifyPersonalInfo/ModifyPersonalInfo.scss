@@ -1,0 +1,76 @@
+@import "../../mixin/main.scss";
+.modify-form {
+  width: 50%;
+  margin: 35px auto 50px auto;
+  font-size: $fontSize-m;
+  font-weight: bold;
+  @include pad {
+    width: 65%;
+  }
+  @include mobile {
+    width: 80%;
+  }
+  @include min-mobile {
+    width: 90%;
+  }
+  .input-style {
+    width: 100%;
+    display: flex;
+    .letter {
+      width: 25%;
+      height: 30px;
+      margin: 10px 0;
+      line-height: 30px;
+      letter-spacing: $letterSpacing-m;
+    }
+    .input {
+      width: 75%;
+      height: 30px;
+      margin: 10px 0;
+      font-size: $fontSize-m;
+      &:focus {
+        outline-color: $color-main;
+      }
+    }
+    select {
+      width: 75%;
+      height: 30px;
+      margin: 10px 0;
+      font-size: $fontSize-m;
+      background-color: $color-white;
+      &:focus {
+        outline-color: $color-main;
+      }
+    }
+  }
+  .password {
+    position: relative;
+    .eye {
+      position: absolute;
+      right: 5%;
+      color: $color-normal;
+      height: 30px;
+      margin: 10px 0;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .modify-btn {
+    a {
+      width: 100px;
+      height: 40px;
+      margin: 20px auto;
+      background-color: $color-normal;
+      color: $color-white;
+      display: block;
+      text-align: center;
+      line-height: 40px;
+      transition: $transition;
+      letter-spacing: $letterSpacing-m;
+      &:hover {
+        color: $color-main;
+      }
+    }
+  }
+}
