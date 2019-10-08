@@ -11,7 +11,6 @@ class MyFavorite extends React.Component {
     }
   }
   render() {
-
     return (
       <Layout>
         <PersonalHeader />

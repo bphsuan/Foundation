@@ -1,9 +1,10 @@
 const registerAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/Register";
 const loginAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/Login";
+const logoutAPI = "foundation.hsc.nutc.edu.tw/api/Customer/Logout";
 
 function register(data) {
-  // console.log(data)
-  fetch(registerAPI, {
+  console.log(data)
+  return fetch(registerAPI, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,13 +21,22 @@ function register(data) {
       Address: data.Address
     })
   }).then(responese => responese.json())
-    .then(responese => {
-      console.log("Success", JSON.stringify(responese))
+}
+function login(data) {
+  console.log(data)
+  return fetch(loginAPI, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+    body: JSON.stringify({
+      Account: data.Account,
+      Password: data.Password,
     })
-    .catch(error => console.log("Error", error)
-    );
+  }).then(responese => responese.json())
 }
 export {
-  register
+  register, login
 }
 

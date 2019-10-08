@@ -52,10 +52,13 @@
         height: 30px;
         line-height: 30px;
         font-size: $fontSize-m;
-        letter-spacing: $letterSpacing-l;
+        letter-spacing: $letterSpacing-m;
         text-align: left;
         @include mobile {
-          width: 20%;
+          width: 25%;
+        }
+        .required {
+          color: #990000;
         }
       }
       .input {
@@ -67,7 +70,7 @@
           outline-color: $color-main;
         }
         @include mobile {
-          width: 80%;
+          width: 75%;
         }
       }
     }

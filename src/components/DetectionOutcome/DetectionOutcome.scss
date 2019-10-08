@@ -1,0 +1,31 @@
+@import "../../mixin/main.scss";
+.detection-outcome {
+  width: 100%;
+  padding: 25px 0;
+  display: flex;
+  .detection-origin {
+    width: 40%;
+    margin: 0 5%;
+    padding: 20px 0;
+    text-align: right;
+    img {
+      width: 80%;
+      height: auto;
+      padding: 5px;
+      border: $borderWidth * 2.5 solid $color-black;
+    }
+  }
+  .detection-text {
+    width: 40%;
+    margin: 0 5%;
+    padding: 30px 0;
+    text-align: left;
+    font-size: $fontSize-m;
+    line-height: 2;
+    letter-spacing: $letterSpacing-m;
+    h1 {
+      font-size: $fontSize-l;
+      letter-spacing: $letterSpacing-l;
+    }
+  }
+}

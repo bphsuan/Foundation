@@ -1,19 +1,23 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import './style.scss';
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { navigateTo } from 'gatsby'
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLogin: false,
       account: "",
       password: "",
       show: false
     }
+  }
+  componentDidMount() {
+    this.accountInput.focus(); //載入時focus
   }
   pwdShow() {
     this.setState({ show: true });
@@ -31,25 +35,40 @@ class Login extends React.Component {
       password: e.target.value
     })
   }
-  async login() {
-    const { account, password } = this.state;
-    fetch("http://foundation.hsc.nutc.edu.tw/api/Customer/Login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        Account: account,
-        Password: password
+  handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      this.login();
+    }
+  }
+  login = () => {
+    const memberObj = {
+      Account: this.state.account,
+      Password: this.state.password,
+    }
+    if (this.state.account.length === 0) {
+      alert("帳號尚未輸入");
+    } else if (this.state.password.length === 0) {
+      alert("密碼尚未輸入");
+    } else {
+      this.props.dispatch({
+        type: "member/login",
+        payload: memberObj,
+        callback: resMsg => {
+          console.log(resMsg);
+          if (resMsg === "登入成功") {
+            this.props.dispatch({
+              type: "member/loginSuccess",
+              payload: memberObj,
+              callback: () => {
+                return navigateTo('/')
+              }
+            })
+          } else {
+            alert(resMsg);
+          }
+        }
       })
-    }).then(r => r.json())
-      .then(response => {
-        window.location = '/';
-        console.log('Success:', JSON.stringify(response));
-        this.setState({ isLogin: true })
-      })
-      .catch(error => console.error('Error:', error));
+    }
   }
   render() {
     const eyeDispear = {
@@ -70,6 +89,8 @@ class Login extends React.Component {
                 className="input"
                 value={this.state.account}
                 onChange={this.updateAccount.bind(this)}
+                onKeyDown={this.handleKeyDown}
+                ref={(input) => { this.accountInput = input; }} //載入時focus
               />
             </div>
             <div className="input-style password">
@@ -79,6 +100,7 @@ class Login extends React.Component {
                 className="input"
                 value={this.state.password}
                 onChange={this.updatePassword.bind(this)}
+                onKeyDown={this.handleKeyDown}
               />
               <FontAwesomeIcon
                 className="eye"
@@ -117,4 +139,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+export default connect()(Login)

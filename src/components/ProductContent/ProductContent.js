@@ -11,9 +11,16 @@ class ProductContent extends React.Component {
   render() {
     return (
       <div className="product-content">
-        {this.props.products.map((e) => {
+        {this.props.products.map((product) => {
           return (
-            <Product />
+            <Product
+              id={product.id}
+              img={product.img}
+              brand={product.brand}
+              name={product.name}
+              new_price={product.new_price}
+              price={product.price}
+            />
           )
         })}
       </div>
