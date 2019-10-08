@@ -3,9 +3,16 @@
   width: 100%;
   padding: 50px 0;
   a {
+<<<<<<< HEAD
     margin: 10px 10%;
     color: $color-black;
     font-size: $fontSize-m;
+=======
+    margin: 15px 10%;
+    color: $color-black;
+    font-size: $fontSize-m;
+    font-weight: bold;
+>>>>>>> 6dbe5677df55a7a90ab42358ab8b8db3c527049c
     &:hover {
       cursor: pointer;
     }
@@ -25,16 +32,37 @@
         width: 85%;
       }
     }
+<<<<<<< HEAD
+=======
+    @include pad {
+      & {
+        display: block;
+      }
+    }
+>>>>>>> 6dbe5677df55a7a90ab42358ab8b8db3c527049c
     .detail-img {
       width: 50%;
       @include pad {
         & {
+<<<<<<< HEAD
           margin: 10px 7.5%;
+=======
+          width: 100%;
+>>>>>>> 6dbe5677df55a7a90ab42358ab8b8db3c527049c
         }
       }
       img {
         width: 80%;
         margin: 10%;
+<<<<<<< HEAD
+=======
+        @include pad {
+          & {
+            width: 60%;
+            margin: 20px 20%;
+          }
+        }
+>>>>>>> 6dbe5677df55a7a90ab42358ab8b8db3c527049c
       }
     }
     .detail-text {
@@ -43,9 +71,32 @@
       background-color: $color-gray;
       font-size: $fontSize-m;
       line-height: 2;
+<<<<<<< HEAD
       .name {
         font-size: $fontSize-l;
         font-weight: bold;
+=======
+      @include pad {
+        & {
+          width: 80%;
+          padding: 20px 10%;
+          line-height: 1.5;
+        }
+      }
+      .name {
+        font-size: $fontSize-l;
+        font-weight: bold;
+        @include mobile {
+          & {
+            font-size: $fontSize-l * 0.85;
+          }
+        }
+        @include min-mobile {
+          & {
+            font-size: $fontSize-m;
+          }
+        }
+>>>>>>> 6dbe5677df55a7a90ab42358ab8b8db3c527049c
       }
       .new-price {
         font-size: $fontSize-l;
@@ -66,7 +117,11 @@
         }
       }
       button {
+<<<<<<< HEAD
         width: 160px;
+=======
+        width: 155px;
+>>>>>>> 6dbe5677df55a7a90ab42358ab8b8db3c527049c
         height: 40px;
         margin: 0 15px;
         background-color: $color-normal;
