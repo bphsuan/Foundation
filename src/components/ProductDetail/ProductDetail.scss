@@ -1,0 +1,91 @@
+@import "../../mixin/main.scss";
+.detail-content {
+  width: 100%;
+  padding: 50px 0;
+  a {
+    margin: 10px 10%;
+    color: $color-black;
+    font-size: $fontSize-m;
+    &:hover {
+      cursor: pointer;
+    }
+    @include laptop {
+      & {
+        margin: 10px 7.5%;
+      }
+    }
+  }
+  .detail {
+    width: 80%;
+    margin: 5px auto;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    display: flex;
+    @include laptop {
+      & {
+        width: 85%;
+      }
+    }
+    .detail-img {
+      width: 50%;
+      @include pad {
+        & {
+          margin: 10px 7.5%;
+        }
+      }
+      img {
+        width: 80%;
+        margin: 10%;
+      }
+    }
+    .detail-text {
+      width: 40%;
+      padding: 5%;
+      background-color: $color-gray;
+      font-size: $fontSize-m;
+      line-height: 2;
+      .name {
+        font-size: $fontSize-l;
+        font-weight: bold;
+      }
+      .new-price {
+        font-size: $fontSize-l;
+        font-weight: bold;
+        color: $color-main;
+        .price {
+          font-size: $fontSize-m;
+          font-weight: normal;
+          color: $color-black;
+          text-decoration: line-through;
+        }
+      }
+      .favorite {
+        font-size: $fontSize-l;
+        color: $color-main;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      button {
+        width: 160px;
+        height: 40px;
+        margin: 0 15px;
+        background-color: $color-normal;
+        color: $color-white;
+        text-align: center;
+        line-height: 40px;
+        transition: $transition;
+        letter-spacing: $letterSpacing-m;
+        font-size: $fontSize-m;
+        outline: 0;
+        &:hover {
+          cursor: pointer;
+          color: $color-main;
+          font-size: $fontSize-m;
+        }
+        .addCart {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
