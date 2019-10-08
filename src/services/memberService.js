@@ -1,6 +1,5 @@
 const registerAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/Register";
 const loginAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/Login";
-const logoutAPI = "foundation.hsc.nutc.edu.tw/api/Customer/Logout";
 
 function register(data) {
   console.log(data)
@@ -36,6 +35,24 @@ function login(data) {
     })
   }).then(responese => responese.json())
 }
+// function login(data) {
+//   console.log(data)
+//   return fetch(loginAPI, {
+//     headers: {
+//       'Accept': 'application/json',
+//       "Content-Type": "application/json",
+//       "Access-Control-Allow-Origin": "*",
+//       "Access-Control-Allow-Credentials": true,
+
+//     },
+//     method: "POST",
+//     credentials: "same-origin",
+//     body: JSON.stringify({
+//       Account: data.Account,
+//       Password: data.Password,
+//     })
+//   }).then(responese => responese)
+// }
 export {
   register, login
 }

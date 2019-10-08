@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { navigateTo } from 'gatsby'
+import { navigateTo } from 'gatsby';
 
 class Login extends React.Component {
   constructor(props) {
@@ -53,16 +53,11 @@ class Login extends React.Component {
       this.props.dispatch({
         type: "member/login",
         payload: memberObj,
+        callback: () => { },
         callback: resMsg => {
           console.log(resMsg);
           if (resMsg === "登入成功") {
-            this.props.dispatch({
-              type: "member/loginSuccess",
-              payload: memberObj,
-              callback: () => {
-                return navigateTo('/')
-              }
-            })
+            return navigateTo('/')
           } else {
             alert(resMsg);
           }
