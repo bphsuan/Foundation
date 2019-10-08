@@ -1,11 +1,8 @@
 const registerAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/Register";
 const loginAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/Login";
-<<<<<<< HEAD
 const logoutAPI = "foundation.hsc.nutc.edu.tw/api/Customer/Logout";
 const modifyPswAPI = "foundation.hsc.nutc.edu.tw/api/Customer/ModifyPassword"
-=======
 
->>>>>>> e009500526f26cfc6f2e15bd6dd5b7a75220a2c9
 function register(data) {
   console.log(data)
   return fetch(registerAPI, {
