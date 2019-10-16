@@ -53,13 +53,12 @@ class Login extends React.Component {
       this.props.dispatch({
         type: "member/login",
         payload: memberObj,
-        callback: () => { },
-        callback: resMsg => {
-          console.log(resMsg);
-          if (resMsg === "登入成功") {
+        callback: response => {
+          console.log(response);
+          if (response === "登入成功") {
             return navigateTo('/')
           } else {
-            alert(resMsg);
+            alert(response);
           }
         }
       })

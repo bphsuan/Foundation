@@ -109,7 +109,7 @@ class Header extends React.Component {
           </Link>
           <div className="headerIcons">
             <Link
-              to="/"
+              to="/ShoppingCart"
               className="headerIcon">
               <FontAwesomeIcon
                 icon={faShoppingCart}

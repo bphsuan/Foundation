@@ -2,7 +2,7 @@
 .addProduct {
   width: 100%;
   padding-top: 1rem;
-  h2{
+  h2 {
     text-align: center;
     color: $color-black;
     letter-spacing: $letterSpacing-l;
@@ -11,27 +11,28 @@
     @include pad {
       width: 90%;
     }
-    width: 40%;   
+    width: 40%;
     margin: 0 auto;
     padding-top: 1rem;
     .input {
       padding: 0.5rem;
-      display:flex;
+      display: flex;
       margin: 15px 5%;
-      span{
-        font-weight: 600;      
+      span {
+        font-weight: 600;
         letter-spacing: $letterSpacing-l;
       }
-      input{
+      input {
         height: 20px;
         width: 75%;
         &:focus {
           outline-color: $color-main;
         }
       }
-      textarea{
+      textarea {
         width: 75%;
-        min-height: 180px;        
+        min-height: 180px;
+        resize: vertical;
       }
     }
     .summit-btn {
@@ -145,7 +146,7 @@
     }
     textarea {
       width: 80%;
-      height: 180px;
+      min-height: 180px;
       resize: vertical;
       @include pad {
         width: 100%;
