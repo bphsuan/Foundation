@@ -1,0 +1,19 @@
+@import "../../mixin/main.scss";
+.order-content {
+  width: 80%;
+  margin: 20px 10%;
+  display: flex;
+  font-size: $fontSize-m;
+  line-height: 1.5;
+  @include pad {
+    & {
+      display: inline-block;
+    }
+  }
+  .order-list {
+    width: 90%;
+    padding: 20px 5%;
+    min-height: 360px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  }
+}

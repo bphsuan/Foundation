@@ -1,7 +1,8 @@
 const registerAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/Register";
 const loginAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/Login";
-const logoutAPI = "foundation.hsc.nutc.edu.tw/api/Customer/Logout";
-const modifyPswAPI = "foundation.hsc.nutc.edu.tw/api/Customer/ModifyPassword"
+const modifyPswAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/ModifyPassword";
+const userInfoAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/UserInformation";
+
 
 function register(data) {
   console.log(data)
@@ -21,7 +22,7 @@ function register(data) {
       Phone: data.Phone,
       Address: data.Address
     })
-  }).then(responese => responese.json())
+  }).then(response => response.json())
 }
 function login(data) {
   console.log(data)
@@ -29,55 +30,71 @@ function login(data) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      // "Access-Control-Allow-Credentials":true,
       "Access-Control-Allow-Origin": "*",
-      "Accept": "application/json"
+      "Accept": "application/json",
     },
-    credentials: "same-origin",
 
     body: JSON.stringify({
       Account: data.Account,
       Password: data.Password,
     })
-  }).then(responese => {
-    // console.log(responese.headers)
-    return responese.json()
-  }
-  )
+  }).then(response => response.json())
+}
+function UserInfo() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  console.log(token.token[0]);
+  return fetch(userInfoAPI, {
+    method: "GET",
+    headers: ({
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    }),
+  }).then(response => response.json())
+
 }
 function modifyPsw(data) {
-  console.log(data)
+  console.log(data);
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
   return fetch(modifyPswAPI, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
     },
     body: JSON.stringify({
       oldPassword: data.oldPassword,
       newPassword: data.newPassword,
     })
-  }).then(responese => responese.json())
+  }).then(response => response.json())
 }
-// function login(data) {
-//   console.log(data)
-//   return fetch(loginAPI, {
-//     headers: {
-//       'Accept': 'application/json',
-//       "Content-Type": "application/json",
-//       "Access-Control-Allow-Origin": "*",
-//       "Access-Control-Allow-Credentials": true,
 
-//     },
-//     method: "POST",
-//     credentials: "same-origin",
-//     body: JSON.stringify({
-//       Account: data.Account,
-//       Password: data.Password,
-//     })
-//   }).then(responese => responese)
-// }
 export {
-  register, login, modifyPsw
+  register, login, modifyPsw, UserInfo
 }
-
+// const UserInfo = async () => {
+//   const data = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+//     token: []
+//   };
+//   console.log(data.token[0]);
+//   await fetch('http://foundation.hsc.nutc.edu.tw/api/Customer/UserInformation', {
+//     method: "GET",
+//     headers: ({
+//       "Content-Type": "application/json",
+      // "Access-Control-Allow-Origin": "*",
+      // "Accept": "application/json",
+//       "Authorization": "Bearer " + data.token[0]
+//     }),
+//   })
+//     .then(async res => res.json())
+//     .then(async data => {
+//       await console.log(data);
+//     })
+// }

@@ -37,7 +37,7 @@ class ModifyPassword extends React.Component {
       newPassword: e.target.value
     })
   }
-  modify(){
+  modify = () => {
     const passwordObj = {
       oldPassword: this.state.oldPassword,
       newPassword: this.state.newPassword
@@ -52,7 +52,7 @@ class ModifyPassword extends React.Component {
         payload: passwordObj,
         callback: resMsg => {
           console.log(resMsg);
-          if (resMsg === "修改成功") {
+          if (resMsg === "修改密碼成功") {
             alert(resMsg);
             return navigateTo('/PersonalInfo')
           } else {
