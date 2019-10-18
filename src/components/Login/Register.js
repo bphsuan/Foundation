@@ -25,46 +25,97 @@ class Register extends React.Component {
   componentDidMount() {
     this.accountInput.focus(); //載入時focus
   }
-  updateAccount(e) {
-    this.setState({
-      account: e.target.value
-    })
+  updateItem(e) {
+    switch (e.target.id) {
+      case "Account":
+        this.setState({
+          account: e.target.value
+        })
+        console.log("改帳號!");
+        break;
+      case "Password":
+        this.setState({
+          password: e.target.value
+        })
+        console.log("改密碼!");
+        break;
+      case "Name":
+        this.setState({
+          name: e.target.value
+        })
+        console.log("改名字!");
+        break;
+      case "Gender":
+        this.setState({
+          gender: e.target.value
+        })
+        console.log("改性別!");
+        break;
+      case "Birthday":
+        this.setState({
+          birthday: e.target.value
+        })
+        console.log("改生日!");
+        break;
+      case "Email":
+        this.setState({
+          email: e.target.value
+        })
+        console.log("改信箱!");
+        break;
+      case "Phone":
+        this.setState({
+          phone: e.target.value
+        })
+        console.log("改電話!");
+        break;
+      case "Address":
+        this.setState({
+          address: e.target.value
+        })
+        console.log("改地址!");
+        break;
+    }
+    // this.setState({
+    //   account: e.target.value
+    // })
   }
-  updatePassword(e) {
-    this.setState({
-      password: e.target.value
-    })
-  }
-  updateName(e) {
-    this.setState({
-      name: e.target.value
-    })
-  }
-  updateGender(e) {
-    this.setState({
-      gender: e.target.value
-    })
-  }
-  updateBirthday(e) {
-    this.setState({
-      birthday: e.target.value
-    })
-  }
-  updateEmail(e) {
-    this.setState({
-      email: e.target.value
-    })
-  }
-  updatePhone(e) {
-    this.setState({
-      phone: e.target.value
-    })
-  }
-  updateAddress(e) {
-    this.setState({
-      address: e.target.value
-    })
-  }
+  // updatePassword(e) {
+  //   this.setState({
+  //     password: e.target.value
+  //   })
+  // }
+  // updateName(e) {
+  //   this.setState({
+  //     name: e.target.value
+  //   })
+  //   console.log(e.target.id);
+  // }
+  // updateGender(e) {
+  //   this.setState({
+  //     gender: e.target.value
+  //   })
+  // }
+  // updateBirthday(e) {
+  //   this.setState({
+  //     birthday: e.target.value
+  //   })
+  // }
+  // updateEmail(e) {
+  //   this.setState({
+  //     email: e.target.value
+  //   })
+  // }
+  // updatePhone(e) {
+  //   this.setState({
+  //     phone: e.target.value
+  //   })
+  // }
+  // updateAddress(e) {
+  //   this.setState({
+  //     address: e.target.value
+  //   })
+  // }
   pwdShow() {
     this.setState({ show: true });
   }
@@ -141,9 +192,10 @@ class Register extends React.Component {
             <span className="required">*</span>
             </p>
             <input
+              id="Account"
               type="text"
               className="input"
-              onChange={this.updateAccount.bind(this)}
+              onChange={this.updateItem.bind(this)}
               onKeyDown={this.handleKeyDown}
               placeholder="請輸入介於6~20字元"
               ref={(input) => { this.accountInput = input; }} //載入時focus
@@ -155,8 +207,9 @@ class Register extends React.Component {
             </p>
             <input
               type={this.state.show ? "text" : "password"}
+              id="Password"
               className="input"
-              onChange={this.updatePassword.bind(this)}
+              onChange={this.updateItem.bind(this)}
               onKeyDown={this.handleKeyDown}
               placeholder="請輸入介於6~20字元"
             />
@@ -176,9 +229,10 @@ class Register extends React.Component {
             <span className="required">*</span>
             </p>
             <input
+              id="Name"
               type="text"
               className="input"
-              onChange={this.updateName.bind(this)}
+              onChange={this.updateItem.bind(this)}
               onKeyDown={this.handleKeyDown}
             />
           </div>
@@ -187,8 +241,9 @@ class Register extends React.Component {
             <span className="required">*</span>
             </p>
             <select
+              id="Gender"
               className="input"
-              onChange={this.updateGender.bind(this)}
+              onChange={this.updateItem.bind(this)}
               onKeyDown={this.handleKeyDown}
               defaultValue="女"
             >
@@ -202,9 +257,10 @@ class Register extends React.Component {
             <span className="required">*</span>
             </p>
             <input type="date"
+              id="Birthday"
               className="input"
               onKeyDown={this.handleKeyDown}
-              onChange={this.updateBirthday.bind(this)}
+              onChange={this.updateItem.bind(this)}
             />
           </div>
           <div className="input-style">
@@ -212,8 +268,9 @@ class Register extends React.Component {
             <span className="required">*</span>
             </p>
             <input type="email"
+              id="Email"
               className="input"
-              onChange={this.updateEmail.bind(this)}
+              onChange={this.updateItem.bind(this)}
               onKeyDown={this.handleKeyDown}
               placeholder="例如:abc@gmail.com"
             />
@@ -223,8 +280,9 @@ class Register extends React.Component {
             <span className="required">*</span>
             </p>
             <input type="tel"
+              id="Phone"
               className="input"
-              onChange={this.updatePhone.bind(this)}
+              onChange={this.updateItem.bind(this)}
               onKeyDown={this.handleKeyDown}
               placeholder="例如:0912345678、0422334455"
             />
@@ -233,9 +291,11 @@ class Register extends React.Component {
             <p className="letter">地址
             <span className="required">*</span>
             </p>
-            <input type="text"
+            <input
+              id="Address"
+              type="text"
               className="input"
-              onChange={this.updateAddress.bind(this)}
+              onChange={this.updateItem.bind(this)}
               onKeyDown={this.handleKeyDown}
             />
           </div>

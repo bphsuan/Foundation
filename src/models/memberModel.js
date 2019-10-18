@@ -1,4 +1,4 @@
-import { register, login, modifyPsw, UserInfo } from '../services/memberService';
+import { register, login, modifyPsw, UserInfo, SendUserInfo } from '../services/memberService';
 
 export default {
   namespace: "member",
@@ -64,11 +64,11 @@ export default {
     * GET_userInfo({ payload, callback }, { put, call, select }) {
       const resMsg = yield call(UserInfo);
       console.log(resMsg);
-      let _name = resMsg.Name;
-      yield put({
-        type: "SET_Username",
-        payload: _name,
-      })
+      callback(resMsg);
+    },
+    * Send_userInfo({ payload, callback }, { put, call, select }) {
+      const resMsg = yield call(SendUserInfo, payload);
+      console.log(resMsg);
       callback(resMsg);
     },
     * modifyPsw({ payload, callback }, { put, call, select }) {

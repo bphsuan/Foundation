@@ -56,6 +56,29 @@ function UserInfo() {
   }).then(response => response.json())
 
 }
+function SendUserInfo(data) {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  console.log(token.token[0]);
+  return fetch(userInfoAPI, {
+    method: "POST",
+    headers: ({
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Authorization": "Bearer " + token.token[0]
+    }),
+    body: JSON.stringify({
+      Name: data.Name,
+      Gender: data.Gender,
+      Birthday: data.Birthday,
+      Email: data.Email,
+      Phone: data.Phone,
+      Address: data.Address
+    })
+  }).then(response => response.json())
+
+}
 function modifyPsw(data) {
   console.log(data);
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
@@ -77,7 +100,7 @@ function modifyPsw(data) {
 }
 
 export {
-  register, login, modifyPsw, UserInfo
+  register, login, modifyPsw, UserInfo, SendUserInfo
 }
 // const UserInfo = async () => {
 //   const data = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
