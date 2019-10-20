@@ -9,12 +9,12 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import Product from '../Product/Product';
 
 class ProductDetail extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    console.log(props) 
+    console.log(props)
   }
   render() {
-    return (      
+    return (
       <div className="detail-content">
         <Link to="/Products">
           <FontAwesomeIcon icon={faArrowLeft} /> 回到產品介紹
@@ -26,7 +26,7 @@ class ProductDetail extends React.Component {
           <div className="detail-text">
             <p className="brand">{this.props.pageContext.product.brand}</p>
             <p className="name">{this.props.pageContext.product.name}</p>
-            <p className="new-price"><span className="price">179 </span>178</p>
+            <p className="new-price"><span className="price">{this.props.pageContext.product.price}</span>{this.props.pageContext.product.new_price}</p>
             <p className="description">無</p>
             <br />
             <FontAwesomeIcon
