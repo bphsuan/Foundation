@@ -85,10 +85,10 @@ class Product extends React.Component {
   render() {
     return (
       <Layout>
-        <ProductHeader />
-        <ProductContent
-          products={this.state.products}
-        />
+        <ProductHeader />       
+          <ProductContent
+            products={this.state.products}
+          />
       </Layout>
     )
   }

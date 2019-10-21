@@ -2,7 +2,9 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-
+import ProductDetail from '../ProductDetail/ProductDetail'
+// import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { Link } from 'gatsby'
 class Product extends React.Component {
   constructor(props) {
     super(props);
@@ -11,13 +13,16 @@ class Product extends React.Component {
   }
   render() {
     return (
+
       <div id={this.props.id} className="product">
         <div className="product-func">
           <FontAwesomeIcon icon={faHeart} className="favorite" />
           <FontAwesomeIcon icon={faCartPlus} className="addCart" />
         </div>
+
         <div className="product-img">
-          <img src={this.props.img} />
+          <Link to={`/ProductDetail/${this.props.id}`} component={ProductDetail}> <img src={this.props.img} /></Link>
+          {/* <img src={this.props.img} /> */}
         </div>
         <div className="product-text">
           <p className="product-brand">{this.props.brand}</p>
@@ -26,6 +31,7 @@ class Product extends React.Component {
           <p className="new-price">{this.props.new_price}</p>
         </div>
       </div>
+
     )
   }
 }
