@@ -8,7 +8,7 @@ import Footer from '../Footer/Footer';
 import ToTop from '../ToTop/ToTop';
 import './Layout.scss';
 import Favicon from '../../images/favicon.ico';
-
+// import { CookiesProvider } from 'react-cookie';
 const app = create();
 app.model(memberModel);
 app.start();

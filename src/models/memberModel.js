@@ -1,23 +1,37 @@
-import { register, login } from '../services/memberService';
+import { register, login, modifyPsw, UserInfo } from '../services/memberService';
 
 export default {
   namespace: "member",
   state: {
-    memberAccount: "",
-    isLogin: ""
+    token: "",
+    isLogin: "",
+    username: "",
   },
   reducers: {
     SET_Login(state, { payload }) {
       console.log(payload);
+      const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+        token: []
+      };
+      token.token.push(payload);
+      localStorage.setItem("token", JSON.stringify(token));
       return {
         ...state, //open state
-        memberAccount: payload,
+        token: payload,
         isLogin: "user"
       }
     },
-    SET_Logout(state) {
+    SET_Username(state, { payload }) {
       return {
         ...state,
+        username: payload
+      }
+    },
+    SET_Logout(state) {
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        token: "",
         isLogin: "guest"
       }
     }
@@ -31,23 +45,36 @@ export default {
     * login({ payload, callback }, { put, call, select }) {
       const resMsg = yield call(login, payload); //return status
       console.log(resMsg);
-      callback(resMsg);
-      let _account = "";
-      if (resMsg === "登入成功") {
-        _account = payload.Account; //get account
+      if (resMsg[0].message === "登入成功") {
         yield put({
           //to reducer
           type: "SET_Login",
-          payload: _account,
+          payload: resMsg[0].token,
         });
+        callback(resMsg[0].message);
       } else {
-        callback(resMsg);
+        callback(resMsg[0].message);
       }
     },
     * logout({ payload, callback }, { put, call, select }) {
       yield put({
         type: "SET_Logout",
       })
+    },
+    * GET_userInfo({ payload, callback }, { put, call, select }) {
+      const resMsg = yield call(UserInfo);
+      console.log(resMsg);
+      let _name = resMsg.Name;
+      yield put({
+        type: "SET_Username",
+        payload: _name,
+      })
+      callback(resMsg);
+    },
+    * modifyPsw({ payload, callback }, { put, call, select }) {
+      const resMsg = yield call(modifyPsw, payload); //return status
+      console.log(resMsg);
+      callback(resMsg);
     }
   },
 

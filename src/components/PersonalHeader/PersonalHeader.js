@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faGift } from '@fortawesome/free-solid-svg-icons';
 
 class PersonalHeader extends React.Component {
   constructor(props) {
@@ -20,13 +20,14 @@ class PersonalHeader extends React.Component {
   }
   componentDidMount() {
     this.setState({ location: window.location.pathname }) //抓路由
+
   }
   render() {
     return (
       <div className="personal-header">
         <ModifyHead />
         <div className="personal-menu">
-          <p className="name">Hello! {this.props.memberAccount}</p>
+          <p className="name">Hello! {this.props.username}</p>
           <Link
             to="/PersonalInfo"
             className={this.state.location === "/PersonalInfo" ? "active" : ""}>
@@ -57,10 +58,10 @@ class PersonalHeader extends React.Component {
           <Link
             to="/MyFavorite"
             className={this.state.location === "/MyFavorite" ? "active" : ""}>
-            <span>查看我的最愛 </span>
+            <span>我的好物管理 </span>
             <FontAwesomeIcon
               className="icon"
-              icon={faHeart}
+              icon={faGift}
             />
           </Link>
         </div>
@@ -71,8 +72,7 @@ class PersonalHeader extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    isLogin: state.member.isLogin,
-    memberAccount: state.member.memberAccount
+    username: state.member.username
   };
 }
 

@@ -1,15 +1,18 @@
 import React from 'react';
 import './ModifyPassword.scss';
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-
+import { navigateTo } from 'gatsby'
 class ModifyPassword extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       originPwd: false,
       newPwd: false,
+      oldPassword: "",
+      newPassword: ""
     }
   }
   originPwdShow() {
@@ -24,6 +27,41 @@ class ModifyPassword extends React.Component {
   newPwdHide() {
     this.setState({ newPwd: false });
   }
+  updateOldPsw(e) {
+    this.setState({
+      oldPassword: e.target.value
+    })
+  }
+  updateNewPsw(e) {
+    this.setState({
+      newPassword: e.target.value
+    })
+  }
+  modify = () => {
+    const passwordObj = {
+      oldPassword: this.state.oldPassword,
+      newPassword: this.state.newPassword
+    }
+    if (this.state.newPassword.length === 0 || this.state.oldPassword.length === 0) {
+      alert("缺少新或舊密碼");
+    } else if (this.state.newPassword.length < 6) {
+      alert("請輸入6~20位元")
+    } else {
+      this.props.dispatch({
+        type: "member/modifyPsw",
+        payload: passwordObj,
+        callback: resMsg => {
+          console.log(resMsg);
+          if (resMsg === "修改密碼成功") {
+            alert(resMsg);
+            return navigateTo('/PersonalInfo')
+          } else {
+            alert(resMsg);
+          }
+        }
+      })
+    }
+  }
   render() {
     const eyeDispear = {
       display: "none"
@@ -35,7 +73,9 @@ class ModifyPassword extends React.Component {
       <div className="modify-form" >
         <div className="input-style password">
           <p className="letter">舊密碼</p>
-          <input type={this.state.originPwd ? "text" : "password"} className="input" />
+          <input type={this.state.originPwd ? "text" : "password"}
+            className="input"
+            onChange={this.updateOldPsw.bind(this)} />
           <FontAwesomeIcon
             className="eye"
             style={this.state.originPwd ? eyeDispear : eyeApear}
@@ -49,7 +89,9 @@ class ModifyPassword extends React.Component {
         </div>
         <div className="input-style password">
           <p className="letter">新密碼</p>
-          <input type={this.state.newPwd ? "text" : "password"} className="input" />
+          <input type={this.state.newPwd ? "text" : "password"}
+            className="input"
+            onChange={this.updateNewPsw.bind(this)} />
           <FontAwesomeIcon
             className="eye"
             style={this.state.newPwd ? eyeDispear : eyeApear}
@@ -62,11 +104,11 @@ class ModifyPassword extends React.Component {
             onClick={this.newPwdHide.bind(this)} />
         </div>
         <div className="modify-btn">
-          <a href="">儲存</a>
+          <a onClick={this.modify.bind(this)}>儲存</a>
         </div>
       </div>
     )
   }
 }
 
-export default ModifyPassword
+export default connect()(ModifyPassword)

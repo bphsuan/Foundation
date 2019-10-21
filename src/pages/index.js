@@ -8,9 +8,7 @@ import AboutTeam from '../components/AboutTeam/AboutTeam';
 class Index extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
 
-    }
   }
   render() {
     return (
