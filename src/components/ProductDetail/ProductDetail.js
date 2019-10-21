@@ -6,25 +6,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import Product from '../Product/Product';
 
 class ProductDetail extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {
-    }
+    super(props)
+    console.log(props)
   }
   render() {
     return (
       <div className="detail-content">
-        <Link><FontAwesomeIcon icon={faArrowLeft} /> 回到產品介紹</Link>
+        <Link to="/Products">
+          <FontAwesomeIcon icon={faArrowLeft} /> 回到產品介紹
+          </Link>
         <div className="detail">
           <div className="detail-img">
             <img src={img1} />
           </div>
           <div className="detail-text">
-            <p className="brand">essence</p>
-            <p className="name">艾森絲16 hr 持久粉底液 30</p>
-            <p className="new-price"><span className="price">179 </span>178</p>
+            <p className="brand">{this.props.pageContext.product.brand}</p>
+            <p className="name">{this.props.pageContext.product.name}</p>
+            <p className="new-price"><span className="price">{this.props.pageContext.product.price}</span>{this.props.pageContext.product.new_price}</p>
             <p className="description">無</p>
             <br />
             <FontAwesomeIcon

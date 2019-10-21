@@ -1,6 +1,5 @@
 {
     "editor.tabSize": 2,
-    "editor.fontSize": 16,
-    "editor.fontWeight": "bold",
+    "editor.fontSize": 13,
     "editor.formatOnSave": true
 }

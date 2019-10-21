@@ -11,6 +11,9 @@ class AddContent extends React.Component {
                         <span>品牌</span><input type="text" />
                     </div>
                     <div className="input">
+                        <span>上傳照片</span><input type="file" />
+                    </div>
+                    <div className="input">
                         <span>品名</span><input type="text" />
                     </div>
                     <div className="input">
@@ -21,7 +24,7 @@ class AddContent extends React.Component {
                     </div>
                     <div className="summit-btn">
                         <a>新增</a>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         )

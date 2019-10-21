@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from 'gatsby';
 import Layout from '../components/Layout/Layout';
 import News from '../components/News/News';
 import Features from '../components/Features/Features';

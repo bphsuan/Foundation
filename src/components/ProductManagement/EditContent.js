@@ -4,13 +4,16 @@ class EditContent extends React.Component {
         return (
             <div>
                 <div className="input">
-                    <p>品牌</p><input type="text" />
+                    <span>品牌</span><input type="text" />
                 </div>
                 <div className="input">
-                    <p>品名</p><input type="text" />
+                    <span>品名</span><input type="text" />
                 </div>
                 <div className="input">
-                    <p>描述</p><textarea />
+                    <span>上傳照片</span><input type="file" />
+                </div>
+                <div className="input">
+                    <span>描述</span><textarea />
                 </div>
             </div>
         )
