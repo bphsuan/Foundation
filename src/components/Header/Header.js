@@ -134,6 +134,7 @@ class Header extends React.Component {
               />
             </Link>
             <Link
+              to="/"
               className="headerIcon"
               style={isLogin === "user" ? iconApear : iconDispear}
               onClick={this.logout.bind(this)}

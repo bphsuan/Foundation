@@ -1,4 +1,4 @@
-import { register, login, modifyPsw, UserInfo, SendUserInfo } from '../services/memberService';
+import { register, login, modifyPsw, UserInfo, SendUserInfo, uploadUserPic, getUserPic } from '../services/memberService';
 
 export default {
   namespace: "member",
@@ -63,17 +63,22 @@ export default {
     },
     * GET_userInfo({ payload, callback }, { put, call, select }) {
       const resMsg = yield call(UserInfo);
-      console.log(resMsg);
       callback(resMsg);
     },
     * Send_userInfo({ payload, callback }, { put, call, select }) {
       const resMsg = yield call(SendUserInfo, payload);
-      console.log(resMsg);
       callback(resMsg);
     },
     * modifyPsw({ payload, callback }, { put, call, select }) {
       const resMsg = yield call(modifyPsw, payload); //return status
-      console.log(resMsg);
+      callback(resMsg);
+    },
+    * uploadUserPic({ payload, callback }, { put, call, select }) {
+      const resMsg = yield call(uploadUserPic, payload);
+      callback(resMsg);
+    },
+    * GET_UserPic({ payload, callback }, { put, call, select }) {
+      const resMsg = yield call(getUserPic, payload);
       callback(resMsg);
     }
   },

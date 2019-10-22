@@ -1,8 +1,6 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import './ModifyHead.scss';
 import defaultHead from '../../images/Default.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -10,30 +8,91 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import { connect } from "react-redux";
+import { navigateTo } from 'gatsby'
+const UserPicUrl = "http://foundation.hsc.nutc.edu.tw";
 class ModifyHead extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      setOpen: false
+      setOpen: false,
+      hasPic: false,
+      picUrl: "",
+      picture: null
     }
   }
-
+  componentDidMount() {
+    this.GET_UserPic();
+  }
+  GET_UserPic = () => {
+    this.props.dispatch({
+      type: "member/GET_UserPic",
+      callback: response => {
+        console.log(response);
+        if (response != null) {
+          console.log(response);
+          this.setState({
+            hasPic: true,
+            picUrl: UserPicUrl + response
+          })
+          console.log(this.state.picUrl);
+        } else {
+          // alert(response);
+        }
+      }
+    })
+  }
   handleClickOpen() {
     this.setState({
       setOpen: true,
       open: true
     })
   }
-
-  handleClose() {
+  handleCancel() {
     this.setState({
       setOpen: false,
       open: false
     })
   }
-
+  handleClose() {
+    const ImgData = this.state.picture;
+    let form = new FormData();
+    form.append('file', ImgData)
+    console.log(ImgData);
+    if (this.state.picture != null) {
+      console.log("進入傳送照片");
+      this.props.dispatch({
+        type: "member/uploadUserPic",
+        payload: form,
+        callback: resMsg => {
+          console.log(resMsg);
+          if (resMsg === "上傳圖片成功") {
+            alert(resMsg);
+            this.setState({
+              setOpen: false,
+              open: false,
+            })
+            window.location.reload();
+          } else {
+            alert(resMsg);
+          }
+        }
+      })
+    } else {
+      this.setState({
+        setOpen: false,
+        open: false,
+        picture: null
+      })
+    }
+  }
+  upload(e) {
+    this.setState({
+      picture: e.target.files[0]
+    })
+    console.log(this.state.picture)
+  }
   render() {
     const button = {
       margin: "0",
@@ -54,7 +113,8 @@ class ModifyHead extends React.Component {
     }
     return (
       <div className="personal-head" >
-        <img src={defaultHead} />
+
+        <img src={this.state.hasPic === true ? this.state.picUrl : defaultHead} />
         <span onClick={this.handleClickOpen.bind(this)} >更換頭貼</span>
         <Dialog
           open={this.state.open}
@@ -75,11 +135,12 @@ class ModifyHead extends React.Component {
               label=""
               type="file"
               fullWidth
+              onChange={this.upload.bind(this)}
             />
           </DialogContent>
           <DialogActions>
             <Button
-              onClick={this.handleClose.bind(this)}
+              onClick={this.handleCancel.bind(this)}
               style={button}>
               取消
             </Button>
@@ -95,4 +156,4 @@ class ModifyHead extends React.Component {
   }
 }
 
-export default ModifyHead 
+export default connect()(ModifyHead) 
