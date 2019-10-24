@@ -13,10 +13,20 @@ class Login extends React.Component {
     this.state = {
       account: "",
       password: "",
-      show: false
+      show: false,
+      location: ""
     }
   }
   componentDidMount() {
+    this.setState({
+      location: window.location.pathname
+    }, () => {
+      console.log(this.state.location);
+    })
+    // 登入後阻擋此頁顯示
+    if (this.props.isLogin === "user") {
+      navigateTo("/");
+    }
     this.accountInput.focus(); //載入時focus
   }
   pwdShow() {
@@ -65,6 +75,9 @@ class Login extends React.Component {
     }
   }
   render() {
+    if (this.props.isLogin === "user" && this.state.location === "/Login") {
+      navigateTo("/");
+    }
     const eyeDispear = {
       display: "none"
     }
@@ -117,12 +130,6 @@ class Login extends React.Component {
             </div>
             <Link
               className="login-link"
-              to="/ForgetPassword">
-              忘記密碼?
-            </Link>
-            <span>｜</span>
-            <Link
-              className="login-link"
               to="/Register">
               還不是會員?
             </Link>
@@ -133,4 +140,11 @@ class Login extends React.Component {
   }
 }
 
-export default connect()(Login)
+function mapStateToProps(state, ownProps) {
+  return {
+    isLogin: state.member.isLogin,
+    token: state.member.token
+  };
+}
+
+export default connect(mapStateToProps)(Login)
