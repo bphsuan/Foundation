@@ -15,6 +15,7 @@ class TabContent extends React.Component {
         {this.props.tabs.map((tab) => {
           return (
             <Tab
+              key={tab.id}
               id={tab.id}
               name={tab.name}
               icon={tab.icon}

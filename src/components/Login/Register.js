@@ -31,91 +31,44 @@ class Register extends React.Component {
         this.setState({
           account: e.target.value
         })
-        console.log("改帳號!");
         break;
       case "Password":
         this.setState({
           password: e.target.value
         })
-        console.log("改密碼!");
         break;
       case "Name":
         this.setState({
           name: e.target.value
         })
-        console.log("改名字!");
         break;
       case "Gender":
         this.setState({
           gender: e.target.value
         })
-        console.log("改性別!");
         break;
       case "Birthday":
         this.setState({
           birthday: e.target.value
         })
-        console.log("改生日!");
         break;
       case "Email":
         this.setState({
           email: e.target.value
         })
-        console.log("改信箱!");
         break;
       case "Phone":
         this.setState({
           phone: e.target.value
         })
-        console.log("改電話!");
         break;
       case "Address":
         this.setState({
           address: e.target.value
         })
-        console.log("改地址!");
         break;
     }
-    // this.setState({
-    //   account: e.target.value
-    // })
   }
-  // updatePassword(e) {
-  //   this.setState({
-  //     password: e.target.value
-  //   })
-  // }
-  // updateName(e) {
-  //   this.setState({
-  //     name: e.target.value
-  //   })
-  //   console.log(e.target.id);
-  // }
-  // updateGender(e) {
-  //   this.setState({
-  //     gender: e.target.value
-  //   })
-  // }
-  // updateBirthday(e) {
-  //   this.setState({
-  //     birthday: e.target.value
-  //   })
-  // }
-  // updateEmail(e) {
-  //   this.setState({
-  //     email: e.target.value
-  //   })
-  // }
-  // updatePhone(e) {
-  //   this.setState({
-  //     phone: e.target.value
-  //   })
-  // }
-  // updateAddress(e) {
-  //   this.setState({
-  //     address: e.target.value
-  //   })
-  // }
   pwdShow() {
     this.setState({ show: true });
   }

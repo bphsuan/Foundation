@@ -2,7 +2,6 @@ import React from 'react';
 import './ModifyPersonalInfo.scss';
 import { connect } from "react-redux";
 import { navigateTo } from 'gatsby';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class ModifyPersonalInfo extends React.Component {
   constructor(props) {
@@ -19,7 +18,6 @@ class ModifyPersonalInfo extends React.Component {
   componentDidMount() {
     this.GET_userInfo();
   }
-
   GET_userInfo = () => {
     this.props.dispatch({
       type: "member/GET_userInfo",
@@ -38,7 +36,6 @@ class ModifyPersonalInfo extends React.Component {
         this.setState({
           Birthday: dateTemp
         })
-        // console.log(this.state);
       }
     })
   }
@@ -71,37 +68,31 @@ class ModifyPersonalInfo extends React.Component {
         this.setState({
           Name: e.target.value
         })
-        console.log("改名字!" + e.target.value);
         break;
       case "Gender":
         this.setState({
           Gender: e.target.value
         })
-        console.log("改性別!" + e.target.value);
         break;
       case "Birthday":
         this.setState({
           Birthday: e.target.value
         })
-        console.log("改生日!" + e.target.value);
         break;
       case "Email":
         this.setState({
           Email: e.target.value
         })
-        console.log("改信箱!" + e.target.value);
         break;
       case "Phone":
         this.setState({
           Phone: e.target.value
         })
-        console.log("改電話!" + e.target.value);
         break;
       case "Address":
         this.setState({
           Address: e.target.value
         })
-        console.log("改地址!" + e.target.value);
         break;
     }
   }

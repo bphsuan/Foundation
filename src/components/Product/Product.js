@@ -21,8 +21,7 @@ class Product extends React.Component {
         </div>
 
         <div className="product-img">
-          <Link to={`/ProductDetail/${this.props.id}`} component={ProductDetail}> <img src={this.props.img} /></Link>
-          {/* <img src={this.props.img} /> */}
+          <Link to={`/ProductDetail/${this.props.id}`}> <img src={this.props.img} /></Link>
         </div>
         <div className="product-text">
           <p className="product-brand">{this.props.brand}</p>

@@ -2,7 +2,8 @@ const registerAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/Register";
 const loginAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/Login";
 const modifyPswAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/ModifyPassword";
 const userInfoAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/UserInformation";
-
+const uploadUserPicAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/UploadUserPic";
+const getUserPicAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/GetUserPic";
 
 function register(data) {
   console.log(data)
@@ -98,26 +99,33 @@ function modifyPsw(data) {
     })
   }).then(response => response.json())
 }
+function uploadUserPic(Img) {
+  console.log(Img);
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(uploadUserPicAPI, {
+    method: "POST",
+    headers: {
+      //上傳圖片不需要先填content-type
+      // "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": "Bearer " + token.token[0]
+    },
+    body: Img
+  }).then(response => response.json())
+}
+function getUserPic() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(getUserPicAPI, {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token.token[0]
+    },
+  }).then(response => response.json())
+}
 
 export {
-  register, login, modifyPsw, UserInfo, SendUserInfo
+  register, login, modifyPsw, UserInfo, SendUserInfo, uploadUserPic, getUserPic
 }
-// const UserInfo = async () => {
-//   const data = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
-//     token: []
-//   };
-//   console.log(data.token[0]);
-//   await fetch('http://foundation.hsc.nutc.edu.tw/api/Customer/UserInformation', {
-//     method: "GET",
-//     headers: ({
-//       "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin": "*",
-      // "Accept": "application/json",
-//       "Authorization": "Bearer " + data.token[0]
-//     }),
-//   })
-//     .then(async res => res.json())
-//     .then(async data => {
-//       await console.log(data);
-//     })
-// }
