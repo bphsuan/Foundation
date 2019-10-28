@@ -15,6 +15,8 @@ export default {
       };
       token.token.push(payload);
       localStorage.setItem("token", JSON.stringify(token));
+      token.token.push("user");
+      localStorage.setItem("token", JSON.stringify(token));
       return {
         ...state, //open state
         token: payload,
@@ -25,6 +27,17 @@ export default {
       return {
         ...state,
         username: payload
+      }
+    },
+    SET_LoginState(state, { payload }) {
+      const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+        token: []
+      };
+      localStorage.getItem(token);
+      return {
+        ...state,
+        token: token.token[0],
+        isLogin: "user"
       }
     },
     SET_Logout(state) {
@@ -68,6 +81,11 @@ export default {
     * Send_userInfo({ payload, callback }, { put, call, select }) {
       const resMsg = yield call(SendUserInfo, payload);
       callback(resMsg);
+    },
+    * Maintain_loginState({ payload, callback }, { put, call, select }) {
+      yield put({
+        type: "SET_LoginState"
+      })
     },
     * modifyPsw({ payload, callback }, { put, call, select }) {
       const resMsg = yield call(modifyPsw, payload); //return status

@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import ProductDetail from '../ProductDetail/ProductDetail'
-// import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import { Link } from 'gatsby'
+
 class Product extends React.Component {
   constructor(props) {
     super(props);
@@ -12,12 +12,25 @@ class Product extends React.Component {
     }
   }
   render() {
+    const colorMain = {
+      color: "#FF5151"
+    }
+    const colorGray = {
+      color: "#EFEFEF"
+    }
     return (
-
       <div id={this.props.id} className="product">
         <div className="product-func">
-          <FontAwesomeIcon icon={faHeart} className="favorite" />
-          <FontAwesomeIcon icon={faCartPlus} className="addCart" />
+          <FontAwesomeIcon
+            icon={faHeart}
+            className="favorite"
+            style={this.props.favorite ? colorMain : colorGray}
+            onClick={this.props.addFavorite}
+          />
+          <FontAwesomeIcon
+            icon={faCartPlus}
+            className="addCart"
+          />
         </div>
 
         <div className="product-img">

@@ -12,7 +12,6 @@ class ProductHeader extends React.Component {
       priceAsc: true,
       priceDesc: false,
       hotSale: false,
-      favorite: false,
     }
   }
   priceAsc() {
@@ -20,7 +19,6 @@ class ProductHeader extends React.Component {
       priceAsc: true,
       priceDesc: false,
       hotSale: false,
-      favorite: false,
     })
   }
   priceDesc() {
@@ -28,7 +26,6 @@ class ProductHeader extends React.Component {
       priceAsc: false,
       priceDesc: true,
       hotSale: false,
-      favorite: false,
     })
   }
   hotSale() {
@@ -36,15 +33,6 @@ class ProductHeader extends React.Component {
       priceAsc: false,
       priceDesc: false,
       hotSale: true,
-      favorite: false,
-    })
-  }
-  favorite() {
-    this.setState({
-      priceAsc: false,
-      priceDesc: false,
-      hotSale: false,
-      favorite: true,
     })
   }
   render() {
@@ -76,11 +64,6 @@ class ProductHeader extends React.Component {
             onClick={this.hotSale.bind(this)}
             className={this.state.hotSale ? "active" : ""}
           >熱銷排行
-          </a>
-          <a
-            onClick={this.favorite.bind(this)}
-            className={this.state.favorite ? "active" : ""}
-          >我的最愛
           </a>
         </div>
       </div>

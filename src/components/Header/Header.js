@@ -24,12 +24,44 @@ class Header extends React.Component {
   }
   componentDidMount() {
     this.setState({ location: window.location.pathname }) //抓路由
+    this.maintainLoginState();
   }
   menuShow() {
     this.setState({ menu: true })
   }
   menuHide() {
     this.setState({ menu: false })
+  }
+  maintainLoginState = () => {
+    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+      token: []
+    };
+    localStorage.getItem(token);
+    console.log(token);
+    if (token.token.length !== 0) {
+      this.props.dispatch({
+        type: "member/Maintain_loginState",
+        callback: () => {
+
+        }
+      })
+    }
+  }
+  toShoppingCart = () => {
+    if (this.props.isLogin !== "user") {
+      alert("您尚未登入!");
+      navigateTo("/Login");
+    } else {
+      navigateTo("/ShoppingCart");
+    }
+  }
+  toDetection = () => {
+    if (this.props.isLogin !== "user") {
+      alert("您尚未登入!");
+      navigateTo("/Login");
+    } else {
+      navigateTo("/Detection");
+    }
   }
   logout = () => {
     this.props.dispatch({
@@ -58,7 +90,6 @@ class Header extends React.Component {
     const menuHide = {
       left: "-305px",
     }
-    const isLogin = this.props.isLogin;
     return (
       <div className="Header">
         <div className="bar">
@@ -87,9 +118,10 @@ class Header extends React.Component {
             網站首頁｜Home
           </Link>
           <Link
-            to="/Detection"
             id="detection"
+            to={this.props.isLogin === "user" ? "/Detection" : "/Login"}
             className={this.state.location === "/Detection" ? "active" : ""}
+            onClick={this.toDetection}
           >
             色號檢測｜Detection
           </Link>
@@ -109,7 +141,8 @@ class Header extends React.Component {
           </Link>
           <div className="headerIcons">
             <Link
-              to="/ShoppingCart"
+              to={this.props.isLogin === "user" ? "/ShoppingCart" : "/Login"}
+              onClick={this.toShoppingCart}
               className="headerIcon">
               <FontAwesomeIcon
                 icon={faShoppingCart}
@@ -118,7 +151,7 @@ class Header extends React.Component {
             <Link
               to="/PersonalInfo"
               className="headerIcon"
-              style={isLogin === "user" ? iconApear : iconDispear}
+              style={this.props.isLogin === "user" ? iconApear : iconDispear}
             >
               <FontAwesomeIcon
                 icon={faUserCircle}
@@ -127,7 +160,7 @@ class Header extends React.Component {
             <Link
               to="/Login"
               className="headerIcon"
-              style={isLogin === "user" ? iconDispear : iconApear}
+              style={this.props.isLogin === "user" ? iconDispear : iconApear}
             >
               <FontAwesomeIcon
                 icon={faSignInAlt}
@@ -136,7 +169,7 @@ class Header extends React.Component {
             <Link
               to="/"
               className="headerIcon"
-              style={isLogin === "user" ? iconApear : iconDispear}
+              style={this.props.isLogin === "user" ? iconApear : iconDispear}
               onClick={this.logout.bind(this)}
             >
               <FontAwesomeIcon
@@ -153,6 +186,7 @@ class Header extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     isLogin: state.member.isLogin,
+    token: state.member.token
   };
 }
 

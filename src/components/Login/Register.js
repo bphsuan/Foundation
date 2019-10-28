@@ -19,10 +19,20 @@ class Register extends React.Component {
       birthday: "",
       email: "",
       phone: "",
-      address: ""
+      address: "",
+      location: ""
     }
   }
   componentDidMount() {
+    this.setState({
+      location: window.location.pathname
+    }, () => {
+      console.log(this.state.location);
+    })
+    // 登入後阻擋此頁顯示
+    if (this.props.isLogin === "user") {
+      navigateTo("/");
+    }
     this.accountInput.focus(); //載入時focus
   }
   updateItem(e) {
@@ -68,6 +78,7 @@ class Register extends React.Component {
         })
         break;
     }
+
   }
   pwdShow() {
     this.setState({ show: true });
@@ -130,6 +141,9 @@ class Register extends React.Component {
     }
   }
   render() {
+    if (this.props.isLogin === "user" && this.state.location === "/Register") {
+      navigateTo("/");
+    }
     const eyeDispear = {
       display: "none"
     }
@@ -270,4 +284,11 @@ class Register extends React.Component {
   }
 }
 
-export default connect()(Register)
+function mapStateToProps(state, ownProps) {
+  return {
+    isLogin: state.member.isLogin,
+    token: state.member.token
+  };
+}
+
+export default connect(mapStateToProps)(Register)
