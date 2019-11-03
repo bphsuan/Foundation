@@ -9,6 +9,7 @@ export default {
   },
   effects: {
     * Add_product({ payload, callback }, { put, call, select }) {
+      console.log("進入model~");
       const resMsg = yield call(addProduct, payload);
       callback(resMsg);
     }

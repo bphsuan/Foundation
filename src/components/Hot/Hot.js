@@ -5,41 +5,38 @@ import { Chart, Geom, Axis, Tooltip, Legend, Coord, Guide, Label } from 'bizchar
 import DataSet from "@antv/data-set";
 // 数据源
 const data = [
-  { genre: 'Sports', sold: 275, income: 2300 },
-  { genre: 'Strategy', sold: 115, income: 667 },
-  { genre: 'Action', sold: 120, income: 982 },
-  { genre: 'Shooter', sold: 350, income: 5271 },
-  { genre: 'Other', sold: 150, income: 3710 }
+  { genre: '15歲以下', sold: 5 },
+  { genre: '16~20歲', sold: 115 },
+  { genre: '21~25歲', sold: 205 },
+  { genre: '26~30歲', sold: 22 },
+
 ];
 
 // 定义度量
 const cols = {
-  sold: { alias: '销售量' },
-  genre: { alias: '游戏种类' }
+  sold: { alias: '數量' },
+  genre: { alias: '年齡' }
 };
+
 const { DataView } = DataSet;
 const { Html } = Guide;
 const data2 = [
   {
-    item: "事例一",
+    item: "品牌一",
     count: 40
   },
   {
-    item: "事例二",
+    item: "品牌二",
     count: 21
   },
   {
-    item: "事例三",
+    item: "品牌三",
     count: 17
   },
   {
-    item: "事例四",
+    item: "品牌四",
     count: 13
   },
-  {
-    item: "事例五",
-    count: 9
-  }
 ];
 const dv = new DataView();
 dv.source(data2).transform({

@@ -65,17 +65,14 @@ class AddContent extends React.Component {
             Original_price: this.state.P_OPrice,
             Pic: this.state.P_Pic,
         }
+        console.log(this.props.dispatch);
         this.props.dispatch({
             type: "product/Add_product",
             payload: product,
             callback: resMsg => {
                 console.log(resMsg);
-                if (resMsg === "上傳成功") {
+                if (resMsg === "新增成功") {
                     alert(resMsg);
-                    this.setState({
-                        setOpen: false,
-                        open: false,
-                    })
                 } else {
                     alert(resMsg);
                 }
@@ -109,7 +106,7 @@ class AddContent extends React.Component {
                         <span>描述</span><textarea id="Descrpition" onChange={this.changeItem} />
                     </div>
                     <div className="summit-btn">
-                        <a onClick={this.addProduct.bind(this)}>新增</a>
+                        <a onClick={this.addProduct}>新增</a>
                     </div>
                 </div>
             </div>

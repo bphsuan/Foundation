@@ -4,7 +4,7 @@ function addProduct(data) {
   console.log(data);
   //Brand,Name,Color,Ticket,Info,Original_price,圖片
   let formData = new FormData();
-  formData.append('Brand', data.Name)
+  formData.append('Brand', data.Brand)
   formData.append('Name', data.Name)
   formData.append('Color', data.Color)
   formData.append('Ticket', data.Ticket)
