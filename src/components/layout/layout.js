@@ -3,14 +3,16 @@ import { Provider } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { create } from 'dva-core';
 import memberModel from '../../models/memberModel';
+import productModel from '../../models/productModel';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import ToTop from '../ToTop/ToTop';
 import './Layout.scss';
 import Favicon from '../../images/favicon.ico';
-// import { CookiesProvider } from 'react-cookie';
+
 const app = create();
 app.model(memberModel);
+app.model(productModel);
 app.start();
 const store = app._store;
 
