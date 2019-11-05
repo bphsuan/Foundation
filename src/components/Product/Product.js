@@ -2,14 +2,26 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-import ProductDetail from '../ProductDetail/ProductDetail'
 import { Link } from 'gatsby'
-
+import { connect } from "react-redux";
 class Product extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
     }
+  }
+
+  addCart = () => {
+    const id = this.props.id;
+    // console.log(id);
+    this.props.dispatch({
+      type: "cart/Add_Cart",
+      payload: id,
+      callback: resMsg => {
+        console.log(resMsg);
+        alert(resMsg);
+      }
+    })
   }
   render() {
     const colorMain = {
@@ -30,6 +42,7 @@ class Product extends React.Component {
           <FontAwesomeIcon
             icon={faCartPlus}
             className="addCart"
+            onClick={this.addCart}
           />
         </div>
 
@@ -48,4 +61,4 @@ class Product extends React.Component {
   }
 }
 
-export default Product;
+export default connect()(Product);
