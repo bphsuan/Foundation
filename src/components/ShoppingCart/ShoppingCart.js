@@ -1,6 +1,8 @@
 import React from 'react';
 import Product from './ShoppingItem';
 import './ShoppingCart.scss';
+import { connect } from 'react-redux';
+import { navigateTo } from 'gatsby';
 
 class ShoppingCart extends React.Component {
   constructor(props) {
@@ -9,6 +11,17 @@ class ShoppingCart extends React.Component {
     }
   }
   render() {
+    if (this.props.isLogin === "admin") {
+      navigateTo("/");
+    } else if (this.props.isLogin === "guest") {
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigateTo("/Login");
+        }
+      })
+      navigateTo("/Login");
+    }
     return (
       <div className="product-content">
         {this.props.products.map((product) => {
@@ -27,4 +40,10 @@ class ShoppingCart extends React.Component {
   }
 }
 
-export default ShoppingCart;
+function mapStateToProps(state, ownProps) {
+  return {
+    isLogin: state.member.isLogin,
+  };
+}
+
+export default connect(mapStateToProps)(ShoppingCart);

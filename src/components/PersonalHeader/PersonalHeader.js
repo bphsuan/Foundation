@@ -23,6 +23,17 @@ class PersonalHeader extends React.Component {
 
   }
   render() {
+    if (this.props.isLogin === "admin") {
+      navigateTo("/");
+    } else if (this.props.isLogin === "guest") {
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigateTo("/Login");
+        }
+      })
+      navigateTo("/Login");
+    }
     return (
       <div className="personal-header">
         <ModifyHead />
@@ -72,6 +83,7 @@ class PersonalHeader extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
+    isLogin: state.member.isLogin,
     username: state.member.username
   };
 }

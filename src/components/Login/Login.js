@@ -24,7 +24,7 @@ class Login extends React.Component {
       console.log(this.state.location);
     })
     // 登入後阻擋此頁顯示
-    if (this.props.isLogin === "user") {
+    if (this.props.isLogin === "user" || this.props.isLogin === "admin") {
       navigateTo("/");
     }
     this.accountInput.focus(); //載入時focus
@@ -76,6 +76,8 @@ class Login extends React.Component {
   }
   render() {
     if (this.props.isLogin === "user" && this.state.location === "/Login") {
+      navigateTo("/");
+    } else if (this.props.isLogin === "admin" && this.state.location === "/Login") {
       navigateTo("/");
     }
     const eyeDispear = {

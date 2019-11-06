@@ -2,6 +2,8 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import '../MemberManagement/MemberManagement.scss';
+import { connect } from 'react-redux';
+import { navigateTo } from 'gatsby';
 
 class MemberManagement extends React.Component {
   constructor(props) {
@@ -24,6 +26,17 @@ class MemberManagement extends React.Component {
     })
   }
   render() {
+    if (this.props.isLogin === "user") {
+      navigateTo("/");
+    } else if (this.props.isLogin === "guest") {
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigateTo("/Login");
+        }
+      })
+      navigateTo("/Login");
+    }
     return (
       <div className="Member-header">
         <div className="Member-search">
@@ -53,4 +66,10 @@ class MemberManagement extends React.Component {
   }
 }
 
-export default MemberManagement;
+function mapStateToProps(state, ownProps) {
+  return {
+    isLogin: state.member.isLogin,
+  };
+}
+
+export default connect(mapStateToProps)(MemberManagement)

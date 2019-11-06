@@ -19,25 +19,46 @@ class ModifyPersonalInfo extends React.Component {
     this.GET_userInfo();
   }
   GET_userInfo = () => {
-    this.props.dispatch({
-      type: "member/GET_userInfo",
-      callback: response => {
-        // console.log(response);
-        this.setState({
-          Name: response.Name,
-          Gender: response.Gender,
-          Birthday: response.Birthday,
-          Email: response.Email,
-          Phone: response.Phone,
-          Address: response.Address
-        })
-        //取年月日
-        let dateTemp = this.state.Birthday.split("T", 1)[0]
-        this.setState({
-          Birthday: dateTemp
-        })
-      }
-    })
+    if (this.props.isLogin === "admin") {
+      navigateTo("/");
+    } else if (this.props.isLogin === "guest") {
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigateTo("/Login");
+        }
+      })
+      navigateTo("/Login");
+    } else {
+      this.props.dispatch({
+        type: "member/GET_userInfo",
+        callback: response => {
+          console.log(response);
+          if (response.Message === "發生錯誤。") {
+            console.log("happen");
+            alert("連線逾時，請重新登入");
+            this.props.dispatch({
+              type: "member/logout",
+            })
+            navigateTo("/Login");
+          } else {
+            this.setState({
+              Name: response.Name,
+              Gender: response.Gender,
+              Birthday: response.Birthday,
+              Email: response.Email,
+              Phone: response.Phone,
+              Address: response.Address
+            })
+            //取年月日
+            let dateTemp = this.state.Birthday.split("T", 1)[0]
+            this.setState({
+              Birthday: dateTemp
+            })
+          }
+        }
+      })
+    }
   }
   Send_userInfo = () => {
     const userInfo = {
@@ -134,4 +155,11 @@ class ModifyPersonalInfo extends React.Component {
   }
 }
 
-export default connect()(ModifyPersonalInfo)
+function mapStateToProps(state, ownProps) {
+  return {
+    username: state.member.username,
+    isLogin: state.member.isLogin
+  };
+}
+
+export default connect(mapStateToProps)(ModifyPersonalInfo)

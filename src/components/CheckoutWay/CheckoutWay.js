@@ -4,6 +4,7 @@ import StepNext from '../StepNext/StepNext';
 import StepPrevious from '../StepPrevious/StepPrevious';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { connect } from 'react-redux';
 import { navigateTo } from 'gatsby';
 import { Link } from 'gatsby';
 
@@ -51,6 +52,17 @@ class CheckoutWay extends React.Component {
     }
   }
   render() {
+    if (this.props.isLogin === "admin") {
+      navigateTo("/");
+    } else if (this.props.isLogin === "guest") {
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigateTo("/Login");
+        }
+      })
+      navigateTo("/Login");
+    }
     return (
       <div className="checkout-content">
         <div className="checkout-list">
@@ -61,14 +73,6 @@ class CheckoutWay extends React.Component {
           <p className="sum">total</p>
         </div>
         <div className="checkout-way">
-          <input
-            type="radio"
-            name="checkoutway"
-            value="cash"
-            onChange={this.checkoutWay.bind(this)}
-          />
-          <span> 現金匯款</span>
-          <br />
           <input
             type="radio"
             name="checkoutway"
@@ -107,5 +111,12 @@ class CheckoutWay extends React.Component {
     )
   }
 }
-export default CheckoutWay
+
+function mapStateToProps(state, ownProps) {
+  return {
+    isLogin: state.member.isLogin,
+  };
+}
+
+export default connect(mapStateToProps)(CheckoutWay)
 
