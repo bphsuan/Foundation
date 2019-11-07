@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-
+const PicServer = "http://foundation.hsc.nutc.edu.tw/";
 class ShoppingItem extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +32,7 @@ class ShoppingItem extends React.Component {
     return (
       <div id={this.props.id} className="product">
         <div className="product-img">
-          <img src={this.props.img} />
+          <img src={PicServer + this.props.img} />
         </div>
         <div className="product-func">
           <FontAwesomeIcon icon={faTimes}

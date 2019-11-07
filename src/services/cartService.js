@@ -24,6 +24,7 @@ function getCart() {
   return fetch(cartSever + "GetCartByAcc", {
     method: "GET",
     headers: {
+      "Accept": "application/json",
       "Authorization": "Bearer " + token.token[0]
     },
   }).then(response => response.json())

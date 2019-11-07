@@ -16,7 +16,6 @@ class ShoppingCart extends React.Component {
     this.props.dispatch({
       type: "cart/GET_Cart",
       callback: response => {
-        console.log(response);
         this.setState({
           products: response
         })
@@ -27,14 +26,15 @@ class ShoppingCart extends React.Component {
   render() {
     return (
       <div className="product-content">
-        {this.state.products.map((product) => {
+        {this.state.products.map((product, i) => {
           return (
             <Product
-              id={product.id}
-              img={product.img}
-              brand={product.brand}
-              name={product.name}
-              new_price={product.new_price}
+              key={i}
+              id={product.Product_Id}
+              img={product.Url}
+              brand={product.Brand}
+              name={product.Name}
+              new_price={product.Cheapest_price}
             />
           )
         })}

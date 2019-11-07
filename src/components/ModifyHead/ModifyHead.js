@@ -9,7 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from "react-redux";
-import { navigateTo } from 'gatsby'
+
 const UserPicUrl = "http://foundation.hsc.nutc.edu.tw";
 class ModifyHead extends React.Component {
   constructor(props) {
@@ -29,16 +29,13 @@ class ModifyHead extends React.Component {
     this.props.dispatch({
       type: "member/GET_UserPic",
       callback: response => {
-        console.log(response);
         if (response != null) {
-          console.log(response);
           this.setState({
             hasPic: true,
             picUrl: UserPicUrl + response
           })
-          console.log(this.state.picUrl);
         } else {
-          // alert(response);
+          alert(response);
         }
       }
     })
