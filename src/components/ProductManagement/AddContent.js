@@ -1,7 +1,8 @@
 import React from "react"
 import './ProductManagement.scss'
 import { connect } from "react-redux";
-import { navigateTo } from 'gatsby'
+import { navigateTo } from 'gatsby';
+
 class AddContent extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +15,32 @@ class AddContent extends React.Component {
       P_Ticket: "",
       P_OPrice: ""
     }
+  }
+  addProduct = () => {
+    //Brand,Name,Color,Ticket,Info,Original_price,圖片
+    const product = {
+      Brand: this.state.P_Brand,
+      Name: this.state.P_Name,
+      Color: this.state.P_Color,
+      Ticket: this.state.P_Ticket,
+      Info: this.state.P_description,
+      Original_price: this.state.P_OPrice,
+      Pic: this.state.P_Pic,
+    }
+    console.log(this.props.dispatch);
+    this.props.dispatch({
+      type: "product/Add_product",
+      payload: product,
+      callback: resMsg => {
+        console.log(resMsg);
+        if (resMsg === "新增成功") {
+          alert(resMsg);
+          navigateTo = "/ProductManagement"
+        } else {
+          alert(resMsg);
+        }
+      }
+    })
   }
   changeItem = (e) => {
     switch (e.target.id) {

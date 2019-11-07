@@ -1,4 +1,4 @@
-import { addProduct } from '../services/productService'
+import { addProduct, getProduct } from '../services/productService'
 export default {
   namespace: "product",
   state: {
@@ -9,8 +9,11 @@ export default {
   },
   effects: {
     * Add_product({ payload, callback }, { put, call, select }) {
-      console.log("進入model~");
       const resMsg = yield call(addProduct, payload);
+      callback(resMsg);
+    },
+    * Get_product({ payload, callback }, { put, call, select }) {
+      const resMsg = yield call(getProduct);
       callback(resMsg);
     }
   }
