@@ -47,6 +47,7 @@ export default {
         token: []
       };
       localStorage.getItem(token);
+      console.log(token.token[1]);
       return {
         ...state,
         token: token.token[0],

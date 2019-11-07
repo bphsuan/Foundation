@@ -36,9 +36,13 @@ class Detection extends React.Component {
   }
 
   render() {
-    if (this.props.isLogin === "admin") {
+    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+      token: []
+    };
+    localStorage.getItem(token);
+    if (token.token[1] === "admin") {
       navigateTo("/");
-    } else if (this.props.isLogin === "guest") {
+    } else if (this.props.isLogin === "guest" || this.props.isLogin === "") {
       this.props.dispatch({
         type: "member/logout",
         callback: () => {

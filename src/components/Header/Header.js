@@ -42,7 +42,7 @@ class Header extends React.Component {
       this.props.dispatch({
         type: "member/Maintain_loginState",
         callback: () => {
-
+          
         }
       })
     }
@@ -147,7 +147,7 @@ class Header extends React.Component {
             id="memberManagement"
             to={this.props.isLogin === "admin" ? "/MemberJoinData" : "/Login"}
             className={this.state.location === "/MemberJoinData" ? "active" : ""}
-            style={this.props.isLogin === "user" || this.props.isLogin === "guest" ? iconDispear : iconApear}
+            style={this.props.isLogin === "user" || this.props.isLogin === "guest" || this.props.isLogin === "" ? iconDispear : iconApear}
             onClick={this.toMemberJoinData}
           >
             會員管理｜Member
@@ -156,7 +156,7 @@ class Header extends React.Component {
             id="productManagement"
             to={this.props.isLogin === "admin" ? "/ProductManagement" : "/Login"}
             className={this.state.location === "/ProductManagement" ? "active" : ""}
-            style={this.props.isLogin === "user" || this.props.isLogin === "guest" ? iconDispear : iconApear}
+            style={this.props.isLogin === "user" || this.props.isLogin === "guest" || this.props.isLogin === "" ? iconDispear : iconApear}
             onClick={this.toProductManagement}
           >
             產品管理｜Product
@@ -180,7 +180,7 @@ class Header extends React.Component {
             id="feedback"
             to={this.props.isLogin === "admin" ? "/FeedbackManagement" : "/Login"}
             className={this.state.location === "/FeedbackManagement" ? "active" : ""}
-            style={this.props.isLogin === "user" || this.props.isLogin === "guest" ? iconDispear : iconApear}
+            style={this.props.isLogin === "user" || this.props.isLogin === "guest" || this.props.isLogin === "" ? iconDispear : iconApear}
             onClick={this.toFeedbackManagement}
           >
             回饋管理｜Feedback

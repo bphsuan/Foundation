@@ -66,6 +66,7 @@ class Login extends React.Component {
         callback: response => {
           console.log(response);
           if (response === "登入成功") {
+            console.log(this.props.isLogin);
             return navigateTo('/')
           } else {
             alert(response);
