@@ -73,6 +73,7 @@ class AddContent extends React.Component {
                 console.log(resMsg);
                 if (resMsg === "新增成功") {
                     alert(resMsg);
+                    navigateTo = "/ProductManagement"
                 } else {
                     alert(resMsg);
                 }

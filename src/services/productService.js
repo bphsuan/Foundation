@@ -23,4 +23,16 @@ function addProduct(data) {
   }).then(response => response.json())
 }
 
-export { addProduct }
+function getProduct() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productSever + "GetProducts", {
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+  }).then(response => response.json())
+}
+export { addProduct, getProduct }
