@@ -1,13 +1,8 @@
-const registerAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/Register";
-const loginAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/Login";
-const modifyPswAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/ModifyPassword";
-const userInfoAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/UserInformation";
-const uploadUserPicAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/UploadUserPic";
-const getUserPicAPI = "http://foundation.hsc.nutc.edu.tw/api/Customer/GetUserPic";
+const memberServer = "http://foundation.hsc.nutc.edu.tw/api/Customer/"
 
 function register(data) {
   console.log(data)
-  return fetch(registerAPI, {
+  return fetch(memberServer + "Register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -27,7 +22,7 @@ function register(data) {
 }
 function login(data) {
   console.log(data)
-  return fetch(loginAPI, {
+  return fetch(memberServer + "Login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -45,8 +40,7 @@ function UserInfo() {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
   };
-  console.log(token.token[0]);
-  return fetch(userInfoAPI, {
+  return fetch(memberServer + "UserInformation", {
     method: "GET",
     headers: ({
       "Content-Type": "application/json",
@@ -61,8 +55,7 @@ function SendUserInfo(data) {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
   };
-  console.log(token.token[0]);
-  return fetch(userInfoAPI, {
+  return fetch(memberServer + "UserInformation", {
     method: "POST",
     headers: ({
       "Content-Type": "application/json",
@@ -85,7 +78,7 @@ function modifyPsw(data) {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
   };
-  return fetch(modifyPswAPI, {
+  return fetch(memberServer + "ModifyPassword", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -104,7 +97,7 @@ function uploadUserPic(Img) {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
   };
-  return fetch(uploadUserPicAPI, {
+  return fetch(memberServer + "UploadUserPic", {
     method: "POST",
     headers: {
       //上傳圖片不需要先填content-type
@@ -118,7 +111,7 @@ function getUserPic() {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
   };
-  return fetch(getUserPicAPI, {
+  return fetch(memberServer + "GetUserPic", {
     method: "GET",
     headers: {
       "Authorization": "Bearer " + token.token[0]
