@@ -23,6 +23,21 @@ class PersonalHeader extends React.Component {
 
   }
   render() {
+    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+      token: []
+    };
+    localStorage.getItem(token);
+    if (token.token[1] === "admin") {
+      navigateTo("/");
+    } else if (this.props.isLogin === "guest" || this.props.isLogin === "") {
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigateTo("/Login");
+        }
+      })
+      navigateTo("/Login");
+    }
     return (
       <div className="personal-header">
         <ModifyHead />
@@ -72,6 +87,7 @@ class PersonalHeader extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
+    isLogin: state.member.isLogin,
     username: state.member.username
   };
 }

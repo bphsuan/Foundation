@@ -9,6 +9,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { connect } from 'react-redux';
+import { navigateTo } from 'gatsby';
 
 class Detection extends React.Component {
   constructor(props) {
@@ -34,6 +36,21 @@ class Detection extends React.Component {
   }
 
   render() {
+    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+      token: []
+    };
+    localStorage.getItem(token);
+    if (token.token[1] === "admin") {
+      navigateTo("/");
+    } else if (this.props.isLogin === "guest" || this.props.isLogin === "") {
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigateTo("/Login");
+        }
+      })
+      navigateTo("/Login");
+    }
     const button = {
       margin: "0",
       padding: "0",
@@ -95,4 +112,10 @@ class Detection extends React.Component {
   }
 }
 
-export default Detection
+function mapStateToProps(state, ownProps) {
+  return {
+    isLogin: state.member.isLogin,
+  };
+}
+
+export default connect(mapStateToProps)(Detection)

@@ -1,7 +1,9 @@
 import React from 'react';
 import Product from './ShoppingItem';
 import './ShoppingCart.scss';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+import { navigateTo } from 'gatsby';
+
 class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
@@ -24,6 +26,23 @@ class ShoppingCart extends React.Component {
     })
   }
   render() {
+    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+      token: []
+    };
+    localStorage.getItem(token);
+    if (token.token[1] === "admin") {
+      console.log(this.props.isLogin);
+      navigateTo("/");
+    } else if (this.props.isLogin === "guest" || this.props.isLogin === "") {
+      console.log(this.props.isLogin);
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigateTo("/Login");
+        }
+      })
+      navigateTo("/Login");
+    }
     return (
       <div className="product-content">
         {this.state.products.map((product, i) => {
@@ -43,4 +62,10 @@ class ShoppingCart extends React.Component {
   }
 }
 
-export default connect()(ShoppingCart);
+function mapStateToProps(state, ownProps) {
+  return {
+    isLogin: state.member.isLogin,
+  };
+}
+
+export default connect(mapStateToProps)(ShoppingCart);

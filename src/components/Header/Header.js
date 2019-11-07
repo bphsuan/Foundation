@@ -42,7 +42,7 @@ class Header extends React.Component {
       this.props.dispatch({
         type: "member/Maintain_loginState",
         callback: () => {
-
+          
         }
       })
     }
@@ -61,6 +61,22 @@ class Header extends React.Component {
       navigateTo("/Login");
     } else {
       navigateTo("/Detection");
+    }
+  }
+  toMemberJoinData = () => {
+    if (this.props.isLogin !== "admin") {
+      alert("您不是管理員唷!");
+      navigateTo("/Login");
+    } else {
+      navigateTo("/MemberJoinData");
+    }
+  }
+  toProductManagement = () => {
+    if (this.props.isLogin !== "admin") {
+      alert("您不是管理員唷!");
+      navigateTo("/Login");
+    } else {
+      navigateTo("/ProductManagement");
     }
   }
   logout = () => {
@@ -111,16 +127,10 @@ class Header extends React.Component {
         </Link>
         <div className="nav" style={this.state.menu ? menuShow : menuHide}>
           <Link
-            to="/"
-            id="home"
-            className={this.state.location === "/" ? "active" : ""}
-          >
-            網站首頁｜Home
-          </Link>
-          <Link
             id="detection"
             to={this.props.isLogin === "user" ? "/Detection" : "/Login"}
             className={this.state.location === "/Detection" ? "active" : ""}
+            style={this.props.isLogin === "admin" ? iconDispear : iconApear}
             onClick={this.toDetection}
           >
             色號檢測｜Detection
@@ -129,21 +139,59 @@ class Header extends React.Component {
             to="/Products"
             id="products"
             className={this.state.location === "/Products" ? "active" : ""}
+            style={this.props.isLogin === "admin" ? iconDispear : iconApear}
           >
             產品介紹｜Products
+          </Link>
+          <Link
+            id="memberManagement"
+            to={this.props.isLogin === "admin" ? "/MemberJoinData" : "/Login"}
+            className={this.state.location === "/MemberJoinData" ? "active" : ""}
+            style={this.props.isLogin === "user" || this.props.isLogin === "guest" || this.props.isLogin === "" ? iconDispear : iconApear}
+            onClick={this.toMemberJoinData}
+          >
+            會員管理｜Member
+          </Link>
+          <Link
+            id="productManagement"
+            to={this.props.isLogin === "admin" ? "/ProductManagement" : "/Login"}
+            className={this.state.location === "/ProductManagement" ? "active" : ""}
+            style={this.props.isLogin === "user" || this.props.isLogin === "guest" || this.props.isLogin === "" ? iconDispear : iconApear}
+            onClick={this.toProductManagement}
+          >
+            產品管理｜Product
+          </Link>
+          <Link
+            to="/Statistic"
+            id="statistic"
+            className={this.state.location === "/Statistic" ? "active" : ""}
+          >
+            統計數據｜Statistic
           </Link>
           <Link
             to="/Contact"
             id="contact"
             className={this.state.location === "/Contact" ? "active" : ""}
+            style={this.props.isLogin === "admin" ? iconDispear : iconApear}
           >
             聯絡我們｜Contact
+          </Link>
+          <Link
+            id="feedback"
+            to={this.props.isLogin === "admin" ? "/FeedbackManagement" : "/Login"}
+            className={this.state.location === "/FeedbackManagement" ? "active" : ""}
+            style={this.props.isLogin === "user" || this.props.isLogin === "guest" || this.props.isLogin === "" ? iconDispear : iconApear}
+            onClick={this.toFeedbackManagement}
+          >
+            回饋管理｜Feedback
           </Link>
           <div className="headerIcons">
             <Link
               to={this.props.isLogin === "user" ? "/ShoppingCart" : "/Login"}
               onClick={this.toShoppingCart}
-              className="headerIcon">
+              className="headerIcon"
+              style={this.props.isLogin === "admin" ? iconDispear : iconApear}
+            >
               <FontAwesomeIcon
                 icon={faShoppingCart}
               />
@@ -160,7 +208,7 @@ class Header extends React.Component {
             <Link
               to="/Login"
               className="headerIcon"
-              style={this.props.isLogin === "user" ? iconDispear : iconApear}
+              style={this.props.isLogin === "user" || this.props.isLogin === "admin" ? iconDispear : iconApear}
             >
               <FontAwesomeIcon
                 icon={faSignInAlt}
@@ -169,7 +217,7 @@ class Header extends React.Component {
             <Link
               to="/"
               className="headerIcon"
-              style={this.props.isLogin === "user" ? iconApear : iconDispear}
+              style={this.props.isLogin === "user" || this.props.isLogin === "admin" ? iconApear : iconDispear}
               onClick={this.logout.bind(this)}
             >
               <FontAwesomeIcon

@@ -4,6 +4,7 @@ import StepNext from '../StepNext/StepNext';
 import StepPrevious from '../StepPrevious/StepPrevious';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { connect } from 'react-redux';
 import { navigateTo } from 'gatsby';
 import { Link } from 'gatsby';
 
@@ -89,6 +90,23 @@ class DeliveryWay extends React.Component {
 
 
   render() {
+    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+      token: []
+    };
+    localStorage.getItem(token);
+    if (token.token[1] === "admin") {
+      console.log(this.props.isLogin);
+      navigateTo("/");
+    } else if (this.props.isLogin === "guest" || this.props.isLogin === "") {
+      console.log(this.props.isLogin);
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigateTo("/Login");
+        }
+      })
+      navigateTo("/Login");
+    }
     const apear = {
       display: "block"
     }
@@ -184,5 +202,12 @@ class DeliveryWay extends React.Component {
     )
   }
 }
-export default DeliveryWay
+
+function mapStateToProps(state, ownProps) {
+  return {
+    isLogin: state.member.isLogin,
+  };
+}
+
+export default connect(mapStateToProps)(DeliveryWay)
 

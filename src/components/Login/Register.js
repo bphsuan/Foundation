@@ -30,7 +30,7 @@ class Register extends React.Component {
       console.log(this.state.location);
     })
     // 登入後阻擋此頁顯示
-    if (this.props.isLogin === "user") {
+    if (this.props.isLogin === "user" || this.props.isLogin === "admin") {
       navigateTo("/");
     }
     this.accountInput.focus(); //載入時focus

@@ -4,9 +4,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
-import contactPic from '../../images/contactus.png'
+import contactPic from '../../images/contactus.png';
+import { connect } from 'react-redux';
+import { navigateTo } from 'gatsby';
+
 class Contact extends React.Component {
   render() {
+    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+      token: []
+    };
+    localStorage.getItem(token);
+    if (token.token[1] === "admin") {
+      navigateTo("/");
+    } else if (this.props.isLogin === "guest" || this.props.isLogin === "") {
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigateTo("/Login");
+        }
+      })
+      navigateTo("/Login");
+    }
     return (
       <div className="contact">
         <div className="contact-bar">
@@ -66,4 +84,10 @@ class Contact extends React.Component {
   }
 }
 
-export default Contact
+function mapStateToProps(state, ownProps) {
+  return {
+    isLogin: state.member.isLogin,
+  };
+}
+
+export default connect(mapStateToProps)(Contact)
