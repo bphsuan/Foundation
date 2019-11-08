@@ -13,17 +13,17 @@ class ProductDetail extends React.Component {
     super(props)
     console.log(props)
   }
-  addCart = () => {
-    const id = this.props.pageContext.product.Product_Id;
-    this.props.dispatch({
-      type: "cart/Add_Cart",
-      payload: id,
-      callback: resMsg => {
-        console.log(resMsg);
-        alert(resMsg);
-      }
-    })
-  }
+  // addCart = () => {
+  //   const id = this.props.pageContext.product.Product_Id;
+  //   this.props.dispatch({
+  //     type: "cart/Add_Cart",
+  //     payload: id,
+  //     callback: resMsg => {
+  //       console.log(resMsg);
+  //       alert(resMsg);
+  //     }
+  //   })
+  // }
   render() {
     return (
       <Layout>
@@ -48,7 +48,9 @@ class ProductDetail extends React.Component {
               <br />
               <FontAwesomeIcon icon={faHeart} className="favorite" />
               <button>
-                <FontAwesomeIcon icon={faCartPlus} className="addCart" onClick={this.addCart} />
+                <FontAwesomeIcon icon={faCartPlus} className="addCart"
+                // onClick={this.addCart}
+                />
                 加入購物車
               </button>
             </div>
@@ -58,4 +60,4 @@ class ProductDetail extends React.Component {
     )
   }
 }
-export default connect()(ProductDetail)
+export default ProductDetail

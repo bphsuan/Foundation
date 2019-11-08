@@ -1,6 +1,8 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { connect } from 'react-redux';
+import { navigateTo } from 'gatsby';
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class ShoppingItem extends React.Component {
   constructor(props) {
@@ -28,6 +30,18 @@ class ShoppingItem extends React.Component {
       disable: false
     })
   }
+  deleteItem = () => {
+    const id = this.props.id;
+    console.log(id);
+    this.props.dispatch({
+      type: "cart/Delete_Cart",
+      payload: id,
+      callback: resMsg => {
+        console.log(resMsg);
+        alert(resMsg);
+      }
+    })
+  }
   render() {
     return (
       <div id={this.props.id} className="product">
@@ -37,6 +51,8 @@ class ShoppingItem extends React.Component {
         <div className="product-func">
           <FontAwesomeIcon icon={faTimes}
             className="delete"
+            onClick={this.deleteItem}
+
           />
         </div>
         <div className="product-text">
@@ -49,7 +65,7 @@ class ShoppingItem extends React.Component {
             -
           </button>
           <input type="text"
-            value={this.state.quantity}
+            defaultValue={this.state.quantity}
           />
           <button
             className="quantity"
@@ -63,4 +79,4 @@ class ShoppingItem extends React.Component {
   }
 }
 
-export default ShoppingItem;
+export default connect()(ShoppingItem);
