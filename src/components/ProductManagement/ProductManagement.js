@@ -64,7 +64,7 @@ class ProductManagement extends React.Component {
   }
   GetProducts = () => {
     this.props.dispatch({
-      type: "product/Get_product",
+      type: "product/AdminGet_product",
       callback: response => {
         this.setState({
           products: response
