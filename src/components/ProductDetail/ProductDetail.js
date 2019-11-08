@@ -1,13 +1,12 @@
 import React from "react"
 import { Link } from "gatsby"
 import "./ProductDetail.scss"
-import img1 from "../../images/1.jpg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
 import { faHeart } from "@fortawesome/free-solid-svg-icons"
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons"
-import Product from "../Product/Product"
 import Layout from "../layout/layout"
+const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class ProductDetail extends React.Component {
   constructor(props) {
     super(props)
@@ -22,16 +21,16 @@ class ProductDetail extends React.Component {
           </Link>
           <div className="detail">
             <div className="detail-img">
-              <img src={img1} />
+              <img src={PicServer + this.props.pageContext.product.Url} />
             </div>
             <div className="detail-text">
-              <p className="brand">{this.props.pageContext.product.brand}</p>
-              <p className="name">{this.props.pageContext.product.name}</p>
+              <p className="brand">{this.props.pageContext.product.Brand}</p>
+              <p className="name">{this.props.pageContext.product.Name}</p>
               <p className="new-price">
                 <span className="price">
-                  {this.props.pageContext.product.price}
+                  {this.props.pageContext.product.Cheapest_price}
                 </span>
-                {this.props.pageContext.product.new_price}
+                {this.props.pageContext.product.Original_price}
               </p>
               <p className="description">無</p>
               <br />

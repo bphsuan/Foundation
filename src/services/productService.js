@@ -1,4 +1,5 @@
 const productSever = "http://foundation.hsc.nutc.edu.tw/api/Product/"
+const productAdminSever = "http://foundation.hsc.nutc.edu.tw/api/Admin/"
 
 function addProduct(data) {
   console.log(data);
@@ -24,15 +25,26 @@ function addProduct(data) {
 }
 
 function getProduct() {
-  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
-    token: []
-  };
   return fetch(productSever + "GetProducts", {
     method: "GET",
     headers: {
+      "Accept": "application/json"
+    },
+  }).then(response => response.json())
+}
+
+function getAdminProduct() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productAdminSever + "GetProductsForAdmin", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
       "Accept": "application/json",
       "Authorization": "Bearer " + token.token[0]
     },
   }).then(response => response.json())
 }
-export { addProduct, getProduct }
+export { addProduct, getProduct, getAdminProduct }

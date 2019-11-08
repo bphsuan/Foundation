@@ -35,7 +35,7 @@ class AddContent extends React.Component {
         console.log(resMsg);
         if (resMsg === "新增成功") {
           alert(resMsg);
-          navigateTo = "/ProductManagement"
+          navigateTo("/ProductManagement")
         } else {
           alert(resMsg);
         }
@@ -80,31 +80,6 @@ class AddContent extends React.Component {
         })
         break;
     }
-  }
-  addProduct = () => {
-    //Brand,Name,Color,Ticket,Info,Original_price,圖片
-    const product = {
-      Brand: this.state.P_Brand,
-      Name: this.state.P_Name,
-      Color: this.state.P_Color,
-      Ticket: this.state.P_Ticket,
-      Info: this.state.P_description,
-      Original_price: this.state.P_OPrice,
-      Pic: this.state.P_Pic,
-    }
-    console.log(this.props.dispatch);
-    this.props.dispatch({
-      type: "product/Add_product",
-      payload: product,
-      callback: resMsg => {
-        console.log(resMsg);
-        if (resMsg === "新增成功") {
-          alert(resMsg);
-        } else {
-          alert(resMsg);
-        }
-      }
-    })
   }
   render() {
     const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
