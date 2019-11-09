@@ -80,7 +80,7 @@ class ProductManagement extends React.Component {
     localStorage.getItem(token);
     if (token.token[1] === "user") {
       navigateTo("/");
-    } else if (this.props.isLogin === "guest" || this.props.isLogin === "") {
+    } else if (localStorage.length === 0) {
       this.props.dispatch({
         type: "member/logout",
         callback: () => {

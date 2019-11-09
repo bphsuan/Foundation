@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import Layout from '../components/Layout/Layout';
 import PersonalHeader from "../components/PersonalHeader/PersonalHeader";
 import TabContent from '../components/TabContent/TabContent';
+import Coupon from "../components/Coupon/Coupon";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faTicketAlt } from '@fortawesome/free-solid-svg-icons';
@@ -17,6 +18,12 @@ class MyFavorite extends React.Component {
         { id: 2, name: "我的優惠券", icon: faTicketAlt }
       ]
       , location: ""
+      , coupons: [
+        { id: 1, topic: "生日禮", discount: "100", deadline: "2019/12/31" },
+        { id: 2, topic: "生日禮", discount: "100", deadline: "2019/12/31" },
+        { id: 3, topic: "生日禮", discount: "100", deadline: "2019/12/31" },
+        { id: 4, topic: "生日禮", discount: "100", deadline: "2019/12/31" },
+      ]
     }
   }
   componentDidMount() {
@@ -54,6 +61,12 @@ class MyFavorite extends React.Component {
     }
   }
   render() {
+    const dispear = {
+      display: "none",
+    }
+    const apear = {
+      display: "block",
+    }
     return (
       <Layout>
         <PersonalHeader />
@@ -62,6 +75,11 @@ class MyFavorite extends React.Component {
           activeTab={this.state.activeTab}
           onChangeTab={this.onChangeTab.bind(this)}
         />
+        <div style={this.state.activeTab === 2 ? apear : dispear}>
+          <Coupon
+            coupons={this.state.coupons}
+          />
+        </div>
       </Layout>
     )
   }
