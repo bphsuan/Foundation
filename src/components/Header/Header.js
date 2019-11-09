@@ -42,7 +42,7 @@ class Header extends React.Component {
       this.props.dispatch({
         type: "member/Maintain_loginState",
         callback: () => {
-          
+
         }
       })
     }
@@ -61,22 +61,6 @@ class Header extends React.Component {
       navigateTo("/Login");
     } else {
       navigateTo("/Detection");
-    }
-  }
-  toMemberJoinData = () => {
-    if (this.props.isLogin !== "admin") {
-      alert("您不是管理員唷!");
-      navigateTo("/Login");
-    } else {
-      navigateTo("/MemberJoinData");
-    }
-  }
-  toProductManagement = () => {
-    if (this.props.isLogin !== "admin") {
-      alert("您不是管理員唷!");
-      navigateTo("/Login");
-    } else {
-      navigateTo("/ProductManagement");
     }
   }
   logout = () => {
@@ -148,7 +132,6 @@ class Header extends React.Component {
             to={this.props.isLogin === "admin" ? "/MemberJoinData" : "/Login"}
             className={this.state.location === "/MemberJoinData" ? "active" : ""}
             style={this.props.isLogin === "user" || this.props.isLogin === "guest" || this.props.isLogin === "" ? iconDispear : iconApear}
-            onClick={this.toMemberJoinData}
           >
             會員管理｜Member
           </Link>
@@ -157,7 +140,6 @@ class Header extends React.Component {
             to={this.props.isLogin === "admin" ? "/ProductManagement" : "/Login"}
             className={this.state.location === "/ProductManagement" ? "active" : ""}
             style={this.props.isLogin === "user" || this.props.isLogin === "guest" || this.props.isLogin === "" ? iconDispear : iconApear}
-            onClick={this.toProductManagement}
           >
             產品管理｜Product
           </Link>
@@ -181,7 +163,6 @@ class Header extends React.Component {
             to={this.props.isLogin === "admin" ? "/FeedbackManagement" : "/Login"}
             className={this.state.location === "/FeedbackManagement" ? "active" : ""}
             style={this.props.isLogin === "user" || this.props.isLogin === "guest" || this.props.isLogin === "" ? iconDispear : iconApear}
-            onClick={this.toFeedbackManagement}
           >
             回饋管理｜Feedback
           </Link>
