@@ -1,0 +1,46 @@
+@import "../../mixin/main.scss";
+.coupon-content {
+  width: 90%;
+  margin: 0 5%;
+  .coupon-item {
+    width: 20%;
+    margin: 20px 2.5%;
+    padding: 10px 0;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    line-height: 2;
+    text-align: center;
+    font-size: $fontSize-s;
+    font-weight: bold;
+    display: inline-block;
+    @include laptop {
+      & {
+        width: 30%;
+        margin: 20px 1.5%;
+      }
+    }
+    @include pad {
+      & {
+        width: 45%;
+        margin: 20px 2.5%;
+      }
+    }
+    @include mobile {
+      & {
+        width: 95%;
+        margin: 20px 2.5%;
+      }
+    }
+    .topic {
+      font-size: $fontSize-m;
+      letter-spacing: $letterSpacing-l;
+    }
+    .discount {
+      font-size: $fontSize-l;
+      letter-spacing: $letterSpacing-l;
+      color: $color-main;
+    }
+    .deadline {
+      letter-spacing: $letterSpacing-s;
+    }
+  }
+}

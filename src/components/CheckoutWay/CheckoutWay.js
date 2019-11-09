@@ -59,7 +59,7 @@ class CheckoutWay extends React.Component {
     if (token.token[1] === "admin") {
       console.log(this.props.isLogin);
       navigateTo("/");
-    } else if (this.props.isLogin === "guest" || this.props.isLogin === "") {
+    } else if (localStorage.length === 0) {
       console.log(this.props.isLogin);
       this.props.dispatch({
         type: "member/logout",
