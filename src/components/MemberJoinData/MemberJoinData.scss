@@ -31,6 +31,7 @@
         transition: $transition;
         letter-spacing: $letterSpacing-m;
         font-size: $fontSize-m;
+        border: none;
         &:hover {
           cursor: pointer;
           color: $color-main;

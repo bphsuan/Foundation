@@ -40,7 +40,7 @@ class ModifyPersonalInfo extends React.Component {
           console.log(response);
           if (response.Message === "發生錯誤。") {
             console.log("happen");
-            // alert("連線逾時，請重新登入");
+            alert("連線逾時，請重新登入");
             this.props.dispatch({
               type: "member/logout",
             })
@@ -82,7 +82,7 @@ class ModifyPersonalInfo extends React.Component {
         if (response === "修改成功") {
           return navigateTo('/PersonalInfo')
         } else {
-          // alert(response);
+          alert(response);
         }
       }
     })

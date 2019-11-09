@@ -17,13 +17,25 @@ class MemberManagement extends React.Component {
     this.setState({
       filterAsc: true,
       filterDesc: false
-    })
+    }, () => { this.onChangeFilter(); }
+    )
+
   }
   filterDesc() {
     this.setState({
       filterAsc: false,
       filterDesc: true
-    })
+    }, () => { this.onChangeFilter(); }
+    )
+
+  }
+  onChangeFilter() {
+    if (this.state.filterAsc === true) {
+      window.location.hash = "#Asc";
+    } else if (this.state.filterDesc === true) {
+      window.location.hash = "#Desc";
+    }
+    console.log(window.location.hash);
   }
   render() {
     const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
@@ -65,7 +77,7 @@ class MemberManagement extends React.Component {
             加入時間晚至早
           </a>
         </div>
-      </div>
+      </div >
     )
   }
 }
