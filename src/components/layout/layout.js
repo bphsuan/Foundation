@@ -5,6 +5,7 @@ import { create } from 'dva-core';
 import memberModel from '../../models/memberModel';
 import productModel from '../../models/productModel';
 import cartModel from '../../models/cartModel';
+import memberForAdminModel from '../../models/memberForAdminModel';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import ToTop from '../ToTop/ToTop';
@@ -15,6 +16,7 @@ const app = create();
 app.model(memberModel);
 app.model(productModel);
 app.model(cartModel);
+app.model(memberForAdminModel);
 app.start();
 const store = app._store;
 

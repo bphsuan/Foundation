@@ -2,6 +2,7 @@ import React from 'react';
 import Product from '../Product/Product';
 import './ProductContent.scss';
 import { connect } from "react-redux";
+
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class ProductContent extends React.Component {
   constructor(props) {

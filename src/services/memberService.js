@@ -1,4 +1,5 @@
-const memberServer = "http://foundation.hsc.nutc.edu.tw/api/Customer/"
+const memberServer = "http://foundation.hsc.nutc.edu.tw/api/Customer/";
+const memberAdminService = 'http://foundation.hsc.nutc.edu.tw/api/Admin/';
 
 function register(data) {
   console.log(data)
@@ -118,7 +119,42 @@ function getUserPic() {
     },
   }).then(response => response.json())
 }
-
+function getAdminMemberAsc() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(memberAdminService + "GetCustomers", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+  }).then(response => response.json())
+}
+function getAdminMemberDesc() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(memberAdminService + "GetCustomersDesc", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+  }).then(response => response.json())
+}
 export {
-  register, login, modifyPsw, UserInfo, SendUserInfo, uploadUserPic, getUserPic
+  register,
+  login,
+  modifyPsw,
+  UserInfo,
+  SendUserInfo,
+  uploadUserPic,
+  getUserPic,
+  getAdminMemberAsc,
+  getAdminMemberDesc
 }

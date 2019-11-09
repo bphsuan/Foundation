@@ -1,19 +1,48 @@
 import React from 'react';
 import './MemberJoinData.scss';
+import { connect } from "react-redux";
 
 class MemberJoinData extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      members: []
     }
   }
+  componentDidMount() {
+    this.getMemberAsc();
+  }
+  getMemberAsc = () => {
+    this.props.dispatch({
+      type: "memberAdmin/Get_memberAsc",
+      callback: response => {
+        this.setState({
+          members: response
+        })
+      }
+    })
+  }
+  getMemberDesc = () => {
+    this.props.dispatch({
+      type: "memberAdmin/Get_memberDesc",
+      callback: response => {
+        this.setState({
+          members: response
+        })
+      }
+    })
+  }
   render() {
+    const hash = window.location.hash;
+    if (hash === "#Asc") {
+      this.getMemberAsc();
+    } else if (hash === "#Desc") {
+      this.getMemberDesc();
+    }
     return (
       <div className="Member">
         <table className="MemberData">
           <tr>
-            <th>序號</th>
             <th>帳號</th>
             <th>姓名</th>
             <th>性別</th>
@@ -21,37 +50,26 @@ class MemberJoinData extends React.Component {
             <th>email</th>
             <th>電話</th>
             <th>地址</th>
-            <th>加入時間</th>
             <th>停權</th>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>amychen861110</td>
-            <td>陳璟誼</td>
-            <td>女</td>
-            <td>1997/11/10</td>
-            <td>amychen861110@gmail.com</td>
-            <td>09123456789</td>
-            <td>台中市北區三民路三段111號</td>
-            <td>2019/09/03</td>
-            <td><a className="block">停權</a></td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>tiffany116</td>
-            <td>林庭蓁</td>
-            <td>女</td>
-            <td>1990/10/10</td>
-            <td>lin12345@yahoo.com.tw</td>
-            <td>09123456789</td>
-            <td>彰化市民生路23號</td>
-            <td>2019/09/11</td>
-            <td><a className="block">停權</a></td>
-          </tr>
+          {this.state.members.map((member) => {
+            return (
+              <tr>
+                <th>{member.Account}</th>
+                <th>{member.Name}</th>
+                <th>{member.Gender}</th>
+                <th>{member.Birthday.split("T", 1)}</th>
+                <th>{member.Email}</th>
+                <th>{member.Phone}</th>
+                <th>{member.Address}</th>
+                <th><button className="block">停權</button></th>
+              </tr>
+            )
+          })}
         </table>
       </div>
     )
   }
 }
 
-export default MemberJoinData
+export default connect()(MemberJoinData)
