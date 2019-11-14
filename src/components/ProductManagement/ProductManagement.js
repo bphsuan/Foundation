@@ -104,8 +104,8 @@ class ProductManagement extends React.Component {
               <th>色票</th>
               <th>色號</th>
               <th className="t-width">描述</th>
-              <th>最近一次修改時間</th>
-              <th>修改</th>
+              <th>上傳時間</th>
+              <th>下架</th>
               <th>刪除</th>
             </tr>
             {this.state.products.map((product, i) => {
