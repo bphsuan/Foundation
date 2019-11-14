@@ -25,7 +25,7 @@ function addProduct(data) {
 }
 
 function getProduct() {
-  return fetch(productSever + "GetProducts", {
+  return fetch(productSever + "GetProductsDesc", {
     method: "GET",
     headers: {
       "Accept": "application/json"

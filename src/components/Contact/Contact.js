@@ -59,8 +59,8 @@ class Contact extends React.Component {
       this.props.dispatch({
         type: "contact/sendContact",
         payload: feedbackObj,
-        callback: resMsg => {
-          console.log(resMsg);
+        callback: response => {
+          console.log(response);
         }
       })
     }
@@ -71,17 +71,16 @@ class Contact extends React.Component {
     };
     localStorage.getItem(token);
     if (token.token[1] === "admin") {
-      console.log(this.props.isLogin);
       navigateTo("/");
-    } else if (localStorage.length === 0) {
-      console.log(this.props.isLogin);
-      this.props.dispatch({
-        type: "member/logout",
-        callback: () => {
-          navigateTo("/Login");
-        }
-      })
-      navigateTo("/Login");
+      // } else if (localStorage.length === 0) {
+      //   console.log(this.props.isLogin);
+      //   this.props.dispatch({
+      //     type: "member/logout",
+      //     callback: () => {
+      //       navigateTo("/Login");
+      //     }
+      //   })
+      //   navigateTo("/Login");
     }
     return (
       <div className="contact">
@@ -150,7 +149,7 @@ class Contact extends React.Component {
               />
             </div>
             <div className="summit-btn">
-              <button onClick={this.submitFeedback()}>
+              <button onClick={this.submitFeedback.bind(this)}>
                 送出
               </button>
             </div>

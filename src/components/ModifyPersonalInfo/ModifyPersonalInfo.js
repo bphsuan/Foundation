@@ -39,7 +39,6 @@ class ModifyPersonalInfo extends React.Component {
         callback: response => {
           console.log(response);
           if (response.Message === "發生錯誤。") {
-            console.log("happen");
             alert("連線逾時，請重新登入");
             this.props.dispatch({
               type: "member/logout",
