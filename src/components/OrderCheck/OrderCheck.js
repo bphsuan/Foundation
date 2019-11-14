@@ -3,6 +3,7 @@ import './OrderCheck.scss';
 import StepPrevious from '../StepPrevious/StepPrevious';
 import StepNext from '../StepNext/StepNext';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -19,7 +20,7 @@ class OrderCheck extends React.Component {
     super(props);
     this.state = {
       previous: " 上一步",
-      next: "送出訂單 ",
+      next: "送出 ",
     }
   }
   handleClickOpen() {
@@ -34,6 +35,35 @@ class OrderCheck extends React.Component {
       setOpen: false,
       open: false
     })
+  }
+
+  submitOrder = () => {
+    const data = JSON.parse(localStorage.getItem("product"));
+    const orderObj = []
+    data.forEach(product => {
+      const data = { "Product_Id": product.id, "Cheapest_price": product.Price, "Quantity": product.quantity }
+      orderObj.push(data)
+    })
+    console.log(orderObj);
+
+    this.props.dispatch({
+      type: "cart/Send_Cart",
+      payload: orderObj,
+      coupon: -1,
+      callback: response => {
+        if (response.Message === "發生錯誤。") {
+          alert("連線逾時，請重新登入");
+          this.props.dispatch({
+            type: "member/logout",
+          })
+          navigateTo("/Login");
+        } else {
+          console.log(response);
+        }
+      }
+    })
+    this.handleClose();
+
   }
 
   render() {
@@ -82,6 +112,7 @@ class OrderCheck extends React.Component {
         </Link>
         <StepNext
           next={this.state.next}
+          icon={faCheck}
           onClick={this.handleClickOpen.bind(this)}
         />
         <Dialog
@@ -106,7 +137,7 @@ class OrderCheck extends React.Component {
               取消
             </Button>
             <Button
-              onClick={this.handleClose.bind(this)}
+              onClick={this.submitOrder.bind(this)}
               style={button}>
               送出
             </Button>

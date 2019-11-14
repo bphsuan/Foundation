@@ -8,7 +8,7 @@ export default {
 
   },
   effects: {
-    * register({ payload, callback }, { put, call, select }) {
+    * sendContact({ payload, callback }, { put, call, select }) {
       const resMsg = yield call(sendContact, payload); //return status
       console.log(resMsg);
       callback(resMsg)
