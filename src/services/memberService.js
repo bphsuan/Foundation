@@ -22,7 +22,6 @@ function register(data) {
   }).then(response => response.json())
 }
 function login(data) {
-  console.log(data)
   return fetch(memberServer + "Login", {
     method: "POST",
     headers: {
@@ -147,6 +146,56 @@ function getAdminMemberDesc() {
     },
   }).then(response => response.json())
 }
+function searchMember(data) {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(memberAdminService + "SearchCustomer?search=" + data, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+  }).then(response => response.json())
+}
+function bindPermission(data) {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  console.log(data);
+  return fetch(memberAdminService + "AddBlackList", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+    body: JSON.stringify({
+      Account: data
+    })
+  }).then(response => response.json())
+}
+function unbindPermission(data) {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  console.log(data);
+  return fetch(memberAdminService + "DeleteBlackList", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+    body: JSON.stringify({
+      Account: data
+    })
+  }).then(response => response.json())
+}
 export {
   register,
   login,
@@ -156,5 +205,8 @@ export {
   uploadUserPic,
   getUserPic,
   getAdminMemberAsc,
-  getAdminMemberDesc
+  getAdminMemberDesc,
+  searchMember,
+  bindPermission,
+  unbindPermission,
 }
