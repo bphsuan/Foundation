@@ -17,7 +17,24 @@ class CheckoutWay extends React.Component {
       checkout: "",
       isCreditCard: true,
       card: "",
+      products: []
     }
+  }
+  componentDidMount() {
+    this.GET_Cart()
+    const quantity = JSON.parse(localStorage.getItem("product1"))
+    // console.log(quantity);
+  }
+  GET_Cart = () => {
+    this.props.dispatch({
+      type: "cart/GET_Cart",
+      callback: response => {
+        this.setState({
+          products: response
+        })
+        console.log(this.state.products);
+      }
+    })
   }
   checkoutWay = (e) => {
     this.setState({
@@ -72,10 +89,11 @@ class CheckoutWay extends React.Component {
     return (
       <div className="checkout-content">
         <div className="checkout-list">
-          <p>list item</p>
-          <p>list item</p>
-          <p>list item</p>
-          <p>list item</p>
+          {this.state.products.map((product, i) => {
+            return (
+              <p key={i}>{product.Name}</p>
+            )
+          })}
           <p className="sum">total</p>
         </div>
         <div className="checkout-way">

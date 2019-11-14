@@ -1,16 +1,38 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { connect } from 'react-redux';
+import { navigateTo } from 'gatsby';
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class ShoppingItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       quantity: 1,
-      disable: true
+      disable: true,
+      product: [],
+      localdata: localStorage.getItem("product")
     }
   }
+  // componentDidMount() {
+  //   if (localStorage.getItem("product") !== null)
+  //     this.setData()
+  // }
+  // setData = () => {
+  //   const data = localStorage.getItem("product");
+  //   this.setState({
+  //     product: JSON.parse(data)
+  //   }, () => {
+  //     console.log(this.state.product);
+  //   })
+  // }
   minus = () => {
+    // const data = localStorage.getItem("product");
+    // this.setState({
+    //   product: JSON.parse(data)
+    // }, () => {
+    //   console.log(this.state.product);
+    // })
     if (this.state.quantity === 1) {
       this.setState({
         disable: true
@@ -20,12 +42,42 @@ class ShoppingItem extends React.Component {
         quantity: this.state.quantity - 1,
         disable: false
       })
+      this.setState(prevState => ({
+        product: prevState.product.map(el =>
+          el.id === this.props.id ? { ...el, quantity: this.state.quantity - 1 } : el,
+        ),
+      }), () => {
+        console.log(this.state.product);
+      });
+
+      localStorage.setItem("product", JSON.stringify(this.state.product));
     }
   }
   plus = () => {
     this.setState({
       quantity: this.state.quantity + 1,
       disable: false
+    })
+    this.setState(prevState => ({
+      product: prevState.product.map(el =>
+        el.id === this.props.id ? { ...el, quantity: this.state.quantity + 1 } : el,
+      ),
+    }), () => {
+      console.log(this.state.product);
+    });
+    localStorage.setItem("product", JSON.stringify(this.state.product));
+  }
+  deleteItem = () => {
+    const id = this.props.id;
+    console.log(id);
+    this.props.dispatch({
+      type: "cart/Delete_Cart",
+      payload: id,
+      callback: resMsg => {
+        console.log(resMsg);
+        alert(resMsg);
+        window.location.reload();
+      }
     })
   }
   render() {
@@ -37,6 +89,7 @@ class ShoppingItem extends React.Component {
         <div className="product-func">
           <FontAwesomeIcon icon={faTimes}
             className="delete"
+            onClick={this.deleteItem}
           />
         </div>
         <div className="product-text">
@@ -63,4 +116,4 @@ class ShoppingItem extends React.Component {
   }
 }
 
-export default ShoppingItem;
+export default connect()(ShoppingItem);

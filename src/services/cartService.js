@@ -29,4 +29,21 @@ function getCart() {
     },
   }).then(response => response.json())
 }
-export { addCart, getCart }
+
+function deleteCart(data) {
+  console.log(data);
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(cartSever + "DeleteCartById", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+    body: JSON.stringify({
+      Product_Id: data
+    })
+  }).then(response => response.json())
+}
+export { addCart, getCart, deleteCart }

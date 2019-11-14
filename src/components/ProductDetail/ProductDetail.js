@@ -6,12 +6,24 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
 import { faHeart } from "@fortawesome/free-solid-svg-icons"
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons"
 import Layout from "../layout/layout"
+import { connect } from "react-redux";
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class ProductDetail extends React.Component {
   constructor(props) {
     super(props)
     console.log(props)
   }
+  // addCart = () => {
+  //   const id = this.props.pageContext.product.Product_Id;
+  //   this.props.dispatch({
+  //     type: "cart/Add_Cart",
+  //     payload: id,
+  //     callback: resMsg => {
+  //       console.log(resMsg);
+  //       alert(resMsg);
+  //     }
+  //   })
+  // }
   render() {
     return (
       <Layout>
@@ -32,11 +44,13 @@ class ProductDetail extends React.Component {
                 </span>
                 {this.props.pageContext.product.Original_price}
               </p>
-              <p className="description">無</p>
+              <p className="description">{this.props.pageContext.product.Info}</p>
               <br />
               <FontAwesomeIcon icon={faHeart} className="favorite" />
               <button>
-                <FontAwesomeIcon icon={faCartPlus} className="addCart" />
+                <FontAwesomeIcon icon={faCartPlus} className="addCart"
+                // onClick={this.addCart}
+                />
                 加入購物車
               </button>
             </div>
@@ -46,5 +60,4 @@ class ProductDetail extends React.Component {
     )
   }
 }
-
 export default ProductDetail
