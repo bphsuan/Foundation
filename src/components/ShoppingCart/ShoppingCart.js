@@ -1,14 +1,19 @@
 import React from 'react';
 import Product from './ShoppingItem';
+import StepNext from '../StepNext/StepNext';
 import './ShoppingCart.scss';
 import { connect } from 'react-redux';
 import { navigateTo } from 'gatsby';
+import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'gatsby';
 
 class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      next: "結帳 ",
       products: [],
+
     }
   }
   componentDidMount() {
@@ -22,6 +27,12 @@ class ShoppingCart extends React.Component {
           products: response
         })
         console.log(this.state.products);
+        const products_local = [];
+        response.forEach(product => {
+          const data = { "id": product.Product_Id, "quantity": 1 }
+          products_local.push(data)
+        })
+        localStorage.setItem("product", JSON.stringify(products_local));
       }
     })
   }
@@ -57,6 +68,13 @@ class ShoppingCart extends React.Component {
             />
           )
         })}
+
+        <Link to="/Checkout">
+          <StepNext
+            next={this.state.next}
+            icon={faDollarSign}
+          />
+        </Link>
       </div>
     )
   }

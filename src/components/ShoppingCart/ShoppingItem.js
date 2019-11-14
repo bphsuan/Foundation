@@ -9,10 +9,30 @@ class ShoppingItem extends React.Component {
     super(props);
     this.state = {
       quantity: 1,
-      disable: true
+      disable: true,
+      product: [],
+      localdata: localStorage.getItem("product")
     }
   }
+  // componentDidMount() {
+  //   if (localStorage.getItem("product") !== null)
+  //     this.setData()
+  // }
+  // setData = () => {
+  //   const data = localStorage.getItem("product");
+  //   this.setState({
+  //     product: JSON.parse(data)
+  //   }, () => {
+  //     console.log(this.state.product);
+  //   })
+  // }
   minus = () => {
+    // const data = localStorage.getItem("product");
+    // this.setState({
+    //   product: JSON.parse(data)
+    // }, () => {
+    //   console.log(this.state.product);
+    // })
     if (this.state.quantity === 1) {
       this.setState({
         disable: true
@@ -22,6 +42,15 @@ class ShoppingItem extends React.Component {
         quantity: this.state.quantity - 1,
         disable: false
       })
+      this.setState(prevState => ({
+        product: prevState.product.map(el =>
+          el.id === this.props.id ? { ...el, quantity: this.state.quantity - 1 } : el,
+        ),
+      }), () => {
+        console.log(this.state.product);
+      });
+
+      localStorage.setItem("product", JSON.stringify(this.state.product));
     }
   }
   plus = () => {
@@ -29,6 +58,14 @@ class ShoppingItem extends React.Component {
       quantity: this.state.quantity + 1,
       disable: false
     })
+    this.setState(prevState => ({
+      product: prevState.product.map(el =>
+        el.id === this.props.id ? { ...el, quantity: this.state.quantity + 1 } : el,
+      ),
+    }), () => {
+      console.log(this.state.product);
+    });
+    localStorage.setItem("product", JSON.stringify(this.state.product));
   }
   deleteItem = () => {
     const id = this.props.id;
@@ -39,6 +76,7 @@ class ShoppingItem extends React.Component {
       callback: resMsg => {
         console.log(resMsg);
         alert(resMsg);
+        window.location.reload();
       }
     })
   }
@@ -52,7 +90,6 @@ class ShoppingItem extends React.Component {
           <FontAwesomeIcon icon={faTimes}
             className="delete"
             onClick={this.deleteItem}
-
           />
         </div>
         <div className="product-text">
@@ -65,7 +102,7 @@ class ShoppingItem extends React.Component {
             -
           </button>
           <input type="text"
-            defaultValue={this.state.quantity}
+            value={this.state.quantity}
           />
           <button
             className="quantity"

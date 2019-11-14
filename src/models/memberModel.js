@@ -55,7 +55,7 @@ export default {
       }
     },
     SET_Logout(state) {
-      localStorage.removeItem("token");
+      localStorage.clear();
       return {
         ...state,
         token: "",
