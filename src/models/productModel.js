@@ -1,4 +1,4 @@
-import { addProduct, getProduct, getAdminProduct } from '../services/productService'
+import { addProduct, getProduct, getAdminProduct, addFavorite } from '../services/productService'
 export default {
   namespace: "product",
   state: {
@@ -19,6 +19,10 @@ export default {
     * AdminGet_product({ payload, callback }, { put, call, select }) {
       const resMsg = yield call(getAdminProduct);
       callback(resMsg);
-    }
+    },
+    * Add_favorite({ payload, callback }, { put, call, select }) {
+      const resMsg = yield call(addFavorite, payload);
+      callback(resMsg);
+    },
   }
 }

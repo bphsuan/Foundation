@@ -14,18 +14,17 @@ class ShoppingItem extends React.Component {
       localdata: localStorage.getItem("product")
     }
   }
-  // componentDidMount() {
-  //   if (localStorage.getItem("product") !== null)
-  //     this.setData()
-  // }
-  // setData = () => {
-  //   const data = localStorage.getItem("product");
-  //   this.setState({
-  //     product: JSON.parse(data)
-  //   }, () => {
-  //     console.log(this.state.product);
-  //   })
-  // }
+  componentDidMount() {
+    this.setData()
+  }
+  setData = () => {
+    const data = localStorage.getItem("product");
+    this.setState({
+      product: JSON.parse(data)
+    }, () => {
+      console.log(this.state.product);
+    })
+  }
   minus = () => {
     // const data = localStorage.getItem("product");
     // this.setState({

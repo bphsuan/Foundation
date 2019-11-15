@@ -47,4 +47,16 @@ function getAdminProduct() {
     },
   }).then(response => response.json())
 }
-export { addProduct, getProduct, getAdminProduct }
+function addFavorite(data) {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productAdminSever + "AddFavorite", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + token.token[0]
+    },
+    body: data
+  }).then(response => response.json())
+}
+export { addProduct, getProduct, getAdminProduct, addFavorite }
