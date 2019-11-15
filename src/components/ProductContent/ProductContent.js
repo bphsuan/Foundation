@@ -12,68 +12,119 @@ class ProductContent extends React.Component {
     super(props);
     this.state = {
       products: [],
-      priceAsc: true,
-      priceDesc: false,
+      priceAsc: false,
+      priceDesc: true,
       hotSale: false,
     }
   }
   componentDidMount() {
-    this.getProduct();
+    window.location.hash = "#Desc";
+    this.getProductDesc();
   }
   priceAsc() {
     this.setState({
       priceAsc: true,
       priceDesc: false,
       hotSale: false,
-    })
+    }, () => { this.onChangeFilter(); })
+    this.getProductAsc();
   }
   priceDesc() {
     this.setState({
       priceAsc: false,
       priceDesc: true,
       hotSale: false,
-    })
+    }, () => { this.onChangeFilter(); })
+    this.getProductDesc();
   }
   hotSale() {
     this.setState({
       priceAsc: false,
       priceDesc: false,
       hotSale: true,
-    })
+    }, () => { this.onChangeFilter(); })
   }
-  getProduct = () => {
-    // const permission = JSON.parse(localStorage.getItem("token"));
-    // if (localStorage.length === 0) {
-    //   this.props.dispatch({
-    //     type: "product/Get_product",
-    //     callback: response => {
-    //       console.log(response);
-    //       this.setState({
-    //         products: response
-    //       })
-    //     }
-    //   })
-    // }
-    this.props.dispatch({
-      type: "product/Get_product",
-      callback: response => {
-        if (response.Message === "發生錯誤。") {
-          console.log("happen");
-          alert("連線逾時，請重新登入");
-          this.props.dispatch({
-            type: "member/logout",
-          })
-          navigateTo("/Login");
-        } else {
-          console.log(response);
+  onChangeFilter = () => {
+    if (this.state.priceAsc === true) {
+      window.location.hash = "#Asc";
+    } else if (this.state.priceDesc === true) {
+      window.location.hash = "#Desc";
+    } else if (this.state.hotSale === true) {
+      window.location.hash = "#HotSell"
+    }
+  }
+  getProductDesc = () => {
+    const permission = JSON.parse(localStorage.getItem("token"));
+    if (localStorage.length === 0) {
+      this.props.dispatch({
+        type: "product/Get_productsDesc",
+        callback: response => {
           this.setState({
             products: response
           })
         }
-      }
-    })
+      })
+    } else if (permission.token[1] === "user") {
+      this.props.dispatch({
+        type: "product/Get_productsDescByAcc",
+        callback: response => {
+          if (response.Message === "發生錯誤。") {
+            alert("連線逾時，請重新登入");
+            this.props.dispatch({
+              type: "member/logout",
+            })
+            navigateTo("/Login");
+          } else {
+            this.setState({
+              products: response
+            })
+          }
+        }
+      })
+    } else if (permission.token[1] === "admin") {
+      navigateTo("/");
+    }
   }
-
+  getProductAsc = () => {
+    const permission = JSON.parse(localStorage.getItem("token"));
+    if (localStorage.length === 0) {
+      this.props.dispatch({
+        type: "product/Get_productsAsc",
+        callback: response => {
+          this.setState({
+            products: response
+          })
+        }
+      })
+    } else if (permission.token[1] === "user") {
+      this.props.dispatch({
+        type: "product/Get_productsAscByAcc",
+        callback: response => {
+          if (response.Message === "發生錯誤。") {
+            alert("連線逾時，請重新登入");
+            this.props.dispatch({
+              type: "member/logout",
+            })
+            navigateTo("/Login");
+          } else {
+            this.setState({
+              products: response
+            })
+          }
+        }
+      })
+    } else if (permission.token[1] === "admin") {
+      navigateTo("/");
+    }
+  }
+  getProductAfterAction = () => {
+    const hash = window.location.hash;
+    if (hash === "#Desc") {
+      this.getProductDesc();
+    } else if (hash === "#Asc") {
+      this.getProductAsc();
+    }
+  }
   render() {
     return (
       <div>
@@ -91,13 +142,13 @@ class ProductContent extends React.Component {
           </div>
           <div className="product-filter">
             <a
-              onClick={this.priceAsc.bind(this)}
-              className={this.state.priceAsc ? "active" : ""}
+              onClick={this.priceDesc.bind(this)}
+              className={this.state.priceDesc ? "active" : ""}
             >價錢高至低
           </a>
             <a
-              onClick={this.priceDesc.bind(this)}
-              className={this.state.priceDesc ? "active" : ""}
+              onClick={this.priceAsc.bind(this)}
+              className={this.state.priceAsc ? "active" : ""}
             >價錢低至高
           </a>
             <a
@@ -116,8 +167,7 @@ class ProductContent extends React.Component {
                 img={PicServer + product.Url}
                 brand={product.Brand}
                 name={product.Name}
-                favorite={product.favorite}
-                addFavorite={this.props.addFavorite}
+                favorite={product.isFavorite}
                 new_price={product.Cheapest_price}
                 price={product.Original_price}
               />

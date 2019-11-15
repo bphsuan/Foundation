@@ -13,7 +13,7 @@ class ManageList extends React.Component {
         <td>{this.props.Ticket}</td>
         <td>{this.props.Info}</td>
         <td>2019/10/10</td>
-        <td><a className="p-button b-size" onClick={this.setEdditButton} >下架</a></td>
+        <td><a className="p-button b-size" onClick={this.setEdditButton}>下架</a></td>
         <td><a className="p-button b-size" onClick={this.setDeleteButton}>刪除</a></td>
       </tr>
     )

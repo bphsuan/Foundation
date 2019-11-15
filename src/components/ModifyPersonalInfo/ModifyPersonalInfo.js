@@ -37,7 +37,6 @@ class ModifyPersonalInfo extends React.Component {
       this.props.dispatch({
         type: "member/GET_userInfo",
         callback: response => {
-          console.log(response);
           if (response.Message === "發生錯誤。") {
             alert("連線逾時，請重新登入");
             this.props.dispatch({

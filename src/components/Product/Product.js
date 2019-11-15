@@ -4,6 +4,8 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'gatsby'
 import { connect } from "react-redux";
+import { navigateTo } from 'gatsby';
+
 class Product extends React.Component {
   constructor(props) {
     super(props);
@@ -13,15 +15,61 @@ class Product extends React.Component {
 
   addCart = () => {
     const id = this.props.id;
-    // console.log(id);
     this.props.dispatch({
       type: "cart/Add_Cart",
       payload: id,
-      callback: resMsg => {
-        console.log(resMsg);
-        alert(resMsg);
+      callback: response => {
+        if (response.Message === "發生錯誤。") {
+          alert("連線逾時，請重新登入");
+          this.props.dispatch({
+            type: "member/logout",
+          })
+          navigateTo("/Login");
+        } else {
+          alert(response);
+        }
       }
     })
+  }
+  addFavorite = () => {
+    const id = this.props.id
+    this.props.dispatch({
+      type: "product/Add_favorite",
+      payload: id,
+      callback: response => {
+        if (response.Message === "發生錯誤。") {
+          alert("連線逾時，請重新登入");
+          this.props.dispatch({
+            type: "member/logout",
+          })
+          navigateTo("/Login");
+        } else {
+          alert(response);
+          window.location.reload();
+        }
+      }
+    })
+
+  }
+  cancelFavorite = () => {
+    const id = this.props.id
+    this.props.dispatch({
+      type: "product/Cancel_favorite",
+      payload: id,
+      callback: response => {
+        if (response.Message === "發生錯誤。") {
+          alert("連線逾時，請重新登入");
+          this.props.dispatch({
+            type: "member/logout",
+          })
+          navigateTo("/Login");
+        } else {
+          alert(response);
+          window.location.reload();
+        }
+      }
+    })
+
   }
   render() {
     const colorMain = {
@@ -37,7 +85,7 @@ class Product extends React.Component {
             icon={faHeart}
             className="favorite"
             style={this.props.favorite ? colorMain : colorGray}
-            onClick={this.props.addFavorite}
+            onClick={this.props.favorite ? this.cancelFavorite : this.addFavorite}
           />
           <FontAwesomeIcon
             icon={faCartPlus}

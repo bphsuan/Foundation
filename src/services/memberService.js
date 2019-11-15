@@ -2,7 +2,6 @@ const memberServer = "http://foundation.hsc.nutc.edu.tw/api/Customer/";
 const memberAdminService = 'http://foundation.hsc.nutc.edu.tw/api/Admin/';
 
 function register(data) {
-  console.log(data)
   return fetch(memberServer + "Register", {
     method: "POST",
     headers: {
@@ -74,7 +73,6 @@ function SendUserInfo(data) {
 
 }
 function modifyPsw(data) {
-  console.log(data);
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
   };
@@ -93,7 +91,6 @@ function modifyPsw(data) {
   }).then(response => response.json())
 }
 function uploadUserPic(Img) {
-  console.log(Img);
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
   };
@@ -164,7 +161,6 @@ function bindPermission(data) {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
   };
-  console.log(data);
   return fetch(memberAdminService + "AddBlackList", {
     method: "POST",
     headers: {

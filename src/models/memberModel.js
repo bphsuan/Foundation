@@ -9,7 +9,6 @@ export default {
   },
   reducers: {
     SET_Login(state, { payload }) {
-      console.log(payload);
       const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
         token: []
       };
@@ -36,7 +35,6 @@ export default {
       }
     },
     SET_Username(state, { payload }) {
-      console.log(payload);
       return {
         ...state,
         username: payload
@@ -66,12 +64,10 @@ export default {
   effects: {
     * register({ payload, callback }, { put, call, select }) {
       const resMsg = yield call(register, payload); //return status
-      console.log(resMsg);
       callback(resMsg)
     },
     * login({ payload, callback }, { put, call, select }) {
       const resMsg = yield call(login, payload); //return status
-      console.log(resMsg);
       if (resMsg[0].message === "登入成功") {
         yield put({
           //to reducer
@@ -90,7 +86,6 @@ export default {
     },
     * GET_userInfo({ payload, callback }, { put, call, select }) {
       const resMsg = yield call(UserInfo);
-      console.log(resMsg);
       callback(resMsg);
       let _username = resMsg.Name;
       yield put({

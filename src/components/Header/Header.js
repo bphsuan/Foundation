@@ -37,7 +37,6 @@ class Header extends React.Component {
       token: []
     };
     localStorage.getItem(token);
-    console.log(token);
     if (token.token.length !== 0) {
       this.props.dispatch({
         type: "member/Maintain_loginState",
