@@ -92,7 +92,7 @@ class MemberManagement extends React.Component {
           navigateTo("/Login");
         } else {
           this.setState({
-            members: response
+            members: response,
           })
         }
       }
@@ -110,7 +110,7 @@ class MemberManagement extends React.Component {
           navigateTo("/Login");
         } else {
           this.setState({
-            members: response
+            members: response,
           })
         }
       }
@@ -136,6 +136,7 @@ class MemberManagement extends React.Component {
           } else if (hash === "#Search") {
             this.searchMember();
           }
+          alert("已停用此帳號");
         }
       }
     })
@@ -158,6 +159,7 @@ class MemberManagement extends React.Component {
           } else if (hash === "#Desc") {
             this.getMemberDesc();
           }
+          alert("已啟用此帳號");
         }
       }
     })
@@ -185,7 +187,7 @@ class MemberManagement extends React.Component {
           <div className="Member-search">
             <input
               type="text"
-              placeholder="請輸入關鍵字"
+              placeholder="請輸入帳號或信箱關鍵字"
               onChange={this.handleOnChange.bind(this)}
               onKeyDown={this.handleKeyDown.bind(this)}
             />

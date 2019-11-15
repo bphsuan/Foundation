@@ -42,28 +42,37 @@ class Contact extends React.Component {
     }
   }
   submitFeedback = () => {
+    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+      token: []
+    };
     const feedbackObj = {
       Name: this.state.Name,
       Email: this.state.Email,
       Content: this.state.Content
     }
-    if (
-      this.state.Name.length === 0 ||
-      this.state.Email.length === 0 ||
-      this.state.Content.length === 0
-    ) {
-      alert("所有欄位皆為必填");
-    } else if (!(/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(this.state.Email))) {
-      alert("Email格式錯誤")
-    } else {
-      this.props.dispatch({
-        type: "contact/sendContact",
-        payload: feedbackObj,
-        callback: response => {
-          console.log(response);
-        }
-      })
+    if (token.token[1] === "user") {
+      if (
+        this.state.Name.length === 0 ||
+        this.state.Email.length === 0 ||
+        this.state.Content.length === 0
+      ) {
+        alert("所有欄位皆為必填");
+      } else if (!(/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(this.state.Email))) {
+        alert("Email格式錯誤")
+      } else {
+        this.props.dispatch({
+          type: "contact/sendContact",
+          payload: feedbackObj,
+          callback: response => {
+            console.log(response);
+          }
+        })
+      }
+    } else if (localStorage.length === 0) {
+      alert("您尚未登入!");
+      navigateTo("/Login");
     }
+
   }
   render() {
     const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
@@ -72,15 +81,6 @@ class Contact extends React.Component {
     localStorage.getItem(token);
     if (token.token[1] === "admin") {
       navigateTo("/");
-      // } else if (localStorage.length === 0) {
-      //   console.log(this.props.isLogin);
-      //   this.props.dispatch({
-      //     type: "member/logout",
-      //     callback: () => {
-      //       navigateTo("/Login");
-      //     }
-      //   })
-      //   navigateTo("/Login");
     }
     return (
       <div className="contact">

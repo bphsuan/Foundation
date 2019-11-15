@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import Layout from '../components/Layout/Layout';
 import PersonalHeader from "../components/PersonalHeader/PersonalHeader";
 import TabContent from '../components/TabContent/TabContent';
+import Favorite from '../components/Favorite/Favorite'
 import Coupon from "../components/Coupon/Coupon";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -75,6 +76,9 @@ class MyFavorite extends React.Component {
           activeTab={this.state.activeTab}
           onChangeTab={this.onChangeTab.bind(this)}
         />
+        <div style={this.state.activeTab === 1 ? apear : dispear}>
+          <Favorite />
+        </div>
         <div style={this.state.activeTab === 2 ? apear : dispear}>
           <Coupon
             coupons={this.state.coupons}
