@@ -22,7 +22,7 @@ class ShoppingItem extends React.Component {
     const data = localStorage.getItem("product");
     this.setState({
       product: JSON.parse(data)
-    }, () => { })
+    }, () => { console.log(data); })
   }
   minus = () => {
     localStorage.removeItem("product");
@@ -49,7 +49,6 @@ class ShoppingItem extends React.Component {
     this.setState({
       quantity: this.state.quantity + 1,
       disable: false
-    }, () => {
     })
     this.setState(prevState => ({
       product: prevState.product.map(el =>
