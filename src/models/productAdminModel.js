@@ -12,7 +12,7 @@ export default {
       const resMsg = yield call(getAdminProduct);
       callback(resMsg);
     },
-    * AdminGet_product({ payload, callback }, { call }) {
+    * AdminOut_product({ payload, callback }, { call }) {
       const resMsg = yield call(outProduct, payload);
       callback(resMsg);
     },
