@@ -45,7 +45,6 @@ class OrderCheck extends React.Component {
       orderObj.push(data)
     })
     console.log(orderObj);
-
     this.props.dispatch({
       type: "cart/Send_Cart",
       payload: orderObj,
@@ -58,7 +57,7 @@ class OrderCheck extends React.Component {
           })
           navigate("/Login");
         } else {
-          console.log(response);
+          navigate("/Products")
         }
       }
     })
