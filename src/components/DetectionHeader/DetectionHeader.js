@@ -10,7 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 
 class Detection extends React.Component {
   constructor(props) {
@@ -41,15 +41,15 @@ class Detection extends React.Component {
     };
     localStorage.getItem(token);
     if (token.token[1] === "admin") {
-      navigateTo("/");
+      navigate("/");
     } else if (localStorage.length === 0) {
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigateTo("/Login");
+          navigate("/Login");
         }
       })
-      navigateTo("/Login");
+      navigate("/Login");
     }
     const button = {
       margin: "0",

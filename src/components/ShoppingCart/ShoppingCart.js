@@ -3,7 +3,7 @@ import Product from './ShoppingItem';
 import StepNext from '../StepNext/StepNext';
 import './ShoppingCart.scss';
 import { connect } from 'react-redux';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'gatsby';
 
@@ -29,7 +29,7 @@ class ShoppingCart extends React.Component {
           this.props.dispatch({
             type: "member/logout",
           })
-          navigateTo("/Login");
+          navigate("/Login");
         } else {
           this.setState({
             products: response
@@ -51,16 +51,16 @@ class ShoppingCart extends React.Component {
     localStorage.getItem(token);
     if (token.token[1] === "admin") {
       console.log(this.props.isLogin);
-      navigateTo("/");
+      navigate("/");
     } else if (localStorage.length === 0) {
       console.log(this.props.isLogin);
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigateTo("/Login");
+          navigate("/Login");
         }
       })
-      navigateTo("/Login");
+      navigate("/Login");
     }
     return (
       <div className="product-content">

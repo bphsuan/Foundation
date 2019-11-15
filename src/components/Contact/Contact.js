@@ -6,7 +6,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 import contactPic from '../../images/contactus.png';
 import { connect } from 'react-redux';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 
 class Contact extends React.Component {
   constructor(props) {
@@ -70,7 +70,7 @@ class Contact extends React.Component {
       }
     } else if (localStorage.length === 0) {
       alert("您尚未登入!");
-      navigateTo("/Login");
+      navigate("/Login");
     }
 
   }
@@ -80,7 +80,7 @@ class Contact extends React.Component {
     };
     localStorage.getItem(token);
     if (token.token[1] === "admin") {
-      navigateTo("/");
+      navigate("/");
     }
     return (
       <div className="contact">

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 
 class Login extends React.Component {
   constructor(props) {
@@ -21,11 +21,11 @@ class Login extends React.Component {
     this.setState({
       location: window.location.pathname
     }, () => {
-      console.log(this.state.location);
+      // console.log(this.state.location);
     })
     // 登入後阻擋此頁顯示
     if (this.props.isLogin === "user" || this.props.isLogin === "admin") {
-      navigateTo("/");
+      navigate("/");
     }
     this.accountInput.focus(); //載入時focus
   }
@@ -64,10 +64,8 @@ class Login extends React.Component {
         type: "member/login",
         payload: memberObj,
         callback: response => {
-          console.log(response);
           if (response === "登入成功") {
-            console.log(this.props.isLogin);
-            return navigateTo('/')
+            return navigate('/')
           } else {
             alert(response);
           }
@@ -77,9 +75,9 @@ class Login extends React.Component {
   }
   render() {
     if (this.props.isLogin === "user" && this.state.location === "/Login") {
-      navigateTo("/");
+      navigate("/");
     } else if (this.props.isLogin === "admin" && this.state.location === "/Login") {
-      navigateTo("/");
+      navigate("/");
     }
     const eyeDispear = {
       display: "none"

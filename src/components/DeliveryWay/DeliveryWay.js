@@ -5,7 +5,7 @@ import StepPrevious from '../StepPrevious/StepPrevious';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 import { Link } from 'gatsby';
 
 
@@ -69,7 +69,7 @@ class DeliveryWay extends React.Component {
       } else if (this.state.address.length === 0) {
         alert("請輸入收件地址");
       } else {
-        navigateTo("/Order");
+        navigate("/Order");
       }
     } else if (this.state.delivery === "toStore") {
       if (this.state.customerB.length === 0) {
@@ -80,11 +80,11 @@ class DeliveryWay extends React.Component {
         alert("聯絡電話格式錯誤");
       }
       else {
-        navigateTo("/Order");
+        navigate("/Order");
       }
     } else {
       console.log("redirect");
-      navigateTo("/Order");
+      navigate("/Order");
     }
   }
 
@@ -96,16 +96,16 @@ class DeliveryWay extends React.Component {
     localStorage.getItem(token);
     if (token.token[1] === "admin") {
       console.log(this.props.isLogin);
-      navigateTo("/");
+      navigate("/");
     } else if (localStorage.length === 0) {
       console.log(this.props.isLogin);
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigateTo("/Login");
+          navigate("/Login");
         }
       })
-      navigateTo("/Login");
+      navigate("/Login");
     }
     const apear = {
       display: "block"

@@ -11,7 +11,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 import { Link } from 'gatsby';
 
 
@@ -56,7 +56,7 @@ class OrderCheck extends React.Component {
           this.props.dispatch({
             type: "member/logout",
           })
-          navigateTo("/Login");
+          navigate("/Login");
         } else {
           console.log(response);
         }
@@ -73,16 +73,16 @@ class OrderCheck extends React.Component {
     localStorage.getItem(token);
     if (token.token[1] === "admin") {
       console.log(this.props.isLogin);
-      navigateTo("/");
+      navigate("/");
     } else if (localStorage.length === 0) {
       console.log(this.props.isLogin);
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigateTo("/Login");
+          navigate("/Login");
         }
       })
-      navigateTo("/Login");
+      navigate("/Login");
     }
     const button = {
       margin: "0",

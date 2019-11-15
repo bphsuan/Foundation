@@ -2,7 +2,7 @@ import React from 'react';
 import Product from '../Product/Product';
 import './Favorite.scss';
 import { connect } from 'react-redux';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class Favorite extends React.Component {
@@ -19,7 +19,7 @@ class Favorite extends React.Component {
     const permission = JSON.parse(localStorage.getItem("token"));
     if (localStorage.length === 0) {
       alert("您尚未登入!");
-      navigateTo("/Login");
+      navigate("/Login");
     } else if (permission.token[1] === "user") {
       this.props.dispatch({
         type: "product/Get_productsDescByAcc",
@@ -29,7 +29,7 @@ class Favorite extends React.Component {
             this.props.dispatch({
               type: "member/logout",
             })
-            navigateTo("/Login");
+            navigate("/Login");
           } else {
             console.log(response);
             this.setState({
@@ -39,7 +39,7 @@ class Favorite extends React.Component {
         }
       })
     } else if (permission.token[1] === "admin") {
-      navigateTo("/");
+      navigate("/");
     }
   }
   render() {

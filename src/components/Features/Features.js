@@ -5,6 +5,7 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import Title from '../Title/Title';
+
 class News extends React.Component {
   constructor(props) {
     super(props);

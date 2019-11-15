@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { connect } from "react-redux";
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 
 class ProductManagement extends React.Component {
   constructor(props) {
@@ -90,15 +90,15 @@ class ProductManagement extends React.Component {
     };
     localStorage.getItem(token);
     if (token.token[1] === "user") {
-      navigateTo("/");
+      navigate("/");
     } else if (localStorage.length === 0) {
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigateTo("/Login");
+          navigate("/Login");
         }
       })
-      navigateTo("/Login");
+      navigate("/Login");
     }
     return (
       <div>

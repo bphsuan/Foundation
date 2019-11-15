@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import './style.scss';
+
 class ForgetPassword extends React.Component {
   constructor(props) {
     super(props);
