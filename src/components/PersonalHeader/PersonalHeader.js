@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import './PersonalHeader.scss';
 import { connect } from 'react-redux';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 import ModifyHead from '../ModifyHead/ModifyHead';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -28,15 +28,15 @@ class PersonalHeader extends React.Component {
     };
     localStorage.getItem(token);
     if (token.token[1] === "admin") {
-      navigateTo("/");
+      navigate("/");
     } else if (localStorage.length === 0) {
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigateTo("/Login");
+          navigate("/Login");
         }
       })
-      navigateTo("/Login");
+      navigate("/Login");
     }
     return (
       <div className="personal-header">

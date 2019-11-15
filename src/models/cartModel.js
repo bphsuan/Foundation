@@ -8,19 +8,19 @@ export default {
 
   },
   effects: {
-    * Add_Cart({ payload, callback }, { put, call, select }) {
+    * Add_Cart({ payload, callback }, { call }) {
       const resMsg = yield call(addCart, payload);
       callback(resMsg);
     },
-    * GET_Cart({ payload, callback }, { put, call, select }) {
+    * GET_Cart({ callback }, { call }) {
       const resMsg = yield call(getCart);
       callback(resMsg);
     },
-    * Delete_Cart({ payload, callback }, { put, call, select }) {
+    * Delete_Cart({ payload, callback }, { call }) {
       const resMsg = yield call(deleteCart, payload);
       callback(resMsg);
     },
-    * Send_Cart({ payload, coupon, callback }, { put, call, select }) {
+    * Send_Cart({ payload, coupon, callback }, { call }) {
       const resMsg = yield call(sendCart, payload, coupon);
       callback(resMsg);
     }

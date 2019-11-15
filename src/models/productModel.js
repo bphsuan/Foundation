@@ -8,35 +8,35 @@ export default {
 
   },
   effects: {
-    * Add_product({ payload, callback }, { put, call, select }) {
+    * Add_product({ payload, callback }, { call }) {
       const resMsg = yield call(addProduct, payload);
       callback(resMsg);
     },
-    * Get_productsDesc({ payload, callback }, { put, call, select }) {
+    * Get_productsDesc({ callback }, { call }) {
       const resMsg = yield call(getProductsDesc);
       callback(resMsg);
     },
-    * Get_productsDescByAcc({ payload, callback }, { put, call, select }) {
+    * Get_productsDescByAcc({ callback }, { call }) {
       const resMsg = yield call(getProductsDescByAcc);
       callback(resMsg);
     },
-    * Get_productsAsc({ payload, callback }, { put, call, select }) {
+    * Get_productsAsc({ callback }, { call }) {
       const resMsg = yield call(getProductsAsc);
       callback(resMsg);
     },
-    * Get_productsAscByAcc({ payload, callback }, { put, call, select }) {
+    * Get_productsAscByAcc({ callback }, { call }) {
       const resMsg = yield call(getProductsAscByAcc);
       callback(resMsg);
     },
-    * AdminGet_product({ payload, callback }, { put, call, select }) {
+    * AdminGet_product({ callback }, { call }) {
       const resMsg = yield call(getAdminProduct);
       callback(resMsg);
     },
-    * Add_favorite({ payload, callback }, { put, call, select }) {
+    * Add_favorite({ payload, callback }, { call }) {
       const resMsg = yield call(addFavotie, payload);
       callback(resMsg);
     },
-    * Cancel_favorite({ payload, callback }, { put, call, select }) {
+    * Cancel_favorite({ payload, callback }, { call }) {
       const resMsg = yield call(cancelFavotie, payload);
       callback(resMsg);
     },

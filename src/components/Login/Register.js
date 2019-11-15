@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 
 class Register extends React.Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class Register extends React.Component {
     })
     // 登入後阻擋此頁顯示
     if (this.props.isLogin === "user" || this.props.isLogin === "admin") {
-      navigateTo("/");
+      navigate("/");
     }
     this.accountInput.focus(); //載入時focus
   }
@@ -131,7 +131,7 @@ class Register extends React.Component {
           console.log(resMsg);
           if (resMsg === "註冊成功") {
             alert(resMsg);
-            return navigateTo('/Login') //redirect to Login
+            return navigate('/Login') //redirect to Login
 
           } else {
             alert(resMsg);
@@ -142,7 +142,7 @@ class Register extends React.Component {
   }
   render() {
     if (this.props.isLogin === "user" && this.state.location === "/Register") {
-      navigateTo("/");
+      navigate("/");
     }
     const eyeDispear = {
       display: "none"

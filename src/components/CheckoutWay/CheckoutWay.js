@@ -5,7 +5,7 @@ import StepPrevious from '../StepPrevious/StepPrevious';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 import { Link } from 'gatsby';
 
 class CheckoutWay extends React.Component {
@@ -64,7 +64,7 @@ class CheckoutWay extends React.Component {
     } else if (this.state.checkout === "creditCard") {
       alert("請輸入信用卡");
     } else {
-      navigateTo("/Delivery");
+      navigate("/Delivery");
     }
   }
   priceSum = () => {
@@ -88,16 +88,16 @@ class CheckoutWay extends React.Component {
     localStorage.getItem(token);
     if (token.token[1] === "admin") {
       console.log(this.props.isLogin);
-      navigateTo("/");
+      navigate("/");
     } else if (localStorage.length === 0) {
       console.log(this.props.isLogin);
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigateTo("/Login");
+          navigate("/Login");
         }
       })
-      navigateTo("/Login");
+      navigate("/Login");
     }
     return (
 

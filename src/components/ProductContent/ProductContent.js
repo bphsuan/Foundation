@@ -4,7 +4,7 @@ import './ProductContent.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class ProductContent extends React.Component {
@@ -73,7 +73,7 @@ class ProductContent extends React.Component {
             this.props.dispatch({
               type: "member/logout",
             })
-            navigateTo("/Login");
+            navigate("/Login");
           } else {
             this.setState({
               products: response
@@ -82,7 +82,7 @@ class ProductContent extends React.Component {
         }
       })
     } else if (permission.token[1] === "admin") {
-      navigateTo("/");
+      navigate("/");
     }
   }
   getProductAsc = () => {
@@ -105,7 +105,7 @@ class ProductContent extends React.Component {
             this.props.dispatch({
               type: "member/logout",
             })
-            navigateTo("/Login");
+            navigate("/Login");
           } else {
             this.setState({
               products: response
@@ -114,7 +114,7 @@ class ProductContent extends React.Component {
         }
       })
     } else if (permission.token[1] === "admin") {
-      navigateTo("/");
+      navigate("/");
     }
   }
   getProductAfterAction = () => {

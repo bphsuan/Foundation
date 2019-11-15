@@ -3,6 +3,7 @@ import './Footer.scss';
 import Logo from '../../images/background/foundationLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopyright } from '@fortawesome/free-solid-svg-icons';
+
 function Footer(props) {
   return (
     <div className="Footer">

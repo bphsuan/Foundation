@@ -1,7 +1,7 @@
 import React from 'react';
 import './ModifyPersonalInfo.scss';
 import { connect } from "react-redux";
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 
 class ModifyPersonalInfo extends React.Component {
   constructor(props) {
@@ -24,15 +24,15 @@ class ModifyPersonalInfo extends React.Component {
     };
     localStorage.getItem(token);
     if (token.token[1] === "admin") {
-      navigateTo("/");
+      navigate("/");
     } else if (localStorage.length === 0) {
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigateTo("/Login");
+          navigate("/Login");
         }
       })
-      navigateTo("/Login");
+      navigate("/Login");
     } else {
       this.props.dispatch({
         type: "member/GET_userInfo",
@@ -42,7 +42,7 @@ class ModifyPersonalInfo extends React.Component {
             this.props.dispatch({
               type: "member/logout",
             })
-            navigateTo("/Login");
+            navigate("/Login");
           } else {
             this.setState({
               Name: response.Name,
@@ -78,7 +78,7 @@ class ModifyPersonalInfo extends React.Component {
       callback: response => {
         console.log(response);
         if (response === "修改成功") {
-          return navigateTo('/PersonalInfo')
+          return navigate('/PersonalInfo')
         } else {
           alert(response);
         }

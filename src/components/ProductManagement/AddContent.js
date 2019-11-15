@@ -1,7 +1,7 @@
 import React from "react"
 import './ProductManagement.scss'
 import { connect } from "react-redux";
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 
 class AddContent extends React.Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class AddContent extends React.Component {
         console.log(resMsg);
         if (resMsg === "新增成功") {
           alert(resMsg);
-          navigateTo("/ProductManagement")
+          navigate("/ProductManagement")
         } else {
           alert(resMsg);
         }
@@ -87,15 +87,15 @@ class AddContent extends React.Component {
     };
     localStorage.getItem(token);
     if (token.token[1] === "user") {
-      navigateTo("/");
+      navigate("/");
     } else if (localStorage.length === 0) {
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigateTo("/Login");
+          navigate("/Login");
         }
       })
-      navigateTo("/Login");
+      navigate("/Login");
     }
     return (
       <div className="addProduct">

@@ -7,6 +7,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons"
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons"
 import Layout from "../layout/layout"
 import { connect } from "react-redux";
+
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class ProductDetail extends React.Component {
   constructor(props) {

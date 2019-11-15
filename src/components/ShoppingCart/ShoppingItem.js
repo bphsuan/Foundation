@@ -2,7 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
+
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class ShoppingItem extends React.Component {
   constructor(props) {

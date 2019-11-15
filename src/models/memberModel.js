@@ -40,12 +40,11 @@ export default {
         username: payload
       }
     },
-    SET_LoginState(state, { payload }) {
+    SET_LoginState(state, { }) {
       const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
         token: []
       };
       localStorage.getItem(token);
-      // console.log(token.token[1]);
       return {
         ...state,
         token: token.token[0],
@@ -62,11 +61,11 @@ export default {
     }
   },
   effects: {
-    * register({ payload, callback }, { put, call, select }) {
+    * register({ payload, callback }, { call }) {
       const resMsg = yield call(register, payload); //return status
       callback(resMsg)
     },
-    * login({ payload, callback }, { put, call, select }) {
+    * login({ payload, callback }, { put, call }) {
       const resMsg = yield call(login, payload); //return status
       if (resMsg[0].message === "登入成功") {
         yield put({
@@ -79,12 +78,12 @@ export default {
         callback(resMsg[0].message);
       }
     },
-    * logout({ payload, callback }, { put, call, select }) {
+    * logout({ }, { put }) {
       yield put({
         type: "SET_Logout",
       })
     },
-    * GET_userInfo({ payload, callback }, { put, call, select }) {
+    * GET_userInfo({ callback }, { put, call }) {
       const resMsg = yield call(UserInfo);
       callback(resMsg);
       let _username = resMsg.Name;
@@ -93,24 +92,24 @@ export default {
         payload: _username
       })
     },
-    * Send_userInfo({ payload, callback }, { put, call, select }) {
+    * Send_userInfo({ payload, callback }, { call }) {
       const resMsg = yield call(SendUserInfo, payload);
       callback(resMsg);
     },
-    * Maintain_loginState({ payload, callback }, { put, call, select }) {
+    * Maintain_loginState({ }, { put }) {
       yield put({
         type: "SET_LoginState"
       })
     },
-    * modifyPsw({ payload, callback }, { put, call, select }) {
+    * modifyPsw({ payload, callback }, { call }) {
       const resMsg = yield call(modifyPsw, payload); //return status
       callback(resMsg);
     },
-    * uploadUserPic({ payload, callback }, { put, call, select }) {
+    * uploadUserPic({ payload, callback }, { call }) {
       const resMsg = yield call(uploadUserPic, payload);
       callback(resMsg);
     },
-    * GET_UserPic({ payload, callback }, { put, call, select }) {
+    * GET_UserPic({ payload, callback }, { call }) {
       const resMsg = yield call(getUserPic, payload);
       callback(resMsg);
     }
