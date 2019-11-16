@@ -31,15 +31,20 @@ class ShoppingCart extends React.Component {
           })
           navigate("/Login");
         } else {
-          this.setState({
-            products: response
-          })
-          const products_local = [];
-          response.forEach(product => {
-            const data = { "id": product.Product_Id, "Name": product.Name, "Price": product.Cheapest_price, "quantity": 1 }
-            products_local.push(data)
-          })
-          localStorage.setItem("product", JSON.stringify(products_local));
+          if (response.length === 0) {
+            alert("購物車現在空空如也，快手刀去逛逛!!!");
+            navigate("/Products");
+          } else {
+            this.setState({
+              products: response
+            })
+            const products_local = [];
+            response.forEach(product => {
+              const data = { "id": product.Product_Id, "Name": product.Name, "Price": product.Cheapest_price, "quantity": 1 }
+              products_local.push(data)
+            })
+            localStorage.setItem("product", JSON.stringify(products_local));
+          }
         }
       }
     })

@@ -18,9 +18,12 @@ class DeliveryWay extends React.Component {
       delivery: "",
       customerA: "",
       telA: "",
-      address: "",
+      addressA: "",
       customerB: "",
       telB: "",
+      wayB: "",
+      locationB: "",
+      storeB: ""
     }
   }
   deliveryWay = (e) => {
@@ -42,7 +45,7 @@ class DeliveryWay extends React.Component {
   }
   address = (e) => {
     this.setState({
-      address: e.target.value
+      addressA: e.target.value
     })
   }
   customerB = (e) => {
