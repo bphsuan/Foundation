@@ -8,6 +8,10 @@ export default {
 
   },
   effects: {
-
+    * Get_coupon({ callback }, { call }) {
+      const resMsg = yield call(getCoupon); //return status
+      console.log(resMsg);
+      callback(resMsg)
+    },
   }
 }

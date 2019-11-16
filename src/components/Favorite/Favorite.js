@@ -31,7 +31,6 @@ class Favorite extends React.Component {
             })
             navigate("/Login");
           } else {
-            console.log(response);
             this.setState({
               products: response
             })

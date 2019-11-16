@@ -14,7 +14,8 @@ class ProductContent extends React.Component {
       products: [],
       priceAsc: false,
       priceDesc: true,
-      hotSale: false,
+      hotSell: false,
+      keyword: "",
     }
   }
   componentDidMount() {
@@ -25,7 +26,7 @@ class ProductContent extends React.Component {
     this.setState({
       priceAsc: true,
       priceDesc: false,
-      hotSale: false,
+      hotSell: false,
     }, () => { this.onChangeFilter(); })
     this.getProductAsc();
   }
@@ -33,15 +34,15 @@ class ProductContent extends React.Component {
     this.setState({
       priceAsc: false,
       priceDesc: true,
-      hotSale: false,
+      hotSell: false,
     }, () => { this.onChangeFilter(); })
     this.getProductDesc();
   }
-  hotSale() {
+  hotSell() {
     this.setState({
       priceAsc: false,
       priceDesc: false,
-      hotSale: true,
+      hotSell: true,
     }, () => { this.onChangeFilter(); })
   }
   onChangeFilter = () => {
@@ -49,7 +50,7 @@ class ProductContent extends React.Component {
       window.location.hash = "#Asc";
     } else if (this.state.priceDesc === true) {
       window.location.hash = "#Desc";
-    } else if (this.state.hotSale === true) {
+    } else if (this.state.hotSell === true) {
       window.location.hash = "#HotSell"
     }
   }
@@ -117,14 +118,61 @@ class ProductContent extends React.Component {
       navigate("/");
     }
   }
-  getProductAfterAction = () => {
-    const hash = window.location.hash;
-    if (hash === "#Desc") {
-      this.getProductDesc();
-    } else if (hash === "#Asc") {
-      this.getProductAsc();
+  handleOnChange = (e) => {
+    this.setState({
+      keyword: e.target.value
+    })
+  }
+  handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      this.searchProduct();
     }
   }
+  searchProduct = () => {
+    window.location.hash = "#Search";
+    this.setState({
+      priceAsc: false,
+      priceDesc: false,
+      hotSell: false
+    })
+    const permission = JSON.parse(localStorage.getItem("token"));
+    const search = this.state.keyword;
+    console.log(search);
+    if (localStorage.length === 0) {
+      this.props.dispatch({
+        type: "product/Search_products",
+        payload: search,
+        callback: response => {
+          console.log(response);
+          this.setState({
+            products: response
+          })
+        }
+      })
+    } else if (permission.token[1] === "user") {
+      this.props.dispatch({
+        type: "product/Search_productsByAcc",
+        payload: search,
+        callback: response => {
+          if (response.Message === "發生錯誤。") {
+            alert("連線逾時，請重新登入");
+            this.props.dispatch({
+              type: "member/logout",
+            })
+            navigate("/Login");
+          } else {
+            console.log(response);
+            this.setState({
+              products: response
+            })
+          }
+        }
+      })
+    } else if (permission.token[1] === "admin") {
+      navigate("/");
+    }
+  }
+
   render() {
     return (
       <div>
@@ -132,11 +180,14 @@ class ProductContent extends React.Component {
           <div className="product-search">
             <input
               type="text"
-              placeholder="請輸入關鍵字"
+              placeholder="請輸入品牌或名稱關鍵字"
+              onChange={this.handleOnChange.bind(this)}
+              onKeyDown={this.handleKeyDown.bind(this)}
             />
             <span>
               <FontAwesomeIcon
                 icon={faSearch}
+                onClick={this.searchProduct.bind(this)}
               />
             </span>
           </div>
@@ -152,8 +203,8 @@ class ProductContent extends React.Component {
             >價錢低至高
           </a>
             <a
-              onClick={this.hotSale.bind(this)}
-              className={this.state.hotSale ? "active" : ""}
+              onClick={this.hotSell.bind(this)}
+              className={this.state.hotSell ? "active" : ""}
             >熱銷排行
           </a>
           </div>

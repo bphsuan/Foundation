@@ -102,7 +102,9 @@ class OrderCheck extends React.Component {
     }
     return (
       <div className="order-content">
-        <div className="order-list"></div>
+        <div className="order-list">
+          <p className="order-tit">訂單明細</p>
+        </div>
         <Link to="/Delivery">
           <StepPrevious
             previous={this.state.previous}

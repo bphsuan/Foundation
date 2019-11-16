@@ -225,6 +225,7 @@ class MemberManagement extends React.Component {
                 <th>電話</th>
                 <th>地址</th>
                 <th>停權</th>
+                <th>購買紀錄</th>
               </tr>
               {this.state.members.map((member, i) => {
                 return (
@@ -240,8 +241,15 @@ class MemberManagement extends React.Component {
                       <button
                         className="block"
                         id={member.Account}
-                        onClick={member.Permission === 0 ? this.bindPermission.bind(this) : this.unbindPermission.bind(this)}>
-                        {member.Permission === 0 ? "停權" : "啟用"}
+                        onClick={member.Permission === 0 ? this.bindPermission.bind(this) : this.unbindPermission.bind(this)}
+                      >{member.Permission === 0 ? "停權" : "啟用"}
+                      </button>
+                    </th>
+                    <th>
+                      <button
+                        className="block"
+                        id={"history" + member.Account}
+                      >查看
                       </button>
                     </th>
                   </tr>

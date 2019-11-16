@@ -119,7 +119,7 @@ class AddContent extends React.Component {
           <div className="input">
             <span>色票</span><input id="Ticket" type="text" onChange={this.changeItem} />
           </div>
-          <div className="input">
+          <div className="input input2">
             <span>描述</span><textarea id="Descrpition" onChange={this.changeItem} />
           </div>
           <div className="summit-btn">

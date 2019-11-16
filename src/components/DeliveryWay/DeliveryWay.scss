@@ -27,6 +27,16 @@
         margin-right: 0;
       }
     }
+    .delivery-tit {
+      padding: 5px 0;
+      margin: 5px 0;
+      text-align: center;
+      font-size: $fontSize-m;
+      letter-spacing: $letterSpacing-m;
+      font-weight: bold;
+      border-bottom: $borderWidth solid $color-gray;
+      background-color: $color-gray;
+    }
     .sum {
       font-size: $fontSize-l;
       font-weight: bold;
@@ -47,6 +57,16 @@
         width: 96%;
         margin-left: 0;
       }
+    }
+    .delivery-tit {
+      padding: 5px 0;
+      margin: 5px 0;
+      text-align: center;
+      font-size: $fontSize-m;
+      letter-spacing: $letterSpacing-m;
+      font-weight: bold;
+      border-bottom: $borderWidth solid $color-gray;
+      background-color: $color-gray;
     }
     input[type="text"] {
       width: 100%;

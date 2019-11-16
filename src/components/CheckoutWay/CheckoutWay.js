@@ -23,8 +23,6 @@ class CheckoutWay extends React.Component {
   }
   componentDidMount() {
     this.GET_Cart();
-
-    // console.log(quantity);
   }
   GET_Cart = () => {
     const data = JSON.parse(localStorage.getItem("product"));
@@ -103,17 +101,19 @@ class CheckoutWay extends React.Component {
 
       <div className="checkout-content">
         <div className="checkout-list">
+          <p className="checkout-tit">購買清單</p>
           {this.state.products.map((product, i) => {
             return (
-              <p key={i}>{product.Name} ${product.Price} X {product.quantity}</p>
+              <p key={i}>- {product.Name} ${product.Price} X {product.quantity}</p>
             )
           })}
           <br />
-          <p>使用優惠券</p>
+          <p className="checkout-tit">使用優惠券</p>
           <input type="radio" /><span> 生日禮</span>
           <p className="sum">總金額 ${this.state.sum}</p>
         </div>
         <div className="checkout-way">
+          <p className="checkout-tit">選擇付款方式</p>
           <input
             type="radio"
             name="checkoutway"
