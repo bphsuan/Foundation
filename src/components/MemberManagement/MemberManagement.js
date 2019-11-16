@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import '../MemberManagement/MemberManagement.scss';
 import { connect } from 'react-redux';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 
 class MemberManagement extends React.Component {
   constructor(props) {
@@ -71,7 +71,7 @@ class MemberManagement extends React.Component {
           this.props.dispatch({
             type: "member/logout",
           })
-          navigateTo("/Login");
+          navigate("/Login");
         } else {
           this.setState({
             members: response
@@ -89,7 +89,7 @@ class MemberManagement extends React.Component {
           this.props.dispatch({
             type: "member/logout",
           })
-          navigateTo("/Login");
+          navigate("/Login");
         } else {
           this.setState({
             members: response,
@@ -107,7 +107,7 @@ class MemberManagement extends React.Component {
           this.props.dispatch({
             type: "member/logout",
           })
-          navigateTo("/Login");
+          navigate("/Login");
         } else {
           this.setState({
             members: response,
@@ -126,7 +126,7 @@ class MemberManagement extends React.Component {
           this.props.dispatch({
             type: "member/logout",
           })
-          navigateTo("/Login");
+          navigate("/Login");
         } else {
           const hash = window.location.hash;
           if (hash === "#Asc") {
@@ -151,7 +151,7 @@ class MemberManagement extends React.Component {
           this.props.dispatch({
             type: "member/logout",
           })
-          navigateTo("/Login");
+          navigate("/Login");
         } else {
           const hash = window.location.hash;
           if (hash === "#Asc") {
@@ -171,15 +171,15 @@ class MemberManagement extends React.Component {
     localStorage.getItem(token);
     console.log(token.token[1]);
     if (token.token[1] === "user") {
-      navigateTo("/");
+      navigate("/");
     } else if (localStorage.length === 0) {
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigateTo("/Login");
+          navigate("/Login");
         }
       })
-      navigateTo("/Login");
+      navigate("/Login");
     }
     return (
       <div>
@@ -225,6 +225,7 @@ class MemberManagement extends React.Component {
                 <th>電話</th>
                 <th>地址</th>
                 <th>停權</th>
+                <th>購買紀錄</th>
               </tr>
               {this.state.members.map((member, i) => {
                 return (
@@ -240,8 +241,15 @@ class MemberManagement extends React.Component {
                       <button
                         className="block"
                         id={member.Account}
-                        onClick={member.Permission === 0 ? this.bindPermission.bind(this) : this.unbindPermission.bind(this)}>
-                        {member.Permission === 0 ? "停權" : "啟用"}
+                        onClick={member.Permission === 0 ? this.bindPermission.bind(this) : this.unbindPermission.bind(this)}
+                      >{member.Permission === 0 ? "停權" : "啟用"}
+                      </button>
+                    </th>
+                    <th>
+                      <button
+                        className="block"
+                        id={"history" + member.Account}
+                      >查看
                       </button>
                     </th>
                   </tr>

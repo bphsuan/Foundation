@@ -72,6 +72,30 @@ function getProductsAscByAcc() {
   }).then(response => response.json())
 }
 
+function searchProducts(data) {
+  return fetch(productSever + "SearchProduct?search=" + data, {
+    method: "POST",
+    headers: {
+      "Accept": "application/json"
+    },
+  }).then(response => response.json())
+}
+
+function searchProductsByAcc(data) {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productSever + "SearchProByAcc?search=" + data, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+  }).then(response => response.json())
+}
+
 function getAdminProduct() {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
@@ -87,18 +111,38 @@ function getAdminProduct() {
   }).then(response => response.json())
 }
 
-function outProduct() {
+function outProduct(data) {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
   };
   return fetch(productSever + "OutProduct", {
-    method: "GET",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
       "Accept": "application/json",
       "Authorization": "Bearer " + token.token[0]
     },
+    body: JSON.stringify({
+      Product_Id: data
+    })
+  }).then(response => response.json())
+}
+function cancelOutProduct(data) {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productSever + "CancelOutProduct", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+    body: JSON.stringify({
+      Product_Id: data
+    })
   }).then(response => response.json())
 }
 
@@ -144,8 +188,11 @@ export {
   getProductsDescByAcc,
   getProductsAsc,
   getProductsAscByAcc,
+  searchProducts,
+  searchProductsByAcc,
   getAdminProduct,
   outProduct,
+  cancelOutProduct,
   addFavotie,
   cancelFavotie,
 }

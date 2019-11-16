@@ -19,12 +19,6 @@ class MyFavorite extends React.Component {
         { id: 2, name: "我的優惠券", icon: faTicketAlt }
       ]
       , location: ""
-      , coupons: [
-        { id: 1, topic: "生日禮", discount: "100", deadline: "2019/12/31" },
-        { id: 2, topic: "生日禮", discount: "100", deadline: "2019/12/31" },
-        { id: 3, topic: "生日禮", discount: "100", deadline: "2019/12/31" },
-        { id: 4, topic: "生日禮", discount: "100", deadline: "2019/12/31" },
-      ]
     }
   }
   componentDidMount() {
@@ -80,9 +74,7 @@ class MyFavorite extends React.Component {
           <Favorite />
         </div>
         <div style={this.state.activeTab === 2 ? apear : dispear}>
-          <Coupon
-            coupons={this.state.coupons}
-          />
+          <Coupon />
         </div>
       </Layout>
     )

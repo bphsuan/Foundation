@@ -15,5 +15,15 @@
     padding: 20px 5%;
     min-height: 360px;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    .order-tit {
+      padding: 5px 0;
+      margin: 5px 0;
+      text-align: center;
+      font-size: $fontSize-m;
+      letter-spacing: $letterSpacing-m;
+      font-weight: bold;
+      border-bottom: $borderWidth solid $color-gray;
+      background-color: $color-gray;
+    }
   }
 }

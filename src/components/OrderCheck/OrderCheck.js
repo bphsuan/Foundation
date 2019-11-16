@@ -11,7 +11,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 import { Link } from 'gatsby';
 
 
@@ -45,7 +45,6 @@ class OrderCheck extends React.Component {
       orderObj.push(data)
     })
     console.log(orderObj);
-
     this.props.dispatch({
       type: "cart/Send_Cart",
       payload: orderObj,
@@ -56,9 +55,9 @@ class OrderCheck extends React.Component {
           this.props.dispatch({
             type: "member/logout",
           })
-          navigateTo("/Login");
+          navigate("/Login");
         } else {
-          console.log(response);
+          navigate("/Products")
         }
       }
     })
@@ -73,16 +72,16 @@ class OrderCheck extends React.Component {
     localStorage.getItem(token);
     if (token.token[1] === "admin") {
       console.log(this.props.isLogin);
-      navigateTo("/");
+      navigate("/");
     } else if (localStorage.length === 0) {
       console.log(this.props.isLogin);
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigateTo("/Login");
+          navigate("/Login");
         }
       })
-      navigateTo("/Login");
+      navigate("/Login");
     }
     const button = {
       margin: "0",
@@ -103,7 +102,9 @@ class OrderCheck extends React.Component {
     }
     return (
       <div className="order-content">
-        <div className="order-list"></div>
+        <div className="order-list">
+          <p className="order-tit">訂單明細</p>
+        </div>
         <Link to="/Delivery">
           <StepPrevious
             previous={this.state.previous}

@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { navigateTo } from 'gatsby'
+import { navigate } from 'gatsby';
+
 class ModifyPassword extends React.Component {
   constructor(props) {
     super(props);
@@ -54,7 +55,7 @@ class ModifyPassword extends React.Component {
           console.log(resMsg);
           if (resMsg === "修改密碼成功") {
             alert(resMsg);
-            return navigateTo('/PersonalInfo')
+            return navigate('/PersonalInfo')
           } else {
             alert(resMsg);
           }

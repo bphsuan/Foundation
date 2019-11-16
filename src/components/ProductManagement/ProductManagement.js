@@ -1,12 +1,17 @@
 import React from "react"
 import './ProductManagement.scss'
 import { Link } from 'gatsby';
-import DialogBox from './DialogBox';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { connect } from "react-redux";
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 
 class ProductManagement extends React.Component {
   constructor(props) {
@@ -22,6 +27,19 @@ class ProductManagement extends React.Component {
   }
   componentDidMount() {
     this.GetProducts();
+  }
+  handleClickOpen() {
+    this.setState({
+      setOpen: true,
+      open: true
+    })
+  }
+
+  handleClose() {
+    this.setState({
+      setOpen: false,
+      open: false
+    })
   }
   priceAsc() {
     this.setState({
@@ -81,24 +99,75 @@ class ProductManagement extends React.Component {
       }
     })
   }
-  // outFromCurrentProductList = (e) => {
-
-  // }
+  outFromCurrentProductList = (e) => {
+    console.log(e.target.id);
+    this.props.dispatch({
+      type: "productAdmin/AdminOut_product",
+      payload: e.target.id,
+      callback: response => {
+        if (response.Message === "發生錯誤。") {
+          alert("連線逾時，請重新登入");
+          this.props.dispatch({
+            type: "member/logout",
+          })
+          navigate("/Login");
+        } else {
+          alert("已下架此產品");
+          this.GetProducts();
+        }
+      }
+    })
+  }
+  cancelOutFromCurrentProductList = (e) => {
+    this.props.dispatch({
+      type: "productAdmin/AdminCancelOut_product",
+      payload: e.target.id,
+      callback: response => {
+        if (response.Message === "發生錯誤。") {
+          alert("連線逾時，請重新登入");
+          this.props.dispatch({
+            type: "member/logout",
+          })
+          navigate("/Login");
+        } else {
+          alert("已上架此產品");
+          this.GetProducts();
+        }
+      }
+    })
+  }
   render() {
     const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
       token: []
     };
     localStorage.getItem(token);
     if (token.token[1] === "user") {
-      navigateTo("/");
+      navigate("/");
     } else if (localStorage.length === 0) {
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigateTo("/Login");
+          navigate("/Login");
         }
       })
-      navigateTo("/Login");
+      navigate("/Login");
+    }
+    const button = {
+      margin: "0",
+      padding: "0",
+      fontFamily: "sans-serif, 'Microsoft JhengHei', '微軟正黑體'",
+      width: "100px",
+      height: "40px",
+      margin: "20px auto",
+      backgroundColor: "#343434",
+      color: "#fff",
+      fontSize: "18px",
+      display: "block",
+      textAlign: "center",
+      lineHeight: "40px",
+      transition: "all 0.5s",
+      letterSpacing: "3px",
+      borderRadius: "0"
     }
     return (
       <div>
@@ -134,7 +203,14 @@ class ProductManagement extends React.Component {
         </div>
         <div className="product-management">
           <div className="top-tool">
-            <Link to="/addProduct" className="p-button square-size" onClick={this.setAddButton.bind(this)} ><FontAwesomeIcon icon={faPlus} /></Link>
+            <Link
+              to="/addProduct"
+              className="p-button square-size"
+              onClick={this.setAddButton.bind(this)}
+              title="新增產品"
+            >
+              <FontAwesomeIcon icon={faPlus} />
+            </Link>
           </div>
           <table className="product-data">
             <tbody>
@@ -163,14 +239,18 @@ class ProductManagement extends React.Component {
                       <a
                         id={product.Product_Id}
                         className="p-button b-size"
-                      // onClick={this.outFromCurrentProductList.bind(this)}
-                      >下架
-                    </a>
+                        onClick={
+                          product.IsOut === 0
+                            ? this.outFromCurrentProductList.bind(this)
+                            : this.cancelOutFromCurrentProductList.bind(this)
+                        }
+                      >{product.IsOut === 0 ? "下架" : "上架"}
+                      </a>
                     </td>
                     <td>
                       <a
                         className="p-button b-size"
-                        onClick={this.setDeleteButton}
+                        onClick={this.handleClickOpen.bind(this)}
                       >刪除
                     </a>
                     </td>
@@ -181,6 +261,34 @@ class ProductManagement extends React.Component {
             </tbody>
           </table>
         </div>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose.bind(this)}
+          aria-labelledby="form-dialog-title" >
+          <DialogTitle
+            id="form-dialog-title">
+            確定刪除？
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              <div className="DialogContent">
+                刪除即無法復原。
+              </div>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={this.handleClose.bind(this)}
+              style={button}>
+              取消
+            </Button>
+            <Button
+              // onClick={this.submitOrder.bind(this)}
+              style={button}>
+              送出
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     )
   }

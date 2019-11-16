@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import { navigateTo } from 'gatsby';
+
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class ShoppingItem extends React.Component {
   constructor(props) {
@@ -44,12 +44,14 @@ class ShoppingItem extends React.Component {
     }
   }
   plus = () => {
+    this.setData();
     localStorage.removeItem("product");
     this.setState({
       quantity: this.state.quantity + 1,
       disable: false
     }, () => {
     })
+    console.log(this.state.product);
     this.setState(prevState => ({
       product: prevState.product.map(el =>
         el.id === this.props.id ? { ...el, quantity: this.state.quantity + 1 } : el,

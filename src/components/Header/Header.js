@@ -10,7 +10,7 @@ import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 
 class Header extends React.Component {
   constructor(props) {
@@ -49,24 +49,24 @@ class Header extends React.Component {
   toShoppingCart = () => {
     if (this.props.isLogin !== "user") {
       alert("您尚未登入!");
-      navigateTo("/Login");
+      navigate("/Login");
     } else {
-      navigateTo("/ShoppingCart");
+      navigate("/ShoppingCart");
     }
   }
   toDetection = () => {
     if (this.props.isLogin !== "user") {
       alert("您尚未登入!");
-      navigateTo("/Login");
+      navigate("/Login");
     } else {
-      navigateTo("/Detection");
+      navigate("/Detection");
     }
   }
   logout = () => {
     this.props.dispatch({
       type: "member/logout",
       callback: () => {
-        return navigateTo('/') //redirect to homepage
+        return navigate('/') //redirect to homepage
       }
     })
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import './AboutTeam.scss';
 import picture from '../../images/pic01.png';
 import Title from '../Title/Title';
+
 class AboutTeam extends React.Component {
   constructor(props) {
     super(props);

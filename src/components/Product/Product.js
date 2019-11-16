@@ -4,7 +4,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'gatsby'
 import { connect } from "react-redux";
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 
 class Product extends React.Component {
   constructor(props) {
@@ -15,41 +15,52 @@ class Product extends React.Component {
 
   addCart = () => {
     const id = this.props.id;
-    this.props.dispatch({
-      type: "cart/Add_Cart",
-      payload: id,
-      callback: response => {
-        if (response.Message === "發生錯誤。") {
-          alert("連線逾時，請重新登入");
-          this.props.dispatch({
-            type: "member/logout",
-          })
-          navigateTo("/Login");
-        } else {
-          alert(response);
+    const permission = JSON.parse(localStorage.getItem("token"));
+    if (localStorage.length === 0) {
+      alert("您尚未登入!");
+      navigate("/Login");
+    } else if (permission.token[1] === "user") {
+      this.props.dispatch({
+        type: "cart/Add_Cart",
+        payload: id,
+        callback: response => {
+          if (response.Message === "發生錯誤。") {
+            alert("連線逾時，請重新登入");
+            this.props.dispatch({
+              type: "member/logout",
+            })
+            navigate("/Login");
+          } else {
+            alert(response);
+          }
         }
-      }
-    })
+      })
+    }
   }
   addFavorite = () => {
     const id = this.props.id
-    this.props.dispatch({
-      type: "product/Add_favorite",
-      payload: id,
-      callback: response => {
-        if (response.Message === "發生錯誤。") {
-          alert("連線逾時，請重新登入");
-          this.props.dispatch({
-            type: "member/logout",
-          })
-          navigateTo("/Login");
-        } else {
-          alert(response);
-          window.location.reload();
+    const permission = JSON.parse(localStorage.getItem("token"));
+    if (localStorage.length === 0) {
+      alert("您尚未登入!");
+      navigate("/Login");
+    } else if (permission.token[1] === "user") {
+      this.props.dispatch({
+        type: "product/Add_favorite",
+        payload: id,
+        callback: response => {
+          if (response.Message === "發生錯誤。") {
+            alert("連線逾時，請重新登入");
+            this.props.dispatch({
+              type: "member/logout",
+            })
+            navigate("/Login");
+          } else {
+            alert(response);
+            window.location.reload();
+          }
         }
-      }
-    })
-
+      })
+    }
   }
   cancelFavorite = () => {
     const id = this.props.id
@@ -62,7 +73,7 @@ class Product extends React.Component {
           this.props.dispatch({
             type: "member/logout",
           })
-          navigateTo("/Login");
+          navigate("/Login");
         } else {
           alert(response);
           window.location.reload();

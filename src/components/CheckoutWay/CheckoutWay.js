@@ -5,7 +5,7 @@ import StepPrevious from '../StepPrevious/StepPrevious';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import { navigateTo } from 'gatsby';
+import { navigate } from 'gatsby';
 import { Link } from 'gatsby';
 
 class CheckoutWay extends React.Component {
@@ -23,8 +23,6 @@ class CheckoutWay extends React.Component {
   }
   componentDidMount() {
     this.GET_Cart();
-
-    // console.log(quantity);
   }
   GET_Cart = () => {
     const data = JSON.parse(localStorage.getItem("product"));
@@ -64,7 +62,7 @@ class CheckoutWay extends React.Component {
     } else if (this.state.checkout === "creditCard") {
       alert("請輸入信用卡");
     } else {
-      navigateTo("/Delivery");
+      navigate("/Delivery");
     }
   }
   priceSum = () => {
@@ -88,32 +86,34 @@ class CheckoutWay extends React.Component {
     localStorage.getItem(token);
     if (token.token[1] === "admin") {
       console.log(this.props.isLogin);
-      navigateTo("/");
+      navigate("/");
     } else if (localStorage.length === 0) {
       console.log(this.props.isLogin);
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigateTo("/Login");
+          navigate("/Login");
         }
       })
-      navigateTo("/Login");
+      navigate("/Login");
     }
     return (
 
       <div className="checkout-content">
         <div className="checkout-list">
+          <p className="checkout-tit">購買清單</p>
           {this.state.products.map((product, i) => {
             return (
-              <p key={i}>{product.Name} ${product.Price} X {product.quantity}</p>
+              <p key={i}>- {product.Name} ${product.Price} X {product.quantity}</p>
             )
           })}
           <br />
-          <p>使用優惠券</p>
+          <p className="checkout-tit">使用優惠券</p>
           <input type="radio" /><span> 生日禮</span>
           <p className="sum">總金額 ${this.state.sum}</p>
         </div>
         <div className="checkout-way">
+          <p className="checkout-tit">選擇付款方式</p>
           <input
             type="radio"
             name="checkoutway"
