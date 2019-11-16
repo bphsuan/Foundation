@@ -24,6 +24,16 @@
         margin-right: 0;
       }
     }
+    .checkout-tit {
+      padding: 5px 0;
+      margin: 5px 0;
+      text-align: center;
+      font-size: $fontSize-m;
+      letter-spacing: $letterSpacing-m;
+      font-weight: bold;
+      border-bottom: $borderWidth solid $color-gray;
+      background-color: $color-gray;
+    }
     .sum {
       font-size: $fontSize-l;
       font-weight: bold;
@@ -44,6 +54,16 @@
         width: 96%;
         margin-left: 0;
       }
+    }
+    .checkout-tit {
+      padding: 5px 0;
+      margin: 5px 0;
+      text-align: center;
+      font-size: $fontSize-m;
+      letter-spacing: $letterSpacing-m;
+      font-weight: bold;
+      border-bottom: $borderWidth solid $color-gray;
+      background-color: $color-gray;
     }
     input[type="radio"] {
       margin-right: 5px;

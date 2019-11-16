@@ -1,4 +1,4 @@
-import { addProduct, getProductsDesc, getProductsDescByAcc, getProductsAsc, getProductsAscByAcc, getAdminProduct, addFavotie, cancelFavotie } from '../services/productService'
+import { addProduct, getProductsDesc, getProductsDescByAcc, getProductsAsc, getProductsAscByAcc, searchProducts, searchProductsByAcc, getAdminProduct, addFavotie, cancelFavotie } from '../services/productService'
 export default {
   namespace: "product",
   state: {
@@ -26,6 +26,14 @@ export default {
     },
     * Get_productsAscByAcc({ callback }, { call }) {
       const resMsg = yield call(getProductsAscByAcc);
+      callback(resMsg);
+    },
+    * Search_products({ payload, callback }, { call }) {
+      const resMsg = yield call(searchProducts, payload);
+      callback(resMsg);
+    },
+    * Search_productsByAcc({ payload, callback }, { call }) {
+      const resMsg = yield call(searchProductsByAcc, payload);
       callback(resMsg);
     },
     * AdminGet_product({ callback }, { call }) {

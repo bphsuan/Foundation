@@ -116,6 +116,7 @@ class DeliveryWay extends React.Component {
     return (
       <div className="delivery-content">
         <div className="delivery-way">
+          <p className="delivery-tit">選擇配送方式</p>
           <input
             type="radio"
             name="deliveryway"
@@ -133,6 +134,7 @@ class DeliveryWay extends React.Component {
           <span> 便利商店取貨</span>
         </div>
         <div className="delivery-list">
+          <p className="delivery-tit">填寫配送資料</p>
           <p
             style={this.state.delivery === "toHome" || this.state.delivery === "toStore" ? dispear : apear}>
             請先選擇配送方式

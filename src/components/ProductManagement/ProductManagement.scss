@@ -136,38 +136,82 @@
 }
 .addProduct {
   width: 100%;
-  padding-top: 1rem;
+  padding: 40px 0;
+  color: $color-black;
+  font-size: $fontSize-m;
   h2 {
+    margin: 10px 0;
     text-align: center;
-    color: $color-black;
     letter-spacing: $letterSpacing-l;
+    font-size: $fontSize-l;
   }
   .addContent {
-    @include pad {
-      width: 90%;
-    }
     width: 40%;
     margin: 0 auto;
-    padding-top: 1rem;
+    @include laptop {
+      & {
+        width: 50%;
+      }
+    }
+    @include pad {
+      & {
+        width: 65%;
+      }
+    }
+    @include mobile {
+      & {
+        width: 85%;
+      }
+    }
+    @include min-mobile {
+      & {
+        width: 95%;
+      }
+    }
     .input {
-      padding: 0.5rem;
+      height: 30px;
+      padding: 10px 0;
+      line-height: 30px;
       display: flex;
-      margin: 15px 5%;
+      letter-spacing: $letterSpacing-m;
       span {
-        font-weight: 600;
-        letter-spacing: $letterSpacing-l;
+        width: 25%;
+        font-weight: bold;
+        @include mobile {
+          & {
+            width: 35%;
+          }
+        }
       }
       input {
-        height: 20px;
         width: 75%;
+        height: 100%;
+        font-size: $fontSize-m;
         &:focus {
           outline-color: $color-main;
         }
+        @include mobile {
+          & {
+            width: 65%;
+          }
+        }
       }
+    }
+    .input2 {
+      height: auto;
       textarea {
         width: 75%;
-        min-height: 180px;
+        height: 100%;
+        min-height: 120px;
         resize: vertical;
+        &:focus {
+          outline-color: $color-main;
+        }
+        @include mobile {
+          & {
+            width: 65%;
+          }
+        }
       }
     }
     .summit-btn {
