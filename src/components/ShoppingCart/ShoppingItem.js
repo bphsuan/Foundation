@@ -21,17 +21,10 @@ class ShoppingItem extends React.Component {
     const data = localStorage.getItem("product");
     this.setState({
       product: JSON.parse(data)
-    }, () => {
-      console.log(this.state.product);
-    })
+    }, () => { })
   }
   minus = () => {
-    // const data = localStorage.getItem("product");
-    // this.setState({
-    //   product: JSON.parse(data)
-    // }, () => {
-    //   console.log(this.state.product);
-    // })
+    localStorage.removeItem("product");
     if (this.state.quantity === 1) {
       this.setState({
         disable: true
@@ -46,25 +39,24 @@ class ShoppingItem extends React.Component {
           el.id === this.props.id ? { ...el, quantity: this.state.quantity - 1 } : el,
         ),
       }), () => {
-        console.log(this.state.product);
+        localStorage.setItem("product", JSON.stringify(this.state.product));
       });
-
-      localStorage.setItem("product", JSON.stringify(this.state.product));
     }
   }
   plus = () => {
+    localStorage.removeItem("product");
     this.setState({
       quantity: this.state.quantity + 1,
       disable: false
+    }, () => {
     })
     this.setState(prevState => ({
       product: prevState.product.map(el =>
         el.id === this.props.id ? { ...el, quantity: this.state.quantity + 1 } : el,
       ),
     }), () => {
-      console.log(this.state.product);
+      localStorage.setItem("product", JSON.stringify(this.state.product));
     });
-    localStorage.setItem("product", JSON.stringify(this.state.product));
   }
   deleteItem = () => {
     const id = this.props.id;

@@ -17,23 +17,22 @@ class CheckoutWay extends React.Component {
       checkout: "",
       isCreditCard: true,
       card: "",
-      products: []
+      products: [],
+      sum: 0
     }
   }
   componentDidMount() {
-    this.GET_Cart()
-    const quantity = JSON.parse(localStorage.getItem("product1"))
+    this.GET_Cart();
+
     // console.log(quantity);
   }
   GET_Cart = () => {
-    this.props.dispatch({
-      type: "cart/GET_Cart",
-      callback: response => {
-        this.setState({
-          products: response
-        })
-        console.log(this.state.products);
-      }
+    const data = JSON.parse(localStorage.getItem("product"));
+    this.setState({
+      products: data
+    }, () => {
+      console.log("hi" + this.state.products);
+      this.priceSum();
     })
   }
   checkoutWay = (e) => {
@@ -68,6 +67,20 @@ class CheckoutWay extends React.Component {
       navigateTo("/Delivery");
     }
   }
+  priceSum = () => {
+    let sum = 0;
+    console.log(this.state.products);
+    this.state.products.forEach(product => {
+      sum += product.Price * product.quantity
+    })
+    localStorage.setItem("sum", JSON.stringify(sum));
+    this.setState({
+      sum: sum
+    }, () => {
+      console.log(this.state.sum);
+    })
+
+  }
   render() {
     const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
       token: []
@@ -87,14 +100,18 @@ class CheckoutWay extends React.Component {
       navigateTo("/Login");
     }
     return (
+
       <div className="checkout-content">
         <div className="checkout-list">
           {this.state.products.map((product, i) => {
             return (
-              <p key={i}>{product.Name}</p>
+              <p key={i}>{product.Name} ${product.Price} X {product.quantity}</p>
             )
           })}
-          <p className="sum">total</p>
+          <br />
+          <p>使用優惠券</p>
+          <input type="radio" /><span> 生日禮</span>
+          <p className="sum">總金額 ${this.state.sum}</p>
         </div>
         <div className="checkout-way">
           <input

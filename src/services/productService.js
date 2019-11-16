@@ -24,11 +24,50 @@ function addProduct(data) {
   }).then(response => response.json())
 }
 
-function getProduct() {
+function getProductsDesc() {
+  return fetch(productSever + "GetProductsDesc", {
+    method: "GET",
+    headers: {
+      "Accept": "application/json"
+    },
+  }).then(response => response.json())
+}
+
+function getProductsDescByAcc() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productSever + "GetProductsDescByAcc", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+  }).then(response => response.json())
+}
+
+function getProductsAsc() {
   return fetch(productSever + "GetProducts", {
     method: "GET",
     headers: {
       "Accept": "application/json"
+    },
+  }).then(response => response.json())
+}
+
+function getProductsAscByAcc() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productSever + "GetProductsByAcc", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
     },
   }).then(response => response.json())
 }
@@ -47,16 +86,66 @@ function getAdminProduct() {
     },
   }).then(response => response.json())
 }
-function addFavorite(data) {
+
+function outProduct() {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
   };
-  return fetch(productAdminSever + "AddFavorite", {
-    method: "POST",
+  return fetch(productSever + "OutProduct", {
+    method: "GET",
     headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
       "Authorization": "Bearer " + token.token[0]
     },
-    body: data
   }).then(response => response.json())
 }
-export { addProduct, getProduct, getAdminProduct, addFavorite }
+
+function addFavotie(data) {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productSever + "AddFavorite", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+    body: JSON.stringify({
+      Product_Id: data
+    })
+  }).then(response => response.json())
+}
+
+function cancelFavotie(data) {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productSever + "CancelFavorite", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+    body: JSON.stringify({
+      Product_Id: data
+    })
+  }).then(response => response.json())
+}
+
+export {
+  addProduct,
+  getProductsDesc,
+  getProductsDescByAcc,
+  getProductsAsc,
+  getProductsAscByAcc,
+  getAdminProduct,
+  outProduct,
+  addFavotie,
+  cancelFavotie,
+}

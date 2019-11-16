@@ -23,16 +23,24 @@ class ShoppingCart extends React.Component {
     this.props.dispatch({
       type: "cart/GET_Cart",
       callback: response => {
-        this.setState({
-          products: response
-        })
-        console.log(this.state.products);
-        const products_local = [];
-        response.forEach(product => {
-          const data = { "id": product.Product_Id, "quantity": 1 }
-          products_local.push(data)
-        })
-        localStorage.setItem("product", JSON.stringify(products_local));
+        if (response.Message === "發生錯誤。") {
+          console.log("happen");
+          alert("連線逾時，請重新登入");
+          this.props.dispatch({
+            type: "member/logout",
+          })
+          navigateTo("/Login");
+        } else {
+          this.setState({
+            products: response
+          })
+          const products_local = [];
+          response.forEach(product => {
+            const data = { "id": product.Product_Id, "Name": product.Name, "Price": product.Cheapest_price, "quantity": 1 }
+            products_local.push(data)
+          })
+          localStorage.setItem("product", JSON.stringify(products_local));
+        }
       }
     })
   }
