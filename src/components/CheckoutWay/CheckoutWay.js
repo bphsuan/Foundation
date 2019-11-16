@@ -18,6 +18,7 @@ class CheckoutWay extends React.Component {
       isCreditCard: true,
       card: "",
       products: [],
+      coupons: [],
       sum: 0
     }
   }
@@ -29,11 +30,12 @@ class CheckoutWay extends React.Component {
     this.setState({
       products: data
     }, () => {
-      console.log("hi" + this.state.products);
       this.priceSum();
     })
+    this.getCoupon();
   }
   checkoutWay = (e) => {
+    localStorage.removeItem("checkout");
     this.setState({
       checkout: e.target.value,
     }, () => {  //setState異步
@@ -47,6 +49,7 @@ class CheckoutWay extends React.Component {
         })
       }
     })
+    localStorage.setItem("checkout", JSON.stringify(e.target.value));
   }
   card = (e) => {
     this.setState({
@@ -58,12 +61,47 @@ class CheckoutWay extends React.Component {
   checkoutisEmpty = () => {
     if (this.state.checkout === "") {
       alert("請選擇付款方式");
-      console.log("1");
     } else if (this.state.checkout === "creditCard") {
       alert("請輸入信用卡");
     } else {
       navigate("/Delivery");
     }
+  }
+  getCoupon = () => {
+    this.props.dispatch({
+      type: "coupon/Get_coupon",
+      callback: response => {
+        if (response.Message === "發生錯誤。") {
+          alert("連線逾時，請重新登入");
+          this.props.dispatch({
+            type: "member/logout",
+          })
+          navigate("/Login");
+        } else {
+          console.log(response);
+          this.setState({
+            coupons: response
+          })
+        }
+      }
+    })
+  }
+  chooseCoupon = (e) => {
+    const coupon = Number(e.target.value);
+    const couponId = e.target.id;
+    this.setState({
+      sum: 0
+    })
+    this.priceSum();
+    localStorage.removeItem("sum");
+    localStorage.removeItem("coupon");
+    setTimeout(() => {
+      this.setState({
+        sum: this.state.sum - coupon
+      })
+      localStorage.setItem("sum", JSON.stringify(this.state.sum));
+      localStorage.setItem("coupon", JSON.stringify(couponId));
+    }, 500);
   }
   priceSum = () => {
     let sum = 0;
@@ -74,10 +112,7 @@ class CheckoutWay extends React.Component {
     localStorage.setItem("sum", JSON.stringify(sum));
     this.setState({
       sum: sum
-    }, () => {
-      console.log(this.state.sum);
     })
-
   }
   render() {
     const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
@@ -109,7 +144,29 @@ class CheckoutWay extends React.Component {
           })}
           <br />
           <p className="checkout-tit">使用優惠券</p>
-          <input type="radio" /><span> 生日禮</span>
+          <input
+            type="radio"
+            name="coupon"
+            id="-1"
+            value="0"
+            onChange={this.chooseCoupon.bind(this)}
+          /><span> 無</span><br />
+          {this.state.coupons.map((coupon) => {
+            return (
+              <div>
+                <input
+                  type="radio"
+                  name="coupon"
+                  id={coupon.CouponRecord_Id}
+                  value={coupon.Coupon_price}
+                  onChange={this.chooseCoupon.bind(this)}
+                />
+                <span> {coupon.Name}</span><br />
+              </div>
+            )
+          }
+          )}
+
           <p className="sum">總金額 ${this.state.sum}</p>
         </div>
         <div className="checkout-way">

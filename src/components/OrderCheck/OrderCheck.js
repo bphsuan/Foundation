@@ -62,19 +62,32 @@ class OrderCheck extends React.Component {
       }
     })
     this.handleClose();
-
+    this.removeCart();
   }
-
+  removeCart = () => {
+    this.props.dispatch({
+      type: "cart/Remove_Cart",
+      callback: response => {
+        if (response.Message === "發生錯誤。") {
+          alert("連線逾時，請重新登入");
+          this.props.dispatch({
+            type: "member/logout",
+          })
+          navigate("/Login");
+        } else {
+          console.log(response);
+        }
+      }
+    })
+  }
   render() {
     const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
       token: []
     };
     localStorage.getItem(token);
     if (token.token[1] === "admin") {
-      console.log(this.props.isLogin);
       navigate("/");
     } else if (localStorage.length === 0) {
-      console.log(this.props.isLogin);
       this.props.dispatch({
         type: "member/logout",
         callback: () => {

@@ -1,4 +1,4 @@
-import { addCart, getCart, deleteCart, sendCart } from '../services/cartService';
+import { addCart, getCart, deleteCart, sendCart, removeCart } from '../services/cartService';
 export default {
   namespace: "cart",
   state: {
@@ -23,6 +23,10 @@ export default {
     * Send_Cart({ payload, coupon, callback }, { call }) {
       const resMsg = yield call(sendCart, payload, coupon);
       callback(resMsg);
-    }
+    },
+    * Remove_Cart({ callback }, { call }) {
+      const resMsg = yield call(removeCart);
+      callback(resMsg);
+    },
   }
 }

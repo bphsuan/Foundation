@@ -31,7 +31,6 @@ function getCart() {
 }
 
 function deleteCart(data) {
-  console.log(data);
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
   };
@@ -47,8 +46,6 @@ function deleteCart(data) {
   }).then(response => response.json())
 }
 function sendCart(data, coupon) {
-  console.log(data);
-  console.log(coupon);
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
   };
@@ -64,4 +61,16 @@ function sendCart(data, coupon) {
     })
   }).then(response => response.json())
 }
-export { addCart, getCart, deleteCart, sendCart }
+function removeCart() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(cartSever + "DeleteCart", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+  }).then(response => response.json())
+}
+export { addCart, getCart, deleteCart, sendCart, removeCart, }
