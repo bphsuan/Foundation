@@ -181,6 +181,23 @@ function cancelFavotie(data) {
     })
   }).then(response => response.json())
 }
+function deleteProduct(data) {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productSever + "DeleteProduct", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+    body: JSON.stringify({
+      Product_Id: data
+    })
+  }).then(response => response.json())
+}
 
 export {
   addProduct,
@@ -195,4 +212,5 @@ export {
   cancelOutProduct,
   addFavotie,
   cancelFavotie,
+  deleteProduct
 }

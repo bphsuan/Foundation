@@ -9,41 +9,15 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import EditContent from './EditContent';
 
 class DialogBox extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         button: 'none',
-    //         title: '修改商品',
-    //         save: '儲存'
-    //     }
-    // }
+    constructor(props) {
+        super(props);
+    }
 
     handleClose = () => {
         //取得父元件的function
         this.props.onClose();
     }
-    // setData = () => {
-    //     return this.setState({
-    //         title: '修改商品',
-    //         button: 'edit'
-    //     })
 
-    // }
-    // setDelData = () => {
-    //     return this.setState({
-    //         title: '刪除商品',
-    //         button: 'delete'
-
-    //     })
-
-    // }
-    // setAddData = () => {
-    //     return this.setState({
-    //         title: '新增商品',
-    //         button: 'add',
-    //     })
-
-    // }
     render() {
         const button = {
             margin: "0",
@@ -65,38 +39,12 @@ class DialogBox extends React.Component {
         const title = {
             margin: "0 auto",
         }
-
-        //判斷是刪除還是修改按鈕來切換對話窗內容
-       
-        // if (this.props.button === 'edit'){
-        //     this.setData
-
-        // if (this.props.button === 'edit') {
-        //     dialogContent = <EditContent />
-        //      this.setData
-        // }
-
-        // switch (this.props.button) {
-        //     case 'edit':
-        //         { this.setData }
-        //         dialogContent = <EditContent />
-        //         break;
-        //     case 'delete':
-        //         { this.setDelData }
-
-        //         break;
-        //     case 'add':
-        //         { this.setAddData }
-        //         dialogContent = <AddContent />
-        //         break;
-        //     default: ;
-        // }
         let dialogContent;
         this.props.button === 'edit' ? dialogContent = <EditContent /> : dialogContent = undefined;
 
         return (
             <Dialog open={this.props.open} onClose={this.handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description"  >
-                <DialogTitle style={title}>{this.props.button === 'edit' ?"修改商品":"確認刪除？"}</DialogTitle>
+                <DialogTitle style={title}>{this.props.button === 'edit' ? "修改商品" : "確認刪除？"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         <div className="DialogContent">
@@ -106,7 +54,7 @@ class DialogBox extends React.Component {
                 </DialogContent>
                 <DialogActions>
                     <Button style={button} onClick={this.handleClose} color="primary"> 取消 </Button>
-                    <Button style={button} onClick={this.handleClose} color="primary"> {this.props.button === 'edit' ?"儲存":"刪除"} </Button>
+                    <Button style={button} onClick={this.handleClose} color="primary"> {this.props.button === 'edit' ? "儲存" : "刪除"} </Button>
                 </DialogActions>
             </Dialog >
         )

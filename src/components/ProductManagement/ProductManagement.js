@@ -23,22 +23,38 @@ class ProductManagement extends React.Component {
       priceAsc: false,
       priceDesc: true,
       hotSale: false,
+      deleteId: ""
     }
   }
   componentDidMount() {
     this.GetProducts();
   }
-  handleClickOpen() {
+  handleClickOpen(e) {
     this.setState({
       setOpen: true,
-      open: true
+      open: true,
+      deleteId: e.target.id,
     })
   }
-
+  submitOrder() {
+    this.props.dispatch({
+      type: "productAdmin/AdminDelete_product",
+      payload: this.state.deleteId,
+      callback: response => {
+        console.log(response);
+      }
+    })
+    this.setState({
+      setOpen: false,
+      open: false,
+      deleteId: "",
+    })
+    window.location.reload();
+  }
   handleClose() {
     this.setState({
       setOpen: false,
-      open: false
+      open: false,
     })
   }
   priceAsc() {
@@ -227,7 +243,7 @@ class ProductManagement extends React.Component {
               </tr>
               {this.state.products.map((product, i) => {
                 return (
-                  <tr id={product.Product_Id}>
+                  <tr key={i} id={product.Product_Id}>
                     <td>{i + 1}</td>
                     <td>{product.Brand}</td>
                     <td>{product.Name}</td>
@@ -249,6 +265,7 @@ class ProductManagement extends React.Component {
                     </td>
                     <td>
                       <a
+                        id={product.Product_Id}
                         className="p-button b-size"
                         onClick={this.handleClickOpen.bind(this)}
                       >刪除
@@ -283,7 +300,7 @@ class ProductManagement extends React.Component {
               取消
             </Button>
             <Button
-              // onClick={this.submitOrder.bind(this)}
+              onClick={this.submitOrder.bind(this)}
               style={button}>
               送出
             </Button>
