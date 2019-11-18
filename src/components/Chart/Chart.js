@@ -35,7 +35,7 @@ const cols2 = {
 };
 
 // dv.source(this.state.memberGenderData).transform({
-const dv = new DataView();
+
 
 class Chartpie extends React.Component {
   constructor(props) {
@@ -49,17 +49,12 @@ class Chartpie extends React.Component {
   componentDidMount() {
     this.GET_brandhistory();
     this.GET_memberGender();
-    this.gender();
+    // this.gender();
   }
-  gender = () => {
+  // gender = () => {
 
-    dv.source(this.state.memberGenderData).transform({
-      type: "percent",
-      field: "count",
-      dimension: "item",
-      as: "percent"
-    });
-  }
+
+  // }
   GET_brandhistory = () => {
     this.props.dispatch({
       type: "chart/Get_brandHistory",
@@ -87,6 +82,13 @@ class Chartpie extends React.Component {
   }
 
   render() {
+    const dv = new DataView();
+    dv.source(this.state.memberGenderData).transform({
+      type: "percent",
+      field: "count",
+      dimension: "item",
+      as: "percent"
+    });
     return (
       <div className="hot-content">
         <div id="mountNode">
