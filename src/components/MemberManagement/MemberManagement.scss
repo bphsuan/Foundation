@@ -151,11 +151,6 @@
     border-collapse: collapse;
     word-break: break-all;
     tr {
-      &:hover > td {
-        transition: $transition;
-        cursor: pointer;
-        color: #777;
-      }
       td,
       th {
         // width: 110px;
@@ -187,3 +182,4 @@
     }
   }
 }
+
