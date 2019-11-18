@@ -1,4 +1,4 @@
-import { getAdminProduct, outProduct, cancelOutProduct, deleteProduct } from '../services/productService'
+import { getAdminProduct, outProduct, cancelOutProduct, deleteProduct, getProductsDescForAdmin, getProductsForAdmin, getProductsHotForAdmin } from '../services/productService'
 export default {
   namespace: "productAdmin",
   state: {
@@ -22,6 +22,18 @@ export default {
     },
     * AdminDelete_product({ payload, callback }, { call }) {
       const resMsg = yield call(deleteProduct, payload);
+      callback(resMsg);
+    },
+    * Get_ProductsDescForAdmin({ callback }, { call }) {
+      const resMsg = yield call(getProductsDescForAdmin);
+      callback(resMsg);
+    },
+    * Get_ProductsForAdmin({ callback }, { call }) {
+      const resMsg = yield call(getProductsForAdmin);
+      callback(resMsg);
+    },
+    * Get_ProductsHotForAdmin({ callback }, { call }) {
+      const resMsg = yield call(getProductsHotForAdmin);
       callback(resMsg);
     },
 

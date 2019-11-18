@@ -44,6 +44,7 @@ class ProductContent extends React.Component {
       priceDesc: false,
       hotSell: true,
     }, () => { this.onChangeFilter(); })
+    this.getProductHot();
   }
   onChangeFilter = () => {
     if (this.state.priceAsc === true) {
@@ -100,6 +101,38 @@ class ProductContent extends React.Component {
     } else if (permission.token[1] === "user") {
       this.props.dispatch({
         type: "product/Get_productsAscByAcc",
+        callback: response => {
+          if (response.Message === "發生錯誤。") {
+            alert("連線逾時，請重新登入");
+            this.props.dispatch({
+              type: "member/logout",
+            })
+            navigate("/Login");
+          } else {
+            this.setState({
+              products: response
+            })
+          }
+        }
+      })
+    } else if (permission.token[1] === "admin") {
+      navigate("/");
+    }
+  }
+  getProductHot = () => {
+    const permission = JSON.parse(localStorage.getItem("token"));
+    if (localStorage.length === 0) {
+      this.props.dispatch({
+        type: "product/Get_productsHot",
+        callback: response => {
+          this.setState({
+            products: response
+          })
+        }
+      })
+    } else if (permission.token[1] === "user") {
+      this.props.dispatch({
+        type: "product/Get_productsHotByAcc",
         callback: response => {
           if (response.Message === "發生錯誤。") {
             alert("連線逾時，請重新登入");
