@@ -2,6 +2,12 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import '../MemberManagement/MemberManagement.scss';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
 import { navigate } from 'gatsby';
 
@@ -9,10 +15,13 @@ class MemberManagement extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      setOpen: false,
+      open: false,
       filterAsc: true,
       filterDesc: false,
       keyword: "",
-      members: []
+      members: [],
+      history: [],
     }
   }
   componentDidMount = () => {
@@ -23,6 +32,34 @@ class MemberManagement extends React.Component {
     } else if (hash === "#Desc") {
       this.getMemberDesc();
     }
+  }
+  handleClickOpen = (e) => {
+    this.setState({
+      setOpen: true,
+      open: true,
+    })
+    // this.props.dispatch({
+    //   type: "memberAdmin/Get_ProductsHotForAdmin",
+    //   payload: e.target.id,
+    //   callback: response => {
+    //     if (response.Message === "發生錯誤。") {
+    //       alert("連線逾時，請重新登入");
+    //       this.props.dispatch({
+    //         type: "member/logout",
+    //       })
+    //       navigate("/Login");
+    //     } else {
+    //       console.log(response);
+    
+    //     }
+    //   }
+    // })
+  }
+  handleClose() {
+    this.setState({
+      setOpen: false,
+      open: false,
+    })
   }
   filterAsc = () => {
     this.setState({
@@ -165,6 +202,31 @@ class MemberManagement extends React.Component {
     })
   }
   render() {
+    const button = {
+      margin: "0",
+      padding: "0",
+      fontFamily: "sans-serif, 'Microsoft JhengHei', '微軟正黑體'",
+      width: "100px",
+      height: "40px",
+      margin: "20px auto",
+      backgroundColor: "#343434",
+      color: "#fff",
+      fontSize: "18px",
+      display: "block",
+      textAlign: "center",
+      lineHeight: "40px",
+      transition: "all 0.5s",
+      letterSpacing: "3px",
+      borderRadius: "0"
+    }
+    const table = {
+      "border": "2px solid #222222",
+      "borderCollapse": "collapse",
+    }
+    const td = {
+      "border": "2px solid #222222",
+      "color": "#222222",
+    }
     const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
       token: []
     };
@@ -225,39 +287,70 @@ class MemberManagement extends React.Component {
                 <th>電話</th>
                 <th>地址</th>
                 <th>停權</th>
-                <th>購買紀錄</th>
               </tr>
               {this.state.members.map((member, i) => {
                 return (
-                  <tr key={i}>
-                    <th>{member.Account}</th>
-                    <th>{member.Name}</th>
-                    <th>{member.Gender}</th>
-                    <th>{member.Birthday.split("T", 1)}</th>
-                    <th>{member.Email}</th>
-                    <th>{member.Phone}</th>
-                    <th>{member.Address}</th>
-                    <th>
+                  <tr
+                    key={i}
+                    id={member.Account}
+                    onClick={this.handleClickOpen.bind(this)}
+                    title="點選以查看購買紀錄"
+                  >
+                    <td>{member.Account}</td>
+                    <td>{member.Name}</td>
+                    <td>{member.Gender}</td>
+                    <td>{member.Birthday.split("T", 1)}</td>
+                    <td>{member.Email}</td>
+                    <td>{member.Phone}</td>
+                    <td>{member.Address}</td>
+                    <td>
                       <button
                         className="block"
                         id={member.Account}
                         onClick={member.Permission === 0 ? this.bindPermission.bind(this) : this.unbindPermission.bind(this)}
                       >{member.Permission === 0 ? "停權" : "啟用"}
                       </button>
-                    </th>
-                    <th>
-                      <button
-                        className="block"
-                        id={"history" + member.Account}
-                      >查看
-                      </button>
-                    </th>
+                    </td>
                   </tr>
                 )
               })}
             </tbody>
           </table>
         </div>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose.bind(this)}
+          aria-labelledby="form-dialog-title" >
+          <DialogTitle
+            id="form-dialog-title">
+            購買紀錄
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              <div className="DialogContent">
+                <table style={table}>
+                  <tbody>
+                    <tr>
+                      <th style={td}>序號</th>
+                      <th style={td}>品牌</th>
+                      <th style={td}>名稱</th>
+                      <th style={td}>價格</th>
+                      <th style={td}>數量</th>
+                      <th style={td}>購買時間</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={this.handleClose.bind(this)}
+              style={button}>
+              確定
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     )
   }

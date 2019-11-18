@@ -18,6 +18,7 @@ class ProductManagement extends React.Component {
     super(props);
     this.state = {
       button: '',
+      setOpen: false,
       open: false,
       products: [],
       priceAsc: false,
@@ -55,6 +56,11 @@ class ProductManagement extends React.Component {
     this.setState({
       setOpen: false,
       open: false,
+    })
+  }
+  handleClose = () => {
+    this.setState({
+      open: false
     })
   }
   priceAsc() {
@@ -154,11 +160,6 @@ class ProductManagement extends React.Component {
     this.setState({
       button: 'add',
       open: true
-    })
-  }
-  handleClose = () => {
-    this.setState({
-      open: false
     })
   }
   GetProducts = () => {

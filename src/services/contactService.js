@@ -20,6 +20,22 @@ function sendContact(data) {
   }).then(response => response.json())
 }
 
+function getContact() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(contactServer + "GetContacts", {
+    method: "GET",
+    headers: ({
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    }),
+  }).then(response => response.json())
+}
+
 export {
   sendContact,
+  getContact
 }

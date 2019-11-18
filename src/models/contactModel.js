@@ -1,4 +1,4 @@
-import { sendContact, } from '../services/contactService';
+import { sendContact, getContact } from '../services/contactService';
 export default {
   namespace: "contact",
   state: {
@@ -10,7 +10,10 @@ export default {
   effects: {
     * sendContact({ payload, callback }, { call }) {
       const resMsg = yield call(sendContact, payload); //return status
-      console.log(resMsg);
+      callback(resMsg)
+    },
+    * getContact({ callback }, { call }) {
+      const resMsg = yield call(getContact); //return status
       callback(resMsg)
     },
   }

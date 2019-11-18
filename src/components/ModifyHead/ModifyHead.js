@@ -34,8 +34,6 @@ class ModifyHead extends React.Component {
             hasPic: true,
             picUrl: UserPicUrl + response
           })
-        } else {
-          alert(response);
         }
       }
     })
@@ -58,21 +56,17 @@ class ModifyHead extends React.Component {
     form.append('file', ImgData)
     console.log(ImgData);
     if (this.state.picture != null) {
-      console.log("進入傳送照片");
       this.props.dispatch({
         type: "member/uploadUserPic",
         payload: form,
-        callback: resMsg => {
-          console.log(resMsg);
-          if (resMsg === "上傳圖片成功") {
-            alert(resMsg);
+        callback: response => {
+          if (response === "上傳圖片成功") {
+            alert(response);
             this.setState({
               setOpen: false,
               open: false,
             })
             window.location.reload();
-          } else {
-            alert(resMsg);
           }
         }
       })

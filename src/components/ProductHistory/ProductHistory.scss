@@ -1,10 +1,10 @@
 @import "../../mixin/main.scss";
-.Member-header {
+.product-header {
   width: 70%;
   height: 160px;
   padding: 20px 15%;
   background-color: $color-gray;
-  //   display: flex;
+  // display: flex;
   @include pc {
     & {
       width: 75%;
@@ -17,25 +17,19 @@
       padding: 20px 7.5%;
     }
   }
-  @include pad {
-    & {
-      width: 70%;
-      padding: 20px 15%;
-    }
-  }
   @include mobile {
-    & {
-      width: 90%;
-      padding: 20px 5%;
-    }
-  }
-  @include min-mobile {
     & {
       width: 95%;
       padding: 20px 2.5%;
     }
   }
-  .Member-search {
+  @include min-mobile {
+    & {
+      width: 98%;
+      padding: 20px 1%;
+    }
+  }
+  .product-search {
     width: 75%;
     padding: 10px 12.5%;
     position: relative;
@@ -78,7 +72,7 @@
       }
     }
   }
-  .Member-timeList {
+  .product-filter {
     width: 100%;
     padding: 10px 2.5%;
     text-align: center;
@@ -124,65 +118,83 @@
       @include pad {
         & {
           margin: 30px 35px 30px 0;
+          font-size: $fontSize-s;
         }
       }
       @include mobile {
         & {
-          margin: 30px 25px 30px 0;
+          margin: 30px 20px 30px 0;
+        }
+      }
+      @include min-mobile {
+        & {
+          margin: 30px 5px 30px 0;
         }
       }
     }
   }
 }
-.Member {
-  width: 100%;
-  text-align: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  @include pad {
-    overflow-x: scroll;
-    white-space: nowrap;
-    // text-overflow : ellipsis;
-  }
-  .MemberData {
-    width: 95%;
-    margin: 0 auto;
-    border: 2px solid $color-black;
-    border-collapse: collapse;
-    word-break: break-all;
-    tr {
-      &:hover > td {
-        transition: $transition;
-        cursor: pointer;
-        color: #777;
+.product-content {
+  width: 95%;
+  margin: 20px auto;
+  .product {
+    width: 20%;
+    margin: 20px 2.5%;
+    position: relative;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    text-align: center;
+    font-size: $fontSize-m;
+    line-height: 1.5;
+    display: inline-block;
+    @include pc {
+      & {
+        width: 30%;
+        margin: 20px 1.5%;
       }
-      td,
-      th {
-        // width: 110px;
-        border: 2px solid $color-black;
-        .block {
-          width: 70px;
-          height: 30px;
-          margin: 12px auto;
-          background-color: $color-normal;
-          color: $color-white;
-          display: block;
-          text-align: center;
-          line-height: 30px;
-          transition: $transition;
-          letter-spacing: $letterSpacing-m;
-          font-size: $fontSize-m;
-          border: none;
-          &:hover {
-            cursor: pointer;
-            color: $color-main;
-          }
-          @include pad {
-            width: 60px;
-            height: 28px;
-            margin: 5px;
-          }
-        }
+    }
+    @include laptop {
+      & {
+        width: 40%;
+        margin: 20px 5%;
+      }
+    }
+    @include pad {
+      & {
+        width: 44%;
+        margin: 20px 3%;
+      }
+    }
+    @include mobile {
+      & {
+        width: 70%;
+        margin: 20px 15%;
+      }
+    }
+    @include min-mobile {
+      & {
+        width: 80%;
+        margin: 20px 10%;
+      }
+    }
+    .product-text {
+      width: 95%;
+      padding: 10px 2.5%;
+      background-color: $color-gray;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      p {
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .buy-price {
+        font-weight: bold;
+        color: $color-black;
+      }
+      .time {
+        color: #777;
       }
     }
   }

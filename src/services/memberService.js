@@ -1,5 +1,6 @@
 const memberServer = "http://foundation.hsc.nutc.edu.tw/api/Customer/";
 const memberAdminService = 'http://foundation.hsc.nutc.edu.tw/api/Admin/';
+const buyHistoryService = 'http://foundation.hsc.nutc.edu.tw/api/BuyHistory/';
 
 function register(data) {
   return fetch(memberServer + "Register", {
@@ -192,6 +193,38 @@ function unbindPermission(data) {
     })
   }).then(response => response.json())
 }
+function getBuyHistories() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(buyHistoryService + "GetBuyHistories", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+  }).then(response => response.json())
+}
+function getBuyHistoriesForAdmin(data) {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(memberAdminService + "GetBuyHistoryByAcc", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+    body: JSON.stringify({
+      Account: data
+    })
+  }).then(response => response.json())
+}
+
 export {
   register,
   login,
@@ -205,4 +238,6 @@ export {
   searchMember,
   bindPermission,
   unbindPermission,
+  getBuyHistories,
+  getBuyHistoriesForAdmin,
 }

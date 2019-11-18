@@ -1,4 +1,4 @@
-import { register, login, modifyPsw, UserInfo, SendUserInfo, uploadUserPic, getUserPic } from '../services/memberService';
+import { register, login, modifyPsw, UserInfo, SendUserInfo, uploadUserPic, getUserPic, getBuyHistories } from '../services/memberService';
 
 export default {
   namespace: "member",
@@ -112,7 +112,11 @@ export default {
     * GET_UserPic({ payload, callback }, { call }) {
       const resMsg = yield call(getUserPic, payload);
       callback(resMsg);
-    }
+    },
+    * GET_BuyHistories({ callback }, { call }) {
+      const resMsg = yield call(getBuyHistories);
+      callback(resMsg);
+    },
   },
 
 }
