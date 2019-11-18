@@ -6,6 +6,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
 import { faHeart } from "@fortawesome/free-solid-svg-icons"
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons"
 import { connect } from "react-redux";
+import { navigate } from 'gatsby';
 
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class ProductDetail extends React.Component {
@@ -15,17 +16,81 @@ class ProductDetail extends React.Component {
   }
   addCart = () => {
     const id = this.props.Product.Product_Id;
-    console.log(id);
+    const permission = JSON.parse(localStorage.getItem("token"));
+    if (localStorage.length === 0) {
+      alert("您尚未登入!");
+      navigate("/Login");
+    } else if (permission.token[1] === "user") {
+      console.log(id);
+      this.props.dispatch({
+        type: "cart/Add_Cart",
+        payload: id,
+        callback: response => {
+          if (response.Message === "發生錯誤。") {
+            alert("連線逾時，請重新登入");
+            this.props.dispatch({
+              type: "member/logout",
+            })
+            navigate("/Login");
+          } else {
+            console.log(response);
+            alert(response);
+          }
+        }
+      })
+    }
+  }
+  addFavorite = () => {
+    const id = this.props.Product.Product_Id
+    const permission = JSON.parse(localStorage.getItem("token"));
+    if (localStorage.length === 0) {
+      alert("您尚未登入!");
+      navigate("/Login");
+    } else if (permission.token[1] === "user") {
+      this.props.dispatch({
+        type: "product/Add_favorite",
+        payload: id,
+        callback: response => {
+          if (response.Message === "發生錯誤。") {
+            alert("連線逾時，請重新登入");
+            this.props.dispatch({
+              type: "member/logout",
+            })
+            navigate("/Login");
+          } else {
+            alert(response);
+            window.location.reload();
+          }
+        }
+      })
+    }
+  }
+  cancelFavorite = () => {
+    const id = this.Product.Product_Id
     this.props.dispatch({
-      type: "cart/Add_Cart",
+      type: "product/Cancel_favorite",
       payload: id,
-      callback: resMsg => {
-        console.log(resMsg);
-        alert(resMsg);
+      callback: response => {
+        if (response.Message === "發生錯誤。") {
+          alert("連線逾時，請重新登入");
+          this.props.dispatch({
+            type: "member/logout",
+          })
+          navigate("/Login");
+        } else {
+          alert(response);
+          window.location.reload();
+        }
       }
     })
   }
   render() {
+    const colorMain = {
+      color: "#FF5151"
+    }
+    const colorGray = {
+      color: "#555"
+    }
     return (
       <div className="detail-content">
         <Link to="/Products">
@@ -46,9 +111,17 @@ class ProductDetail extends React.Component {
             </p>
             <p className="description">{this.props.Product.Info}</p>
             <br />
-            <FontAwesomeIcon icon={faHeart} className="favorite" />
+            {/* <FontAwesomeIcon
+              icon={faHeart}
+              className="favorite"
+              style={this.props.Product.isFavorite ? colorMain : colorGray}
+              onClick={this.props.Product.isFavorite ? this.cancelFavorite : this.addFavorite}
+            /> */}
             <button onClick={this.addCart}>
-              <FontAwesomeIcon icon={faCartPlus} className="addCart" />
+              <FontAwesomeIcon
+                icon={faCartPlus}
+                className="addCart"
+              />
               加入購物車
              </button>
           </div>

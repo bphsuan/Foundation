@@ -1,4 +1,4 @@
-import { getAdminMemberAsc, getAdminMemberDesc, searchMember, bindPermission, unbindPermission } from '../services/memberService';
+import { getAdminMemberAsc, getAdminMemberDesc, searchMember, bindPermission, unbindPermission, getBuyHistoriesForAdmin } from '../services/memberService';
 export default {
   namespace: "memberAdmin",
   state: {
@@ -26,6 +26,10 @@ export default {
     },
     * unbindPermission({ payload, callback }, { call }) {
       const resMsg = yield call(unbindPermission, payload)
+      callback(resMsg);
+    },
+    * GET_BuyHistories({ payload, callback }, { call }) {
+      const resMsg = yield call(getBuyHistoriesForAdmin, payload);
       callback(resMsg);
     },
   }

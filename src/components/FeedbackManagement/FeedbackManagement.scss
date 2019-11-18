@@ -1,0 +1,48 @@
+@import "../../mixin/main.scss";
+.feedback {
+  width: 100%;
+  text-align: center;
+  margin: 105px 0;
+  @include pad {
+    overflow-x: scroll;
+    white-space: nowrap;
+    // text-overflow : ellipsis;
+  }
+  .feedbackData {
+    width: 95%;
+    margin: 0 auto;
+    border: 2px solid $color-black;
+    border-collapse: collapse;
+    word-break: break-all;
+    tr {
+      td,
+      th {
+        padding: 5px 0;
+        border: 2px solid $color-black;
+        .block {
+          width: 70px;
+          height: 30px;
+          margin: 12px auto;
+          background-color: $color-normal;
+          color: $color-white;
+          display: block;
+          text-align: center;
+          line-height: 30px;
+          transition: $transition;
+          letter-spacing: $letterSpacing-m;
+          font-size: $fontSize-m;
+          border: none;
+          &:hover {
+            cursor: pointer;
+            color: $color-main;
+          }
+          @include pad {
+            width: 60px;
+            height: 28px;
+            margin: 5px;
+          }
+        }
+      }
+    }
+  }
+}

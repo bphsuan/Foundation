@@ -1,8 +1,8 @@
-import React, { Component } from "react"
-import { Link } from 'gatsby'
-import Layout from '../components/Layout/Layout'
-import PersonalHeader from "../components/PersonalHeader/PersonalHeader"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from "react";
+import Layout from '../components/Layout/Layout';
+import PersonalHeader from "../components/PersonalHeader/PersonalHeader";
+import ProductHistory from '../components/ProductHistory/ProductHistory';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class DealHistory extends React.Component {
   constructor(props) {
@@ -15,6 +15,7 @@ class DealHistory extends React.Component {
     return (
       <Layout>
         <PersonalHeader />
+        <ProductHistory />
       </Layout>
     )
   }

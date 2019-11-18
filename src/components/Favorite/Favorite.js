@@ -44,11 +44,11 @@ class Favorite extends React.Component {
   render() {
     return (
       <div className="product-content">
-        {this.state.products.map((product) => {
+        {this.state.products.map((product, i) => {
           if (product.isFavorite === true) {
             return (
               <Product
-                key={product.Product_Id}
+                key={i}
                 id={product.Product_Id}
                 img={PicServer + product.Url}
                 brand={product.Brand}

@@ -81,6 +81,7 @@
         font-weight: bold;
         color: $color-main;
         .price {
+          margin-right: 10px;
           font-size: $fontSize-m;
           font-weight: normal;
           color: $color-black;
@@ -97,7 +98,7 @@
       button {
         width: 155px;
         height: 40px;
-        margin: 0 15px;
+        margin: 0 15px 0 0;
         background-color: $color-normal;
         color: $color-white;
         text-align: center;

@@ -243,10 +243,10 @@ class ProductContent extends React.Component {
           </div>
         </div>
         <div className="product-content">
-          {this.state.products.map((product) => {
+          {this.state.products.map((product, i) => {
             return (
               <Product
-                key={product.Product_Id}
+                key={i}
                 id={product.Product_Id}
                 img={PicServer + product.Url}
                 brand={product.Brand}

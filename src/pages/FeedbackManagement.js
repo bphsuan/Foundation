@@ -1,7 +1,8 @@
-import React, { Component } from "react"
-import { Link } from 'gatsby'
-import Layout from '../components/Layout/Layout'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { Component } from 'react';
+import { Link } from 'gatsby';
+import Layout from '../components/Layout/Layout';
+import FeedbackManagement from '../components/FeedbackManagement/FeedbackManagement';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Feedback extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Feedback extends React.Component {
 
     return (
       <Layout>
-
+        <FeedbackManagement />
       </Layout>
     )
   }
