@@ -48,7 +48,7 @@ class OrderCheck extends React.Component {
     this.props.dispatch({
       type: "cart/Send_Cart",
       payload: orderObj,
-      coupon: -1,
+      coupon: JSON.parse(localStorage.getItem("coupon")),
       callback: response => {
         if (response.Message === "發生錯誤。") {
           alert("連線逾時，請重新登入");
@@ -57,6 +57,7 @@ class OrderCheck extends React.Component {
           })
           navigate("/Login");
         } else {
+          alert("購買成功!")
           navigate("/Products")
         }
       }
@@ -75,7 +76,13 @@ class OrderCheck extends React.Component {
           })
           navigate("/Login");
         } else {
-          console.log(response);
+          localStorage.removeItem("sum");
+          localStorage.removeItem("coupon");
+          localStorage.removeItem("couponValue");
+          localStorage.removeItem("sum");
+          localStorage.removeItem("checkout");
+          localStorage.removeItem("delivery");
+          localStorage.removeItem("deliveryInfo");
         }
       }
     })
@@ -96,6 +103,14 @@ class OrderCheck extends React.Component {
       })
       navigate("/Login");
     }
+    const products = JSON.parse(localStorage.getItem("product"));
+    const coupon = JSON.parse(localStorage.getItem("coupon"));
+    const couponValue = JSON.parse(localStorage.getItem("couponValue"));
+    const sum = JSON.parse(localStorage.getItem("sum"));
+    const checkout = JSON.parse(localStorage.getItem("checkout"));
+    const delivery = JSON.parse(localStorage.getItem("delivery"));
+    const deliveryInfo = JSON.parse(localStorage.getItem("deliveryInfo"));
+    // console.log(deliveryInfo);
     const button = {
       margin: "0",
       padding: "0",
@@ -114,9 +129,24 @@ class OrderCheck extends React.Component {
       borderRadius: "0"
     }
     return (
-      <div className="order-content">
+      <div className="order-content" >
         <div className="order-list">
           <p className="order-tit">訂單明細</p>
+          {products.map((product, i) => {
+            return (
+              <p key={i}>- {product.Name} ${product.Price} X {product.quantity}</p>
+            )
+          })}
+          <p>使用優惠券： - {couponValue}</p>
+          <p>總金額： {sum}</p>
+          <p>付款方式： {checkout === "afterDelivery" ? "貨到付款" : "信用卡"}</p>
+          <p>配送方式： {delivery === "toHome" ? "宅配到府" : "便利商店取貨"}</p>
+          <p>配送明細：</p>
+          <p>[姓名] {deliveryInfo[0].customer}</p>
+          <p>[電話] {deliveryInfo[0].tel}</p>
+          <p>{delivery === "toHome" ? "[地址]" : "[店家]"} {delivery === "toHome" ? deliveryInfo[0].address : deliveryInfo.way}</p>
+          <p>{delivery === "toHome" ? "" : "[地區]"} {delivery === "toHome" ? "" : deliveryInfo[0].location}</p>
+          <p>{delivery === "toHome" ? "" : "[分店]"} {delivery === "toHome" ? "" : deliveryInfo[0].store}</p>
         </div>
         <Link to="/Delivery">
           <StepPrevious

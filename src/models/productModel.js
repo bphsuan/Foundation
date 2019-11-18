@@ -1,4 +1,4 @@
-import { addProduct, getProductsDesc, getProductsDescByAcc, getProductsAsc, getProductsAscByAcc, searchProducts, searchProductsByAcc, getAdminProduct, addFavotie, cancelFavotie } from '../services/productService'
+import { addProduct, getProductsDesc, getProductsDescByAcc, getProductsAsc, getProductsAscByAcc, searchProducts, searchProductsByAcc, getAdminProduct, addFavotie, cancelFavotie, getProductsHot3, getProductsHot, getProductsHotByAcc, getProductsHot3ByAcc } from '../services/productService'
 export default {
   namespace: "product",
   state: {
@@ -46,6 +46,22 @@ export default {
     },
     * Cancel_favorite({ payload, callback }, { call }) {
       const resMsg = yield call(cancelFavotie, payload);
+      callback(resMsg);
+    },
+    * Get_productsHot3({ callback }, { call }) {
+      const resMsg = yield call(getProductsHot3);
+      callback(resMsg);
+    },
+    * Get_productsHot3ByAcc({ callback }, { call }) {
+      const resMsg = yield call(getProductsHot3ByAcc);
+      callback(resMsg);
+    },
+    * Get_productsHot({ callback }, { call }) {
+      const resMsg = yield call(getProductsHot);
+      callback(resMsg);
+    },
+    * Get_productsHotByAcc({ callback }, { call }) {
+      const resMsg = yield call(getProductsHotByAcc);
       callback(resMsg);
     },
   }

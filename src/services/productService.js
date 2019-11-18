@@ -128,6 +128,7 @@ function outProduct(data) {
     })
   }).then(response => response.json())
 }
+
 function cancelOutProduct(data) {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
@@ -199,6 +200,100 @@ function deleteProduct(data) {
   }).then(response => response.json())
 }
 
+function getProductsHot3() {
+  return fetch(productSever + "GetProductsHotTop3", {
+    method: "GET",
+    headers: {
+      "Accept": "application/json"
+    },
+  }).then(response => response.json())
+}
+
+function getProductsHot3ByAcc() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productSever + "GetProductsHotTop3ByAcc", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+  }).then(response => response.json())
+}
+
+
+function getProductsHot() {
+  return fetch(productSever + "GetProductsHot", {
+    method: "GET",
+    headers: {
+      "Accept": "application/json"
+    },
+  }).then(response => response.json())
+}
+
+function getProductsHotByAcc() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productSever + "GetProductsHotByAcc", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+  }).then(response => response.json())
+}
+
+function getProductsDescForAdmin() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productAdminSever + "GetProductsDescForAdmin", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+  }).then(response => response.json())
+}
+
+function getProductsForAdmin() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productAdminSever + "GetProductsForAdmin", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+  }).then(response => response.json())
+}
+
+function getProductsHotForAdmin() {
+  const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+    token: []
+  };
+  return fetch(productAdminSever + "GetProductsHotForAdmin", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token.token[0]
+    },
+  }).then(response => response.json())
+}
+
 export {
   addProduct,
   getProductsDesc,
@@ -212,5 +307,12 @@ export {
   cancelOutProduct,
   addFavotie,
   cancelFavotie,
-  deleteProduct
+  deleteProduct,
+  getProductsHot3,
+  getProductsHot,
+  getProductsHotByAcc,
+  getProductsHot3ByAcc,
+  getProductsDescForAdmin,
+  getProductsForAdmin,
+  getProductsHotForAdmin
 }

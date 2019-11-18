@@ -63,6 +63,7 @@ class ProductManagement extends React.Component {
       priceDesc: false,
       hotSale: false,
     }, () => { this.onChangeFilter(); })
+    this.getProductAsc();
   }
   priceDesc() {
     this.setState({
@@ -70,6 +71,7 @@ class ProductManagement extends React.Component {
       priceDesc: true,
       hotSale: false,
     }, () => { this.onChangeFilter(); })
+    this.getProductDesc();
   }
   hotSale() {
     this.setState({
@@ -77,6 +79,7 @@ class ProductManagement extends React.Component {
       priceDesc: false,
       hotSale: true,
     }, () => { this.onChangeFilter(); })
+    this.getProductHot();
   }
   onChangeFilter = () => {
     if (this.state.priceAsc === true) {
@@ -86,6 +89,60 @@ class ProductManagement extends React.Component {
     } else if (this.state.hotSale === true) {
       window.location.hash = "#HotSell"
     }
+  }
+  getProductDesc = () => {
+    this.props.dispatch({
+      type: "productAdmin/Get_ProductsDescForAdmin",
+      callback: response => {
+        if (response.Message === "發生錯誤。") {
+          alert("連線逾時，請重新登入");
+          this.props.dispatch({
+            type: "member/logout",
+          })
+          navigate("/Login");
+        } else {
+          this.setState({
+            products: response
+          })
+        }
+      }
+    })
+  }
+  getProductAsc = () => {
+    this.props.dispatch({
+      type: "productAdmin/Get_ProductsForAdmin",
+      callback: response => {
+        if (response.Message === "發生錯誤。") {
+          alert("連線逾時，請重新登入");
+          this.props.dispatch({
+            type: "member/logout",
+          })
+          navigate("/Login");
+        } else {
+          this.setState({
+            products: response
+          })
+        }
+      }
+    })
+  }
+  getProductHot = () => {
+    this.props.dispatch({
+      type: "productAdmin/Get_ProductsHotForAdmin",
+      callback: response => {
+        if (response.Message === "發生錯誤。") {
+          alert("連線逾時，請重新登入");
+          this.props.dispatch({
+            type: "member/logout",
+          })
+          navigate("/Login");
+        } else {
+          this.setState({
+            products: response
+          })
+        }
+      }
+    })
   }
   setDeleteButton = () => {
     this.setState({
