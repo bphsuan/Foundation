@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Layout from '../components/Layout/Layout';
 import ProductDetail from '../components/ProductDetail/ProductDetail';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 class Detail extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +10,7 @@ class Detail extends React.Component {
   render() {
     return (
       <Layout>
-        <ProductDetail />
+        <ProductDetail Product={this.props.pageContext.product} />
       </Layout>
     )
   }
