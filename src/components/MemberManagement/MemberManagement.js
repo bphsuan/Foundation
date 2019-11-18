@@ -21,7 +21,7 @@ class MemberManagement extends React.Component {
       filterDesc: false,
       keyword: "",
       members: [],
-      history: [],
+      histories: [],
     }
   }
   componentDidMount = () => {
@@ -38,22 +38,36 @@ class MemberManagement extends React.Component {
       setOpen: true,
       open: true,
     })
-    // this.props.dispatch({
-    //   type: "memberAdmin/Get_ProductsHotForAdmin",
-    //   payload: e.target.id,
-    //   callback: response => {
-    //     if (response.Message === "發生錯誤。") {
-    //       alert("連線逾時，請重新登入");
-    //       this.props.dispatch({
-    //         type: "member/logout",
-    //       })
-    //       navigate("/Login");
-    //     } else {
-    //       console.log(response);
-    
-    //     }
-    //   }
-    // })
+    this.props.dispatch({
+      type: "memberAdmin/GET_BuyHistories",
+      payload: e.target.id,
+      callback: response => {
+        if (response.Message === "發生錯誤。") {
+          alert("連線逾時，請重新登入");
+          this.props.dispatch({
+            type: "member/logout",
+          })
+          navigate("/Login");
+        } else if (response.length === 0) {
+          this.setState({
+            histories: [{
+              Brand: "無",
+              BuyHistory_Id: "無",
+              BuyTime: "無",
+              Name: "無",
+              Price: "無",
+              Product_Id: "無",
+              Quantity: "無"
+            }]
+          })
+        } else {
+          console.log(response);
+          this.setState({
+            histories: response
+          })
+        }
+      }
+    })
   }
   handleClose() {
     this.setState({
@@ -220,10 +234,14 @@ class MemberManagement extends React.Component {
       borderRadius: "0"
     }
     const table = {
+      "width": "95%",
       "border": "2px solid #222222",
       "borderCollapse": "collapse",
+      "whiteSpace": "nowrap",
+      "overflow-x": "auto"
     }
     const td = {
+      "padding": "5px",
       "border": "2px solid #222222",
       "color": "#222222",
     }
@@ -287,13 +305,12 @@ class MemberManagement extends React.Component {
                 <th>電話</th>
                 <th>地址</th>
                 <th>停權</th>
+                <th>購買紀錄</th>
               </tr>
               {this.state.members.map((member, i) => {
                 return (
                   <tr
                     key={i}
-                    id={member.Account}
-                    onClick={this.handleClickOpen.bind(this)}
                     title="點選以查看購買紀錄"
                   >
                     <td>{member.Account}</td>
@@ -309,6 +326,14 @@ class MemberManagement extends React.Component {
                         id={member.Account}
                         onClick={member.Permission === 0 ? this.bindPermission.bind(this) : this.unbindPermission.bind(this)}
                       >{member.Permission === 0 ? "停權" : "啟用"}
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className="block"
+                        id={member.Account}
+                        onClick={this.handleClickOpen.bind(this)}
+                      >查看
                       </button>
                     </td>
                   </tr>
@@ -338,6 +363,18 @@ class MemberManagement extends React.Component {
                       <th style={td}>數量</th>
                       <th style={td}>購買時間</th>
                     </tr>
+                    {this.state.histories.map((history, i) => {
+                      return (
+                        <tr key={i}>
+                          <td style={td}>{i + 1}</td>
+                          <td style={td}>{history.Brand}</td>
+                          <td style={td}>{history.Name}</td>
+                          <td style={td}>{history.Price}</td>
+                          <td style={td}>{history.Quantity}</td>
+                          <td style={td}>{history.BuyTime.split("T", 1)}</td>
+                        </tr>
+                      )
+                    })}
                   </tbody>
                 </table>
               </div>

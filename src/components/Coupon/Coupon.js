@@ -36,16 +36,18 @@ class CouponContent extends React.Component {
   render() {
     return (
       <div className="coupon-content">
-        {this.state.coupons.map((coupon) => {
-
-          return (
-            <Coupon
-              id={coupon.CouponRecord_Id}
-              topic={coupon.Name}
-              discount={coupon.Coupon_price}
-              deadline={coupon.ExpiryTime.split("T", 1)[0]}
-            />
-          )
+        {this.state.coupons.map((coupon, i) => {
+          if (coupon.IsUse !== "Y") {
+            return (
+              <Coupon
+                key={i}
+                id={coupon.CouponRecord_Id}
+                topic={coupon.Name}
+                discount={coupon.Coupon_price}
+                deadline={coupon.ExpiryTime.split("T", 1)[0]}
+              />
+            )
+          }
         }
         )}
       </div>

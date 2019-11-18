@@ -158,18 +158,20 @@ class CheckoutWay extends React.Component {
             onChange={this.chooseCoupon.bind(this)}
           /><span> 無</span><br />
           {this.state.coupons.map((coupon) => {
-            return (
-              <div>
-                <input
-                  type="radio"
-                  name="coupon"
-                  id={coupon.CouponRecord_Id}
-                  value={coupon.Coupon_price}
-                  onChange={this.chooseCoupon.bind(this)}
-                />
-                <span> {coupon.Name}</span><br />
-              </div>
-            )
+            if (coupon.IsUse !== "Y") {
+              return (
+                <div>
+                  <input
+                    type="radio"
+                    name="coupon"
+                    id={coupon.CouponRecord_Id}
+                    value={coupon.Coupon_price}
+                    onChange={this.chooseCoupon.bind(this)}
+                  />
+                  <span> {coupon.Name}</span><br />
+                </div>
+              )
+            }
           }
           )}
 
