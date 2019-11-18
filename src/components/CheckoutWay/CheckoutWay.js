@@ -14,7 +14,7 @@ class CheckoutWay extends React.Component {
     this.state = {
       previous: " 取消",
       next: "下一步 ",
-      checkout: "",
+      checkout: "afterDelivery",
       isCreditCard: true,
       card: "",
       products: [],
@@ -24,6 +24,9 @@ class CheckoutWay extends React.Component {
   }
   componentDidMount() {
     this.GET_Cart();
+    localStorage.setItem("coupon", -1);
+    localStorage.setItem("couponValue", 0);
+    localStorage.setItem("checkout", JSON.stringify(this.state.checkout));
   }
   GET_Cart = () => {
     const data = JSON.parse(localStorage.getItem("product"));
@@ -39,6 +42,7 @@ class CheckoutWay extends React.Component {
     this.setState({
       checkout: e.target.value,
     }, () => {  //setState異步
+      localStorage.setItem("checkout", JSON.stringify(this.state.checkout));
       if (this.state.checkout === "creditCard") {
         this.setState({
           isCreditCard: false,
@@ -49,7 +53,6 @@ class CheckoutWay extends React.Component {
         })
       }
     })
-    localStorage.setItem("checkout", JSON.stringify(e.target.value));
   }
   card = (e) => {
     this.setState({
@@ -61,7 +64,7 @@ class CheckoutWay extends React.Component {
   checkoutisEmpty = () => {
     if (this.state.checkout === "") {
       alert("請選擇付款方式");
-    } else if (this.state.checkout === "creditCard") {
+    } else if (this.state.checkout === "creditCard" && this.state.card.length === 0) {
       alert("請輸入信用卡");
     } else {
       navigate("/Delivery");
@@ -95,12 +98,14 @@ class CheckoutWay extends React.Component {
     this.priceSum();
     localStorage.removeItem("sum");
     localStorage.removeItem("coupon");
+    localStorage.removeItem("couponValue");
     setTimeout(() => {
       this.setState({
         sum: this.state.sum - coupon
       })
       localStorage.setItem("sum", JSON.stringify(this.state.sum));
       localStorage.setItem("coupon", JSON.stringify(couponId));
+      localStorage.setItem("couponValue", JSON.stringify(coupon));
     }, 500);
   }
   priceSum = () => {
@@ -149,6 +154,7 @@ class CheckoutWay extends React.Component {
             name="coupon"
             id="-1"
             value="0"
+            defaultChecked
             onChange={this.chooseCoupon.bind(this)}
           /><span> 無</span><br />
           {this.state.coupons.map((coupon) => {
@@ -175,6 +181,7 @@ class CheckoutWay extends React.Component {
             type="radio"
             name="checkoutway"
             value="afterDelivery"
+            defaultChecked
             onChange={this.checkoutWay.bind(this)}
           />
           <span> 貨到付款</span>

@@ -16,46 +16,170 @@ class DeliveryWay extends React.Component {
       previous: " 上一步",
       next: "下一步 ",
       delivery: "",
+      toHome: [],
       customerA: "",
       telA: "",
       addressA: "",
+      toStore: [],
       customerB: "",
       telB: "",
-      wayB: "",
-      locationB: "",
-      storeB: ""
+      wayB: "7-11",
+      locationB: "台中",
+      storeB: "育才"
     }
   }
   deliveryWay = (e) => {
+    localStorage.removeItem("delivery");
     this.setState({
       delivery: e.target.value,
     }, () => { //setState異步
-      console.log(this.state.delivery);
+      localStorage.setItem("delivery", JSON.stringify(this.state.delivery));
     })
   }
   customerA = (e) => {
+    localStorage.removeItem("deliveryInfo");
     this.setState({
+      toHome: [],
       customerA: e.target.value
+    }, () => {
+      this.setState({
+        toHome: {
+          "customer": this.state.customerA,
+          "tel": this.state.telA,
+          "address": this.state.addressA
+        }
+      }, () => {
+        localStorage.setItem("deliveryInfo", JSON.stringify(this.state.toHome));
+      })
     })
   }
   telA = (e) => {
+    localStorage.removeItem("deliveryInfo");
     this.setState({
+      toHome: [],
       telA: e.target.value
+    }, () => {
+      this.setState({
+        toHome: [{
+          "customer": this.state.customerA,
+          "tel": this.state.telA,
+          "address": this.state.addressA
+        }]
+      }, () => {
+        localStorage.setItem("deliveryInfo", JSON.stringify(this.state.toHome));
+      })
     })
   }
-  address = (e) => {
+  addressA = (e) => {
+    localStorage.removeItem("deliveryInfo");
     this.setState({
+      toHome: [],
       addressA: e.target.value
+    }, () => {
+      this.setState({
+        toHome: [{
+          "customer": this.state.customerA,
+          "tel": this.state.telA,
+          "address": this.state.addressA
+        }]
+      }, () => {
+        localStorage.setItem("deliveryInfo", JSON.stringify(this.state.toHome));
+      })
     })
   }
   customerB = (e) => {
+    localStorage.removeItem("deliveryInfo");
     this.setState({
+      toStore: [],
       customerB: e.target.value
+    }, () => {
+      this.setState({
+        toStore: [{
+          "customer": this.state.customerB,
+          "tel": this.state.telB,
+          "way": this.state.wayB,
+          "location": this.state.locationB,
+          "store": this.state.storeB
+        }]
+      }, () => {
+        localStorage.setItem("deliveryInfo", JSON.stringify(this.state.toStore));
+      })
     })
   }
   telB = (e) => {
+    localStorage.removeItem("deliveryInfo");
     this.setState({
+      toStore: [],
       telB: e.target.value
+    }, () => {
+      this.setState({
+        toStore: [{
+          "customer": this.state.customerB,
+          "tel": this.state.telB,
+          "way": this.state.wayB,
+          "location": this.state.locationB,
+          "store": this.state.storeB
+        }]
+      }, () => {
+        localStorage.setItem("deliveryInfo", JSON.stringify(this.state.toStore));
+      })
+    })
+  }
+  wayB = (e) => {
+    localStorage.removeItem("deliveryInfo");
+    this.setState({
+      toStore: [],
+      wayB: e.target.value
+    }, () => {
+      this.setState({
+        toStore: [{
+          "customer": this.state.customerB,
+          "tel": this.state.telB,
+          "way": this.state.wayB,
+          "location": this.state.locationB,
+          "store": this.state.storeB
+        }]
+      }, () => {
+        localStorage.setItem("deliveryInfo", JSON.stringify(this.state.toStore));
+      })
+    })
+  }
+  locationB = (e) => {
+    localStorage.removeItem("deliveryInfo");
+    this.setState({
+      toStore: [],
+      locationB: e.target.value
+    }, () => {
+      this.setState({
+        toStore: [{
+          "customer": this.state.customerB,
+          "tel": this.state.telB,
+          "way": this.state.wayB,
+          "location": this.state.locationB,
+          "store": this.state.storeB
+        }]
+      }, () => {
+        localStorage.setItem("deliveryInfo", JSON.stringify(this.state.toStore));
+      })
+    })
+  }
+  storeB = (e) => {
+    localStorage.removeItem("deliveryInfo");
+    this.setState({
+      toStore: [],
+      storeB: e.target.value
+    }, () => {
+      this.setState({
+        toStore: [{
+          "customer": this.state.customerB,
+          "tel": this.state.telB,
+          "way": this.state.wayB,
+          "location": this.state.locationB,
+          "store": this.state.storeB
+        }]
+      }, () => {
+        localStorage.setItem("deliveryInfo", JSON.stringify(this.state.toStore));
+      })
     })
   }
   //格式錯誤檢查
@@ -63,21 +187,21 @@ class DeliveryWay extends React.Component {
     if (this.state.delivery === "") {
       alert("請選擇配送方式");
     } else if (this.state.delivery === "toHome") {
-      if (this.state.customerA.length === 0) {
+      if (this.state.customerA === "") {
         alert("請輸入收件人");
-      } else if (this.state.telA.length === 0) {
+      } else if (this.state.telA === "") {
         alert("請輸入聯絡電話");
       } else if (this.state.telA.length !== 10 || isNaN(this.state.telA)) {
         alert("聯絡電話格式錯誤");
-      } else if (this.state.address.length === 0) {
+      } else if (this.state.address === "") {
         alert("請輸入收件地址");
       } else {
         navigate("/Order");
       }
     } else if (this.state.delivery === "toStore") {
-      if (this.state.customerB.length === 0) {
+      if (this.state.customerB === "") {
         alert("請輸入收件人");
-      } else if (this.state.telB.length === 0) {
+      } else if (this.state.telB === "") {
         alert("請輸入聯絡電話");
       } else if (this.state.telB.length !== 10 || isNaN(this.state.telB)) {
         alert("聯絡電話格式錯誤");
@@ -158,7 +282,7 @@ class DeliveryWay extends React.Component {
             />
             <p>收件地址</p>
             <textarea
-              onChange={this.address.bind(this)}
+              onChange={this.addressA.bind(this)}
             />
           </div>
           <div
@@ -174,21 +298,21 @@ class DeliveryWay extends React.Component {
               type="text"
               onChange={this.telB.bind(this)} />
             <p>選擇店家</p>
-            <select defaultValue="7-11">
-              <option value="7-11">7-11</option>
-              <option value="family-mart">全家</option>
-              <option value="ok">OK</option>
-              <option value="hi-life">萊爾富</option>
+            <select defaultValue="7-11" onChange={this.wayB.bind(this)}>
+              <option value="7-11" onChange={this.wayB.bind(this)}>7-11</option>
+              <option value="全家" onChange={this.wayB.bind(this)}>全家</option>
+              <option value="ok" onChange={this.wayB.bind(this)}>OK</option>
+              <option value="萊爾富" onChange={this.wayB.bind(this)}>萊爾富</option>
             </select>
             <p>選擇地區</p>
-            <select defaultValue="台中">
-              <option value="Taichung">台中</option>
-              <option value="Taipei">台北</option>
-              <option value="Tainan">台南</option>
+            <select defaultValue="台中" onChange={this.locationB.bind(this)}>
+              <option value="台中" onChange={this.locationB.bind(this)}>台中</option>
+              <option value="台北" onChange={this.locationB.bind(this)}>台北</option>
+              <option value="台南" onChange={this.locationB.bind(this)}>台南</option>
             </select>
             <p>選擇分店</p>
-            <select defaultValue="育才">
-              <option value="yutsai">育才</option>
+            <select defaultValue="育才" onChange={this.storeB.bind(this)}>
+              <option value="育才" onChange={this.storeB.bind(this)}>育才</option>
             </select>
           </div>
         </div>

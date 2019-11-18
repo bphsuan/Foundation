@@ -9,6 +9,8 @@ function addCart(data) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
       "Authorization": "Bearer " + token.token[0]
     },
     body: JSON.stringify({
@@ -25,6 +27,8 @@ function getCart() {
     method: "GET",
     headers: {
       "Accept": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
       "Authorization": "Bearer " + token.token[0]
     },
   }).then(response => response.json())
@@ -38,6 +42,8 @@ function deleteCart(data) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
       "Authorization": "Bearer " + token.token[0]
     },
     body: JSON.stringify({
@@ -53,6 +59,8 @@ function sendCart(data, coupon) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
       "Authorization": "Bearer " + token.token[0]
     },
     body: JSON.stringify({
@@ -69,6 +77,8 @@ function removeCart() {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Accept": "application/json",
       "Authorization": "Bearer " + token.token[0]
     },
   }).then(response => response.json())
