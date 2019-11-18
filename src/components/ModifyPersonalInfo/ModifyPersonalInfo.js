@@ -135,7 +135,7 @@ class ModifyPersonalInfo extends React.Component {
         </div>
         <div className="input-style">
           <p className="letter">生日</p>
-          <input type="date" id="Birthday" className="input" defaultValue={this.state.Birthday} onChange={this.changeItem.bind(this)} />
+          <input type="date" id="Birthday" className="input" disabled="true" defaultValue={this.state.Birthday} onChange={this.changeItem.bind(this)} />
         </div>
         <div className="input-style">
           <p className="letter">email</p>
