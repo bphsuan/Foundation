@@ -10,51 +10,45 @@ const cols = {
   sold: { alias: '次數' },
   genre: { alias: '品牌' }
 };
+const cols1 = {
+  sold: { alias: '人數' },
+  genre: { alias: '年紀' }
+};
+
 
 //餅圖
 const { DataView } = DataSet;
 const { Html } = Guide;
-// const data2 = [
-//   {
-//     item: "品牌一",
-//     count: 40
-//   },
-//   {
-//     item: "品牌二",
-//     count: 21
-//   }
-// ];
 
 const cols2 = {
   percent: {
     formatter: val => {
-      val = val * 100 + "%";
+      val = (val * 100).toFixed(2) + "%";
       return val;
     }
   }
 };
 
-// dv.source(this.state.memberGenderData).transform({
-
+const html1 = "<div style={color:#8c8c8c;font-size:1.16em;text-align: center;width: 10em;}>會員<br><span style={color:#262626;font-size:2.5em;}>"
+const html2 = "</span>位</div>"
 
 class Chartpie extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       brandHistoryData: [],
-      memberGenderData: []
+      memberGenderData: [],
+      memberAge: [],
+      memberTotal: 0
     }
 
   }
   componentDidMount() {
     this.GET_brandhistory();
     this.GET_memberGender();
-    // this.gender();
+    this.Get_memberAge();
   }
-  // gender = () => {
 
-
-  // }
   GET_brandhistory = () => {
     this.props.dispatch({
       type: "chart/Get_brandHistory",
@@ -67,6 +61,19 @@ class Chartpie extends React.Component {
       }
     })
   }
+  Get_memberAge = () => {
+    this.props.dispatch({
+      type: "chart/Get_memberAge",
+      callback: response => {
+        this.setState({
+          memberAge: response
+        }, () => {
+          console.log(this.state.memberAge);
+        })
+      }
+    })
+  }
+
   GET_memberGender = () => {
     this.props.dispatch({
       type: "chart/Get_memberGender",
@@ -74,11 +81,13 @@ class Chartpie extends React.Component {
         response.forEach(data => {
           this.state.memberGenderData.push({ "item": data.label, "count": data.value })
           console.log(this.state.memberGenderData);
+          this.setState({
+            memberTotal: this.state.memberTotal += JSON.parse(data.value)
+          })
+          console.log(this.state.memberTotal);
         })
       }
     })
-
-
   }
 
   render() {
@@ -99,7 +108,13 @@ class Chartpie extends React.Component {
             <Tooltip />
             <Geom type="interval" position="genre*sold" color="genre" />
           </Chart>
-
+          <Chart width={600} height={400} data={this.state.memberAge} scale={cols1}>
+            <Axis name="genre" title />
+            <Axis name="sold" title />
+            <Legend position="top" dy={-20} />
+            <Tooltip />
+            <Geom type="interval" position="genre*sold" color="genre" />
+          </Chart>
           {/*餅圖*/}
           <Chart
             height={window.innerHeight}
@@ -122,7 +137,7 @@ class Chartpie extends React.Component {
             <Guide>
               <Html
                 position={["50%", "50%"]}
-                html="<div style=&quot;color:#8c8c8c;font-size:1.16em;text-align: center;width: 10em;&quot;>會員<br><span style=&quot;color:#262626;font-size:2.5em&quot;>200</span>位</div>"
+                html={html1 + this.state.memberTotal + html2}
                 alignX="middle"
                 alignY="middle"
               />
@@ -134,7 +149,7 @@ class Chartpie extends React.Component {
               tooltip={[
                 "item*percent",
                 (item, percent) => {
-                  percent = percent * 100 + "%";
+                  percent = (percent * 100).toFixed(2) + "%";
                   return {
                     name: item,
                     value: percent
