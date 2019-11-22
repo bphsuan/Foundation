@@ -10,6 +10,11 @@ const cols = {
   sold: { alias: '次數' },
   genre: { alias: '品牌' }
 };
+const cols1 = {
+  sold: { alias: '人數' },
+  genre: { alias: '年紀' }
+};
+
 
 //餅圖
 const { DataView } = DataSet;
@@ -33,6 +38,7 @@ class Chartpie extends React.Component {
     this.state = {
       brandHistoryData: [],
       memberGenderData: [],
+      memberAge: [],
       memberTotal: 0
     }
 
@@ -40,6 +46,7 @@ class Chartpie extends React.Component {
   componentDidMount() {
     this.GET_brandhistory();
     this.GET_memberGender();
+    this.Get_memberAge();
   }
 
   GET_brandhistory = () => {
@@ -54,6 +61,19 @@ class Chartpie extends React.Component {
       }
     })
   }
+  Get_memberAge = () => {
+    this.props.dispatch({
+      type: "chart/Get_memberAge",
+      callback: response => {
+        this.setState({
+          memberAge: response
+        }, () => {
+          console.log(this.state.memberAge);
+        })
+      }
+    })
+  }
+
   GET_memberGender = () => {
     this.props.dispatch({
       type: "chart/Get_memberGender",
@@ -88,7 +108,13 @@ class Chartpie extends React.Component {
             <Tooltip />
             <Geom type="interval" position="genre*sold" color="genre" />
           </Chart>
-
+          <Chart width={600} height={400} data={this.state.memberAge} scale={cols1}>
+            <Axis name="genre" title />
+            <Axis name="sold" title />
+            <Legend position="top" dy={-20} />
+            <Tooltip />
+            <Geom type="interval" position="genre*sold" color="genre" />
+          </Chart>
           {/*餅圖*/}
           <Chart
             height={window.innerHeight}
