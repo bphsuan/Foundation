@@ -1,0 +1,23 @@
+@import "../../mixin/main.scss";
+.next {
+  width: 100px;
+  height: 40px;
+  margin: 20px auto;
+  background-color: $color-normal;
+  color: $color-white;
+  border: 0;
+  display: block;
+  font-size: $fontSize-m;
+  text-align: center;
+  line-height: 40px;
+  transition: $transition;
+  letter-spacing: $letterSpacing-m;
+  position: fixed;
+  right: 10px;
+  bottom: 50px;
+  outline: 0;
+  &:hover {
+    cursor: pointer;
+    color: $color-main;
+  }
+}

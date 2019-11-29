@@ -1,0 +1,255 @@
+@import "../../mixin/main.scss";
+.product-header {
+  width: 70%;
+  height: 160px;
+  padding: 20px 15%;
+  background-color: $color-gray;
+  // display: flex;
+  @include pc {
+    & {
+      width: 75%;
+      padding: 20px 12.5%;
+    }
+  }
+  @include laptop {
+    & {
+      width: 85%;
+      padding: 20px 7.5%;
+    }
+  }
+  @include mobile {
+    & {
+      width: 95%;
+      padding: 20px 2.5%;
+    }
+  }
+  @include min-mobile {
+    & {
+      width: 98%;
+      padding: 20px 1%;
+    }
+  }
+  .product-search {
+    width: 75%;
+    padding: 10px 12.5%;
+    position: relative;
+    @include laptop {
+      & {
+        width: 80%;
+        padding: 10px 10%;
+      }
+    }
+    @include pad {
+      & {
+        width: 60%;
+        padding: 10px 20%;
+      }
+    }
+    input {
+      width: 100%;
+      height: 50px;
+      font-size: $fontSize-m;
+      &:focus {
+        outline-color: $color-main;
+      }
+    }
+    span {
+      width: 50px;
+      height: 50px;
+      margin: 10px 0;
+      line-height: 50px;
+      color: $color-normal;
+      font-size: $fontSize-l;
+      font-weight: bold;
+      position: absolute;
+      top: 0;
+      right: 12%;
+      &:hover {
+        cursor: pointer;
+      }
+      @include laptop {
+        right: 3%;
+      }
+    }
+  }
+  .product-filter {
+    width: 100%;
+    padding: 10px 2.5%;
+    text-align: center;
+    @include laptop {
+      & {
+        width: 100%;
+        padding: 10px 1%;
+      }
+    }
+    @include pad {
+      & {
+        padding: 10px 2.5%;
+      }
+    }
+
+    a {
+      height: 37px;
+      margin: 30px 25px 30px 0;
+      display: inline-block;
+      color: $color-normal;
+      font-size: $fontSize-m;
+      font-weight: bold;
+      line-height: 37px;
+      transition: $transition;
+      border-bottom: 3px solid $color-gray;
+      &:hover {
+        cursor: pointer;
+      }
+      &.active {
+        color: $color-main;
+        border-bottom: 3px solid $color-main;
+      }
+      @include pc {
+        & {
+          margin: 30px 20px 30px 0;
+        }
+      }
+      @include laptop {
+        & {
+          margin: 30px 15px 30px 0;
+        }
+      }
+      @include pad {
+        & {
+          margin: 30px 35px 30px 0;
+          font-size: $fontSize-s;
+        }
+      }
+      @include mobile {
+        & {
+          margin: 30px 20px 30px 0;
+        }
+      }
+      @include min-mobile {
+        & {
+          margin: 30px 5px 30px 0;
+        }
+      }
+    }
+  }
+}
+.product-content {
+  width: 95%;
+  margin: 20px auto;
+  a {
+    color: $color-black;
+    .product {
+      width: 20%;
+      margin: 20px 2.5%;
+      position: relative;
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+      text-align: center;
+      font-size: $fontSize-m;
+      line-height: 1.5;
+      display: inline-block;
+      &:hover {
+        cursor: pointer;
+      }
+      @include pc {
+        & {
+          width: 30%;
+          margin: 20px 1.5%;
+        }
+      }
+      @include laptop {
+        & {
+          width: 40%;
+          margin: 20px 5%;
+        }
+      }
+      @include pad {
+        & {
+          width: 44%;
+          margin: 20px 3%;
+        }
+      }
+      @include mobile {
+        & {
+          width: 70%;
+          margin: 20px 15%;
+        }
+      }
+      @include min-mobile {
+        & {
+          width: 80%;
+          margin: 20px 10%;
+        }
+      }
+      .product-func {
+        width: 50px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        .favorite {
+          font-size: $fontSize-l;
+          margin-top: 5px;
+          color: $color-main;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        .addCart {
+          font-size: $fontSize-l;
+          margin-top: 5px;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+      .product-img {
+        width: 80%;
+        height: 260px;
+        padding: 10px 10%;
+        overflow: hidden;
+        @include pad {
+          & {
+            height: 270px;
+          }
+        }
+        @include mobile {
+          & {
+            height: 275px;
+          }
+        }
+        @include min-mobile {
+          & {
+            height: 220px;
+          }
+        }
+        img {
+          width: 100%;
+          height: auto;
+          margin: 0 auto;
+        }
+      }
+      .product-text {
+        width: 95%;
+        padding: 10px 2.5%;
+        background-color: $color-gray;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        p {
+          width: 100%;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+        .new-price {
+          font-weight: bold;
+          color: $color-main;
+        }
+        .price {
+          text-decoration: line-through;
+          font-size: $fontSize-s;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+@import "../../mixin/main.scss";
+.Footer {
+  width: 100%;
+  height: 60px;
+  padding: 5px 0;
+  background-color: $color-black;
+  text-align: center;
+  @include mobile {
+    height: 70px;
+  }
+  img {
+    height: 25px;
+    margin-top: 5px;
+    width: auto;
+    align-content: center;
+  }
+  p {
+    font-size: $fontSize-copyright;
+    color: $color-white;
+    letter-spacing: $letterSpacing-m;
+    @include pad {
+      letter-spacing: $letterSpacing-s;
+    }
+    .addCol {
+      display: none;
+      @include mobile {
+        display: block;
+      }
+    }
+  }
+}

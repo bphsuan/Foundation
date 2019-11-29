@@ -1,0 +1,121 @@
+@import "../../mixin/main.scss";
+.detail-content {
+  width: 100%;
+  padding: 50px 0;
+  a {
+    margin: 15px 10%;
+    color: $color-black;
+    font-size: $fontSize-m;
+    font-weight: bold;
+    &:hover {
+      cursor: pointer;
+    }
+    @include laptop {
+      & {
+        margin: 10px 7.5%;
+      }
+    }
+  }
+  .detail {
+    width: 80%;
+    margin: 5px auto;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    display: flex;
+    @include laptop {
+      & {
+        width: 85%;
+      }
+    }
+    @include pad {
+      & {
+        display: block;
+      }
+    }
+    .detail-img {
+      width: 50%;
+      @include pad {
+        & {
+          width: 100%;
+        }
+      }
+      img {
+        width: 80%;
+        margin: 10%;
+        @include pad {
+          & {
+            width: 60%;
+            margin: 20px 20%;
+          }
+        }
+      }
+    }
+    .detail-text {
+      width: 40%;
+      padding: 5%;
+      background-color: $color-gray;
+      font-size: $fontSize-m;
+      line-height: 2;
+      @include pad {
+        & {
+          width: 80%;
+          padding: 20px 10%;
+          line-height: 1.5;
+        }
+      }
+      .name {
+        font-size: $fontSize-l;
+        font-weight: bold;
+        @include mobile {
+          & {
+            font-size: $fontSize-l * 0.85;
+          }
+        }
+        @include min-mobile {
+          & {
+            font-size: $fontSize-m;
+          }
+        }
+      }
+      .new-price {
+        font-size: $fontSize-l;
+        font-weight: bold;
+        color: $color-main;
+        .price {
+          margin-right: 10px;
+          font-size: $fontSize-m;
+          font-weight: normal;
+          color: $color-black;
+          text-decoration: line-through;
+        }
+      }
+      .favorite {
+        font-size: $fontSize-l;
+        color: $color-main;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      button {
+        width: 155px;
+        height: 40px;
+        margin: 0 15px;
+        background-color: $color-normal;
+        color: $color-white;
+        text-align: center;
+        line-height: 40px;
+        transition: $transition;
+        letter-spacing: $letterSpacing-m;
+        font-size: $fontSize-m;
+        outline: 0;
+        &:hover {
+          cursor: pointer;
+          color: $color-main;
+          font-size: $fontSize-m;
+        }
+        .addCart {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

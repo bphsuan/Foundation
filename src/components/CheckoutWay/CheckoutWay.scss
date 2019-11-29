@@ -1,0 +1,79 @@
+@import "../../mixin/main.scss";
+.checkout-content {
+  width: 80%;
+  margin: 20px 10%;
+  display: flex;
+  font-size: $fontSize-m;
+  line-height: 1.5;
+  @include pad {
+    & {
+      display: inline-block;
+    }
+  }
+  .checkout-list {
+    width: 44%;
+    min-height: 400px;
+    padding: 2%;
+    padding-bottom: 60px;
+    margin-right: 2%;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    position: relative;
+    @include pad {
+      & {
+        width: 96%;
+        margin-bottom: 10px;
+        margin-right: 0;
+      }
+    }
+    .checkout-tit {
+      padding: 5px 0;
+      margin: 5px 0;
+      text-align: center;
+      font-size: $fontSize-m;
+      letter-spacing: $letterSpacing-m;
+      font-weight: bold;
+      border-bottom: $borderWidth solid $color-gray;
+      background-color: $color-gray;
+    }
+    .sum {
+      font-size: $fontSize-l;
+      font-weight: bold;
+      color: $color-main;
+      position: absolute;
+      right: 2%;
+      bottom: 2%;
+    }
+  }
+  .checkout-way {
+    width: 44%;
+    min-height: 400px;
+    padding: 2%;
+    margin-left: 2%;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    @include pad {
+      & {
+        width: 96%;
+        margin-left: 0;
+      }
+    }
+    .checkout-tit {
+      padding: 5px 0;
+      margin: 5px 0;
+      text-align: center;
+      font-size: $fontSize-m;
+      letter-spacing: $letterSpacing-m;
+      font-weight: bold;
+      border-bottom: $borderWidth solid $color-gray;
+      background-color: $color-gray;
+    }
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+    input[type="text"] {
+      width: 100%;
+      margin: 10px 5px 0 0;
+      font-size: $fontSize-m;
+      outline-color: $color-main;
+    }
+  }
+}

@@ -1,0 +1,336 @@
+@import "../../mixin/main.scss";
+.product-header {
+  width: 70%;
+  height: 160px;
+  padding: 20px 15%;
+  background-color: $color-gray;
+  // display: flex;
+  @include pc {
+    & {
+      width: 75%;
+      padding: 20px 12.5%;
+    }
+  }
+  @include laptop {
+    & {
+      width: 85%;
+      padding: 20px 7.5%;
+    }
+  }
+  @include mobile {
+    & {
+      width: 95%;
+      padding: 20px 2.5%;
+    }
+  }
+  @include min-mobile {
+    & {
+      width: 98%;
+      padding: 20px 1%;
+    }
+  }
+  .product-search {
+    width: 75%;
+    padding: 10px 12.5%;
+    position: relative;
+    @include laptop {
+      & {
+        width: 80%;
+        padding: 10px 10%;
+      }
+    }
+    @include pad {
+      & {
+        width: 60%;
+        padding: 10px 20%;
+      }
+    }
+    input {
+      width: 100%;
+      height: 50px;
+      font-size: $fontSize-m;
+      &:focus {
+        outline-color: $color-main;
+      }
+    }
+    span {
+      width: 50px;
+      height: 50px;
+      margin: 10px 0;
+      line-height: 50px;
+      color: $color-normal;
+      font-size: $fontSize-l;
+      font-weight: bold;
+      position: absolute;
+      top: 0;
+      right: 12%;
+      &:hover {
+        cursor: pointer;
+      }
+      @include laptop {
+        right: 3%;
+      }
+    }
+  }
+  .product-filter {
+    width: 100%;
+    padding: 10px 2.5%;
+    text-align: center;
+    @include laptop {
+      & {
+        width: 100%;
+        padding: 10px 1%;
+      }
+    }
+    @include pad {
+      & {
+        padding: 10px 2.5%;
+      }
+    }
+
+    a {
+      height: 37px;
+      margin: 30px 25px 30px 0;
+      display: inline-block;
+      color: $color-normal;
+      font-size: $fontSize-m;
+      font-weight: bold;
+      line-height: 37px;
+      transition: $transition;
+      border-bottom: 3px solid $color-gray;
+      &:hover {
+        cursor: pointer;
+      }
+      &.active {
+        color: $color-main;
+        border-bottom: 3px solid $color-main;
+      }
+      @include pc {
+        & {
+          margin: 30px 20px 30px 0;
+        }
+      }
+      @include laptop {
+        & {
+          margin: 30px 15px 30px 0;
+        }
+      }
+      @include pad {
+        & {
+          margin: 30px 35px 30px 0;
+          font-size: $fontSize-s;
+        }
+      }
+      @include mobile {
+        & {
+          margin: 30px 20px 30px 0;
+        }
+      }
+      @include min-mobile {
+        & {
+          margin: 30px 5px 30px 0;
+        }
+      }
+    }
+  }
+}
+.addProduct {
+  width: 100%;
+  padding: 40px 0;
+  color: $color-black;
+  font-size: $fontSize-m;
+  h2 {
+    margin: 10px 0;
+    text-align: center;
+    letter-spacing: $letterSpacing-l;
+    font-size: $fontSize-l;
+  }
+  .addContent {
+    width: 40%;
+    margin: 0 auto;
+    @include laptop {
+      & {
+        width: 50%;
+      }
+    }
+    @include pad {
+      & {
+        width: 65%;
+      }
+    }
+    @include mobile {
+      & {
+        width: 85%;
+      }
+    }
+    @include min-mobile {
+      & {
+        width: 95%;
+      }
+    }
+    .input {
+      height: 30px;
+      padding: 10px 0;
+      line-height: 30px;
+      display: flex;
+      letter-spacing: $letterSpacing-m;
+      span {
+        width: 25%;
+        font-weight: bold;
+        @include mobile {
+          & {
+            width: 35%;
+          }
+        }
+      }
+      input {
+        width: 75%;
+        height: 100%;
+        font-size: $fontSize-m;
+        &:focus {
+          outline-color: $color-main;
+        }
+        @include mobile {
+          & {
+            width: 65%;
+          }
+        }
+      }
+    }
+    .input2 {
+      height: auto;
+      textarea {
+        width: 75%;
+        height: 100%;
+        min-height: 120px;
+        resize: vertical;
+        font-size: $fontSize-m;
+        &:focus {
+          outline-color: $color-main;
+        }
+        @include mobile {
+          & {
+            width: 65%;
+          }
+        }
+      }
+    }
+    .summit-btn {
+      a {
+        width: 100px;
+        height: 40px;
+        margin: 20px auto;
+        background-color: $color-normal;
+        color: $color-white;
+        display: block;
+        text-align: center;
+        line-height: 40px;
+        transition: $transition;
+        letter-spacing: $letterSpacing-m;
+        font-size: $fontSize-m;
+        &:hover {
+          cursor: pointer;
+          color: $color-main;
+        }
+      }
+    }
+  }
+}
+.product-management {
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  @include pad {
+    overflow-x: scroll;
+    white-space: nowrap;
+    // text-overflow : ellipsis;
+  }
+  .product-data {
+    width: 95%;
+    margin: 0 auto;
+    border: 2px solid $color-black;
+    border-collapse: collapse;
+    word-break: break-all;
+    .t-width {
+      width: 32%;
+    }
+    td,
+    th {
+      border: 2px solid $color-black;
+    }
+  }
+  .p-button {
+    height: 30px;
+    margin: 5px auto;
+    background-color: $color-normal;
+    color: $color-white;
+    display: block;
+    text-align: center;
+    line-height: 30px;
+    transition: $transition;
+    letter-spacing: $letterSpacing-m;
+    font-size: $fontSize-m;
+    &:hover {
+      cursor: pointer;
+      color: $color-main;
+    }
+    @include pad {
+      width: 50px;
+      height: 28px;
+      margin: 5px;
+    }
+  }
+  .top-tool {
+    height: 40px;
+    .square-size {
+      width: 35px;
+      position: absolute;
+      right: 2.5%;
+    }
+  }
+  .b-size {
+    width: 65px;
+  }
+}
+.DialogContent {
+  width: 40vw;
+  @include laptop {
+    width: 60vw;
+  }
+  .input {
+    width: 100%;
+    margin: 5px 0;
+    display: flex;
+    background-color: $color-white;
+    &:focus {
+      outline-color: $color-main;
+    }
+    @include pad {
+      display: block;
+      margin: 0;
+    }
+    input {
+      width: 80%;
+      @include pad {
+        width: 100%;
+      }
+    }
+    p {
+      margin: 0 5px;
+      color: $color-black;
+      letter-spacing: $letterSpacing-m;
+      @include pad {
+        letter-spacing: $letterSpacing-l;
+      }
+    }
+    textarea {
+      width: 80%;
+      min-height: 180px;
+      resize: vertical;
+      @include pad {
+        width: 100%;
+      }
+    }
+  }
+}
