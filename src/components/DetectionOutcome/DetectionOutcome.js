@@ -4,6 +4,7 @@ import './DetectionOutcome.scss';
 import ProductContent from '../ProductContent/ProductContent';
 import img1 from '../../images/1.jpg';
 import img2 from '../../images/2.jpg';
+import { navigate } from 'gatsby';
 
 class DetectionOutcome extends React.Component {
   constructor(props) {
