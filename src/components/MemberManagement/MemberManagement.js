@@ -25,6 +25,23 @@ class MemberManagement extends React.Component {
     }
   }
   componentDidMount = () => {
+    const token = window.localStorage.getItem("token")
+      ? JSON.parse(window.localStorage.getItem("token"))
+      : {
+        token: [],
+      }
+    window.localStorage.getItem(token)
+    if (token.token[1] === "user") {
+      navigate("/")
+    } else if (window.localStorage.length === 0) {
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigate("/Login")
+        },
+      })
+      navigate("/Login")
+    }
     window.location.hash = "#Asc";
     const hash = window.location.hash;
     if (hash === "#Asc") {
@@ -244,22 +261,6 @@ class MemberManagement extends React.Component {
       "padding": "5px",
       "border": "2px solid #222222",
       "color": "#222222",
-    }
-    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
-      token: []
-    };
-    localStorage.getItem(token);
-    console.log(token.token[1]);
-    if (token.token[1] === "user") {
-      navigate("/");
-    } else if (localStorage.length === 0) {
-      this.props.dispatch({
-        type: "member/logout",
-        callback: () => {
-          navigate("/Login");
-        }
-      })
-      navigate("/Login");
     }
     return (
       <div>

@@ -28,6 +28,23 @@ class ProductManagement extends React.Component {
     }
   }
   componentDidMount() {
+    const token = window.localStorage.getItem("token")
+      ? JSON.parse(window.localStorage.getItem("token"))
+      : {
+        token: [],
+      }
+    window.localStorage.getItem(token)
+    if (token.token[1] === "user") {
+      navigate("/")
+    } else if (window.localStorage.length === 0) {
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigate("/Login")
+        },
+      })
+      navigate("/Login")
+    }
     window.location.hash = "#Desc";
     const hash = window.location.hash;
     if (hash === "#Desc") {
@@ -219,21 +236,6 @@ class ProductManagement extends React.Component {
     })
   }
   render() {
-    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
-      token: []
-    };
-    localStorage.getItem(token);
-    if (token.token[1] === "user") {
-      navigate("/");
-    } else if (localStorage.length === 0) {
-      this.props.dispatch({
-        type: "member/logout",
-        callback: () => {
-          navigate("/Login");
-        }
-      })
-      navigate("/Login");
-    }
     const button = {
       margin: "0",
       padding: "0",
