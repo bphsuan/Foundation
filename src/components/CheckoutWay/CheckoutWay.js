@@ -23,13 +23,30 @@ class CheckoutWay extends React.Component {
     }
   }
   componentDidMount() {
+    const token = (window.localStorage.getItem("token")) ? JSON.parse(window.localStorage.getItem("token")) : {
+      token: []
+    };
+    window.localStorage.getItem(token);
+    if (token.token[1] === "admin") {
+      console.log(this.props.isLogin);
+      navigate("/");
+    } else if (window.localStorage.length === 0) {
+      console.log(this.props.isLogin);
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigate("/Login");
+        }
+      })
+      navigate("/Login");
+    }
     this.GET_Cart();
     window.localStorage.setItem("coupon", -1);
     window.localStorage.setItem("couponValue", 0);
     window.localStorage.setItem("checkout", JSON.stringify(this.state.checkout));
   }
   GET_Cart = () => {
-    const data = JSON.parse(localStorage.getItem("product"));
+    const data = JSON.parse(window.localStorage.getItem("product"));
     this.setState({
       products: data
     }, () => {
@@ -38,11 +55,11 @@ class CheckoutWay extends React.Component {
     this.getCoupon();
   }
   checkoutWay = (e) => {
-    localStorage.removeItem("checkout");
+    window.localStorage.removeItem("checkout");
     this.setState({
       checkout: e.target.value,
     }, () => {  //setState異步
-      localStorage.setItem("checkout", JSON.stringify(this.state.checkout));
+      window.localStorage.setItem("checkout", JSON.stringify(this.state.checkout));
       if (this.state.checkout === "creditCard") {
         this.setState({
           isCreditCard: false,
@@ -96,16 +113,16 @@ class CheckoutWay extends React.Component {
       sum: 0
     })
     this.priceSum();
-    localStorage.removeItem("sum");
-    localStorage.removeItem("coupon");
-    localStorage.removeItem("couponValue");
+    window.localStorage.removeItem("sum");
+    window.localStorage.removeItem("coupon");
+    window.localStorage.removeItem("couponValue");
     setTimeout(() => {
       this.setState({
         sum: this.state.sum - coupon
       })
-      localStorage.setItem("sum", JSON.stringify(this.state.sum));
-      localStorage.setItem("coupon", JSON.stringify(couponId));
-      localStorage.setItem("couponValue", JSON.stringify(coupon));
+      window.localStorage.setItem("sum", JSON.stringify(this.state.sum));
+      window.localStorage.setItem("coupon", JSON.stringify(couponId));
+      window.localStorage.setItem("couponValue", JSON.stringify(coupon));
     }, 500);
   }
   priceSum = () => {
@@ -114,29 +131,10 @@ class CheckoutWay extends React.Component {
     this.state.products.forEach(product => {
       sum += product.Price * product.quantity
     })
-    localStorage.setItem("sum", JSON.stringify(sum));
+    window.localStorage.setItem("sum", JSON.stringify(sum));
     this.setState({
       sum: sum
     })
-  }
-  componentDidMount() {
-    const token = (window.localStorage.getItem("token")) ? JSON.parse(window.localStorage.getItem("token")) : {
-      token: []
-    };
-    window.localStorage.getItem(token);
-    if (token.token[1] === "admin") {
-      console.log(this.props.isLogin);
-      navigate("/");
-    } else if (window.localStorage.length === 0) {
-      console.log(this.props.isLogin);
-      this.props.dispatch({
-        type: "member/logout",
-        callback: () => {
-          navigate("/Login");
-        }
-      })
-      navigate("/Login");
-    }
   }
   render() {
 
