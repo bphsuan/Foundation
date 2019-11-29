@@ -28,7 +28,15 @@ class ProductManagement extends React.Component {
     }
   }
   componentDidMount() {
-    this.GetProducts();
+    window.location.hash = "#Desc";
+    const hash = window.location.hash;
+    if (hash === "#Desc") {
+      this.getProductDesc();
+    } else if (hash === "#Asc") {
+      this.getProductAsc();
+    } else if (hash === "#HotSell") {
+      this.getProductHot();
+    }
   }
   handleClickOpen(e) {
     this.setState({

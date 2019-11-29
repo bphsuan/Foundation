@@ -205,7 +205,6 @@ class ProductContent extends React.Component {
       navigate("/");
     }
   }
-
   render() {
     return (
       <div>
