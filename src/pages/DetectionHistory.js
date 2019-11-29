@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { Link } from 'gatsby'
 import Layout from '../components/Layout/Layout'
 import PersonalHeader from "../components/PersonalHeader/PersonalHeader"
+import DetectionContent from "../components/DetectionHistory/DetectionHistory"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class DetectionHistory extends React.Component {
@@ -15,6 +16,7 @@ class DetectionHistory extends React.Component {
     return (
       <Layout>
         <PersonalHeader />
+        <DetectionContent />
       </Layout>
     )
   }

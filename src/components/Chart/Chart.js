@@ -1,36 +1,38 @@
 import React from 'react';
 import './Chart.scss';
-import { Chart, Geom, Axis, Tooltip, Legend, Coord, Guide, Label } from 'bizcharts';
-import DataSet from "@antv/data-set";
+// import { Chart, Geom, Axis, Tooltip, Legend, Coord, Guide, Label } from 'bizcharts';
+// import DataSet from "@antv/data-set";
 import { connect } from "react-redux";
 import { navigate } from 'gatsby';
-
+// import CanvasJSReact from '../../canvasjs.react';
+// var CanvasJS = CanvasJSReact.CanvasJS;
+// var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 // 長條圖的欄位
-const cols = {
-  sold: { alias: '次數' },
-  genre: { alias: '品牌' }
-};
-const cols1 = {
-  sold: { alias: '人數' },
-  genre: { alias: '年紀' }
-};
+// const cols = {
+//   sold: { alias: '次數' },
+//   genre: { alias: '品牌' }
+// };
+// const cols1 = {
+//   sold: { alias: '人數' },
+//   genre: { alias: '年紀' }
+// };
 
 
-//餅圖
-const { DataView } = DataSet;
-const { Html } = Guide;
+// //餅圖
+// const { DataView } = DataSet;
+// const { Html } = Guide;
 
-const cols2 = {
-  percent: {
-    formatter: val => {
-      val = (val * 100).toFixed(2) + "%";
-      return val;
-    }
-  }
-};
+// const cols2 = {
+//   percent: {
+//     formatter: val => {
+//       val = (val * 100).toFixed(2) + "%";
+//       return val;
+//     }
+//   }
+// };
 
-const html1 = "<div style={color:#8c8c8c;font-size:1.16em;text-align: center;width: 10em;}>會員<br><span style={color:#262626;font-size:2.5em;}>"
-const html2 = "</span>位</div>"
+// const html1 = "<div style={color:#8c8c8c;font-size:1.16em;text-align: center;width: 10em;}>會員<br><span style={color:#262626;font-size:2.5em;}>"
+// const html2 = "</span>位</div>"
 
 class Chartpie extends React.Component {
   constructor(props) {
@@ -53,11 +55,18 @@ class Chartpie extends React.Component {
     this.props.dispatch({
       type: "chart/Get_brandHistory",
       callback: response => {
-        this.setState({
-          brandHistoryData: response
-        }, () => {
-          console.log(this.state.brandHistoryData);
+        // this.setState({
+        //   brandHistoryData: response
+        // }, () => {
+        //   console.log(this.state.brandHistoryData);
+        // })
+        console.log(response);
+
+        response.forEach(data => {
+          this.state.brandHistoryData.push({ "label": data.genre, "y": data.sold })
         })
+        console.log(this.state.brandHistoryData);
+
       }
     })
   }
@@ -91,17 +100,37 @@ class Chartpie extends React.Component {
   }
 
   render() {
-    const dv = new DataView();
-    dv.source(this.state.memberGenderData).transform({
-      type: "percent",
-      field: "count",
-      dimension: "item",
-      as: "percent"
-    });
+    // const dv = new DataView();
+    // dv.source(this.state.memberGenderData).transform({
+    //   type: "percent",
+    //   field: "count",
+    //   dimension: "item",
+    //   as: "percent"
+    // });
+    const options = {
+      title: {
+        text: "Basic Column Chart"
+      },
+      data: [
+        {
+          // Change type to "doughnut", "line", "splineArea", etc.
+          type: "column",
+          dataPoints: this.state.brandHistoryData
+          // [
+          //   { label: "Apple", y: 10 },
+          //   { label: "Orange", y: 15 },
+          //   { label: "Banana", y: 25 },
+          //   { label: "Mango", y: 30 },
+          //   { label: "Grape", y: 28 }
+          // ]
+        }
+      ]
+    }
     return (
-      <div className="hot-content">
+      <div className="hot-content" >
         <div id="mountNode">
-          <Chart width={600} height={400} data={this.state.brandHistoryData} scale={cols}>
+          {/* <CanvasJSChart options={options}          /> */}
+          {/* <Chart width={600} height={400} data={this.state.brandHistoryData} scale={cols}>
             <Axis name="genre" title />
             <Axis name="sold" title />
             <Legend position="top" dy={-20} />
@@ -114,9 +143,9 @@ class Chartpie extends React.Component {
             <Legend position="top" dy={-20} />
             <Tooltip />
             <Geom type="interval" position="genre*sold" color="genre" />
-          </Chart>
+          </Chart> */}
           {/*餅圖*/}
-          <Chart
+          {/* <Chart
             height={window.innerHeight}
             data={dv}
             scale={cols2}
@@ -168,9 +197,9 @@ class Chartpie extends React.Component {
                 }}
               />
             </Geom>
-          </Chart>
+          </Chart> */}
         </div>
-      </div>
+      </div >
     )
   }
 }

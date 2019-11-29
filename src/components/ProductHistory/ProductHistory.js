@@ -6,8 +6,8 @@ import './ProductHistory.scss';
 import { Link } from 'gatsby';
 import { connect } from "react-redux";
 import { navigate } from 'gatsby';
-import { Chart, Geom, Axis, Tooltip, Legend, Coord, Guide, Label } from 'bizcharts';
-import DataSet from "@antv/data-set";
+// import { Chart, Geom, Axis, Tooltip, Legend, Coord, Guide, Label } from 'bizcharts';
+// import DataSet from "@antv/data-set";
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class ProductHistory extends React.Component {
   constructor(props) {
@@ -21,8 +21,8 @@ class ProductHistory extends React.Component {
   }
   componentDidMount() {
     this.getProductHistory();
-    this.GET_buyFrequencyChart();
-    this.GET_buyBrandChart();
+    // this.GET_buyFrequencyChart();
+    // this.GET_buyBrandChart();
   }
   getProductHistory = () => {
     this.props.dispatch({
@@ -72,35 +72,35 @@ class ProductHistory extends React.Component {
     })
   }
   render() {
-    const cols = {
-      sold: { alias: '次數' },
-      genre: { alias: '月份' }
-    };
+    // const cols = {
+    //   sold: { alias: '次數' },
+    //   genre: { alias: '月份' }
+    // };
 
-    //餅圖
-    const { DataView } = DataSet;
-    const { Html } = Guide;
+    // //餅圖
+    // const { DataView } = DataSet;
+    // const { Html } = Guide;
 
-    const cols2 = {
-      percent: {
-        formatter: val => {
-          val = (val * 100).toFixed(2) + "%";
-          return val;
-        }
-      }
-    };
-    const dv = new DataView();
-    dv.source(this.state.buyBrand).transform({
-      type: "percent",
-      field: "count",
-      dimension: "item",
-      as: "percent"
-    });
-    const html1 = "<div style={color:#8c8c8c;font-size:1.16em;text-align: center;width: 10em;}>次數<br><span style={color:#262626;font-size:2.5em;}>"
-    const html2 = "</span>次</div>"
+    // const cols2 = {
+    //   percent: {
+    //     formatter: val => {
+    //       val = (val * 100).toFixed(2) + "%";
+    //       return val;
+    //     }
+    //   }
+    // };
+    // const dv = new DataView();
+    // dv.source(this.state.buyBrand).transform({
+    //   type: "percent",
+    //   field: "count",
+    //   dimension: "item",
+    //   as: "percent"
+    // });
+    // const html1 = "<div style={color:#8c8c8c;font-size:1.16em;text-align: center;width: 10em;}>次數<br><span style={color:#262626;font-size:2.5em;}>"
+    // const html2 = "</span>次</div>"
     return (
       <div className="product-content">
-        <div id="mountNode">
+        {/* <div id="mountNode">
           <Chart width={600} height={400} data={this.state.buyFrequency} scale={cols}>
             <Axis name="genre" title />
             <Axis name="sold" title />
@@ -161,7 +161,7 @@ class ProductHistory extends React.Component {
               />
             </Geom>
           </Chart>
-        </div>
+        </div> */}
 
         {this.state.products.map((product, i) => {
           let buyTime = product.BuyTime.split("T", 1)[0]

@@ -10,23 +10,8 @@ class DetectionOutcome extends React.Component {
     super(props);
     this.state = {
       products: [
-        {
-          id: 1,
-          img: img1,
-          brand: "essence",
-          name: "艾森絲16 hr 持久粉底液 30",
-          new_price: "178",
-          price: "179"
-        },
-        {
-          id: 2,
-          img: img2,
-          brand: "RIMMEL",
-          name: "倫敦芮魅極限長效持久粉底液 (103 柔膚色) 30ml",
-          new_price: "425",
-          price: "450"
-        },
-      ]
+      ],
+      color: '#FFDDAA'
     }
   }
   render() {
@@ -37,6 +22,8 @@ class DetectionOutcome extends React.Component {
         </div>
         <div className="detection-text">
           <h1>檢測結果</h1>
+          <p>| 我的膚色</p>
+          <div className="detect-color" style={{ height: '20px', width: '150px', backgroundColor: this.state.color }}></div>
           <p>| 推薦之粉底液</p>
           {/* <ProductContent
             products={this.state.products}
