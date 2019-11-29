@@ -8,6 +8,7 @@ import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
 import { navigate } from 'gatsby';
 
+let hash = ""
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class ProductDetail extends React.Component {
     } else {
       this.getProduct();
     }
+    hash = window.location.hash.replace("#", "");
   }
   getProduct = () => {
     const permission = JSON.parse(localStorage.getItem("token"));
@@ -135,7 +137,6 @@ class ProductDetail extends React.Component {
     const colorGray = {
       color: "#555"
     }
-    const hash = window.location.hash.replace("#", "");
     return (
       <div className="detail-content">
         <Link to="/Products">

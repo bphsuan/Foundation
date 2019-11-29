@@ -14,19 +14,19 @@ import { connect } from 'react-redux';
 import { navigate } from 'gatsby';
 import { Link } from 'gatsby';
 
-let products = [];
-let coupon = "";
-let couponValue = "";
-let sum = "";
-let checkout = "";
-let delivery = "";
-let deliveryInfo = [];
 class OrderCheck extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       previous: " 上一步",
       next: "送出 ",
+      products: [],
+      coupon: "",
+      couponValue: "",
+      sum: "",
+      checkout: "",
+      delivery: "",
+      deliveryInfo: [],
     }
   }
   componentDidMount() {
@@ -47,13 +47,25 @@ class OrderCheck extends React.Component {
       })
       navigate("/Login")
     }
-    products = JSON.parse(window.localStorage.getItem("product"));
-    coupon = JSON.parse(window.localStorage.getItem("coupon"));
-    couponValue = JSON.parse(window.localStorage.getItem("couponValue"));
-    sum = JSON.parse(window.localStorage.getItem("sum"));
-    checkout = JSON.parse(window.localStorage.getItem("checkout"));
-    delivery = JSON.parse(window.localStorage.getItem("delivery"));
-    deliveryInfo = JSON.parse(window.localStorage.getItem("deliveryInfo"));
+    this.getData();
+  }
+  getData = () => {
+    const products = JSON.parse(window.localStorage.getItem("product"));
+    const coupon = JSON.parse(window.localStorage.getItem("coupon"));
+    const couponValue = JSON.parse(window.localStorage.getItem("couponValue"));
+    const sum = JSON.parse(window.localStorage.getItem("sum"));
+    const checkout = JSON.parse(window.localStorage.getItem("checkout"));
+    const delivery = JSON.parse(window.localStorage.getItem("delivery"));
+    const deliveryInfo = JSON.parse(window.localStorage.getItem("deliveryInfo"));
+    this.setState({
+      products: products,
+      coupon: coupon,
+      couponValue: couponValue,
+      sum: sum,
+      checkout: checkout,
+      delivery: delivery,
+      deliveryInfo: deliveryInfo
+    })
   }
   handleClickOpen() {
     this.setState({
@@ -120,7 +132,6 @@ class OrderCheck extends React.Component {
     })
   }
   render() {
-    // console.log(deliveryInfo);
     const button = {
       margin: "0",
       padding: "0",
@@ -142,21 +153,27 @@ class OrderCheck extends React.Component {
       <div className="order-content" >
         <div className="order-list">
           <p className="order-tit">訂單明細</p>
-          {products.map((product, i) => {
+          {this.state.products.map((product, i) => {
             return (
               <p key={i}>- {product.Name} ${product.Price} X {product.quantity}</p>
             )
           })}
-          <p>使用優惠券： - {couponValue}</p>
-          <p>總金額： {sum}</p>
-          <p>付款方式： {checkout === "afterDelivery" ? "貨到付款" : "信用卡"}</p>
-          <p>配送方式： {delivery === "toHome" ? "宅配到府" : "便利商店取貨"}</p>
+          <p>使用優惠券： - {this.state.couponValue}</p>
+          <p>總金額： {this.state.sum}</p>
+          <p>付款方式： {this.state.checkout === "afterDelivery" ? "貨到付款" : "信用卡"}</p>
+          <p>配送方式： {this.state.delivery === "toHome" ? "宅配到府" : "便利商店取貨"}</p>
           <p>配送明細：</p>
-          <p>[姓名] {deliveryInfo[0].customer}</p>
-          <p>[電話] {deliveryInfo[0].tel}</p>
-          <p>{delivery === "toHome" ? "[地址]" : "[店家]"} {delivery === "toHome" ? deliveryInfo[0].address : deliveryInfo.way}</p>
-          <p>{delivery === "toHome" ? "" : "[地區]"} {delivery === "toHome" ? "" : deliveryInfo[0].location}</p>
-          <p>{delivery === "toHome" ? "" : "[分店]"} {delivery === "toHome" ? "" : deliveryInfo[0].store}</p>
+          {this.state.deliveryInfo.map((perInfo, i) => {
+            return (
+              <div key={i}>
+                <p>[姓名] {perInfo.customer}</p>
+                <p>[電話] {perInfo.tel}</p>
+                <p>{this.state.delivery === "toHome" ? "[地址]" : "[店家]"} {this.state.delivery === "toHome" ? perInfo.address : perInfo.way}</p>
+                <p>{this.state.delivery === "toHome" ? "" : "[地區]"} {this.state.delivery === "toHome" ? "" : perInfo.location}</p>
+                <p>{this.state.delivery === "toHome" ? "" : "[分店]"} {this.state.delivery === "toHome" ? "" : perInfo.store}</p>
+              </div>
+            )
+          })}
         </div>
         <Link to="/Delivery">
           <StepPrevious
