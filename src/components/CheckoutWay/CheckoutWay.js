@@ -24,9 +24,9 @@ class CheckoutWay extends React.Component {
   }
   componentDidMount() {
     this.GET_Cart();
-    localStorage.setItem("coupon", -1);
-    localStorage.setItem("couponValue", 0);
-    localStorage.setItem("checkout", JSON.stringify(this.state.checkout));
+    window.localStorage.setItem("coupon", -1);
+    window.localStorage.setItem("couponValue", 0);
+    window.localStorage.setItem("checkout", JSON.stringify(this.state.checkout));
   }
   GET_Cart = () => {
     const data = JSON.parse(localStorage.getItem("product"));

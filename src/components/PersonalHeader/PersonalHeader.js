@@ -25,7 +25,7 @@ class PersonalHeader extends React.Component {
         token: [],
       }
     window.localStorage.getItem(token)
-    if (token.token[1] === "user") {
+    if (token.token[1] === "admin") {
       navigate("/")
     } else if (window.localStorage.length === 0) {
       this.props.dispatch({

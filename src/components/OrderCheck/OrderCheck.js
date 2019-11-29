@@ -14,7 +14,13 @@ import { connect } from 'react-redux';
 import { navigate } from 'gatsby';
 import { Link } from 'gatsby';
 
-
+let products = "";
+let coupon = "";
+let couponValue = "";
+let sum = "";
+let checkout = "";
+let delivery = "";
+let deliveryInfo = "";
 class OrderCheck extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +36,7 @@ class OrderCheck extends React.Component {
         token: [],
       }
     window.localStorage.getItem(token)
-    if (token.token[1] === "user") {
+    if (token.token[1] === "admin") {
       navigate("/")
     } else if (window.localStorage.length === 0) {
       this.props.dispatch({
@@ -41,6 +47,13 @@ class OrderCheck extends React.Component {
       })
       navigate("/Login")
     }
+    products = JSON.parse(window.localStorage.getItem("product"));
+    coupon = JSON.parse(window.localStorage.getItem("coupon"));
+    couponValue = JSON.parse(window.localStorage.getItem("couponValue"));
+    sum = JSON.parse(window.localStorage.getItem("sum"));
+    checkout = JSON.parse(window.localStorage.getItem("checkout"));
+    delivery = JSON.parse(window.localStorage.getItem("delivery"));
+    deliveryInfo = JSON.parse(window.localStorage.getItem("deliveryInfo"));
   }
   handleClickOpen() {
     this.setState({
@@ -107,13 +120,6 @@ class OrderCheck extends React.Component {
     })
   }
   render() {
-    const products = JSON.parse(localStorage.getItem("product"));
-    const coupon = JSON.parse(localStorage.getItem("coupon"));
-    const couponValue = JSON.parse(localStorage.getItem("couponValue"));
-    const sum = JSON.parse(localStorage.getItem("sum"));
-    const checkout = JSON.parse(localStorage.getItem("checkout"));
-    const delivery = JSON.parse(localStorage.getItem("delivery"));
-    const deliveryInfo = JSON.parse(localStorage.getItem("deliveryInfo"));
     // console.log(deliveryInfo);
     const button = {
       margin: "0",

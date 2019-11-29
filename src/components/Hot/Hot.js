@@ -6,19 +6,24 @@ import { connect } from 'react-redux';
 import { navigate } from 'gatsby';
 
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
+let token = [];
 class Hot extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "熱銷排行 Hot Ranking",
       products: [],
+      who: "",
     }
   }
   componentDidMount() {
     this.getProductHot();
-    const token = (window.localStorage.getItem("token")) ? JSON.parse(window.localStorage.getItem("token")) : {
+    token = (window.localStorage.getItem("token")) ? JSON.parse(window.localStorage.getItem("token")) : {
       token: []
     };
+    this.setState({
+      who: token.token[1]
+    })
   }
   getProductHot = () => {
     const permission = JSON.parse(window.localStorage.getItem("token"));
@@ -52,7 +57,6 @@ class Hot extends React.Component {
   }
 
   render() {
-
     const dispear = {
       display: "none",
     }
@@ -62,7 +66,7 @@ class Hot extends React.Component {
     return (
       <div
         className="product-content"
-        style={token.token[1] === "admin" ? dispear : apear}
+        style={this.state.who === "admin" ? dispear : apear}
       >
         <Title name={this.state.name} />
         {this.state.products.map((product) => {

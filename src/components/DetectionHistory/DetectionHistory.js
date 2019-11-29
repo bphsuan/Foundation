@@ -1,5 +1,7 @@
 import React from "react"
 import './DetectionHistory.scss';
+import { navigate } from 'gatsby';
+
 class DetectionHistory extends React.Component {
   constructor(props) {
     super(props);
