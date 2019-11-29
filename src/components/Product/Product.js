@@ -81,6 +81,12 @@ class Product extends React.Component {
       }
     })
   }
+  toProductDetail = () => {
+    console.log(this.props.id);
+    localStorage.removeItem("product_id");
+    localStorage.setItem("product_id", JSON.stringify(this.props.id));
+    navigate("/ProductDetail");
+  }
   render() {
     const colorMain = {
       color: "#FF5151"
@@ -89,7 +95,7 @@ class Product extends React.Component {
       color: "#EFEFEF"
     }
     return (
-      <div id={this.props.id} className="product">
+      <div className="product">
         <div className="product-func">
           <FontAwesomeIcon
             icon={faHeart}
@@ -103,18 +109,24 @@ class Product extends React.Component {
             onClick={this.addCart}
           />
         </div>
-
-        <div className="product-img">
-          <Link to={`/ProductDetail/${this.props.id}`}> <img src={this.props.img} /></Link>
+        <div
+          className="product-img"
+          id={this.props.id}
+          onClick={this.toProductDetail}
+        >
+          <img src={this.props.img} />
         </div>
-        <div className="product-text">
+        <div
+          className="product-text"
+          id={this.props.id}
+          onClick={this.toProductDetail}
+        >
           <p className="product-brand">{this.props.brand}</p>
           <p className="product-name">{this.props.name}</p>
           <p className="price">{this.props.price}</p>
           <p className="new-price">{this.props.new_price}</p>
         </div>
       </div>
-
     )
   }
 }

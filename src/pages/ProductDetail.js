@@ -10,7 +10,8 @@ class Detail extends React.Component {
   render() {
     return (
       <Layout>
-        <ProductDetail Product={this.props.pageContext.product} />
+        {/* <ProductDetail Product={this.props.pageContext.product} /> */}
+        <ProductDetail />
       </Layout>
     )
   }

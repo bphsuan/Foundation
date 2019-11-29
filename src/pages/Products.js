@@ -7,16 +7,10 @@ class Product extends React.Component {
     this.state = {
     }
   }
-  addFavorite = (e) => {
-    console.log(e);
-  }
   render() {
     return (
       <Layout>
-        <ProductContent
-          // products={this.state.products}
-          addFavorite={this.addFavorite}
-        />
+        <ProductContent />
       </Layout>
     )
   }

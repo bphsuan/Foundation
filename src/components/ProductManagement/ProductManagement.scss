@@ -204,6 +204,7 @@
         height: 100%;
         min-height: 120px;
         resize: vertical;
+        font-size: $fontSize-m;
         &:focus {
           outline-color: $color-main;
         }
