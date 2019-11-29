@@ -35,14 +35,14 @@ class Detection extends React.Component {
     })
   }
 
-  render() {
-    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+  componentDidMount() {
+    const token = (window.localStorage.getItem("token")) ? JSON.parse(window.localStorage.getItem("token")) : {
       token: []
     };
-    localStorage.getItem(token);
+    window.localStorage.getItem(token);
     if (token.token[1] === "admin") {
       navigate("/");
-    } else if (localStorage.length === 0) {
+    } else if (window.localStorage.length === 0) {
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
@@ -51,6 +51,9 @@ class Detection extends React.Component {
       })
       navigate("/Login");
     }
+  }
+  render() {
+
     const button = {
       margin: "0",
       padding: "0",

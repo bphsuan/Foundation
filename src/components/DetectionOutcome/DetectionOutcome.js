@@ -14,6 +14,24 @@ class DetectionOutcome extends React.Component {
       color: '#FFDDAA'
     }
   }
+
+  componentDidMount() {
+    const token = (window.localStorage.getItem("token")) ? JSON.parse(window.localStorage.getItem("token")) : {
+      token: []
+    };
+    window.localStorage.getItem(token);
+    if (token.token[1] === "admin") {
+      navigate("/");
+    } else if (window.localStorage.length === 0) {
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigate("/Login");
+        }
+      })
+      navigate("/Login");
+    }
+  }
   render() {
     return (
       <div className="detection-outcome">
