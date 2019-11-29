@@ -14,13 +14,13 @@ import { connect } from 'react-redux';
 import { navigate } from 'gatsby';
 import { Link } from 'gatsby';
 
-let products = "";
+let products = [];
 let coupon = "";
 let couponValue = "";
 let sum = "";
 let checkout = "";
 let delivery = "";
-let deliveryInfo = "";
+let deliveryInfo = [];
 class OrderCheck extends React.Component {
   constructor(props) {
     super(props);
@@ -70,7 +70,7 @@ class OrderCheck extends React.Component {
   }
 
   submitOrder = () => {
-    const data = JSON.parse(localStorage.getItem("product"));
+    const data = JSON.parse(window.localStorage.getItem("product"));
     const orderObj = []
     data.forEach(product => {
       const data = { "Product_Id": product.id, "Cheapest_price": product.Price, "Quantity": product.quantity }
@@ -80,7 +80,7 @@ class OrderCheck extends React.Component {
     this.props.dispatch({
       type: "cart/Send_Cart",
       payload: orderObj,
-      coupon: JSON.parse(localStorage.getItem("coupon")),
+      coupon: JSON.parse(window.localStorage.getItem("coupon")),
       callback: response => {
         if (response.Message === "發生錯誤。") {
           alert("連線逾時，請重新登入");
@@ -108,13 +108,13 @@ class OrderCheck extends React.Component {
           })
           navigate("/Login");
         } else {
-          localStorage.removeItem("sum");
-          localStorage.removeItem("coupon");
-          localStorage.removeItem("couponValue");
-          localStorage.removeItem("sum");
-          localStorage.removeItem("checkout");
-          localStorage.removeItem("delivery");
-          localStorage.removeItem("deliveryInfo");
+          window.localStorage.removeItem("sum");
+          window.localStorage.removeItem("coupon");
+          window.localStorage.removeItem("couponValue");
+          window.localStorage.removeItem("sum");
+          window.localStorage.removeItem("checkout");
+          window.localStorage.removeItem("delivery");
+          window.localStorage.removeItem("deliveryInfo");
         }
       }
     })
