@@ -1,11 +1,11 @@
 import React from "react"
-import './ProductManagement.scss'
-import { connect } from "react-redux";
-import { navigate } from 'gatsby';
+import "./ProductManagement.scss"
+import { connect } from "react-redux"
+import { navigate } from "gatsby"
 
 class AddContent extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       P_Brand: "",
       P_Pic: null,
@@ -13,7 +13,7 @@ class AddContent extends React.Component {
       P_Color: "",
       P_description: "",
       P_Ticket: "",
-      P_OPrice: ""
+      P_OPrice: "",
     }
   }
   addProduct = () => {
@@ -27,100 +27,111 @@ class AddContent extends React.Component {
       Original_price: this.state.P_OPrice,
       Pic: this.state.P_Pic,
     }
-    console.log(this.props.dispatch);
+    console.log(this.props.dispatch)
     this.props.dispatch({
       type: "product/Add_product",
       payload: product,
       callback: resMsg => {
-        console.log(resMsg);
+        console.log(resMsg)
         if (resMsg === "新增成功") {
-          alert(resMsg);
+          alert(resMsg)
           navigate("/ProductManagement")
         } else {
-          alert(resMsg);
+          alert(resMsg)
         }
-      }
+      },
     })
   }
-  changeItem = (e) => {
+  changeItem = e => {
     switch (e.target.id) {
       case "Brand":
         this.setState({
-          P_Brand: e.target.value
+          P_Brand: e.target.value,
         })
-        break;
+        break
       case "Picture":
         this.setState({
-          P_Pic: e.target.files[0]
+          P_Pic: e.target.files[0],
         })
-        break;
+        break
       case "Name":
         this.setState({
-          P_Name: e.target.value
+          P_Name: e.target.value,
         })
-        break;
+        break
       case "OPrice":
         this.setState({
-          P_OPrice: e.target.value
+          P_OPrice: e.target.value,
         })
-        break;
+        break
       case "Color":
         this.setState({
-          P_Color: e.target.value
+          P_Color: e.target.value,
         })
-        break;
+        break
       case "Ticket":
         this.setState({
-          P_Ticket: e.target.value
+          P_Ticket: e.target.value,
         })
-        break;
+        break
       case "Descrpition":
         this.setState({
-          P_description: e.target.value
+          P_description: e.target.value,
         })
-        break;
+        break
     }
   }
-  render() {
-    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
-      token: []
-    };
-    localStorage.getItem(token);
+  componentDidMount() {
+    const token = window.localStorage.getItem("token")
+      ? JSON.parse(window.localStorage.getItem("token"))
+      : {
+          token: [],
+        }
+    window.localStorage.getItem(token)
     if (token.token[1] === "user") {
-      navigate("/");
-    } else if (localStorage.length === 0) {
+      navigate("/")
+    } else if (window.localStorage.length === 0) {
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigate("/Login");
-        }
+          navigate("/Login")
+        },
       })
-      navigate("/Login");
+      navigate("/Login")
     }
+  }
+  render() {
     return (
       <div className="addProduct">
         <h2>新增產品</h2>
         <div className="addContent">
           <div className="input">
-            <span>品牌</span><input id="Brand" type="text" onChange={this.changeItem} />
+            <span>品牌</span>
+            <input id="Brand" type="text" onChange={this.changeItem} />
           </div>
           <div className="input">
-            <span>上傳照片</span><input id="Picture" type="file" onChange={this.changeItem} />
+            <span>上傳照片</span>
+            <input id="Picture" type="file" onChange={this.changeItem} />
           </div>
           <div className="input">
-            <span>品名</span><input id="Name" type="text" onChange={this.changeItem} />
+            <span>品名</span>
+            <input id="Name" type="text" onChange={this.changeItem} />
           </div>
           <div className="input">
-            <span>原始價格</span><input id="OPrice" type="text" onChange={this.changeItem} />
+            <span>原始價格</span>
+            <input id="OPrice" type="text" onChange={this.changeItem} />
           </div>
           <div className="input">
-            <span>色號</span><input id="Color" type="text" onChange={this.changeItem} />
+            <span>色號</span>
+            <input id="Color" type="text" onChange={this.changeItem} />
           </div>
           <div className="input">
-            <span>色票</span><input id="Ticket" type="text" onChange={this.changeItem} />
+            <span>色票</span>
+            <input id="Ticket" type="text" onChange={this.changeItem} />
           </div>
           <div className="input input2">
-            <span>描述</span><textarea id="Descrpition" onChange={this.changeItem} />
+            <span>描述</span>
+            <textarea id="Descrpition" onChange={this.changeItem} />
           </div>
           <div className="summit-btn">
             <a onClick={this.addProduct}>新增</a>
@@ -129,4 +140,5 @@ class AddContent extends React.Component {
       </div>
     )
   }
-} export default connect()(AddContent);
+}
+export default connect()(AddContent)
