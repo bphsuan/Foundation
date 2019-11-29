@@ -16,9 +16,12 @@ class Hot extends React.Component {
   }
   componentDidMount() {
     this.getProductHot();
+    const token = (window.localStorage.getItem("token")) ? JSON.parse(window.localStorage.getItem("token")) : {
+      token: []
+    };
   }
   getProductHot = () => {
-    const permission = JSON.parse(localStorage.getItem("token"));
+    const permission = JSON.parse(window.localStorage.getItem("token"));
     if (localStorage.length === 0) {
       this.props.dispatch({
         type: "product/Get_productsHot3",
@@ -47,10 +50,9 @@ class Hot extends React.Component {
       })
     }
   }
+
   render() {
-    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
-      token: []
-    };
+
     const dispear = {
       display: "none",
     }

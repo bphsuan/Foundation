@@ -74,14 +74,17 @@ class Contact extends React.Component {
     }
 
   }
-  render() {
-    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
+  componentDidMount() {
+    const token = (window.localStorage.getItem("token")) ? JSON.parse(window.localStorage.getItem("token")) : {
       token: []
     };
-    localStorage.getItem(token);
+    window.localStorage.getItem(token);
     if (token.token[1] === "admin") {
       navigate("/");
     }
+  }
+  render() {
+
     return (
       <div className="contact">
         <div className="contact-bar">
