@@ -19,25 +19,26 @@ class PersonalHeader extends React.Component {
     }
   }
   componentDidMount() {
-    this.setState({ location: window.location.pathname }) //抓路由
-
-  }
-  render() {
-    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
-      token: []
-    };
-    localStorage.getItem(token);
-    if (token.token[1] === "admin") {
-      navigate("/");
-    } else if (localStorage.length === 0) {
+    const token = window.localStorage.getItem("token")
+      ? JSON.parse(window.localStorage.getItem("token"))
+      : {
+        token: [],
+      }
+    window.localStorage.getItem(token)
+    if (token.token[1] === "user") {
+      navigate("/")
+    } else if (window.localStorage.length === 0) {
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigate("/Login");
-        }
+          navigate("/Login")
+        },
       })
-      navigate("/Login");
+      navigate("/Login")
     }
+    this.setState({ location: window.location.pathname }) //抓路由
+  }
+  render() {
     return (
       <div className="personal-header">
         <ModifyHead />

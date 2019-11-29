@@ -17,6 +17,23 @@ class ShoppingCart extends React.Component {
     }
   }
   componentDidMount() {
+    const token = window.localStorage.getItem("token")
+      ? JSON.parse(window.localStorage.getItem("token"))
+      : {
+        token: [],
+      }
+    window.localStorage.getItem(token)
+    if (token.token[1] === "user") {
+      navigate("/")
+    } else if (window.localStorage.length === 0) {
+      this.props.dispatch({
+        type: "member/logout",
+        callback: () => {
+          navigate("/Login")
+        },
+      })
+      navigate("/Login")
+    }
     this.GET_Cart();
   }
   GET_Cart = () => {
@@ -50,23 +67,6 @@ class ShoppingCart extends React.Component {
     })
   }
   render() {
-    const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
-      token: []
-    };
-    localStorage.getItem(token);
-    if (token.token[1] === "admin") {
-      console.log(this.props.isLogin);
-      navigate("/");
-    } else if (localStorage.length === 0) {
-      console.log(this.props.isLogin);
-      this.props.dispatch({
-        type: "member/logout",
-        callback: () => {
-          navigate("/Login");
-        }
-      })
-      navigate("/Login");
-    }
     return (
       <div className="product-content">
         {this.state.products.map((product, i) => {
