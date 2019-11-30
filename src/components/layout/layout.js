@@ -10,6 +10,7 @@ import memberAdminModel from '../../models/memberAdminModel';
 import productAdminModel from '../../models/productAdminModel';
 import contactModel from '../../models/contactModel';
 import chartModel from '../../models/chartModel';
+import faceModel from '../../models/faceModel';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import ToTop from '../ToTop/ToTop';
@@ -25,6 +26,7 @@ app.model(productAdminModel);
 app.model(contactModel);
 app.model(couponModel);
 app.model(chartModel);
+app.model(faceModel);
 app.start();
 const store = app._store;
 

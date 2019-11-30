@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from 'gatsby';
 import Layout from '../components/Layout/Layout';
-import DetectionHeader from '../components/DetectionHeader/DetectionHeader';
-import DetectionOutcome from '../components/DetectionOutcome/DetectionOutcome';
-class Detection extends React.Component {
+import Detection from '../components/Detection/Detection';
+
+class FaceDetection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {}
@@ -11,10 +11,9 @@ class Detection extends React.Component {
   render() {
     return (
       <Layout>
-        <DetectionHeader />
-        <DetectionOutcome />
+        <Detection />
       </Layout>
     )
   }
 }
-export default Detection
+export default FaceDetection
