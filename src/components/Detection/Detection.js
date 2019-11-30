@@ -82,7 +82,7 @@ class DetectionOutcome extends React.Component {
     }
     this.setState({
       setOpen: false,
-      open: false
+      open: false 
     })
   }
   upload(e) {
