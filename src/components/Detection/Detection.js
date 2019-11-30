@@ -24,7 +24,8 @@ class DetectionOutcome extends React.Component {
       picture: null,
       products: [
       ],
-      color: '#FFDDAA'
+      color: '#FFDDAA',
+      outcome: []
     }
   }
   componentDidMount() {
@@ -57,6 +58,28 @@ class DetectionOutcome extends React.Component {
     })
   }
   handleClose() {
+    const ImgData = this.state.picture;
+    let form = new FormData();
+    form.append('file', ImgData)
+    console.log(ImgData);
+    if (this.state.picture != null) {
+      this.props.dispatch({
+        type: "face/uploadUserPic",
+        payload: form,
+        callback: response => {
+          this.setState({ outcome: response })
+          console.log("回傳:" + this.state.outcome);
+          // if (response === "上傳圖片成功") {
+          //   alert(response);
+          //   this.setState({
+          //     setOpen: false,
+          //     open: false,
+          //   })
+          //   window.location.reload();
+          // }
+        }
+      })
+    }
     this.setState({
       setOpen: false,
       open: false
