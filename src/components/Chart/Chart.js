@@ -1,46 +1,22 @@
 import React from 'react';
 import './Chart.scss';
-// import { Chart, Geom, Axis, Tooltip, Legend, Coord, Guide, Label } from 'bizcharts';
-// import DataSet from "@antv/data-set";
+import Title from '../Title/Title';
+import { Bar } from 'react-chartjs-2';
 import { connect } from "react-redux";
 import { navigate } from 'gatsby';
-// import CanvasJSReact from '../../canvasjs.react';
-// var CanvasJS = CanvasJSReact.CanvasJS;
-// var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-// 長條圖的欄位
-// const cols = {
-//   sold: { alias: '次數' },
-//   genre: { alias: '品牌' }
-// };
-// const cols1 = {
-//   sold: { alias: '人數' },
-//   genre: { alias: '年紀' }
-// };
-
-
-// //餅圖
-// const { DataView } = DataSet;
-// const { Html } = Guide;
-
-// const cols2 = {
-//   percent: {
-//     formatter: val => {
-//       val = (val * 100).toFixed(2) + "%";
-//       return val;
-//     }
-//   }
-// };
-
-// const html1 = "<div style={color:#8c8c8c;font-size:1.16em;text-align: center;width: 10em;}>會員<br><span style={color:#262626;font-size:2.5em;}>"
-// const html2 = "</span>位</div>"
 
 class Chartpie extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      brandHistoryData: [],
-      memberGenderData: [],
-      memberAge: [],
+      titleHotBrand: "熱銷品牌",
+      titleMemberAge: "年齡分佈",
+      brandHistoryKey: [],
+      brandHistoryValue: [],
+      memberGenderKey: [],
+      memberGenderValue: [],
+      memberAgeKey: [],
+      memberAgeValue: [],
       memberTotal: 0
     }
 
@@ -55,18 +31,10 @@ class Chartpie extends React.Component {
     this.props.dispatch({
       type: "chart/Get_brandHistory",
       callback: response => {
-        // this.setState({
-        //   brandHistoryData: response
-        // }, () => {
-        //   console.log(this.state.brandHistoryData);
-        // })
-        console.log(response);
-
         response.forEach(data => {
-          this.state.brandHistoryData.push({ "label": data.genre, "y": data.sold })
+          this.state.brandHistoryKey.push(data.genre)
+          this.state.brandHistoryValue.push(data.sold)
         })
-        console.log(this.state.brandHistoryData);
-
       }
     })
   }
@@ -74,10 +42,9 @@ class Chartpie extends React.Component {
     this.props.dispatch({
       type: "chart/Get_memberAge",
       callback: response => {
-        this.setState({
-          memberAge: response
-        }, () => {
-          console.log(this.state.memberAge);
+        response.forEach(data => {
+          this.state.memberAgeKey.push(data.genre)
+          this.state.memberAgeValue.push(data.sold)
         })
       }
     })
@@ -100,106 +67,55 @@ class Chartpie extends React.Component {
   }
 
   render() {
-    // const dv = new DataView();
-    // dv.source(this.state.memberGenderData).transform({
-    //   type: "percent",
-    //   field: "count",
-    //   dimension: "item",
-    //   as: "percent"
-    // });
-    const options = {
-      title: {
-        text: "Basic Column Chart"
-      },
-      data: [
+    const hotBrand = {
+      labels: this.state.brandHistoryKey,
+      datasets: [
         {
-          // Change type to "doughnut", "line", "splineArea", etc.
-          type: "column",
-          dataPoints: this.state.brandHistoryData
-          // [
-          //   { label: "Apple", y: 10 },
-          //   { label: "Orange", y: 15 },
-          //   { label: "Banana", y: 25 },
-          //   { label: "Mango", y: 30 },
-          //   { label: "Grape", y: 28 }
-          // ]
+          label: '被購買次數',
+          backgroundColor: 'rgba(255, 209, 209)',
+          // borderColor: 'rgba(255,99,132,1)',
+          borderWidth: 0,
+          hoverBackgroundColor: 'rgba(255, 179, 179)',
+          // hoverBorderColor: 'rgba(255,99,132,1)',
+          data: this.state.brandHistoryValue
         }
       ]
-    }
+    };
+    const memberAge = {
+      labels: this.state.memberAgeKey,
+      datasets: [
+        {
+          label: '人數',
+          backgroundColor: 'rgba(255, 209, 209)',
+          // borderColor: 'rgba(255,99,132,1)',
+          borderWidth: 0,
+          hoverBackgroundColor: 'rgba(255, 179, 179)',
+          // hoverBorderColor: 'rgba(255,99,132,1)',
+          data: this.state.memberAgeValue
+        }
+      ]
+    };
     return (
-      <div className="hot-content" >
-        <div id="mountNode">
-          {/* <CanvasJSChart options={options}          /> */}
-          {/* <Chart width={600} height={400} data={this.state.brandHistoryData} scale={cols}>
-            <Axis name="genre" title />
-            <Axis name="sold" title />
-            <Legend position="top" dy={-20} />
-            <Tooltip />
-            <Geom type="interval" position="genre*sold" color="genre" />
-          </Chart>
-          <Chart width={600} height={400} data={this.state.memberAge} scale={cols1}>
-            <Axis name="genre" title />
-            <Axis name="sold" title />
-            <Legend position="top" dy={-20} />
-            <Tooltip />
-            <Geom type="interval" position="genre*sold" color="genre" />
-          </Chart> */}
-          {/*餅圖*/}
-          {/* <Chart
-            height={window.innerHeight}
-            data={dv}
-            scale={cols2}
-            padding={[80, 100, 80, 80]}
-            forceFit
-          >
-            <Coord type={"theta"} radius={0.75} innerRadius={0.6} />
-            <Axis name="percent" />
-            <Legend
-              position="right"
-              offsetY={-window.innerHeight / 2 + 120}
-              offsetX={-100}
-            />
-            <Tooltip
-              showTitle={false}
-              itemTpl="<li><span style=&quot;background-color:{color};&quot; class=&quot;g2-tooltip-marker&quot;></span>{name}: {value}</li>"
-            />
-            <Guide>
-              <Html
-                position={["50%", "50%"]}
-                html={html1 + this.state.memberTotal + html2}
-                alignX="middle"
-                alignY="middle"
-              />
-            </Guide>
-            <Geom
-              type="intervalStack"
-              position="percent"
-              color="item"
-              tooltip={[
-                "item*percent",
-                (item, percent) => {
-                  percent = (percent * 100).toFixed(2) + "%";
-                  return {
-                    name: item,
-                    value: percent
-                  };
-                }
-              ]}
-              style={{
-                lineWidth: 1,
-                stroke: "#fff"
-              }}
-            >
-              <Label
-                content="percent"
-                formatter={(val, item) => {
-                  return item.point.item + "：" + val;
-                }}
-              />
-            </Geom>
-          </Chart> */}
-        </div>
-      </div >
+      <div className="chart-content" >
+        <Title name={this.state.titleHotBrand} />
+        <Bar
+          data={hotBrand}
+          width={100}
+          height={100}
+          options={{
+            maintainAspectRatio: false
+          }}
+        />
+        <Title name={this.state.titleMemberAge} />
+        <Bar
+          data={memberAge}
+          width={100}
+          height={100}
+          options={{
+            maintainAspectRatio: false
+          }}
+        />
+      </div>
     )
   }
 }
