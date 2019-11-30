@@ -1,4 +1,4 @@
-import { uploadDetectionPic } from '../services/faceService';
+import { uploadDetectionPic, getDetectHistory } from '../services/faceService';
 
 export default {
   namespace: "face",
@@ -10,6 +10,11 @@ export default {
   effects: {
     * uploadUserPic({ payload, callback }, { call }) {
       const resMsg = yield call(uploadDetectionPic, payload);
+      console.log("hi Model");
+      callback(resMsg);
+    },
+    * getDetectHistory({ payload, callback }, { call }) {
+      const resMsg = yield call(getDetectHistory);
       callback(resMsg);
     },
   },
