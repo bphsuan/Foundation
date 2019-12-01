@@ -192,9 +192,12 @@ class DetectionOutcome extends React.Component {
               }}
             ></div>
             <p>| 推薦之粉底液</p>
+            <p>{this.state.outcome.Brand + " " + this.state.outcome.Name}</p>
+            <img src={DetectPicUrl + this.state.outcome.ProductUrl} />
+            {/* <p>{this.state.outcome}</p> */}
             {/* <ProductContent
-            products={this.state.products}
-          /> */}
+              products={this.state.products}
+            /> */}
           </div>
         </div>
       </div>
