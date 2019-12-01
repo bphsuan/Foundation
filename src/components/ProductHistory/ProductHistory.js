@@ -6,23 +6,26 @@ import './ProductHistory.scss';
 import { Link } from 'gatsby';
 import { connect } from "react-redux";
 import { navigate } from 'gatsby';
-// import { Chart, Geom, Axis, Tooltip, Legend, Coord, Guide, Label } from 'bizcharts';
-// import DataSet from "@antv/data-set";
+import Title from '../Title/Title';
+import { Bar, Radar, Doughnut } from 'react-chartjs-2';
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class ProductHistory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      titlebuyFrequency: "個人購買次數",
+      titlebuyBrand: "購買品牌頻率",
       products: [],
-      buyFrequency: [],
-      buyBrand: [],
-      brandTotal: 0
+      buyFrequencyKey: [],
+      buyFrequencyValue: [],
+      buyBrandKey: [],
+      buyBrandValue: []
     }
   }
   componentDidMount() {
     this.getProductHistory();
-    // this.GET_buyFrequencyChart();
-    // this.GET_buyBrandChart();
+    this.GET_buyFrequencyChart();
+    this.GET_buyBrandChart();
   }
   getProductHistory = () => {
     this.props.dispatch({
@@ -47,11 +50,15 @@ class ProductHistory extends React.Component {
     this.props.dispatch({
       type: "chart/Get_buyFrequency",
       callback: response => {
+        console.log(response);
         this.setState({
-          buyFrequency: response
+          buyFrequencyKey: response.labels,
+          buyFrequencyValue: response.data
         }, () => {
-          console.log(this.state.buyFrequency);
+          console.log(this.state.buyFrequencyKey);
+          console.log(this.state.buyFrequencyValue);
         })
+
       }
     })
   }
@@ -60,109 +67,57 @@ class ProductHistory extends React.Component {
       type: "chart/Get_buyBrand",
       callback: response => {
         console.log(response);
-        response.forEach(data => {
-          this.state.buyBrand.push({ "item": data.label, "count": data.value })
-          this.setState({
-            brandTotal: this.state.brandTotal += JSON.parse(data.value)
-          })
+        this.setState({
+          buyBrandKey: response.labels,
+          buyBrandValue: response.data
         })
-        console.log(this.state.buyBrand);
 
       }
     })
   }
   render() {
-    // const cols = {
-    //   sold: { alias: '次數' },
-    //   genre: { alias: '月份' }
-    // };
-
-    // //餅圖
-    // const { DataView } = DataSet;
-    // const { Html } = Guide;
-
-    // const cols2 = {
-    //   percent: {
-    //     formatter: val => {
-    //       val = (val * 100).toFixed(2) + "%";
-    //       return val;
-    //     }
-    //   }
-    // };
-    // const dv = new DataView();
-    // dv.source(this.state.buyBrand).transform({
-    //   type: "percent",
-    //   field: "count",
-    //   dimension: "item",
-    //   as: "percent"
-    // });
-    // const html1 = "<div style={color:#8c8c8c;font-size:1.16em;text-align: center;width: 10em;}>次數<br><span style={color:#262626;font-size:2.5em;}>"
-    // const html2 = "</span>次</div>"
+    const buyFrequency = {
+      labels: this.state.buyFrequencyKey,
+      datasets: [
+        {
+          label: '每月購買次數',
+          backgroundColor: 'rgba(255, 209, 209)',
+          // borderColor: 'rgba(255,99,132,1)',
+          borderWidth: 0,
+          hoverBackgroundColor: 'rgba(255, 179, 179)',
+          // hoverBorderColor: 'rgba(255,99,132,1)',
+          data: this.state.buyFrequencyValue
+        }
+      ]
+    };
+    const buyBrand = {
+      labels: this.state.buyBrandKey,
+      datasets: [{
+        data: this.state.buyBrandValue,
+        backgroundColor: [
+          '#FFE6D9',
+          '#D1E9E9',
+          '#EEFFBB',
+          '#CCEEFF',
+          '#CCCCFF',
+          '#FFB3FF',
+        ],
+        hoverBackgroundColor: [
+          '#FFCBB3',
+          '#B3D9D9',
+          '#DDFF77',
+          '#77DDFF',
+          '#9999FF',
+          '#FF77FF'
+        ]
+      }]
+    };
     return (
       <div className="product-content">
-        {/* <div id="mountNode">
-          <Chart width={600} height={400} data={this.state.buyFrequency} scale={cols}>
-            <Axis name="genre" title />
-            <Axis name="sold" title />
-            <Legend position="top" dy={-20} />
-            <Tooltip />
-            <Geom type="interval" position="genre*sold" color="genre" />
-          </Chart>
-          <Chart
-            height={window.innerHeight}
-            data={dv}
-            scale={cols2}
-            padding={[80, 100, 80, 80]}
-            forceFit
-          >
-            <Coord type={"theta"} radius={0.75} innerRadius={0.6} />
-            <Axis name="percent" />
-            <Legend
-              position="right"
-              offsetY={-window.innerHeight / 2 + 120}
-              offsetX={-100}
-            />
-            <Tooltip
-              showTitle={false}
-              itemTpl="<li><span style=&quot;background-color:{color};&quot; class=&quot;g2-tooltip-marker&quot;></span>{name}: {value}</li>"
-            />
-            <Guide>
-              <Html
-                position={["50%", "50%"]}
-                html={html1 + this.state.brandTotal + html2}
-                alignX="middle"
-                alignY="middle"
-              />
-            </Guide>
-            <Geom
-              type="intervalStack"
-              position="percent"
-              color="item"
-              tooltip={[
-                "item*percent",
-                (item, percent) => {
-                  percent = (percent * 100).toFixed(2) + "%";
-                  return {
-                    name: item,
-                    value: percent
-                  };
-                }
-              ]}
-              style={{
-                lineWidth: 1,
-                stroke: "#fff"
-              }}
-            >
-              <Label
-                content="percent"
-                formatter={(val, item) => {
-                  return item.point.item + "：" + val;
-                }}
-              />
-            </Geom>
-          </Chart>
-        </div> */}
-
+        <Title name={this.state.titlebuyFrequency} />
+        <Bar data={buyFrequency} />
+        <Title name={this.state.titlebuyBrand} />
+        <Doughnut data={buyBrand} />
         {this.state.products.map((product, i) => {
           let buyTime = product.BuyTime.split("T", 1)[0]
           return (
