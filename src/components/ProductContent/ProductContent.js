@@ -61,6 +61,7 @@ class ProductContent extends React.Component {
       this.props.dispatch({
         type: "product/Get_productsDesc",
         callback: response => {
+          console.log(response);
           this.setState({
             products: response
           })

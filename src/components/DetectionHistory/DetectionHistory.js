@@ -63,7 +63,7 @@ class DetectionHistory extends React.Component {
                 <div className="detect-img">
                   <img src={PicServer + detect.ProductUrl} />
                 </div>
-                <p className="time">2018-10-10</p>
+                <p className="time">{detect.FaceDate.split("T", 1)}</p>
               </div>
             </div>
           )
