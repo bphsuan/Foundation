@@ -1,17 +1,18 @@
-import React from "react"
-import test from "../../images/pic01.png"
-import "./Detection.scss"
-import upload from "../../images/upload.png"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import Button from "@material-ui/core/Button"
-import TextField from "@material-ui/core/TextField"
-import Dialog from "@material-ui/core/Dialog"
-import DialogActions from "@material-ui/core/DialogActions"
-import DialogContent from "@material-ui/core/DialogContent"
-import DialogContentText from "@material-ui/core/DialogContentText"
-import DialogTitle from "@material-ui/core/DialogTitle"
-import { connect } from "react-redux"
-import { navigate } from "gatsby"
+import React from "react";
+import test from "../../images/pic01.png";
+import "./Detection.scss";
+import upload from "../../images/upload.png";
+import loading from "../../images/loading.gif";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import { connect } from "react-redux";
+import { navigate } from "gatsby";
 
 const DetectPicUrl = "http://foundation.hsc.nutc.edu.tw"
 class DetectionOutcome extends React.Component {
@@ -20,6 +21,7 @@ class DetectionOutcome extends React.Component {
     this.state = {
       open: false,
       setOpen: false,
+      loading: false,
       isDetect: false,
       picture: null,
       products: [],
@@ -31,8 +33,8 @@ class DetectionOutcome extends React.Component {
     const token = window.localStorage.getItem("token")
       ? JSON.parse(window.localStorage.getItem("token"))
       : {
-          token: [],
-        }
+        token: [],
+      }
     window.localStorage.getItem(token)
     if (token.token[1] === "admin") {
       navigate("/")
@@ -45,6 +47,10 @@ class DetectionOutcome extends React.Component {
       })
       navigate("/Login")
     }
+    this.setState({
+      loading: false,
+      isDetect: false
+    })
   }
   handleClickOpen() {
     this.setState({
@@ -59,6 +65,9 @@ class DetectionOutcome extends React.Component {
     })
   }
   handleClose() {
+    this.setState({
+      loading: true
+    })
     const ImgData = this.state.picture
     let form = new FormData()
     form.append("file", ImgData)
@@ -67,8 +76,12 @@ class DetectionOutcome extends React.Component {
         type: "face/uploadUserPic",
         payload: form,
         callback: response => {
-          this.setState({ outcome: response })
-          console.log("回傳:" + JSON.stringify(response)) //要把json格式轉字串 不然結果是[object,object]
+          this.setState({
+            loading: false,
+            isDetect: true,
+            outcome: response
+          })
+          console.log(this.state.outcome);
           // if (response === "上傳圖片成功") {
           //   alert(response);
           //   this.setState({
@@ -154,13 +167,20 @@ class DetectionOutcome extends React.Component {
           </Dialog>
         </div>
         <div
+          className="detection-loading"
+          style={this.state.loading ? apear : dispear}
+        >
+          <img src={loading} />
+        </div>
+        <div
           className="detection-outcome"
           style={this.state.isDetect ? apear : dispear}
         >
           <div className="detection-origin">
-            <img src={test} />
+            <img src={DetectPicUrl + this.state.outcome.FaceUrl} />
           </div>
           <div className="detection-text">
+
             <h1>檢測結果</h1>
             <p>| 我的膚色</p>
             <div
@@ -168,7 +188,7 @@ class DetectionOutcome extends React.Component {
               style={{
                 height: "20px",
                 width: "150px",
-                backgroundColor: this.state.color,
+                backgroundColor: this.state.outcome.FaceColor,
               }}
             ></div>
             <p>| 推薦之粉底液</p>
