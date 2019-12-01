@@ -77,6 +77,7 @@ class Hot extends React.Component {
               img={PicServer + product.Url}
               brand={product.Brand}
               name={product.Name}
+              color={product.Color}
               favorite={product.isFavorite}
               new_price={product.Cheapest_price}
               price={product.Original_price}
