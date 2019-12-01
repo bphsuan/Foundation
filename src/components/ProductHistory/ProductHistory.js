@@ -7,7 +7,7 @@ import { Link } from 'gatsby';
 import { connect } from "react-redux";
 import { navigate } from 'gatsby';
 import Title from '../Title/Title';
-import { Bar, Radar, Doughnut } from 'react-chartjs-2';
+import { Bar, Radar, } from 'react-chartjs-2';
 const PicServer = "http://foundation.hsc.nutc.edu.tw";
 class ProductHistory extends React.Component {
   constructor(props) {
@@ -92,32 +92,24 @@ class ProductHistory extends React.Component {
     };
     const buyBrand = {
       labels: this.state.buyBrandKey,
-      datasets: [{
-        data: this.state.buyBrandValue,
-        backgroundColor: [
-          '#FFE6D9',
-          '#D1E9E9',
-          '#EEFFBB',
-          '#CCEEFF',
-          '#CCCCFF',
-          '#FFB3FF',
-        ],
-        hoverBackgroundColor: [
-          '#FFCBB3',
-          '#B3D9D9',
-          '#DDFF77',
-          '#77DDFF',
-          '#9999FF',
-          '#FF77FF'
-        ]
-      }]
+      datasets: [
+        {
+          label: '人數',
+          backgroundColor: 'rgba(198, 198, 226)',
+          // borderColor: 'rgba(255,99,132,1)',
+          borderWidth: 0,
+          hoverBackgroundColor: 'rgba(167, 167, 211)',
+          // hoverBorderColor: 'rgba(255,99,132,1)',
+          data: this.state.buyBrandValue
+        }
+      ]
     };
     return (
       <div className="product-content">
         <Title name={this.state.titlebuyFrequency} />
         <Bar data={buyFrequency} />
         <Title name={this.state.titlebuyBrand} />
-        <Doughnut data={buyBrand} />
+        <Radar data={buyBrand} />
         {this.state.products.map((product, i) => {
           let buyTime = product.BuyTime.split("T", 1)[0]
           return (

@@ -152,11 +152,12 @@ class ProductDetail extends React.Component {
                 <div className="detail-text">
                   <p className="brand">{product.Brand}</p>
                   <p className="name">{product.Name}</p>
+                  <p className="color">[{product.Color}]</p>
                   <p className="new-price">
                     <span className="price">
-                      {product.Original_price}
+                      ${product.Original_price}
                     </span>
-                    {product.Cheapest_price}
+                    ${product.Cheapest_price}
                   </p>
                   <p className="description">{product.Info}</p>
                   <br />

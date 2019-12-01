@@ -123,8 +123,9 @@ class Product extends React.Component {
         >
           <p className="product-brand">{this.props.brand}</p>
           <p className="product-name">{this.props.name}</p>
-          <span className="price">{this.props.price}</span>
-          <span className="new-price">{this.props.new_price}</span>
+          <p className="product-color">[{this.props.color}]</p>
+          <span className="price">${this.props.price}</span>
+          <span className="new-price">${this.props.new_price}</span>
         </div>
       </div>
     )
