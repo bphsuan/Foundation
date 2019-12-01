@@ -1,74 +1,74 @@
-import React from 'react';
-import test from '../../images/pic01.png';
-import './Detection.scss';
-import upload from '../../images/upload.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { connect } from 'react-redux';
-import { navigate } from 'gatsby';
+import React from "react"
+import test from "../../images/pic01.png"
+import "./Detection.scss"
+import upload from "../../images/upload.png"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Button from "@material-ui/core/Button"
+import TextField from "@material-ui/core/TextField"
+import Dialog from "@material-ui/core/Dialog"
+import DialogActions from "@material-ui/core/DialogActions"
+import DialogContent from "@material-ui/core/DialogContent"
+import DialogContentText from "@material-ui/core/DialogContentText"
+import DialogTitle from "@material-ui/core/DialogTitle"
+import { connect } from "react-redux"
+import { navigate } from "gatsby"
 
-const DetectPicUrl = "http://foundation.hsc.nutc.edu.tw";
+const DetectPicUrl = "http://foundation.hsc.nutc.edu.tw"
 class DetectionOutcome extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       open: false,
       setOpen: false,
       isDetect: false,
       picture: null,
-      products: [
-      ],
-      color: '#FFDDAA',
-      outcome: []
+      products: [],
+      color: "#FFDDAA",
+      outcome: [],
     }
   }
   componentDidMount() {
-    const token = (window.localStorage.getItem("token")) ? JSON.parse(window.localStorage.getItem("token")) : {
-      token: []
-    };
-    window.localStorage.getItem(token);
+    const token = window.localStorage.getItem("token")
+      ? JSON.parse(window.localStorage.getItem("token"))
+      : {
+          token: [],
+        }
+    window.localStorage.getItem(token)
     if (token.token[1] === "admin") {
-      navigate("/");
+      navigate("/")
     } else if (window.localStorage.length === 0) {
       this.props.dispatch({
         type: "member/logout",
         callback: () => {
-          navigate("/Login");
-        }
+          navigate("/Login")
+        },
       })
-      navigate("/Login");
+      navigate("/Login")
     }
   }
   handleClickOpen() {
     this.setState({
       setOpen: true,
-      open: true
+      open: true,
     })
   }
   handleCancel() {
     this.setState({
       setOpen: false,
-      open: false
+      open: false,
     })
   }
   handleClose() {
-    const ImgData = this.state.picture;
-    let form = new FormData();
-    form.append('file', ImgData)
-    console.log(ImgData);
+    const ImgData = this.state.picture
+    let form = new FormData()
+    form.append("file", ImgData)
     if (this.state.picture != null) {
       this.props.dispatch({
         type: "face/uploadUserPic",
         payload: form,
         callback: response => {
           this.setState({ outcome: response })
-          console.log("回傳:" + this.state.outcome);
+          console.log("回傳:" + JSON.stringify(response)) //要把json格式轉字串 不然結果是[object,object]
           // if (response === "上傳圖片成功") {
           //   alert(response);
           //   this.setState({
@@ -77,17 +77,17 @@ class DetectionOutcome extends React.Component {
           //   })
           //   window.location.reload();
           // }
-        }
+        },
       })
     }
     this.setState({
       setOpen: false,
-      open: false 
+      open: false,
     })
   }
   upload(e) {
     this.setState({
-      picture: e.target.files[0]
+      picture: e.target.files[0],
     })
     console.log(this.state.picture)
   }
@@ -107,30 +107,32 @@ class DetectionOutcome extends React.Component {
       lineHeight: "40px",
       transition: "all 0.5s",
       letterSpacing: "3px",
-      borderRadius: "0"
+      borderRadius: "0",
     }
     const apear = {
-      display: "block"
+      display: "block",
     }
     const dispear = {
-      display: "none"
+      display: "none",
     }
     return (
       <div>
         <div className="detection-header">
-          <img src={upload} onClick={this.handleClickOpen.bind(this)} title="上傳圖片" />
+          <img
+            src={upload}
+            onClick={this.handleClickOpen.bind(this)}
+            title="上傳圖片"
+          />
           <Dialog
             open={this.state.open}
             onClose={this.handleClose.bind(this)}
-            aria-labelledby="form-dialog-title" >
-            <DialogTitle
-              id="form-dialog-title">
-              上傳欲檢測之圖片
-          </DialogTitle>
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">上傳欲檢測之圖片</DialogTitle>
             <DialogContent>
               <DialogContentText>
                 請點選『選擇檔案』上傳您的圖片。
-          </DialogContentText>
+              </DialogContentText>
               <TextField
                 autoFocus
                 margin="dense"
@@ -142,19 +144,14 @@ class DetectionOutcome extends React.Component {
               />
             </DialogContent>
             <DialogActions>
-              <Button
-                onClick={this.handleCancel.bind(this)}
-                style={button}>
+              <Button onClick={this.handleCancel.bind(this)} style={button}>
                 取消
-            </Button>
-              <Button
-                onClick={this.handleClose.bind(this)}
-                style={button}>
+              </Button>
+              <Button onClick={this.handleClose.bind(this)} style={button}>
                 上傳
-            </Button>
+              </Button>
             </DialogActions>
           </Dialog>
-
         </div>
         <div
           className="detection-outcome"
@@ -166,7 +163,14 @@ class DetectionOutcome extends React.Component {
           <div className="detection-text">
             <h1>檢測結果</h1>
             <p>| 我的膚色</p>
-            <div className="detect-color" style={{ height: '20px', width: '150px', backgroundColor: this.state.color }}></div>
+            <div
+              className="detect-color"
+              style={{
+                height: "20px",
+                width: "150px",
+                backgroundColor: this.state.color,
+              }}
+            ></div>
             <p>| 推薦之粉底液</p>
             {/* <ProductContent
             products={this.state.products}
