@@ -28,7 +28,6 @@
     }
     .team-content {
       width: 70%;
-      text-align: right;
       @include mobile {
         & {
           width: 70%;
@@ -38,6 +37,10 @@
         & {
           width: 60%;
         }
+      }
+      p {
+        line-height: 2;
+        font-size: $fontSize-s;
       }
     }
     .team-title {

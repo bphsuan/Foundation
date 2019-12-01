@@ -176,7 +176,6 @@ class ProductContent extends React.Component {
         type: "product/Search_products",
         payload: search,
         callback: response => {
-          console.log(response);
           this.setState({
             products: response
           })
