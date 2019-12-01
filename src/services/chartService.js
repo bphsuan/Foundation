@@ -25,7 +25,7 @@ function buyFrequencyChart() {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
   };
-  return fetch(chartServer + "GetBuyFrequency", {
+  return fetch(chartServer + "GetBuyFrequencyForWeb", {
     method: "GET",
     headers: ({
       "Content-Type": "application/json",
@@ -39,7 +39,7 @@ function buyBrandChart() {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {
     token: []
   };
-  return fetch(chartServer + "GetBuyBrand", {
+  return fetch(chartServer + "GetBuyBrandForWeb", {
     method: "GET",
     headers: ({
       "Content-Type": "application/json",
