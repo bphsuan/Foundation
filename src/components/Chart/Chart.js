@@ -33,24 +33,24 @@ class Chartpie extends React.Component {
         })
       }
     })
-    // await this.props.dispatch({
-    //   type: "chart/Get_memberAge",
-    //   callback: response => {
-    //     response.forEach(data => {
-    //       this.state.memberAgeKey.push(data.genre)
-    //       this.state.memberAgeValue.push(data.sold)
-    //     })
-    //   }
-    // })
-    // await this.props.dispatch({
-    //   type: "chart/Get_memberGender",
-    //   callback: response => {
-    //     response.forEach(data => {
-    //       this.state.memberGenderKey.push(data.genre)
-    //       this.state.memberGenderValue.push(data.sold)
-    //     })
-    //   }
-    // })
+    await this.props.dispatch({
+      type: "chart/Get_memberAge",
+      callback: response => {
+        this.setState({
+          memberAgeKey: response.labels,
+          memberAgeValue: response.data
+        })
+      }
+    })
+    await this.props.dispatch({
+      type: "chart/Get_memberGender",
+      callback: response => {
+        this.setState({
+          memberGenderKey: response.labels,
+          memberGenderValue: response.data
+        })
+      }
+    })
   }
   render() {
     const hotBrand = {
@@ -86,12 +86,12 @@ class Chartpie extends React.Component {
       datasets: [{
         data: this.state.memberGenderValue,
         backgroundColor: [
-          '#FF6384',
-          '#36A2EB',
+          '#FFE6D9',
+          '#D1E9E9',
         ],
         hoverBackgroundColor: [
-          '#FF6384',
-          '#36A2EB',
+          '#FFCBB3',
+          '#B3D9D9',
         ]
       }]
     };

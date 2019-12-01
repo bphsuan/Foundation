@@ -8,14 +8,14 @@ function brandHistoryChart() {
   }).then(response => response.json())
 }
 function memberGenderChart() {
-  return fetch(chartServer + "GetGender", {
+  return fetch(chartServer + "GetGenderFoeWeb", {
     method: "GET",
     headers: ({
     })
   }).then(response => response.json())
 }
 function memberAge() {
-  return fetch(chartServer + "GetAge", {
+  return fetch(chartServer + "GetAgeForWeb", {
     method: "GET",
     headers: ({
     })
