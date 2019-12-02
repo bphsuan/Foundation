@@ -144,11 +144,10 @@ class DetectionOutcome extends React.Component {
     return (
       <div>
         <div className="detection-header">
-          <img
-            src={upload}
+          <button
             onClick={this.handleClickOpen.bind(this)}
             title="上傳圖片"
-          />
+          >上傳圖片</button>
           <Dialog
             open={this.state.open}
             onClose={this.handleClose.bind(this)}
@@ -187,7 +186,7 @@ class DetectionOutcome extends React.Component {
           <div className="text">
             <p>拍攝臉部特寫照片，並請盡量於光線充足的地方拍攝。</p>
             <p className="step"><FontAwesomeIcon icon={faArrowDown} /></p>
-            <p>點選上方按鈕上傳臉部特寫照片。</p>
+            <p>點選上方「上傳圖片」按鈕上傳臉部特寫照片。</p>
             <p className="step"><FontAwesomeIcon icon={faArrowDown} /></p>
             <p>請耐心稍待紅粉知己為您分析您的膚色。</p>
             <p className="step"><FontAwesomeIcon icon={faArrowDown} /></p>

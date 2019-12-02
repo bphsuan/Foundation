@@ -63,7 +63,7 @@ class DetectionHistory extends React.Component {
                 <div className="detect-color" style={{ height: '20px', backgroundColor: detect.FaceColor, }}></div>
                 <p className="detect-">推薦之產品</p>
                 <p className="detect-product">{detect.Brand + detect.Name}</p>
-                <p className="detect-color">{detect.Ticket}</p>
+                <p className="detect-color">{detect.Color}</p>
                 <p className="time">{detect.FaceDate.split("T", 1)}</p>
               </div>
             </div>

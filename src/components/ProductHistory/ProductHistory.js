@@ -14,7 +14,7 @@ class ProductHistory extends React.Component {
     super(props);
     this.state = {
       titlebuyFrequency: "個人購買次數",
-      titlebuyBrand: "購買品牌頻率",
+      titlebuyBrand: "品牌購買頻率",
       products: [],
       buyFrequencyKey: [],
       buyFrequencyValue: [],

@@ -112,7 +112,7 @@ class Header extends React.Component {
           <Link
             id="detection"
             to={this.props.isLogin === "user" ? "/Detection" : "/Login"}
-            className={this.state.location === "/Detection" ? "active" : ""}
+            className={this.state.location === "/Detection" || this.state.location === "/Detection/" ? "active" : ""}
             style={this.props.isLogin === "admin" ? iconDispear : iconApear}
             onClick={this.toDetection}
           >
