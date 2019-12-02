@@ -6,11 +6,21 @@
   background-color: #efefef;
   text-align: center;
   //   display: flex;
-  img {
-    height: 160px;
-    width: auto;
+  button {
+    width: 100px;
+    height: 40px;
+    margin: 60px auto;
+    background-color: $color-normal;
+    color: $color-white;
+    display: block;
+    text-align: center;
+    line-height: 40px;
+    transition: $transition;
+    letter-spacing: $letterSpacing-m;
+    font-size: $fontSize-m;
     &:hover {
       cursor: pointer;
+      color: $color-main;
     }
   }
 }
