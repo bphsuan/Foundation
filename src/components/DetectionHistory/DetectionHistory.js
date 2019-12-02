@@ -56,13 +56,14 @@ class DetectionHistory extends React.Component {
               className="detect"
             >
               <div className="detect-text">
+                <div className="detect-img">
+                  <img src={PicServer + detect.FaceUrl} />
+                </div>
                 <p>我的色號</p>
                 <div className="detect-color" style={{ height: '20px', backgroundColor: detect.FaceColor, }}></div>
                 <p className="detect-">推薦之產品</p>
                 <p className="detect-product">{detect.Brand + detect.Name}</p>
-                <div className="detect-img">
-                  <img src={PicServer + detect.ProductUrl} />
-                </div>
+                <p className="detect-color">{detect.Ticket}</p>
                 <p className="time">{detect.FaceDate.split("T", 1)}</p>
               </div>
             </div>
