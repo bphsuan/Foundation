@@ -100,10 +100,14 @@ class Chartpie extends React.Component {
       <div className="chart-content" >
         <Title name={this.state.titleHotBrand} />
         <Bar data={hotBrand} />
-        <Title name={this.state.titleMemberAge} />
-        <Radar data={memberAge} />
-        <Title name={this.state.titleMemberGender} />
-        <Doughnut data={memberGender} />
+        <div className="chart-block">
+          <Title name={this.state.titleMemberAge} />
+          <Radar data={memberAge} />
+        </div>
+        <div className="chart-block">
+          <Title name={this.state.titleMemberGender} />
+          <Doughnut data={memberGender} />
+        </div>
       </div>
     )
   }

@@ -81,10 +81,10 @@ class ProductHistory extends React.Component {
       datasets: [
         {
           label: '每月購買次數',
-          backgroundColor: 'rgba(255, 209, 209)',
+          backgroundColor: 'rgba(235, 214, 214)',
           // borderColor: 'rgba(255,99,132,1)',
           borderWidth: 0,
-          hoverBackgroundColor: 'rgba(255, 179, 179)',
+          hoverBackgroundColor: 'rgba(226, 197, 197)',
           // hoverBorderColor: 'rgba(255,99,132,1)',
           data: this.state.buyFrequencyValue
         }
@@ -95,10 +95,10 @@ class ProductHistory extends React.Component {
       datasets: [
         {
           label: '人數',
-          backgroundColor: 'rgba(198, 198, 226)',
+          backgroundColor: 'rgba(255, 244, 194)',
           // borderColor: 'rgba(255,99,132,1)',
           borderWidth: 0,
-          hoverBackgroundColor: 'rgba(167, 167, 211)',
+          hoverBackgroundColor: 'rgba(255, 238, 153)',
           // hoverBorderColor: 'rgba(255,99,132,1)',
           data: this.state.buyBrandValue
         }
@@ -106,10 +106,14 @@ class ProductHistory extends React.Component {
     };
     return (
       <div className="product-content">
-        <Title name={this.state.titlebuyFrequency} />
-        <Bar data={buyFrequency} />
-        <Title name={this.state.titlebuyBrand} />
-        <Radar data={buyBrand} />
+        <div className="chart-block">
+          <Title name={this.state.titlebuyFrequency} />
+          <Bar data={buyFrequency} />
+        </div>
+        <div className="chart-block">
+          <Title name={this.state.titlebuyBrand} />
+          <Radar data={buyBrand} />
+        </div>
         {this.state.products.map((product, i) => {
           let buyTime = product.BuyTime.split("T", 1)[0]
           return (
