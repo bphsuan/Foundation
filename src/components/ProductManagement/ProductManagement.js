@@ -63,19 +63,21 @@ class ProductManagement extends React.Component {
     })
   }
   submitOrder() {
+    console.log(this.state.deleteId);
     this.props.dispatch({
       type: "productAdmin/AdminDelete_product",
       payload: this.state.deleteId,
       callback: response => {
         console.log(response);
+        this.setState({
+          setOpen: false,
+          open: false,
+          deleteId: "",
+        }, () => {
+          window.location.reload();
+        })
       }
     })
-    this.setState({
-      setOpen: false,
-      open: false,
-      deleteId: "",
-    })
-    window.location.reload();
   }
   handleClose() {
     this.setState({
