@@ -1,4 +1,4 @@
-const cartSever = "http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/Cart/"
+const cartSever = "http://findyourfoundation.southcentralus.cloudapp.azure.com:8080/api/Cart/"
 
 function addCart(data) {
   console.log(data);

@@ -2,7 +2,7 @@
 // exports.createPages = async ({ actions }) => {
 //   const { createPage } = actions
 //   // Fetch the data
-//   const res = await fetch(`http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/Product/GetProducts`);
+//   const res = await fetch(`http://findyourfoundation.southcentralus.cloudapp.azure.com:8080/api/Product/GetProducts`);
 //   // Transform the data into json
 //   const data = await res.json();
 //   data.forEach(product => {

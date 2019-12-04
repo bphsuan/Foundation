@@ -1,4 +1,4 @@
-const faceServer = "http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/Face/"
+const faceServer = "http://findyourfoundation.southcentralus.cloudapp.azure.com:8080/api/Face/"
 
 function uploadDetectionPic(Img) {
   const token = localStorage.getItem("token")

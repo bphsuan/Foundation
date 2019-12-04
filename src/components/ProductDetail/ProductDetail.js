@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { navigate } from 'gatsby';
 
 let hash = ""
-const PicServer = "http://findyourfoundation.westindia.cloudapp.azure.com:8080";
+const PicServer = "http://findyourfoundation.southcentralus.cloudapp.azure.com:8080";
 class ProductDetail extends React.Component {
   constructor(props) {
     super(props)

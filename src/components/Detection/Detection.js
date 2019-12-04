@@ -17,7 +17,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { connect } from "react-redux";
 import { navigate } from "gatsby";
 
-const DetectPicUrl = "http://findyourfoundation.westindia.cloudapp.azure.com:8080"
+const DetectPicUrl = "http://findyourfoundation.southcentralus.cloudapp.azure.com:8080"
 class DetectionOutcome extends React.Component {
   constructor(props) {
     super(props)
