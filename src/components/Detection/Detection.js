@@ -85,19 +85,26 @@ class DetectionOutcome extends React.Component {
         type: "face/uploadUserPic",
         payload: form,
         callback: response => {
-          this.setState({
-            description: false,
-            loading: false,
-            isDetect: true,
-            outcome: response
-          })
-          console.log(this.state.outcome);
+          console.log(response);
           this.props.dispatch({
             type: "product/Get_productsAsc",
             callback: response => {
               this.setState({
                 products: response
               })
+            }
+          })
+          this.props.dispatch({
+            type: "face/doDetectPic",
+            payload: form,
+            callback: response => {
+              this.setState({
+                description: false,
+                loading: false,
+                isDetect: true,
+                outcome: response
+              })
+              console.log(this.state.outcome);
             }
           })
         },
