@@ -1,6 +1,6 @@
-const memberServer = "http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/Customer/";
-const memberAdminService = 'http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/Admin/';
-const buyHistoryService = 'http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/BuyHistory/';
+const memberServer = "http://findyourfoundation.southcentralus.cloudapp.azure.com:8080/api/Customer/";
+const memberAdminService = 'http://findyourfoundation.southcentralus.cloudapp.azure.com:8080/api/Admin/';
+const buyHistoryService = 'http://findyourfoundation.southcentralus.cloudapp.azure.com:8080/api/BuyHistory/';
 
 function register(data) {
   return fetch(memberServer + "Register", {

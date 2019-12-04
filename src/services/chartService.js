@@ -1,4 +1,4 @@
-const chartServer = "http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/Chart/";
+const chartServer = "http://findyourfoundation.southcentralus.cloudapp.azure.com:8080/api/Chart/";
 
 function brandHistoryChart() {
   return fetch(chartServer + "GetBrandHistoryForWeb", {

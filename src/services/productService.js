@@ -1,5 +1,5 @@
-const productSever = "http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/Product/"
-const productAdminSever = "http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/Admin/"
+const productSever = "http://findyourfoundation.southcentralus.cloudapp.azure.com:8080/api/Product/"
+const productAdminSever = "http://findyourfoundation.southcentralus.cloudapp.azure.com:8080/api/Admin/"
 
 function addProduct(data) {
   console.log(data);
