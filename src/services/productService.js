@@ -1,5 +1,5 @@
-const productSever = "http://foundation.hsc.nutc.edu.tw/api/Product/"
-const productAdminSever = "http://foundation.hsc.nutc.edu.tw/api/Admin/"
+const productSever = "http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/Product/"
+const productAdminSever = "http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/Admin/"
 
 function addProduct(data) {
   console.log(data);

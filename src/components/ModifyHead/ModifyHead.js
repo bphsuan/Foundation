@@ -10,7 +10,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from "react-redux";
 
-const UserPicUrl = "http://foundation.hsc.nutc.edu.tw";
+const UserPicUrl = "http://findyourfoundation.westindia.cloudapp.azure.com:8080";
 class ModifyHead extends React.Component {
   constructor(props) {
     super(props);
