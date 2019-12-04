@@ -2,7 +2,7 @@ import React from "react"
 import './DetectionHistory.scss';
 import { navigate } from 'gatsby';
 import { connect } from 'react-redux';
-const PicServer = "http://foundation.hsc.nutc.edu.tw";
+const PicServer = "http://findyourfoundation.westindia.cloudapp.azure.com:8080";
 class DetectionHistory extends React.Component {
   constructor(props) {
     super(props);

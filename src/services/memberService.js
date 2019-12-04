@@ -1,6 +1,6 @@
-const memberServer = "http://foundation.hsc.nutc.edu.tw/api/Customer/";
-const memberAdminService = 'http://foundation.hsc.nutc.edu.tw/api/Admin/';
-const buyHistoryService = 'http://foundation.hsc.nutc.edu.tw/api/BuyHistory/';
+const memberServer = "http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/Customer/";
+const memberAdminService = 'http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/Admin/';
+const buyHistoryService = 'http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/BuyHistory/';
 
 function register(data) {
   return fetch(memberServer + "Register", {

@@ -1,4 +1,4 @@
-const contactServer = "http://foundation.hsc.nutc.edu.tw/api/Contact/";
+const contactServer = "http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/Contact/";
 
 function sendContact(data) {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {

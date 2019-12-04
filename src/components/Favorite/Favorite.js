@@ -4,7 +4,7 @@ import './Favorite.scss';
 import { connect } from 'react-redux';
 import { navigate } from 'gatsby';
 
-const PicServer = "http://foundation.hsc.nutc.edu.tw";
+const PicServer = "http://findyourfoundation.westindia.cloudapp.azure.com:8080";
 class Favorite extends React.Component {
   constructor(props) {
     super(props);

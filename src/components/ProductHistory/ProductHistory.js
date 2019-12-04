@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { navigate } from 'gatsby';
 import Title from '../Title/Title';
 import { Bar, Radar, } from 'react-chartjs-2';
-const PicServer = "http://foundation.hsc.nutc.edu.tw";
+const PicServer = "http://findyourfoundation.westindia.cloudapp.azure.com:8080";
 class ProductHistory extends React.Component {
   constructor(props) {
     super(props);

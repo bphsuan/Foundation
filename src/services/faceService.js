@@ -1,11 +1,11 @@
-const faceServer = "http://foundation.hsc.nutc.edu.tw/api/Face/"
+const faceServer = "http://findyourfoundation.westindia.cloudapp.azure.com:8080/api/Face/"
 
 function uploadDetectionPic(Img) {
   const token = localStorage.getItem("token")
     ? JSON.parse(localStorage.getItem("token"))
     : {
-        token: [],
-      }
+      token: [],
+    }
   return fetch(faceServer + "SkinDetection", {
     method: "POST",
     headers: {
@@ -21,8 +21,8 @@ function getDetectHistory() {
   const token = localStorage.getItem("token")
     ? JSON.parse(localStorage.getItem("token"))
     : {
-        token: [],
-      }
+      token: [],
+    }
   return fetch(faceServer + "GetFaceHistoryByAcc", {
     method: "GET",
     headers: {
