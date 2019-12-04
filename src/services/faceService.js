@@ -18,7 +18,7 @@ function uploadDetectionPic(Img) {
     body: Img,
   }).then(response => response.json())
 }
-async function doDetectionPic(Img) {
+async function doDetectPic(Img) {
   const token = localStorage.getItem("token")
     ? JSON.parse(localStorage.getItem("token"))
     : {
@@ -51,4 +51,4 @@ function getDetectHistory() {
     },
   }).then(response => response.json())
 }
-export { uploadDetectionPic, getDetectHistory, doDetectionPic }
+export { uploadDetectionPic, getDetectHistory, doDetectPic }
