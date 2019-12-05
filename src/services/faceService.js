@@ -1,4 +1,4 @@
-const faceServer = "http://findyourfoundation.southcentralus.cloudapp.azure.com:8080/api/Face/"
+const faceServer = "http://foundation.hsc.nutc.edu.tw/api/Face/"
 const detectPIC = "http://foundation.hsc.nutc.edu.tw/api/Face/"
 
 function uploadDetectionPic(Img) {
@@ -7,7 +7,7 @@ function uploadDetectionPic(Img) {
     : {
       token: [],
     }
-  return fetch(detectPIC + "InsertFacePic", {
+  return fetch(detectPIC + "Random", {
     method: "POST",
     headers: {
       //上傳圖片不需要先填content-type
