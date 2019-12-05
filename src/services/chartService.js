@@ -1,4 +1,4 @@
-const chartServer = "http://findyourfoundation.southcentralus.cloudapp.azure.com:8080/api/Chart/";
+const chartServer = "http://foundation.hsc.nutc.edu.tw/api/Chart/";
 
 function brandHistoryChart() {
   return fetch(chartServer + "GetBrandHistoryForWeb", {

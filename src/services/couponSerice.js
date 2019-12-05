@@ -1,4 +1,4 @@
-const couponServer = "http://findyourfoundation.southcentralus.cloudapp.azure.com:8080/api/Coupon/";
+const couponServer = "http://foundation.hsc.nutc.edu.tw/api/Coupon/";
 
 function getCoupon(data) {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {

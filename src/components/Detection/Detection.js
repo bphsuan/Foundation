@@ -17,7 +17,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { connect } from "react-redux";
 import { navigate } from "gatsby";
 
-const DetectPicUrl = "http://findyourfoundation.southcentralus.cloudapp.azure.com:8080"
+const DetectPicUrl = "http://foundation.hsc.nutc.edu.tw"
 class DetectionOutcome extends React.Component {
   constructor(props) {
     super(props)
@@ -85,26 +85,19 @@ class DetectionOutcome extends React.Component {
         type: "face/uploadUserPic",
         payload: form,
         callback: response => {
-          console.log(response);
+          this.setState({
+            description: false,
+            loading: false,
+            isDetect: true,
+            outcome: response
+          })
+          console.log(this.state.outcome);
           this.props.dispatch({
             type: "product/Get_productsAsc",
             callback: response => {
               this.setState({
                 products: response
               })
-            }
-          })
-          this.props.dispatch({
-            type: "face/doDetectPic",
-            payload: form,
-            callback: response => {
-              this.setState({
-                description: false,
-                loading: false,
-                isDetect: true,
-                outcome: response
-              })
-              console.log(this.state.outcome);
             }
           })
         },
