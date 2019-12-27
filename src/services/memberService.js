@@ -1,6 +1,6 @@
-const memberServer = "http://foundation.hsc.nutc.edu.tw/api/Customer/";
-const memberAdminService = 'http://foundation.hsc.nutc.edu.tw/api/Admin/';
-const buyHistoryService = 'http://foundation.hsc.nutc.edu.tw/api/BuyHistory/';
+const memberServer = "http://foundation_backend.hsc.nutc.edu.tw/api/Customer/";
+const memberAdminService = 'http://foundation_backend.hsc.nutc.edu.tw/api/Admin/';
+const buyHistoryService = 'http://foundation_backend.hsc.nutc.edu.tw/api/BuyHistory/';
 
 function register(data) {
   return fetch(memberServer + "Register", {

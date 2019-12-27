@@ -1,4 +1,4 @@
-const couponServer = "http://foundation.hsc.nutc.edu.tw/api/Coupon/";
+const couponServer = "http://foundation_backend.hsc.nutc.edu.tw/api/Coupon/";
 
 function getCoupon(data) {
   const token = (localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : {

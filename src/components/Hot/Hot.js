@@ -5,7 +5,7 @@ import './Hot.scss';
 import { connect } from 'react-redux';
 import { navigate } from 'gatsby';
 
-const PicServer = "http://foundation.hsc.nutc.edu.tw";
+const PicServer = "http://foundation_backend.hsc.nutc.edu.tw";
 let token = [];
 class Hot extends React.Component {
   constructor(props) {

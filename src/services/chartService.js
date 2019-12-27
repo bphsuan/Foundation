@@ -1,4 +1,4 @@
-const chartServer = "http://foundation.hsc.nutc.edu.tw/api/Chart/";
+const chartServer = "http://foundation_backend.hsc.nutc.edu.tw/api/Chart/";
 
 function brandHistoryChart() {
   return fetch(chartServer + "GetBrandHistoryForWeb", {
