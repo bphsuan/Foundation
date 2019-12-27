@@ -1,4 +1,4 @@
-const cartSever = "http://foundation.hsc.nutc.edu.tw/api/Cart/"
+const cartSever = "http://foundation_backend.hsc.nutc.edu.tw/api/Cart/"
 
 function addCart(data) {
   console.log(data);

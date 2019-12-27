@@ -1,5 +1,5 @@
-const productSever = "http://foundation.hsc.nutc.edu.tw/api/Product/"
-const productAdminSever = "http://foundation.hsc.nutc.edu.tw/api/Admin/"
+const productSever = "http://foundation_backend.hsc.nutc.edu.tw/api/Product/"
+const productAdminSever = "http://foundation_backend.hsc.nutc.edu.tw/api/Admin/"
 
 function addProduct(data) {
   console.log(data);

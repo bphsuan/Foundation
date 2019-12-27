@@ -1,5 +1,5 @@
-const faceServer = "http://foundation.hsc.nutc.edu.tw/api/Face/"
-const detectPIC = "http://foundation.hsc.nutc.edu.tw/api/Face/"
+const faceServer = "http://foundation_backend.hsc.nutc.edu.tw/api/Face/"
+const detectPIC = "http://foundation_backend.hsc.nutc.edu.tw/api/Face/"
 
 function uploadDetectionPic(Img) {
   const token = localStorage.getItem("token")
